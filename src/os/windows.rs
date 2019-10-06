@@ -7,7 +7,6 @@
 pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
 pub type cc_uint32 = ::std::os::raw::c_uint;
-pub type Codepoint = cc_uint16;
 pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
 #[repr(C)]
@@ -149,15 +148,6 @@ extern "C" {
     raw: *const ::std::os::raw::c_char,
     capacity: ::std::os::raw::c_int,
   ) -> ::std::os::raw::c_int;
-}
-extern "C" {
-  pub fn String_FromRaw(
-    buffer: *mut ::std::os::raw::c_char,
-    capacity: ::std::os::raw::c_int,
-  ) -> String;
-}
-extern "C" {
-  pub fn String_FromReadonly(buffer: *const ::std::os::raw::c_char) -> String;
 }
 extern "C" {
   pub fn String_StripCols(str: *mut String);
@@ -327,27 +317,6 @@ extern "C" {
     a2: *const ::std::os::raw::c_void,
     a3: *const ::std::os::raw::c_void,
     a4: *const ::std::os::raw::c_void,
-  );
-}
-extern "C" {
-  pub fn String_AppendUtf16(
-    str: *mut String,
-    chars: *const Codepoint,
-    numBytes: ::std::os::raw::c_int,
-  );
-}
-extern "C" {
-  pub fn String_AppendUtf8(
-    str: *mut String,
-    chars: *const cc_uint8,
-    numBytes: ::std::os::raw::c_int,
-  );
-}
-extern "C" {
-  pub fn String_DecodeCP1252(
-    str: *mut String,
-    chars: *const cc_uint8,
-    numBytes: ::std::os::raw::c_int,
   );
 }
 #[repr(C)]
@@ -885,6 +854,369 @@ extern "C" {
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub struct _EntityEventsList {
+  pub Added: Event_Int,
+  pub Removed: Event_Int,
+}
+#[test]
+fn bindgen_test_layout__EntityEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_EntityEventsList>(),
+    1040usize,
+    concat!("Size of: ", stringify!(_EntityEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_EntityEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_EntityEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EntityEventsList>())).Added as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EntityEventsList),
+      "::",
+      stringify!(Added)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EntityEventsList>())).Removed as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EntityEventsList),
+      "::",
+      stringify!(Removed)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _TabListEventsList {
+  pub Added: Event_Int,
+  pub Changed: Event_Int,
+  pub Removed: Event_Int,
+}
+#[test]
+fn bindgen_test_layout__TabListEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_TabListEventsList>(),
+    1560usize,
+    concat!("Size of: ", stringify!(_TabListEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_TabListEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_TabListEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Added as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListEventsList),
+      "::",
+      stringify!(Added)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Changed as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListEventsList),
+      "::",
+      stringify!(Changed)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Removed as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListEventsList),
+      "::",
+      stringify!(Removed)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _TextureEventsList {
+  pub AtlasChanged: Event_Void,
+  pub PackChanged: Event_Void,
+  pub FileChanged: Event_Entry,
+}
+#[test]
+fn bindgen_test_layout__TextureEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_TextureEventsList>(),
+    1560usize,
+    concat!("Size of: ", stringify!(_TextureEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_TextureEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_TextureEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).AtlasChanged as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TextureEventsList),
+      "::",
+      stringify!(AtlasChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).PackChanged as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TextureEventsList),
+      "::",
+      stringify!(PackChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).FileChanged as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TextureEventsList),
+      "::",
+      stringify!(FileChanged)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _GfxEventsList {
+  pub ViewDistanceChanged: Event_Void,
+  pub LowVRAMDetected: Event_Void,
+  pub ProjectionChanged: Event_Void,
+  pub ContextLost: Event_Void,
+  pub ContextRecreated: Event_Void,
+}
+#[test]
+fn bindgen_test_layout__GfxEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_GfxEventsList>(),
+    2600usize,
+    concat!("Size of: ", stringify!(_GfxEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_GfxEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_GfxEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ViewDistanceChanged as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_GfxEventsList),
+      "::",
+      stringify!(ViewDistanceChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).LowVRAMDetected as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_GfxEventsList),
+      "::",
+      stringify!(LowVRAMDetected)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ProjectionChanged as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_GfxEventsList),
+      "::",
+      stringify!(ProjectionChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ContextLost as *const _ as usize },
+    1560usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_GfxEventsList),
+      "::",
+      stringify!(ContextLost)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ContextRecreated as *const _ as usize },
+    2080usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_GfxEventsList),
+      "::",
+      stringify!(ContextRecreated)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _UserEventsList {
+  pub BlockChanged: Event_Block,
+  pub HackPermissionsChanged: Event_Void,
+  pub HeldBlockChanged: Event_Void,
+}
+#[test]
+fn bindgen_test_layout__UserEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_UserEventsList>(),
+    1560usize,
+    concat!("Size of: ", stringify!(_UserEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_UserEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_UserEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_UserEventsList>())).BlockChanged as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_UserEventsList),
+      "::",
+      stringify!(BlockChanged)
+    )
+  );
+  assert_eq!(
+    unsafe {
+      &(*(::std::ptr::null::<_UserEventsList>())).HackPermissionsChanged as *const _ as usize
+    },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_UserEventsList),
+      "::",
+      stringify!(HackPermissionsChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_UserEventsList>())).HeldBlockChanged as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_UserEventsList),
+      "::",
+      stringify!(HeldBlockChanged)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _BlockEventsList {
+  pub PermissionsChanged: Event_Void,
+  pub BlockDefChanged: Event_Void,
+}
+#[test]
+fn bindgen_test_layout__BlockEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_BlockEventsList>(),
+    1040usize,
+    concat!("Size of: ", stringify!(_BlockEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_BlockEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_BlockEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_BlockEventsList>())).PermissionsChanged as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_BlockEventsList),
+      "::",
+      stringify!(PermissionsChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_BlockEventsList>())).BlockDefChanged as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_BlockEventsList),
+      "::",
+      stringify!(BlockDefChanged)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _WorldEventsList {
+  pub NewMap: Event_Void,
+  pub Loading: Event_Float,
+  pub MapLoaded: Event_Void,
+  pub EnvVarChanged: Event_Int,
+}
+#[test]
+fn bindgen_test_layout__WorldEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_WorldEventsList>(),
+    2080usize,
+    concat!("Size of: ", stringify!(_WorldEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_WorldEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_WorldEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).NewMap as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldEventsList),
+      "::",
+      stringify!(NewMap)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).Loading as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldEventsList),
+      "::",
+      stringify!(Loading)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).MapLoaded as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldEventsList),
+      "::",
+      stringify!(MapLoaded)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).EnvVarChanged as *const _ as usize },
+    1560usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldEventsList),
+      "::",
+      stringify!(EnvVarChanged)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub struct _ChatEventsList {
   pub FontChanged: Event_Void,
   pub ChatReceived: Event_Chat,
@@ -944,6 +1276,250 @@ fn bindgen_test_layout__ChatEventsList() {
     )
   );
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _WindowEventsList {
+  pub Redraw: Event_Void,
+  pub Resized: Event_Void,
+  pub Closing: Event_Void,
+  pub FocusChanged: Event_Void,
+  pub StateChanged: Event_Void,
+  pub Created: Event_Void,
+}
+#[test]
+fn bindgen_test_layout__WindowEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_WindowEventsList>(),
+    3120usize,
+    concat!("Size of: ", stringify!(_WindowEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_WindowEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_WindowEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Redraw as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WindowEventsList),
+      "::",
+      stringify!(Redraw)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Resized as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WindowEventsList),
+      "::",
+      stringify!(Resized)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Closing as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WindowEventsList),
+      "::",
+      stringify!(Closing)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).FocusChanged as *const _ as usize },
+    1560usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WindowEventsList),
+      "::",
+      stringify!(FocusChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).StateChanged as *const _ as usize },
+    2080usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WindowEventsList),
+      "::",
+      stringify!(StateChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Created as *const _ as usize },
+    2600usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WindowEventsList),
+      "::",
+      stringify!(Created)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _KeyEventsList {
+  pub Press: Event_Int,
+  pub Down: Event_Input,
+  pub Up: Event_Int,
+  pub Wheel: Event_Float,
+}
+#[test]
+fn bindgen_test_layout__KeyEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_KeyEventsList>(),
+    2080usize,
+    concat!("Size of: ", stringify!(_KeyEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_KeyEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_KeyEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Press as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_KeyEventsList),
+      "::",
+      stringify!(Press)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Down as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_KeyEventsList),
+      "::",
+      stringify!(Down)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Up as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_KeyEventsList),
+      "::",
+      stringify!(Up)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Wheel as *const _ as usize },
+    1560usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_KeyEventsList),
+      "::",
+      stringify!(Wheel)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _PointerEventsList {
+  pub Moved: Event_PointerMove,
+  pub Down: Event_Int,
+  pub Up: Event_Int,
+  pub RawMoved: Event_PointerMove,
+}
+#[test]
+fn bindgen_test_layout__PointerEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_PointerEventsList>(),
+    2080usize,
+    concat!("Size of: ", stringify!(_PointerEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_PointerEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_PointerEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Moved as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_PointerEventsList),
+      "::",
+      stringify!(Moved)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Down as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_PointerEventsList),
+      "::",
+      stringify!(Down)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Up as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_PointerEventsList),
+      "::",
+      stringify!(Up)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).RawMoved as *const _ as usize },
+    1560usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_PointerEventsList),
+      "::",
+      stringify!(RawMoved)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _NetEventsList {
+  pub Connected: Event_Void,
+  pub Disconnected: Event_Void,
+}
+#[test]
+fn bindgen_test_layout__NetEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_NetEventsList>(),
+    1040usize,
+    concat!("Size of: ", stringify!(_NetEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_NetEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_NetEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_NetEventsList>())).Connected as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_NetEventsList),
+      "::",
+      stringify!(Connected)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_NetEventsList>())).Disconnected as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_NetEventsList),
+      "::",
+      stringify!(Disconnected)
+    )
+  );
+}
 pub const MsgType_MSG_TYPE_NORMAL: MsgType = 0;
 pub const MsgType_MSG_TYPE_STATUS_1: MsgType = 1;
 pub const MsgType_MSG_TYPE_STATUS_2: MsgType = 2;
@@ -955,8 +1531,82 @@ pub const MsgType_MSG_TYPE_ANNOUNCEMENT: MsgType = 100;
 pub const MsgType_MSG_TYPE_CLIENTSTATUS_1: MsgType = 256;
 pub const MsgType_MSG_TYPE_CLIENTSTATUS_2: MsgType = 257;
 pub type MsgType = i32;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct ChatCommand {
+  pub Name: *const ::std::os::raw::c_char,
+  pub Execute: ::std::option::Option<
+    unsafe extern "C" fn(args: *const String, argsCount: ::std::os::raw::c_int),
+  >,
+  pub SingleplayerOnly: bool_,
+  pub Help: [*const ::std::os::raw::c_char; 5usize],
+  pub next: *mut ChatCommand,
+}
+#[test]
+fn bindgen_test_layout_ChatCommand() {
+  assert_eq!(
+    ::std::mem::size_of::<ChatCommand>(),
+    72usize,
+    concat!("Size of: ", stringify!(ChatCommand))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<ChatCommand>(),
+    8usize,
+    concat!("Alignment of ", stringify!(ChatCommand))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ChatCommand>())).Name as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ChatCommand),
+      "::",
+      stringify!(Name)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ChatCommand>())).Execute as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ChatCommand),
+      "::",
+      stringify!(Execute)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ChatCommand>())).SingleplayerOnly as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ChatCommand),
+      "::",
+      stringify!(SingleplayerOnly)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ChatCommand>())).Help as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ChatCommand),
+      "::",
+      stringify!(Help)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ChatCommand>())).next as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ChatCommand),
+      "::",
+      stringify!(next)
+    )
+  );
+}
 extern "C" {
-  pub fn Chat_SetLogName(name: *const String);
+  pub fn Commands_Register(cmd: *mut ChatCommand);
 }
 extern "C" {
   pub fn Chat_Send(text: *const String, logUsage: bool_);
@@ -966,34 +1616,4 @@ extern "C" {
 }
 extern "C" {
   pub fn Chat_AddOf(text: *const String, msgType: ::std::os::raw::c_int);
-}
-extern "C" {
-  pub fn Chat_AddRaw(raw: *const ::std::os::raw::c_char);
-}
-extern "C" {
-  pub fn Chat_Add1(format: *const ::std::os::raw::c_char, a1: *const ::std::os::raw::c_void);
-}
-extern "C" {
-  pub fn Chat_Add2(
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-    a2: *const ::std::os::raw::c_void,
-  );
-}
-extern "C" {
-  pub fn Chat_Add3(
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-    a2: *const ::std::os::raw::c_void,
-    a3: *const ::std::os::raw::c_void,
-  );
-}
-extern "C" {
-  pub fn Chat_Add4(
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-    a2: *const ::std::os::raw::c_void,
-    a3: *const ::std::os::raw::c_void,
-    a4: *const ::std::os::raw::c_void,
-  );
 }

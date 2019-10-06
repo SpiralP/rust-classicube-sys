@@ -44,7 +44,29 @@ pub static Plugin_Component: IGameComponent = IGameComponent {
 mod os;
 
 pub use crate::os::*;
-use std::{mem, slice, string::String as StdString};
+use std::{
+  convert::TryInto,
+  mem,
+  os::raw::{c_char, c_int},
+  slice,
+  string::String as StdString,
+};
+
+pub unsafe fn Event_RegisterVoid(
+  handlers: *mut Event_Void,
+  obj: *mut ::std::os::raw::c_void,
+  handler: Event_Void_Callback,
+) {
+  Event_Register(handlers, obj, handler)
+}
+
+pub unsafe fn Event_UnregisterVoid(
+  handlers: *mut Event_Void,
+  obj: *mut ::std::os::raw::c_void,
+  handler: Event_Void_Callback,
+) {
+  Event_Unregister(handlers, obj, handler)
+}
 
 pub unsafe fn Event_RegisterChat(
   handlers: *mut Event_Chat,
@@ -52,6 +74,18 @@ pub unsafe fn Event_RegisterChat(
   handler: Event_Chat_Callback,
 ) {
   Event_Register(
+    handlers as *mut Event_Void,
+    obj,
+    mem::transmute::<Event_Chat_Callback, Event_Void_Callback>(handler),
+  )
+}
+
+pub unsafe fn Event_UnregisterChat(
+  handlers: *mut Event_Chat,
+  obj: *mut ::std::os::raw::c_void,
+  handler: Event_Chat_Callback,
+) {
+  Event_Unregister(
     handlers as *mut Event_Void,
     obj,
     mem::transmute::<Event_Chat_Callback, Event_Void_Callback>(handler),
@@ -81,9 +115,39 @@ impl String {
   }
 }
 
+pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> String {
+  String {
+    buffer,
+    length: length.try_into().unwrap(),
+    capacity: capacity.try_into().unwrap(),
+  }
+}
+
+pub unsafe fn String_FromReadonly(buffer: *const c_char) -> String {
+  let len = String_CalcLen(buffer, std::u16::MAX.try_into().unwrap());
+  String_Init(buffer as *mut c_char, len, len)
+}
+
+pub unsafe fn Chat_AddRaw(raw: *const c_char) {
+  let string = String_FromReadonly(raw);
+  Chat_AddOf(&string, MsgType_MSG_TYPE_NORMAL);
+}
+
+// strange fix for these not linking when in generated bindgen
 #[link(name = "ClassiCube")]
 extern "C" {
+  pub static mut EntityEvents: _EntityEventsList;
+  pub static mut TabListEvents: _TabListEventsList;
+  pub static mut TextureEvents: _TextureEventsList;
+  pub static mut GfxEvents: _GfxEventsList;
+  pub static mut UserEvents: _UserEventsList;
+  pub static mut BlockEvents: _BlockEventsList;
+  pub static mut WorldEvents: _WorldEventsList;
   pub static mut ChatEvents: _ChatEventsList;
+  pub static mut WindowEvents: _WindowEventsList;
+  pub static mut KeyEvents: _KeyEventsList;
+  pub static mut PointerEvents: _PointerEventsList;
+  pub static mut NetEvents: _NetEventsList;
 }
 
 #[test]
