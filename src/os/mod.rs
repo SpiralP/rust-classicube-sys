@@ -12,8 +12,3 @@ pub use self::windows::*;
 mod macos;
 #[cfg(target_os = "macos")]
 pub use self::macos::*;
-
-// #[cfg_attr(target_os = "linux", link(name = "pcap"))]
-// #[cfg_attr(target_os = "windows", link(name = "wpcap"))]
-// #[cfg_attr(target_os = "macos", link(name = "pcap"))]
-// extern "C" {}

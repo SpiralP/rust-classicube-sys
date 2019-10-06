@@ -11,6 +11,7 @@ mod builder {
 
   pub fn build_bindings() {
     let bindings = bindgen::builder()
+      .trust_clang_mangling(false)
       .raw_line("#![allow(non_snake_case)]")
       .raw_line("#![allow(non_camel_case_types)]")
       .raw_line("#![allow(non_upper_case_globals)]")
@@ -44,6 +45,8 @@ fn main() {
     "cargo:rustc-link-search=native={}",
     env::current_dir().unwrap().display()
   );
+
+  // println!("cargo:rustc-link-lib=ClassiCube");
 
   #[cfg(feature = "bindgen")]
   self::builder::build_bindings();

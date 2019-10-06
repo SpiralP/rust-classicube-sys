@@ -59,7 +59,16 @@ pub unsafe fn Event_RegisterChat(
 }
 
 #[link(name = "ClassiCube")]
-extern "C" {}
+extern "C" {
+  pub static mut ChatEvents: _ChatEventsList;
+}
+
+#[test]
+fn test_linkage() {
+  unsafe {
+    println!("{:?}", ChatEvents);
+  }
+}
 
 // #define Event_RegisterChat(handlers,   obj, handler) Event_RegisterMacro(handlers,   obj, handler)
 
