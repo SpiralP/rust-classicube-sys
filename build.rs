@@ -16,9 +16,12 @@ mod builder {
       .raw_line("#![allow(non_camel_case_types)]")
       .raw_line("#![allow(non_upper_case_globals)]")
       .whitelist_type("IGameComponent")
-      .whitelist_function("Event_Register")
-      .whitelist_var("ChatEvents")
+      .whitelist_function("Event_.*")
+      .whitelist_type("_ChatEventsList")
+      .whitelist_function("Chat_.*")
+      .whitelist_type("MsgType")
       .whitelist_type("String")
+      .whitelist_function("String_.*")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",

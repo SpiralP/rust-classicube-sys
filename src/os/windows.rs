@@ -4,7 +4,12 @@
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 
+pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
+pub type cc_uint32 = ::std::os::raw::c_uint;
+pub type Codepoint = cc_uint16;
+pub type bool_ = cc_uint8;
+pub type BlockID = cc_uint16;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IGameComponent {
@@ -139,6 +144,253 @@ fn bindgen_test_layout_String_() {
   );
 }
 pub type String = String_;
+extern "C" {
+  pub fn String_CalcLen(
+    raw: *const ::std::os::raw::c_char,
+    capacity: ::std::os::raw::c_int,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_FromRaw(
+    buffer: *mut ::std::os::raw::c_char,
+    capacity: ::std::os::raw::c_int,
+  ) -> String;
+}
+extern "C" {
+  pub fn String_FromReadonly(buffer: *const ::std::os::raw::c_char) -> String;
+}
+extern "C" {
+  pub fn String_StripCols(str: *mut String);
+}
+extern "C" {
+  pub fn String_Copy(dst: *mut String, src: *const String);
+}
+extern "C" {
+  pub fn String_CopyToRaw(
+    dst: *mut ::std::os::raw::c_char,
+    capacity: ::std::os::raw::c_int,
+    src: *const String,
+  );
+}
+extern "C" {
+  pub fn String_UNSAFE_Substring(
+    str: *const String,
+    offset: ::std::os::raw::c_int,
+    length: ::std::os::raw::c_int,
+  ) -> String;
+}
+extern "C" {
+  pub fn String_UNSAFE_SubstringAt(str: *const String, offset: ::std::os::raw::c_int) -> String;
+}
+extern "C" {
+  pub fn String_UNSAFE_Split(
+    str: *const String,
+    c: ::std::os::raw::c_char,
+    subs: *mut String,
+    maxSubs: ::std::os::raw::c_int,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_UNSAFE_SplitBy(str: *mut String, c: ::std::os::raw::c_char, part: *mut String);
+}
+extern "C" {
+  pub fn String_UNSAFE_Separate(
+    str: *const String,
+    c: ::std::os::raw::c_char,
+    key: *mut String,
+    value: *mut String,
+  ) -> bool_;
+}
+extern "C" {
+  pub fn String_Equals(a: *const String, b: *const String) -> bool_;
+}
+extern "C" {
+  pub fn String_CaselessEquals(a: *const String, b: *const String) -> bool_;
+}
+extern "C" {
+  pub fn String_CaselessEqualsConst(a: *const String, b: *const ::std::os::raw::c_char) -> bool_;
+}
+extern "C" {
+  pub fn String_MakeUInt32(
+    num: cc_uint32,
+    digits: *mut ::std::os::raw::c_char,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_Append(str: *mut String, c: ::std::os::raw::c_char);
+}
+extern "C" {
+  pub fn String_AppendBool(str: *mut String, value: bool_);
+}
+extern "C" {
+  pub fn String_AppendInt(str: *mut String, num: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn String_AppendUInt32(str: *mut String, num: cc_uint32);
+}
+extern "C" {
+  pub fn String_AppendPaddedInt(
+    str: *mut String,
+    num: ::std::os::raw::c_int,
+    minDigits: ::std::os::raw::c_int,
+  );
+}
+extern "C" {
+  pub fn String_AppendFloat(str: *mut String, num: f32, fracDigits: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn String_AppendConst(str: *mut String, src: *const ::std::os::raw::c_char);
+}
+extern "C" {
+  pub fn String_AppendString(str: *mut String, src: *const String);
+}
+extern "C" {
+  pub fn String_AppendColorless(str: *mut String, src: *const String);
+}
+extern "C" {
+  pub fn String_AppendHex(str: *mut String, value: cc_uint8);
+}
+extern "C" {
+  pub fn String_IndexOfAt(
+    str: *const String,
+    offset: ::std::os::raw::c_int,
+    c: ::std::os::raw::c_char,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_LastIndexOfAt(
+    str: *const String,
+    offset: ::std::os::raw::c_int,
+    c: ::std::os::raw::c_char,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_InsertAt(
+    str: *mut String,
+    offset: ::std::os::raw::c_int,
+    c: ::std::os::raw::c_char,
+  );
+}
+extern "C" {
+  pub fn String_DeleteAt(str: *mut String, offset: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn String_UNSAFE_TrimStart(str: *mut String);
+}
+extern "C" {
+  pub fn String_UNSAFE_TrimEnd(str: *mut String);
+}
+extern "C" {
+  pub fn String_IndexOfString(str: *const String, sub: *const String) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_CaselessContains(str: *const String, sub: *const String) -> bool_;
+}
+extern "C" {
+  pub fn String_CaselessStarts(str: *const String, sub: *const String) -> bool_;
+}
+extern "C" {
+  pub fn String_CaselessEnds(str: *const String, sub: *const String) -> bool_;
+}
+extern "C" {
+  pub fn String_Compare(a: *const String, b: *const String) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn String_Format1(
+    str: *mut String,
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+  );
+}
+extern "C" {
+  pub fn String_Format2(
+    str: *mut String,
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+    a2: *const ::std::os::raw::c_void,
+  );
+}
+extern "C" {
+  pub fn String_Format3(
+    str: *mut String,
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+    a2: *const ::std::os::raw::c_void,
+    a3: *const ::std::os::raw::c_void,
+  );
+}
+extern "C" {
+  pub fn String_Format4(
+    str: *mut String,
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+    a2: *const ::std::os::raw::c_void,
+    a3: *const ::std::os::raw::c_void,
+    a4: *const ::std::os::raw::c_void,
+  );
+}
+extern "C" {
+  pub fn String_AppendUtf16(
+    str: *mut String,
+    chars: *const Codepoint,
+    numBytes: ::std::os::raw::c_int,
+  );
+}
+extern "C" {
+  pub fn String_AppendUtf8(
+    str: *mut String,
+    chars: *const cc_uint8,
+    numBytes: ::std::os::raw::c_int,
+  );
+}
+extern "C" {
+  pub fn String_DecodeCP1252(
+    str: *mut String,
+    chars: *const cc_uint8,
+    numBytes: ::std::os::raw::c_int,
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct IVec3_ {
+  pub X: ::std::os::raw::c_int,
+  pub Y: ::std::os::raw::c_int,
+  pub Z: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_IVec3_() {
+  assert_eq!(
+    ::std::mem::size_of::<IVec3_>(),
+    12usize,
+    concat!("Size of: ", stringify!(IVec3_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<IVec3_>(),
+    4usize,
+    concat!("Alignment of ", stringify!(IVec3_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<IVec3_>())).X as *const _ as usize },
+    0usize,
+    concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(X))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<IVec3_>())).Y as *const _ as usize },
+    4usize,
+    concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(Y))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<IVec3_>())).Z as *const _ as usize },
+    8usize,
+    concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(Z))
+  );
+}
+pub type IVec3 = IVec3_;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Stream {
+  _unused: [u8; 0],
+}
 pub type Event_Void_Callback =
   ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void)>;
 #[repr(C)]
@@ -244,6 +496,227 @@ fn bindgen_test_layout_Event_Int() {
     )
   );
 }
+pub type Event_Float_Callback =
+  ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: f32)>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Float {
+  pub Handlers: [Event_Float_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Float() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Float>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Float))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Float>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Float))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Float>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Float),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Float>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Float),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Float>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Float),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
+pub type Event_Entry_Callback = ::std::option::Option<
+  unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, stream: *mut Stream, name: *const String),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Entry {
+  pub Handlers: [Event_Entry_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Entry() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Entry>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Entry))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Entry>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Entry))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Entry>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Entry),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Entry>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Entry),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Entry>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Entry),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
+pub type Event_Block_Callback = ::std::option::Option<
+  unsafe extern "C" fn(
+    obj: *mut ::std::os::raw::c_void,
+    coords: IVec3,
+    oldBlock: BlockID,
+    block: BlockID,
+  ),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Block {
+  pub Handlers: [Event_Block_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Block() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Block>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Block))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Block>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Block))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Block>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Block),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Block>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Block),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Block>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Block),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
+pub type Event_PointerMove_Callback = ::std::option::Option<
+  unsafe extern "C" fn(
+    obj: *mut ::std::os::raw::c_void,
+    idx: ::std::os::raw::c_int,
+    xDelta: ::std::os::raw::c_int,
+    yDelta: ::std::os::raw::c_int,
+  ),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_PointerMove {
+  pub Handlers: [Event_PointerMove_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_PointerMove() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_PointerMove>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_PointerMove))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_PointerMove>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_PointerMove))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_PointerMove),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_PointerMove),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_PointerMove),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
 pub type Event_Chat_Callback = ::std::option::Option<
   unsafe extern "C" fn(
     obj: *mut ::std::os::raw::c_void,
@@ -301,12 +774,114 @@ fn bindgen_test_layout_Event_Chat() {
     )
   );
 }
+pub type Event_Input_Callback = ::std::option::Option<
+  unsafe extern "C" fn(
+    obj: *mut ::std::os::raw::c_void,
+    key: ::std::os::raw::c_int,
+    repeating: bool_,
+  ),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Input {
+  pub Handlers: [Event_Input_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Input() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Input>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Input))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Input>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Input))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Input>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Input),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Input>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Input),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Input>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Input),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
 extern "C" {
   pub fn Event_Register(
     handlers: *mut Event_Void,
     obj: *mut ::std::os::raw::c_void,
     handler: Event_Void_Callback,
   );
+}
+extern "C" {
+  pub fn Event_Unregister(
+    handlers: *mut Event_Void,
+    obj: *mut ::std::os::raw::c_void,
+    handler: Event_Void_Callback,
+  );
+}
+extern "C" {
+  pub fn Event_RaiseVoid(handlers: *mut Event_Void);
+}
+extern "C" {
+  pub fn Event_RaiseInt(handlers: *mut Event_Int, arg: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Event_RaiseFloat(handlers: *mut Event_Float, arg: f32);
+}
+extern "C" {
+  pub fn Event_RaiseEntry(handlers: *mut Event_Entry, stream: *mut Stream, name: *const String);
+}
+extern "C" {
+  pub fn Event_RaiseBlock(
+    handlers: *mut Event_Block,
+    coords: IVec3,
+    oldBlock: BlockID,
+    block: BlockID,
+  );
+}
+extern "C" {
+  pub fn Event_RaiseMove(
+    handlers: *mut Event_PointerMove,
+    idx: ::std::os::raw::c_int,
+    xDelta: ::std::os::raw::c_int,
+    yDelta: ::std::os::raw::c_int,
+  );
+}
+extern "C" {
+  pub fn Event_RaiseChat(
+    handlers: *mut Event_Chat,
+    msg: *const String,
+    msgType: ::std::os::raw::c_int,
+  );
+}
+extern "C" {
+  pub fn Event_RaiseInput(handlers: *mut Event_Input, key: ::std::os::raw::c_int, repeating: bool_);
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -369,6 +944,56 @@ fn bindgen_test_layout__ChatEventsList() {
     )
   );
 }
+pub const MsgType_MSG_TYPE_NORMAL: MsgType = 0;
+pub const MsgType_MSG_TYPE_STATUS_1: MsgType = 1;
+pub const MsgType_MSG_TYPE_STATUS_2: MsgType = 2;
+pub const MsgType_MSG_TYPE_STATUS_3: MsgType = 3;
+pub const MsgType_MSG_TYPE_BOTTOMRIGHT_1: MsgType = 11;
+pub const MsgType_MSG_TYPE_BOTTOMRIGHT_2: MsgType = 12;
+pub const MsgType_MSG_TYPE_BOTTOMRIGHT_3: MsgType = 13;
+pub const MsgType_MSG_TYPE_ANNOUNCEMENT: MsgType = 100;
+pub const MsgType_MSG_TYPE_CLIENTSTATUS_1: MsgType = 256;
+pub const MsgType_MSG_TYPE_CLIENTSTATUS_2: MsgType = 257;
+pub type MsgType = i32;
 extern "C" {
-  pub static mut ChatEvents: _ChatEventsList;
+  pub fn Chat_SetLogName(name: *const String);
+}
+extern "C" {
+  pub fn Chat_Send(text: *const String, logUsage: bool_);
+}
+extern "C" {
+  pub fn Chat_Add(text: *const String);
+}
+extern "C" {
+  pub fn Chat_AddOf(text: *const String, msgType: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Chat_AddRaw(raw: *const ::std::os::raw::c_char);
+}
+extern "C" {
+  pub fn Chat_Add1(format: *const ::std::os::raw::c_char, a1: *const ::std::os::raw::c_void);
+}
+extern "C" {
+  pub fn Chat_Add2(
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+    a2: *const ::std::os::raw::c_void,
+  );
+}
+extern "C" {
+  pub fn Chat_Add3(
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+    a2: *const ::std::os::raw::c_void,
+    a3: *const ::std::os::raw::c_void,
+  );
+}
+extern "C" {
+  pub fn Chat_Add4(
+    format: *const ::std::os::raw::c_char,
+    a1: *const ::std::os::raw::c_void,
+    a2: *const ::std::os::raw::c_void,
+    a3: *const ::std::os::raw::c_void,
+    a4: *const ::std::os::raw::c_void,
+  );
 }

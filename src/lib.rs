@@ -44,7 +44,7 @@ pub static Plugin_Component: IGameComponent = IGameComponent {
 mod os;
 
 pub use crate::os::*;
-use std::mem;
+use std::{mem, slice, string::String as StdString};
 
 pub unsafe fn Event_RegisterChat(
   handlers: *mut Event_Chat,
@@ -56,6 +56,29 @@ pub unsafe fn Event_RegisterChat(
     obj,
     mem::transmute::<Event_Chat_Callback, Event_Void_Callback>(handler),
   )
+}
+
+impl ToString for String {
+  fn to_string(&self) -> StdString {
+    let buffer = self.buffer as *mut u8;
+    let length = self.length as usize;
+
+    unsafe { StdString::from_utf8_lossy(slice::from_raw_parts(buffer, length)).to_string() }
+  }
+}
+
+impl String {
+  pub unsafe fn from_string(mut s: StdString) -> Self {
+    let buffer = s.as_mut_ptr() as *mut i8;
+    let length = s.len() as u16;
+    let capacity = s.len() as u16;
+
+    Self {
+      buffer,
+      length,
+      capacity,
+    }
+  }
 }
 
 #[link(name = "ClassiCube")]
