@@ -4,6 +4,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 
+pub type cc_uint16 = ::std::os::raw::c_ushort;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IGameComponent {
@@ -86,4 +87,288 @@ fn bindgen_test_layout_IGameComponent() {
       stringify!(next)
     )
   );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct String_ {
+  pub buffer: *mut ::std::os::raw::c_char,
+  pub length: cc_uint16,
+  pub capacity: cc_uint16,
+}
+#[test]
+fn bindgen_test_layout_String_() {
+  assert_eq!(
+    ::std::mem::size_of::<String_>(),
+    16usize,
+    concat!("Size of: ", stringify!(String_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<String_>(),
+    8usize,
+    concat!("Alignment of ", stringify!(String_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<String_>())).buffer as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(String_),
+      "::",
+      stringify!(buffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<String_>())).length as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(String_),
+      "::",
+      stringify!(length)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<String_>())).capacity as *const _ as usize },
+    10usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(String_),
+      "::",
+      stringify!(capacity)
+    )
+  );
+}
+pub type String = String_;
+pub type Event_Void_Callback =
+  ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void)>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Void {
+  pub Handlers: [Event_Void_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Void() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Void>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Void))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Void>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Void))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Void>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Void),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Void>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Void),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Void>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Void),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
+pub type Event_Int_Callback = ::std::option::Option<
+  unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: ::std::os::raw::c_int),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Int {
+  pub Handlers: [Event_Int_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Int() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Int>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Int))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Int>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Int))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Int>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Int),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Int>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Int),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Int>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Int),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
+pub type Event_Chat_Callback = ::std::option::Option<
+  unsafe extern "C" fn(
+    obj: *mut ::std::os::raw::c_void,
+    msg: *const String,
+    msgType: ::std::os::raw::c_int,
+  ),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_Chat {
+  pub Handlers: [Event_Chat_Callback; 32usize],
+  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+  pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_Chat() {
+  assert_eq!(
+    ::std::mem::size_of::<Event_Chat>(),
+    520usize,
+    concat!("Size of: ", stringify!(Event_Chat))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Event_Chat>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Event_Chat))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Chat>())).Handlers as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Chat),
+      "::",
+      stringify!(Handlers)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Chat>())).Objs as *const _ as usize },
+    256usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Chat),
+      "::",
+      stringify!(Objs)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Event_Chat>())).Count as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Event_Chat),
+      "::",
+      stringify!(Count)
+    )
+  );
+}
+extern "C" {
+  pub fn Event_Register(
+    handlers: *mut Event_Void,
+    obj: *mut ::std::os::raw::c_void,
+    handler: Event_Void_Callback,
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _ChatEventsList {
+  pub FontChanged: Event_Void,
+  pub ChatReceived: Event_Chat,
+  pub ChatSending: Event_Chat,
+  pub ColCodeChanged: Event_Int,
+}
+#[test]
+fn bindgen_test_layout__ChatEventsList() {
+  assert_eq!(
+    ::std::mem::size_of::<_ChatEventsList>(),
+    2080usize,
+    concat!("Size of: ", stringify!(_ChatEventsList))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_ChatEventsList>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_ChatEventsList))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).FontChanged as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ChatEventsList),
+      "::",
+      stringify!(FontChanged)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ChatReceived as *const _ as usize },
+    520usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ChatEventsList),
+      "::",
+      stringify!(ChatReceived)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ChatSending as *const _ as usize },
+    1040usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ChatEventsList),
+      "::",
+      stringify!(ChatSending)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ColCodeChanged as *const _ as usize },
+    1560usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ChatEventsList),
+      "::",
+      stringify!(ColCodeChanged)
+    )
+  );
+}
+extern "C" {
+  pub static mut ChatEvents: _ChatEventsList;
 }

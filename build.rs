@@ -9,18 +9,25 @@ mod builder {
   #[cfg(target_os = "macos")]
   pub const OS: &str = "macos";
 
-  pub const HEADER_PATH: &str = "./ClassiCube/src/GameStructs.h";
-
   pub fn build_bindings() {
     let bindings = bindgen::builder()
       .raw_line("#![allow(non_snake_case)]")
       .raw_line("#![allow(non_camel_case_types)]")
       .raw_line("#![allow(non_upper_case_globals)]")
-      // .whitelist_function("")
       .whitelist_type("IGameComponent")
-      // .whitelist_var("PCAP.*")
+      .whitelist_function("Event_Register")
+      .whitelist_var("ChatEvents")
+      .whitelist_type("String")
       .clang_arg("-I./ClassiCube/src")
-      .header(HEADER_PATH);
+      .header_contents(
+        "bindgen.h",
+        "
+          #include <GameStructs.h>
+          #include <Event.h>
+          #include <Chat.h>
+          #include <String.h>
+        ",
+      );
 
     let bindings = bindings.generate().unwrap();
 
@@ -31,21 +38,12 @@ mod builder {
 }
 
 fn main() {
-  // use std::env;
+  use std::env;
 
-  // if let Ok(libdir) = env::var("PCAP_LIBDIR") {
-  //   println!("cargo:rustc-link-search=native={}", libdir);
-  // } else {
-  //   // this "./npcap-sdk-1.03/Lib/x64" path won't work for other crates!!
-  //   // so use PCAP_LIBDIR!
-  //   // TODO maybe copy .libs to OUT?
-  //   // also you need to set PATH to point to "Windows\System32\Npcap" (x64)
-  //   #[cfg(target_os = "windows")]
-  //   println!("cargo:rustc-link-search=native=./npcap-sdk-1.03/Lib/x64");
-
-  //   #[cfg(target_os = "macos")]
-  //   println!("cargo:rustc-link-search=native=/usr/local/opt/libpcap/lib");
-  // }
+  println!(
+    "cargo:rustc-link-search=native={}",
+    env::current_dir().unwrap().display()
+  );
 
   #[cfg(feature = "bindgen")]
   self::builder::build_bindings();

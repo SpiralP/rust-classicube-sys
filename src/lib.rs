@@ -1,3 +1,7 @@
+#![allow(non_snake_case)]
+#![allow(non_camel_case_types)]
+#![allow(non_upper_case_globals)]
+
 /*!
 
 ```c
@@ -40,3 +44,30 @@ pub static Plugin_Component: IGameComponent = IGameComponent {
 mod os;
 
 pub use crate::os::*;
+use std::mem;
+
+pub unsafe fn Event_RegisterChat(
+  handlers: *mut Event_Chat,
+  obj: *mut ::std::os::raw::c_void,
+  handler: Event_Chat_Callback,
+) {
+  Event_Register(
+    handlers as *mut Event_Void,
+    obj,
+    mem::transmute::<Event_Chat_Callback, Event_Void_Callback>(handler),
+  )
+}
+
+#[link(name = "ClassiCube")]
+extern "C" {}
+
+// #define Event_RegisterChat(handlers,   obj, handler) Event_RegisterMacro(handlers,   obj, handler)
+
+// pub unsafe fn Event_RegisterChat(handlers:*mut Event_Chat,
+//   obj: *mut ::std::os::raw::c_void,
+
+//    Event_RegisterMacro(handlers,   obj, handler)
+//    }
+// pub unsafe fn Event_UnregisterChat(handlers, obj, handler) {
+//    Event_UnregisterMacro(handlers, obj, handler)
+//    }
