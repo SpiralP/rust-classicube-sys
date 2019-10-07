@@ -37,8 +37,6 @@ pub static Plugin_Component: IGameComponent = IGameComponent {
 };
 
 ```
-
-
 */
 
 mod chat;
@@ -60,9 +58,11 @@ extern "C" {
   pub static mut WorldEvents: _WorldEventsList;
   pub static mut ChatEvents: _ChatEventsList;
   pub static mut WindowEvents: _WindowEventsList;
-  pub static mut KeyEvents: _KeyEventsList;
+  pub static mut InputEvents: _KeyEventsList;
   pub static mut PointerEvents: _PointerEventsList;
   pub static mut NetEvents: _NetEventsList;
+
+  pub static mut Server: _ServerConnectionData;
 }
 
 #[test]
@@ -71,14 +71,3 @@ fn test_linkage() {
     println!("{:?}", ChatEvents);
   }
 }
-
-// #define Event_RegisterChat(handlers,   obj, handler) Event_RegisterMacro(handlers,   obj, handler)
-
-// pub unsafe fn Event_RegisterChat(handlers:*mut Event_Chat,
-//   obj: *mut ::std::os::raw::c_void,
-
-//    Event_RegisterMacro(handlers,   obj, handler)
-//    }
-// pub unsafe fn Event_UnregisterChat(handlers, obj, handler) {
-//    Event_UnregisterMacro(handlers, obj, handler)
-//    }

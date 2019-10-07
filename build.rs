@@ -74,6 +74,7 @@ mod builder {
       .whitelist_function("String_Format2")
       .whitelist_function("String_Format3")
       .whitelist_function("String_Format4")
+      .whitelist_type("_ServerConnectionData")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -82,6 +83,7 @@ mod builder {
           #include <Event.h>
           #include <Chat.h>
           #include <String.h>
+          #include <Server.h>
         ",
       );
 

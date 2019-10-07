@@ -94,6 +94,56 @@ fn bindgen_test_layout_IGameComponent() {
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub struct ScheduledTask {
+  pub Accumulator: f64,
+  pub Interval: f64,
+  pub Callback: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
+}
+#[test]
+fn bindgen_test_layout_ScheduledTask() {
+  assert_eq!(
+    ::std::mem::size_of::<ScheduledTask>(),
+    24usize,
+    concat!("Size of: ", stringify!(ScheduledTask))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<ScheduledTask>(),
+    8usize,
+    concat!("Alignment of ", stringify!(ScheduledTask))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Accumulator as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ScheduledTask),
+      "::",
+      stringify!(Accumulator)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Interval as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ScheduledTask),
+      "::",
+      stringify!(Interval)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Callback as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ScheduledTask),
+      "::",
+      stringify!(Callback)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub struct String_ {
   pub buffer: *mut ::std::os::raw::c_char,
   pub length: cc_uint16,
@@ -319,6 +369,42 @@ extern "C" {
     a4: *const ::std::os::raw::c_void,
   );
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Vec3_ {
+  pub X: f32,
+  pub Y: f32,
+  pub Z: f32,
+}
+#[test]
+fn bindgen_test_layout_Vec3_() {
+  assert_eq!(
+    ::std::mem::size_of::<Vec3_>(),
+    12usize,
+    concat!("Size of: ", stringify!(Vec3_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Vec3_>(),
+    4usize,
+    concat!("Alignment of ", stringify!(Vec3_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec3_>())).X as *const _ as usize },
+    0usize,
+    concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(X))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec3_>())).Y as *const _ as usize },
+    4usize,
+    concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(Y))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec3_>())).Z as *const _ as usize },
+    8usize,
+    concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(Z))
+  );
+}
+pub type Vec3 = Vec3_;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IVec3_ {
@@ -1616,4 +1702,237 @@ extern "C" {
 }
 extern "C" {
   pub fn Chat_AddOf(text: *const String, msgType: ::std::os::raw::c_int);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _ServerConnectionData {
+  pub BeginConnect: ::std::option::Option<unsafe extern "C" fn()>,
+  pub Tick: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
+  pub SendBlock: ::std::option::Option<
+    unsafe extern "C" fn(
+      x: ::std::os::raw::c_int,
+      y: ::std::os::raw::c_int,
+      z: ::std::os::raw::c_int,
+      old: BlockID,
+      now: BlockID,
+    ),
+  >,
+  pub SendChat: ::std::option::Option<unsafe extern "C" fn(text: *const String)>,
+  pub SendPosition: ::std::option::Option<unsafe extern "C" fn(pos: Vec3, rotY: f32, headX: f32)>,
+  pub SendData: ::std::option::Option<unsafe extern "C" fn(data: *const cc_uint8, len: cc_uint32)>,
+  pub Name: String,
+  pub MOTD: String,
+  pub AppName: String,
+  pub WriteBuffer: *mut cc_uint8,
+  pub IsSinglePlayer: bool_,
+  pub Disconnected: bool_,
+  pub SupportsExtPlayerList: bool_,
+  pub SupportsPlayerClick: bool_,
+  pub SupportsPartialMessages: bool_,
+  pub SupportsFullCP437: bool_,
+  pub IP: String,
+  pub Port: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout__ServerConnectionData() {
+  assert_eq!(
+    ::std::mem::size_of::<_ServerConnectionData>(),
+    136usize,
+    concat!("Size of: ", stringify!(_ServerConnectionData))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_ServerConnectionData>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_ServerConnectionData))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).BeginConnect as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(BeginConnect)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Tick as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(Tick)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendBlock as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SendBlock)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendChat as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SendChat)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendPosition as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SendPosition)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendData as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SendData)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Name as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(Name)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).MOTD as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(MOTD)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).AppName as *const _ as usize },
+    80usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(AppName)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).WriteBuffer as *const _ as usize },
+    96usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(WriteBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe {
+      &(*(::std::ptr::null::<_ServerConnectionData>())).IsSinglePlayer as *const _ as usize
+    },
+    104usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(IsSinglePlayer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Disconnected as *const _ as usize },
+    105usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(Disconnected)
+    )
+  );
+  assert_eq!(
+    unsafe {
+      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsExtPlayerList as *const _ as usize
+    },
+    106usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SupportsExtPlayerList)
+    )
+  );
+  assert_eq!(
+    unsafe {
+      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsPlayerClick as *const _ as usize
+    },
+    107usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SupportsPlayerClick)
+    )
+  );
+  assert_eq!(
+    unsafe {
+      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsPartialMessages as *const _ as usize
+    },
+    108usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SupportsPartialMessages)
+    )
+  );
+  assert_eq!(
+    unsafe {
+      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsFullCP437 as *const _ as usize
+    },
+    109usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(SupportsFullCP437)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).IP as *const _ as usize },
+    112usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(IP)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Port as *const _ as usize },
+    128usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_ServerConnectionData),
+      "::",
+      stringify!(Port)
+    )
+  );
 }
