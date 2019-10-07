@@ -41,97 +41,12 @@ pub static Plugin_Component: IGameComponent = IGameComponent {
 
 */
 
+mod chat;
+mod event;
 mod os;
+mod string;
 
-pub use crate::os::*;
-use std::{
-  convert::TryInto,
-  mem,
-  os::raw::{c_char, c_int},
-  slice,
-  string::String as StdString,
-};
-
-pub unsafe fn Event_RegisterVoid(
-  handlers: *mut Event_Void,
-  obj: *mut ::std::os::raw::c_void,
-  handler: Event_Void_Callback,
-) {
-  Event_Register(handlers, obj, handler)
-}
-
-pub unsafe fn Event_UnregisterVoid(
-  handlers: *mut Event_Void,
-  obj: *mut ::std::os::raw::c_void,
-  handler: Event_Void_Callback,
-) {
-  Event_Unregister(handlers, obj, handler)
-}
-
-pub unsafe fn Event_RegisterChat(
-  handlers: *mut Event_Chat,
-  obj: *mut ::std::os::raw::c_void,
-  handler: Event_Chat_Callback,
-) {
-  Event_Register(
-    handlers as *mut Event_Void,
-    obj,
-    mem::transmute::<Event_Chat_Callback, Event_Void_Callback>(handler),
-  )
-}
-
-pub unsafe fn Event_UnregisterChat(
-  handlers: *mut Event_Chat,
-  obj: *mut ::std::os::raw::c_void,
-  handler: Event_Chat_Callback,
-) {
-  Event_Unregister(
-    handlers as *mut Event_Void,
-    obj,
-    mem::transmute::<Event_Chat_Callback, Event_Void_Callback>(handler),
-  )
-}
-
-impl ToString for String {
-  fn to_string(&self) -> StdString {
-    let buffer = self.buffer as *mut u8;
-    let length = self.length as usize;
-
-    unsafe { StdString::from_utf8_lossy(slice::from_raw_parts(buffer, length)).to_string() }
-  }
-}
-
-impl String {
-  pub unsafe fn from_string(mut s: StdString) -> Self {
-    let buffer = s.as_mut_ptr() as *mut i8;
-    let length = s.len() as u16;
-    let capacity = s.len() as u16;
-
-    Self {
-      buffer,
-      length,
-      capacity,
-    }
-  }
-}
-
-pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> String {
-  String {
-    buffer,
-    length: length.try_into().unwrap(),
-    capacity: capacity.try_into().unwrap(),
-  }
-}
-
-pub unsafe fn String_FromReadonly(buffer: *const c_char) -> String {
-  let len = String_CalcLen(buffer, std::u16::MAX.try_into().unwrap());
-  String_Init(buffer as *mut c_char, len, len)
-}
-
-pub unsafe fn Chat_AddRaw(raw: *const c_char) {
-  let string = String_FromReadonly(raw);
-  Chat_AddOf(&string, MsgType_MSG_TYPE_NORMAL);
-}
+pub use crate::{chat::*, event::*, os::*, string::*};
 
 // strange fix for these not linking when in generated bindgen
 #[link(name = "ClassiCube")]
