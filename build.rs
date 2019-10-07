@@ -88,6 +88,7 @@ mod builder {
       .whitelist_function("Options_Load")
       .whitelist_function("Options_Save")
       .whitelist_type("Key")
+      .whitelist_type("Key_")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
