@@ -74,7 +74,20 @@ mod builder {
       .whitelist_function("String_Format2")
       .whitelist_function("String_Format3")
       .whitelist_function("String_Format4")
+      .whitelist_var("STRING_SIZE")
       .whitelist_type("_ServerConnectionData")
+      .whitelist_function("Options_Get")
+      .whitelist_function("Options_GetInt")
+      .whitelist_function("Options_GetBool")
+      .whitelist_function("Options_GetFloat")
+      .whitelist_function("Options_GetEnum")
+      .whitelist_function("Options_SetBool")
+      .whitelist_function("Options_SetInt")
+      .whitelist_function("Options_Set")
+      .whitelist_function("Options_SetString")
+      .whitelist_function("Options_Load")
+      .whitelist_function("Options_Save")
+      .whitelist_type("Key")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -84,6 +97,7 @@ mod builder {
           #include <Chat.h>
           #include <String.h>
           #include <Server.h>
+          #include <Options.h>
         ",
       );
 

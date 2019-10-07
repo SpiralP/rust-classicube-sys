@@ -4,6 +4,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 
+pub const STRING_SIZE: u32 = 64;
 pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
 pub type cc_uint32 = ::std::os::raw::c_uint;
@@ -1703,6 +1704,7 @@ extern "C" {
 extern "C" {
   pub fn Chat_AddOf(text: *const String, msgType: ::std::os::raw::c_int);
 }
+pub type Key = ::std::os::raw::c_int;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _ServerConnectionData {
@@ -1935,4 +1937,56 @@ fn bindgen_test_layout__ServerConnectionData() {
       stringify!(Port)
     )
   );
+}
+extern "C" {
+  pub fn Options_Get(
+    key: *const ::std::os::raw::c_char,
+    value: *mut String,
+    defValue: *const ::std::os::raw::c_char,
+  );
+}
+extern "C" {
+  pub fn Options_GetInt(
+    key: *const ::std::os::raw::c_char,
+    min: ::std::os::raw::c_int,
+    max: ::std::os::raw::c_int,
+    defValue: ::std::os::raw::c_int,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn Options_GetBool(key: *const ::std::os::raw::c_char, defValue: bool_) -> bool_;
+}
+extern "C" {
+  pub fn Options_GetFloat(
+    key: *const ::std::os::raw::c_char,
+    min: f32,
+    max: f32,
+    defValue: f32,
+  ) -> f32;
+}
+extern "C" {
+  pub fn Options_GetEnum(
+    key: *const ::std::os::raw::c_char,
+    defValue: ::std::os::raw::c_int,
+    names: *const *const ::std::os::raw::c_char,
+    namesCount: ::std::os::raw::c_int,
+  ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+  pub fn Options_SetBool(keyRaw: *const ::std::os::raw::c_char, value: bool_);
+}
+extern "C" {
+  pub fn Options_SetInt(keyRaw: *const ::std::os::raw::c_char, value: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Options_Set(keyRaw: *const ::std::os::raw::c_char, value: *const String);
+}
+extern "C" {
+  pub fn Options_SetString(key: *const String, value: *const String);
+}
+extern "C" {
+  pub fn Options_Load();
+}
+extern "C" {
+  pub fn Options_Save();
 }
