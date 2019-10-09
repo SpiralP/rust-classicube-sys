@@ -15,5 +15,13 @@ jobs:
       run: sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev
     - name: Build
       run: cargo build --verbose
-    - name: Run tests
+    - name: Test
       run: cargo test --verbose
+    - name: Generate docs
+      run: cargo doc
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v2.5.0
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./target/doc
