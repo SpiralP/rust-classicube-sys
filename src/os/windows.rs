@@ -8,6 +8,7 @@ pub const STRING_SIZE: u32 = 64;
 pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
 pub type cc_uint32 = ::std::os::raw::c_uint;
+pub type cc_uint64 = ::std::os::raw::c_ulonglong;
 pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
 #[repr(C)]
@@ -370,6 +371,24 @@ extern "C" {
     a4: *const ::std::os::raw::c_void,
   );
 }
+extern "C" {
+  pub fn Convert_ParseUInt8(str: *const String, value: *mut cc_uint8) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseUInt16(str: *const String, value: *mut cc_uint16) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseInt(str: *const String, value: *mut ::std::os::raw::c_int) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseUInt64(str: *const String, value: *mut cc_uint64) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseFloat(str: *const String, value: *mut f32) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseBool(str: *const String, value: *mut bool_) -> bool_;
+}
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct StringsBuffer_ {
@@ -476,6 +495,18 @@ fn bindgen_test_layout_StringsBuffer_() {
   );
 }
 pub type StringsBuffer = StringsBuffer_;
+extern "C" {
+  pub fn StringsBuffer_Clear(buffer: *mut StringsBuffer);
+}
+extern "C" {
+  pub fn StringsBuffer_UNSAFE_Get(buffer: *mut StringsBuffer, i: ::std::os::raw::c_int) -> String;
+}
+extern "C" {
+  pub fn StringsBuffer_Add(buffer: *mut StringsBuffer, str: *const String);
+}
+extern "C" {
+  pub fn StringsBuffer_Remove(buffer: *mut StringsBuffer, index: ::std::os::raw::c_int);
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Vec3_ {
