@@ -125,6 +125,18 @@ mod builder {
 }
 
 fn main() {
+  #[cfg(windows)]
+  {
+    println!("cargo:rustc-link-lib=Crypt32");
+    println!("cargo:rustc-link-lib=D3d9");
+    println!("cargo:rustc-link-lib=Dbghelp");
+    println!("cargo:rustc-link-lib=Gdi32");
+    println!("cargo:rustc-link-lib=Shell32");
+    println!("cargo:rustc-link-lib=User32");
+    println!("cargo:rustc-link-lib=Wininet");
+    println!("cargo:rustc-link-lib=Winmm");
+  }
+
   let classicube_src_path = "ClassiCube/src";
 
   let files: Vec<_> = std::fs::read_dir(classicube_src_path)
