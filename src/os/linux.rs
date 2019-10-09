@@ -8,8 +8,10 @@ pub const STRING_SIZE: u32 = 64;
 pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
 pub type cc_uint32 = ::std::os::raw::c_uint;
+pub type cc_uint64 = ::std::os::raw::c_ulong;
 pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
+pub type EntityID = cc_uint8;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IGameComponent {
@@ -369,6 +371,142 @@ extern "C" {
     a3: *const ::std::os::raw::c_void,
     a4: *const ::std::os::raw::c_void,
   );
+}
+extern "C" {
+  pub fn Convert_ParseUInt8(str: *const String, value: *mut cc_uint8) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseUInt16(str: *const String, value: *mut cc_uint16) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseInt(str: *const String, value: *mut ::std::os::raw::c_int) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseUInt64(str: *const String, value: *mut cc_uint64) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseFloat(str: *const String, value: *mut f32) -> bool_;
+}
+extern "C" {
+  pub fn Convert_ParseBool(str: *const String, value: *mut bool_) -> bool_;
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct StringsBuffer_ {
+  pub textBuffer: *mut ::std::os::raw::c_char,
+  pub flagsBuffer: *mut cc_uint32,
+  pub count: ::std::os::raw::c_int,
+  pub totalLength: ::std::os::raw::c_int,
+  pub _textCapacity: ::std::os::raw::c_int,
+  pub _flagsCapacity: ::std::os::raw::c_int,
+  pub _defaultBuffer: [::std::os::raw::c_char; 4096usize],
+  pub _defaultFlags: [cc_uint32; 256usize],
+}
+#[test]
+fn bindgen_test_layout_StringsBuffer_() {
+  assert_eq!(
+    ::std::mem::size_of::<StringsBuffer_>(),
+    5152usize,
+    concat!("Size of: ", stringify!(StringsBuffer_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<StringsBuffer_>(),
+    8usize,
+    concat!("Alignment of ", stringify!(StringsBuffer_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).textBuffer as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(textBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).flagsBuffer as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(flagsBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).count as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(count)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).totalLength as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(totalLength)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._textCapacity as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_textCapacity)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._flagsCapacity as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_flagsCapacity)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultBuffer as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_defaultBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultFlags as *const _ as usize },
+    4128usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_defaultFlags)
+    )
+  );
+}
+pub type StringsBuffer = StringsBuffer_;
+extern "C" {
+  pub fn StringsBuffer_Clear(buffer: *mut StringsBuffer);
+}
+extern "C" {
+  pub fn StringsBuffer_UNSAFE_Get(buffer: *mut StringsBuffer, i: ::std::os::raw::c_int) -> String;
+}
+extern "C" {
+  pub fn StringsBuffer_Add(buffer: *mut StringsBuffer, str: *const String);
+}
+extern "C" {
+  pub fn StringsBuffer_Remove(buffer: *mut StringsBuffer, index: ::std::os::raw::c_int);
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2124,4 +2262,66 @@ extern "C" {
 }
 extern "C" {
   pub fn Options_Save();
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct _TabListData {
+  pub NameOffsets: [cc_uint16; 256usize],
+  pub GroupRanks: [cc_uint8; 256usize],
+  pub _buffer: StringsBuffer,
+}
+#[test]
+fn bindgen_test_layout__TabListData() {
+  assert_eq!(
+    ::std::mem::size_of::<_TabListData>(),
+    5920usize,
+    concat!("Size of: ", stringify!(_TabListData))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_TabListData>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_TabListData))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListData>())).NameOffsets as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListData),
+      "::",
+      stringify!(NameOffsets)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListData>())).GroupRanks as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListData),
+      "::",
+      stringify!(GroupRanks)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListData>()))._buffer as *const _ as usize },
+    768usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListData),
+      "::",
+      stringify!(_buffer)
+    )
+  );
+}
+extern "C" {
+  pub fn TabList_Remove(id: EntityID);
+}
+extern "C" {
+  pub fn TabList_Set(
+    id: EntityID,
+    player: *const String,
+    list: *const String,
+    group: *const String,
+    rank: cc_uint8,
+  );
 }
