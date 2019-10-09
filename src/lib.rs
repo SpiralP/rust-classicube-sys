@@ -53,11 +53,12 @@ pub static mut Plugin_Component: IGameComponent = IGameComponent {
 */
 
 mod chat;
+mod command;
 mod event;
 mod os;
 mod string;
 
-pub use crate::{chat::*, event::*, os::*, string::*};
+pub use crate::{chat::*, command::*, event::*, os::*, string::*};
 
 // strange fix for these not linking when in generated bindgen
 #[link(name = "ClassiCube")]
