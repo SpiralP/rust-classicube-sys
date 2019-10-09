@@ -11,6 +11,7 @@ pub type cc_uint32 = ::std::os::raw::c_uint;
 pub type cc_uint64 = ::std::os::raw::c_ulonglong;
 pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
+pub type EntityID = cc_uint8;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IGameComponent {
@@ -2310,5 +2311,17 @@ fn bindgen_test_layout__TabListData() {
       "::",
       stringify!(_buffer)
     )
+  );
+}
+extern "C" {
+  pub fn TabList_Remove(id: EntityID);
+}
+extern "C" {
+  pub fn TabList_Set(
+    id: EntityID,
+    player: *const String,
+    list: *const String,
+    group: *const String,
+    rank: cc_uint8,
   );
 }

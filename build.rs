@@ -100,6 +100,8 @@ mod builder {
       .whitelist_type("Key")
       .whitelist_type("Key_")
       .whitelist_type("_TabListData")
+      .whitelist_function("TabList_Remove")
+      .whitelist_function("TabList_Set")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
