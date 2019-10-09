@@ -371,6 +371,112 @@ extern "C" {
   );
 }
 #[repr(C)]
+#[derive(Copy, Clone)]
+pub struct StringsBuffer_ {
+  pub textBuffer: *mut ::std::os::raw::c_char,
+  pub flagsBuffer: *mut cc_uint32,
+  pub count: ::std::os::raw::c_int,
+  pub totalLength: ::std::os::raw::c_int,
+  pub _textCapacity: ::std::os::raw::c_int,
+  pub _flagsCapacity: ::std::os::raw::c_int,
+  pub _defaultBuffer: [::std::os::raw::c_char; 4096usize],
+  pub _defaultFlags: [cc_uint32; 256usize],
+}
+#[test]
+fn bindgen_test_layout_StringsBuffer_() {
+  assert_eq!(
+    ::std::mem::size_of::<StringsBuffer_>(),
+    5152usize,
+    concat!("Size of: ", stringify!(StringsBuffer_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<StringsBuffer_>(),
+    8usize,
+    concat!("Alignment of ", stringify!(StringsBuffer_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).textBuffer as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(textBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).flagsBuffer as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(flagsBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).count as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(count)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).totalLength as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(totalLength)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._textCapacity as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_textCapacity)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._flagsCapacity as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_flagsCapacity)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultBuffer as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_defaultBuffer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultFlags as *const _ as usize },
+    4128usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(StringsBuffer_),
+      "::",
+      stringify!(_defaultFlags)
+    )
+  );
+}
+pub type StringsBuffer = StringsBuffer_;
+#[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Vec3_ {
   pub X: f32,
@@ -2124,4 +2230,54 @@ extern "C" {
 }
 extern "C" {
   pub fn Options_Save();
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct _TabListData {
+  pub NameOffsets: [cc_uint16; 256usize],
+  pub GroupRanks: [cc_uint8; 256usize],
+  pub _buffer: StringsBuffer,
+}
+#[test]
+fn bindgen_test_layout__TabListData() {
+  assert_eq!(
+    ::std::mem::size_of::<_TabListData>(),
+    5920usize,
+    concat!("Size of: ", stringify!(_TabListData))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_TabListData>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_TabListData))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListData>())).NameOffsets as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListData),
+      "::",
+      stringify!(NameOffsets)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListData>())).GroupRanks as *const _ as usize },
+    512usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListData),
+      "::",
+      stringify!(GroupRanks)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_TabListData>()))._buffer as *const _ as usize },
+    768usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_TabListData),
+      "::",
+      stringify!(_buffer)
+    )
+  );
 }

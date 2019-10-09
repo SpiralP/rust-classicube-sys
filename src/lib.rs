@@ -77,6 +77,8 @@ extern "C" {
   pub static mut NetEvents: _NetEventsList;
 
   pub static mut Server: _ServerConnectionData;
+
+  pub static mut TabList: _TabListData;
 }
 
 #[test]

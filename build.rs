@@ -89,6 +89,7 @@ mod builder {
       .whitelist_function("Options_Save")
       .whitelist_type("Key")
       .whitelist_type("Key_")
+      .whitelist_type("_TabListData")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -99,6 +100,7 @@ mod builder {
           #include <String.h>
           #include <Server.h>
           #include <Options.h>
+          #include <Entity.h>
         ",
       );
 
