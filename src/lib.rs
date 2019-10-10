@@ -40,6 +40,27 @@ mod string;
 
 pub use crate::{chat::*, command::*, event::*, os::*, string::*};
 
+// strange fix for these not linking when in generated bindgen
+#[link(name = "ClassiCube")]
+extern "C" {
+  pub static mut EntityEvents: _EntityEventsList;
+  pub static mut TabListEvents: _TabListEventsList;
+  pub static mut TextureEvents: _TextureEventsList;
+  pub static mut GfxEvents: _GfxEventsList;
+  pub static mut UserEvents: _UserEventsList;
+  pub static mut BlockEvents: _BlockEventsList;
+  pub static mut WorldEvents: _WorldEventsList;
+  pub static mut ChatEvents: _ChatEventsList;
+  pub static mut WindowEvents: _WindowEventsList;
+  pub static mut InputEvents: _KeyEventsList;
+  pub static mut PointerEvents: _PointerEventsList;
+  pub static mut NetEvents: _NetEventsList;
+
+  pub static mut Server: _ServerConnectionData;
+
+  pub static mut TabList: _TabListData;
+}
+
 #[test]
 fn test_linkage() {
   unsafe {

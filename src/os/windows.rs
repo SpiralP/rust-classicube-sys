@@ -1116,9 +1116,6 @@ fn bindgen_test_layout__EntityEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut EntityEvents: _EntityEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _TabListEventsList {
@@ -1169,9 +1166,6 @@ fn bindgen_test_layout__TabListEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut TabListEvents: _TabListEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _TextureEventsList {
@@ -1221,9 +1215,6 @@ fn bindgen_test_layout__TextureEventsList() {
       stringify!(FileChanged)
     )
   );
-}
-extern "C" {
-  pub static mut TextureEvents: _TextureEventsList;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1297,9 +1288,6 @@ fn bindgen_test_layout__GfxEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut GfxEvents: _GfxEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _UserEventsList {
@@ -1352,9 +1340,6 @@ fn bindgen_test_layout__UserEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut UserEvents: _UserEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _BlockEventsList {
@@ -1393,9 +1378,6 @@ fn bindgen_test_layout__BlockEventsList() {
       stringify!(BlockDefChanged)
     )
   );
-}
-extern "C" {
-  pub static mut BlockEvents: _BlockEventsList;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1458,9 +1440,6 @@ fn bindgen_test_layout__WorldEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut WorldEvents: _WorldEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _ChatEventsList {
@@ -1521,9 +1500,6 @@ fn bindgen_test_layout__ChatEventsList() {
       stringify!(ColCodeChanged)
     )
   );
-}
-extern "C" {
-  pub static mut ChatEvents: _ChatEventsList;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1608,9 +1584,6 @@ fn bindgen_test_layout__WindowEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut WindowEvents: _WindowEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _KeyEventsList {
@@ -1671,9 +1644,6 @@ fn bindgen_test_layout__KeyEventsList() {
       stringify!(Wheel)
     )
   );
-}
-extern "C" {
-  pub static mut InputEvents: _KeyEventsList;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1736,9 +1706,6 @@ fn bindgen_test_layout__PointerEventsList() {
     )
   );
 }
-extern "C" {
-  pub static mut PointerEvents: _PointerEventsList;
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _NetEventsList {
@@ -1777,9 +1744,6 @@ fn bindgen_test_layout__NetEventsList() {
       stringify!(Disconnected)
     )
   );
-}
-extern "C" {
-  pub static mut NetEvents: _NetEventsList;
 }
 pub const MsgType_MSG_TYPE_NORMAL: MsgType = 0;
 pub const MsgType_MSG_TYPE_STATUS_1: MsgType = 1;
@@ -2248,9 +2212,6 @@ fn bindgen_test_layout__ServerConnectionData() {
   );
 }
 extern "C" {
-  pub static mut Server: _ServerConnectionData;
-}
-extern "C" {
   pub fn Options_Get(
     key: *const ::std::os::raw::c_char,
     value: *mut String,
@@ -2351,9 +2312,6 @@ fn bindgen_test_layout__TabListData() {
       stringify!(_buffer)
     )
   );
-}
-extern "C" {
-  pub static mut TabList: _TabListData;
 }
 extern "C" {
   pub fn TabList_Remove(id: EntityID);

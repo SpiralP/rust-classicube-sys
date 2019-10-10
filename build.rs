@@ -1,3 +1,5 @@
+use std::env;
+
 #[cfg(feature = "bindgen")]
 mod builder {
   #[cfg(target_os = "linux")]
@@ -17,18 +19,18 @@ mod builder {
       .raw_line("#![allow(non_upper_case_globals)]")
       .whitelist_type("IGameComponent")
       .whitelist_function("Event_.*")
-      .whitelist_var("EntityEvents")
-      .whitelist_var("TabListEvents")
-      .whitelist_var("TextureEvents")
-      .whitelist_var("GfxEvents")
-      .whitelist_var("UserEvents")
-      .whitelist_var("BlockEvents")
-      .whitelist_var("WorldEvents")
-      .whitelist_var("ChatEvents")
-      .whitelist_var("WindowEvents")
-      .whitelist_var("InputEvents")
-      .whitelist_var("PointerEvents")
-      .whitelist_var("NetEvents")
+      .whitelist_type("_EntityEventsList")
+      .whitelist_type("_TabListEventsList")
+      .whitelist_type("_TextureEventsList")
+      .whitelist_type("_GfxEventsList")
+      .whitelist_type("_UserEventsList")
+      .whitelist_type("_BlockEventsList")
+      .whitelist_type("_WorldEventsList")
+      .whitelist_type("_ChatEventsList")
+      .whitelist_type("_WindowEventsList")
+      .whitelist_type("_KeyEventsList")
+      .whitelist_type("_PointerEventsList")
+      .whitelist_type("_NetEventsList")
       .whitelist_function("Commands_Register")
       .whitelist_function("Chat_Send")
       .whitelist_function("Chat_Add")
@@ -85,7 +87,7 @@ mod builder {
       .whitelist_function("StringsBuffer_Add")
       .whitelist_function("StringsBuffer_Remove")
       .whitelist_var("STRING_SIZE")
-      .whitelist_var("Server")
+      .whitelist_type("_ServerConnectionData")
       .whitelist_function("Options_Get")
       .whitelist_function("Options_GetInt")
       .whitelist_function("Options_GetBool")
@@ -99,7 +101,7 @@ mod builder {
       .whitelist_function("Options_Save")
       .whitelist_type("Key")
       .whitelist_type("Key_")
-      .whitelist_var("TabList")
+      .whitelist_type("_TabListData")
       .whitelist_function("TabList_Remove")
       .whitelist_function("TabList_Set")
       .clang_arg("-I./ClassiCube/src")
@@ -125,39 +127,48 @@ mod builder {
 }
 
 fn main() {
-  #[cfg(windows)]
+  #[cfg(feature = "bindgen")]
   {
-    println!("cargo:rustc-link-lib=Crypt32");
-    println!("cargo:rustc-link-lib=D3d9");
-    println!("cargo:rustc-link-lib=Dbghelp");
-    println!("cargo:rustc-link-lib=Gdi32");
-    println!("cargo:rustc-link-lib=Shell32");
-    println!("cargo:rustc-link-lib=User32");
-    println!("cargo:rustc-link-lib=Wininet");
-    println!("cargo:rustc-link-lib=Winmm");
+    self::builder::build_bindings();
+    return;
   }
+
+  let out_dir = env::var("OUT_DIR").unwrap();
 
   let classicube_src_path = "ClassiCube/src";
 
-  let files: Vec<_> = std::fs::read_dir(classicube_src_path)
-    .unwrap()
-    .filter_map(|m| m.map(|dir_entry| dir_entry.path()).ok())
-    .filter(|path| path.to_string_lossy().ends_with(".c"))
-    .filter(|path| path.file_name().unwrap() != "Program.c")
-    .collect();
+  #[cfg(not(windows))]
+  {
+    assert!(std::process::Command::new("make")
+      .current_dir(&classicube_src_path)
+      .output()
+      .unwrap()
+      .status
+      .success());
 
-  cc::Build::new()
-    .files(files)
-    .include(classicube_src_path)
-    .compile("ClassiCube");
+    // TODO cp ClassiCube libClassiCube.so
+  }
 
-  // println!(
-  //   "cargo:rustc-link-search=native={}",
-  //   env::current_dir().unwrap().display()
-  // );
+  #[cfg(windows)]
+  {
+    let target = env::var("TARGET").unwrap();
 
-  // println!("cargo:rustc-link-lib=ClassiCube");
+    assert!(cc::windows_registry::find(&target, "msbuild")
+      .unwrap()
+      .current_dir(&classicube_src_path)
+      .args(vec![
+        "ClassiCube.sln",
+        "/p:Configuration=Release",
+        "/p:PlatformToolset=v141",
+        "/p:WindowsTargetPlatformVersion=10.0.18362.0",
+        &format!("/p:OutDir={}", &out_dir)
+      ])
+      .output()
+      .unwrap()
+      .status
+      .success());
+  }
 
-  #[cfg(feature = "bindgen")]
-  self::builder::build_bindings();
+  println!("cargo:rustc-link-lib=dylib=ClassiCube");
+  println!("cargo:rustc-link-search=native={}", &out_dir);
 }
