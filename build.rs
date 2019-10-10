@@ -153,7 +153,7 @@ fn main() {
   {
     let target = env::var("TARGET").unwrap();
 
-    assert!(cc::windows_registry::find(&target, "msbuild")
+    let cmd = cc::windows_registry::find(&target, "msbuild")
       .unwrap()
       .current_dir(&classicube_src_path)
       .args(vec![
@@ -161,12 +161,19 @@ fn main() {
         "/p:Configuration=Release",
         "/p:PlatformToolset=v141",
         "/p:WindowsTargetPlatformVersion=10.0.18362.0",
-        &format!("/p:OutDir={}", &out_dir)
+        &format!("/p:OutDir={}\\", &out_dir),
+        &format!("/p:IntDir={}\\obj\\", &out_dir),
       ])
       .output()
-      .unwrap()
-      .status
-      .success());
+      .unwrap();
+
+    if !cmd.status.success() {
+      panic!(
+        "stdout: {}\nstderr: {}",
+        String::from_utf8_lossy(&cmd.stdout),
+        String::from_utf8_lossy(&cmd.stderr)
+      );
+    }
   }
 
   println!("cargo:rustc-link-lib=dylib=ClassiCube");
