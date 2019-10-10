@@ -139,14 +139,24 @@ fn main() {
 
   #[cfg(not(windows))]
   {
-    assert!(std::process::Command::new("make")
+    let cmd = std::process::Command::new("make")
       .current_dir(&classicube_src_path)
       .output()
-      .unwrap()
-      .status
-      .success());
+      .unwrap();
 
-    // TODO cp ClassiCube libClassiCube.so
+    if !cmd.status.success() {
+      panic!(
+        "stdout: {}\nstderr: {}",
+        String::from_utf8_lossy(&cmd.stdout),
+        String::from_utf8_lossy(&cmd.stderr)
+      );
+    }
+
+    std::fs::copy(
+      format!("{}/ClassiCube", &classicube_src_path),
+      format!("{}/libClassiCube.so", &out_dir),
+    )
+    .unwrap();
   }
 
   #[cfg(windows)]
