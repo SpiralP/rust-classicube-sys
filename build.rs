@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, path::Path};
 
 #[cfg(feature = "bindgen")]
 mod builder {
@@ -134,13 +134,24 @@ fn main() {
   }
 
   let out_dir = env::var("OUT_DIR").unwrap();
+  let out_dir = Path::new(&out_dir);
+  let classicube_src_dir = Path::new("ClassiCube").join("src");
+  let build_dir = &out_dir.join("src");
 
-  let classicube_src_path = "ClassiCube/src";
+  let mut copy_options = fs_extra::dir::CopyOptions::new();
+  copy_options.overwrite = true;
+
+  fs_extra::dir::copy(
+    &classicube_src_dir,
+    &build_dir.parent().unwrap(),
+    &copy_options,
+  )
+  .unwrap();
 
   #[cfg(not(windows))]
   {
     let cmd = std::process::Command::new("make")
-      .current_dir(&classicube_src_path)
+      .current_dir(&build_dir)
       .output()
       .unwrap();
 
@@ -153,8 +164,8 @@ fn main() {
     }
 
     std::fs::copy(
-      format!("{}/ClassiCube", &classicube_src_path),
-      format!("{}/libClassiCube.so", &out_dir),
+      &build_dir.join("ClassiCube"),
+      &out_dir.join("libClassiCube.so"),
     )
     .unwrap();
   }
@@ -165,14 +176,14 @@ fn main() {
 
     let cmd = cc::windows_registry::find(&target, "msbuild")
       .unwrap()
-      .current_dir(&classicube_src_path)
+      .current_dir(&build_dir)
       .args(vec![
         "ClassiCube.sln",
         "/p:Configuration=Release",
         "/p:PlatformToolset=v141",
         "/p:WindowsTargetPlatformVersion=10.0.18362.0",
-        &format!("/p:OutDir={}\\", &out_dir),
-        &format!("/p:IntDir={}\\obj\\", &out_dir),
+        &format!("/p:OutDir={}\\", &out_dir.display()),
+        &format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
       ])
       .output()
       .unwrap();
@@ -187,5 +198,5 @@ fn main() {
   }
 
   println!("cargo:rustc-link-lib=dylib=ClassiCube");
-  println!("cargo:rustc-link-search=native={}", &out_dir);
+  println!("cargo:rustc-link-search=native={}", &out_dir.display());
 }
