@@ -3,7 +3,6 @@ use std::{
   borrow::Borrow,
   convert::TryInto,
   ffi::CString,
-  marker::PhantomData,
   os::raw::{c_char, c_int},
   slice,
   string::String as StdString,
@@ -23,13 +22,12 @@ impl ToString for String {
   }
 }
 
-pub struct OwnedString<'a> {
+pub struct OwnedString {
   cc_string: String,
   _c_string: CString,
-  _phantom: PhantomData<&'a String>,
 }
 
-impl<'a> OwnedString<'a> {
+impl OwnedString {
   pub fn new<S: Into<Vec<u8>>>(s: S) -> Self {
     let chars = s.into();
     let length = chars.len() as u16;
@@ -45,16 +43,15 @@ impl<'a> OwnedString<'a> {
         length,
         capacity,
       },
-      _phantom: PhantomData,
     }
   }
 
-  pub fn as_cc_string(&'a self) -> &'a String {
+  pub fn as_cc_string(&self) -> &String {
     &self.cc_string
   }
 }
 
-impl<'a> Borrow<String> for OwnedString<'a> {
+impl Borrow<String> for OwnedString {
   fn borrow(&self) -> &String {
     self.as_cc_string()
   }
