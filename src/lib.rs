@@ -8,7 +8,11 @@ use classicube_sys::*;
 use std::{os::raw::c_int, ptr};
 
 extern "C" fn init() {
-  // doot
+  let owned_string = OwnedString::new("hello from rust!");
+
+  unsafe {
+    Chat_Add(owned_string.as_cc_string());
+  }
 }
 
 #[no_mangle]

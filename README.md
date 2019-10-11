@@ -5,12 +5,26 @@
 Rust bindings to [ClassiCube](https://www.classicube.net)
 
 ## Example
+
+Add this to `Cargo.toml`:
+
+```toml
+[lib]
+crate-type = ["cdylib"]
+```
+
+`lib.rs`:
+
 ```rust
 use classicube_sys::*;
 use std::{os::raw::c_int, ptr};
 
 extern "C" fn init() {
-  // doot
+  let owned_string = OwnedString::new("hello from rust!");
+
+  unsafe {
+    Chat_Add(owned_string.as_cc_string());
+  }
 }
 
 #[no_mangle]
@@ -33,10 +47,14 @@ pub static mut Plugin_Component: IGameComponent = IGameComponent {
 };
 ```
 
+Copy the `.dll`/`.so` from `target/{debug,release}/` to the plugins folder where your ClassiCube executable is found
+
 ## References
+
+Example library usage: https://github.com/SpiralP/rust-classicube-roll-plugin
+
 ClassiCube source: https://github.com/UnknownShadow200/ClassiCube
 
 Plugin help: https://github.com/UnknownShadow200/ClassiCube/blob/master/misc/plugin-dev.md
 
 Plugin examples: https://github.com/UnknownShadow200/ClassiCube-Plugins
-
