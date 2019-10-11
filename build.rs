@@ -18,7 +18,11 @@ mod builder {
       .raw_line("#![allow(non_camel_case_types)]")
       .raw_line("#![allow(non_upper_case_globals)]")
       .whitelist_type("IGameComponent")
-      .whitelist_function("Event_.*")
+      .whitelist_function("Event_Register")
+      .whitelist_function("Event_Unregister")
+      .whitelist_function("Event_RaiseVoid")
+      .whitelist_function("Event_RaiseInt")
+      .whitelist_function("Event_RaiseFloat")
       .whitelist_type("_EntityEventsList")
       .whitelist_type("_TabListEventsList")
       .whitelist_type("_TextureEventsList")
@@ -148,27 +152,27 @@ fn main() {
   )
   .unwrap();
 
-  #[cfg(not(windows))]
-  {
-    let cmd = std::process::Command::new("make")
-      .current_dir(&build_dir)
-      .output()
-      .unwrap();
+  // #[cfg(not(windows))]
+  // {
+  //   let cmd = std::process::Command::new("make")
+  //     .current_dir(&build_dir)
+  //     .output()
+  //     .unwrap();
 
-    if !cmd.status.success() {
-      panic!(
-        "stdout: {}\nstderr: {}",
-        String::from_utf8_lossy(&cmd.stdout),
-        String::from_utf8_lossy(&cmd.stderr)
-      );
-    }
+  //   if !cmd.status.success() {
+  //     panic!(
+  //       "stdout: {}\nstderr: {}",
+  //       String::from_utf8_lossy(&cmd.stdout),
+  //       String::from_utf8_lossy(&cmd.stderr)
+  //     );
+  //   }
 
-    std::fs::copy(
-      &build_dir.join("ClassiCube"),
-      &out_dir.join("libClassiCube.so"),
-    )
-    .unwrap();
-  }
+  //   std::fs::copy(
+  //     &build_dir.join("ClassiCube"),
+  //     &out_dir.join("libClassiCube.so"),
+  //   )
+  //   .unwrap();
+  // }
 
   #[cfg(windows)]
   {
@@ -195,8 +199,9 @@ fn main() {
         String::from_utf8_lossy(&cmd.stderr)
       );
     }
-  }
 
-  println!("cargo:rustc-link-lib=dylib=ClassiCube");
-  println!("cargo:rustc-link-search=native={}", &out_dir.display());
+    // linux doesn't need to link
+    println!("cargo:rustc-link-lib=dylib=ClassiCube");
+    println!("cargo:rustc-link-search=native={}", &out_dir.display());
+  }
 }

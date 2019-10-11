@@ -40,8 +40,8 @@ mod string;
 
 pub use crate::{chat::*, command::*, event::*, os::*, string::*};
 
-// strange fix for these not linking when in generated bindgen
-#[link(name = "ClassiCube")]
+// strange fix for windows where these don't link right
+#[cfg_attr(windows, link(name = "ClassiCube"))]
 extern "C" {
   pub static mut EntityEvents: _EntityEventsList;
   pub static mut TabListEvents: _TabListEventsList;
@@ -59,11 +59,4 @@ extern "C" {
   pub static mut Server: _ServerConnectionData;
 
   pub static mut TabList: _TabListData;
-}
-
-#[test]
-fn test_linkage() {
-  unsafe {
-    println!("{:?}", ChatEvents);
-  }
 }

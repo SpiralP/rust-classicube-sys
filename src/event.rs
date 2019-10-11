@@ -1,5 +1,8 @@
 use crate::os::*;
-use std::{mem, os::raw::c_void};
+use std::{
+  mem,
+  os::raw::{c_int, c_void},
+};
 
 pub unsafe fn Event_RegisterVoid(
   handlers: *mut Event_Void,
@@ -111,4 +114,16 @@ pub unsafe fn Event_UnregisterFloat(
     obj,
     mem::transmute::<Event_Float_Callback, Event_Void_Callback>(handler),
   )
+}
+
+pub unsafe fn Event_RaiseInput(handlers: &mut Event_Input, key: c_int, repeating: bool) {
+  for i in 0..handlers.Count {
+    if let Some(f) = handlers.Handlers[i as usize] {
+      (f)(
+        handlers.Objs[i as usize],
+        key,
+        if repeating { 1 } else { 0 },
+      );
+    }
+  }
 }

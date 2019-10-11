@@ -1048,35 +1048,6 @@ extern "C" {
 extern "C" {
   pub fn Event_RaiseFloat(handlers: *mut Event_Float, arg: f32);
 }
-extern "C" {
-  pub fn Event_RaiseEntry(handlers: *mut Event_Entry, stream: *mut Stream, name: *const String);
-}
-extern "C" {
-  pub fn Event_RaiseBlock(
-    handlers: *mut Event_Block,
-    coords: IVec3,
-    oldBlock: BlockID,
-    block: BlockID,
-  );
-}
-extern "C" {
-  pub fn Event_RaiseMove(
-    handlers: *mut Event_PointerMove,
-    idx: ::std::os::raw::c_int,
-    xDelta: ::std::os::raw::c_int,
-    yDelta: ::std::os::raw::c_int,
-  );
-}
-extern "C" {
-  pub fn Event_RaiseChat(
-    handlers: *mut Event_Chat,
-    msg: *const String,
-    msgType: ::std::os::raw::c_int,
-  );
-}
-extern "C" {
-  pub fn Event_RaiseInput(handlers: *mut Event_Input, key: ::std::os::raw::c_int, repeating: bool_);
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _EntityEventsList {
