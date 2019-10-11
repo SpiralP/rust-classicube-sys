@@ -137,6 +137,13 @@ fn main() {
     return;
   }
 
+  #[cfg(not(windows))]
+  {
+    // linux doesn't need to build the shared library
+    // TODO test mac
+    return;
+  }
+
   let out_dir = env::var("OUT_DIR").unwrap();
   let out_dir = Path::new(&out_dir);
   let classicube_src_dir = Path::new("ClassiCube").join("src");
