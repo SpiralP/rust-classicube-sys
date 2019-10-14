@@ -108,6 +108,7 @@ mod builder {
       .whitelist_type("_TabListData")
       .whitelist_function("TabList_Remove")
       .whitelist_function("TabList_Set")
+      .whitelist_type("_EntitiesData")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",

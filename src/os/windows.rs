@@ -5,6 +5,7 @@
 #![allow(non_upper_case_globals)]
 
 pub const STRING_SIZE: u32 = 64;
+pub type cc_int16 = ::std::os::raw::c_short;
 pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
 pub type cc_uint32 = ::std::os::raw::c_uint;
@@ -12,6 +13,152 @@ pub type cc_uint64 = ::std::os::raw::c_ulonglong;
 pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
 pub type EntityID = cc_uint8;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct TextureRec_ {
+  pub U1: f32,
+  pub V1: f32,
+  pub U2: f32,
+  pub V2: f32,
+}
+#[test]
+fn bindgen_test_layout_TextureRec_() {
+  assert_eq!(
+    ::std::mem::size_of::<TextureRec_>(),
+    16usize,
+    concat!("Size of: ", stringify!(TextureRec_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<TextureRec_>(),
+    4usize,
+    concat!("Alignment of ", stringify!(TextureRec_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<TextureRec_>())).U1 as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(TextureRec_),
+      "::",
+      stringify!(U1)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<TextureRec_>())).V1 as *const _ as usize },
+    4usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(TextureRec_),
+      "::",
+      stringify!(V1)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<TextureRec_>())).U2 as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(TextureRec_),
+      "::",
+      stringify!(U2)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<TextureRec_>())).V2 as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(TextureRec_),
+      "::",
+      stringify!(V2)
+    )
+  );
+}
+pub type TextureRec = TextureRec_;
+pub type GfxResourceID = *mut ::std::os::raw::c_void;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Texture {
+  pub ID: GfxResourceID,
+  pub X: cc_int16,
+  pub Y: cc_int16,
+  pub Width: cc_uint16,
+  pub Height: cc_uint16,
+  pub uv: TextureRec,
+}
+#[test]
+fn bindgen_test_layout_Texture() {
+  assert_eq!(
+    ::std::mem::size_of::<Texture>(),
+    32usize,
+    concat!("Size of: ", stringify!(Texture))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Texture>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Texture))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Texture>())).ID as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Texture),
+      "::",
+      stringify!(ID)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Texture>())).X as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Texture),
+      "::",
+      stringify!(X)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Texture>())).Y as *const _ as usize },
+    10usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Texture),
+      "::",
+      stringify!(Y)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Texture>())).Width as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Texture),
+      "::",
+      stringify!(Width)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Texture>())).Height as *const _ as usize },
+    14usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Texture),
+      "::",
+      stringify!(Height)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Texture>())).uv as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Texture),
+      "::",
+      stringify!(uv)
+    )
+  );
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IGameComponent {
@@ -580,6 +727,108 @@ fn bindgen_test_layout_IVec3_() {
   );
 }
 pub type IVec3 = IVec3_;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Vec4 {
+  pub X: f32,
+  pub Y: f32,
+  pub Z: f32,
+  pub W: f32,
+}
+#[test]
+fn bindgen_test_layout_Vec4() {
+  assert_eq!(
+    ::std::mem::size_of::<Vec4>(),
+    16usize,
+    concat!("Size of: ", stringify!(Vec4))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Vec4>(),
+    4usize,
+    concat!("Alignment of ", stringify!(Vec4))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec4>())).X as *const _ as usize },
+    0usize,
+    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(X))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec4>())).Y as *const _ as usize },
+    4usize,
+    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(Y))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec4>())).Z as *const _ as usize },
+    8usize,
+    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(Z))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Vec4>())).W as *const _ as usize },
+    12usize,
+    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(W))
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Matrix {
+  pub Row0: Vec4,
+  pub Row1: Vec4,
+  pub Row2: Vec4,
+  pub Row3: Vec4,
+}
+#[test]
+fn bindgen_test_layout_Matrix() {
+  assert_eq!(
+    ::std::mem::size_of::<Matrix>(),
+    64usize,
+    concat!("Size of: ", stringify!(Matrix))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Matrix>(),
+    4usize,
+    concat!("Alignment of ", stringify!(Matrix))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Matrix>())).Row0 as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Matrix),
+      "::",
+      stringify!(Row0)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Matrix>())).Row1 as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Matrix),
+      "::",
+      stringify!(Row1)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Matrix>())).Row2 as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Matrix),
+      "::",
+      stringify!(Row2)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Matrix>())).Row3 as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Matrix),
+      "::",
+      stringify!(Row3)
+    )
+  );
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Stream {
@@ -2233,6 +2482,924 @@ extern "C" {
 }
 extern "C" {
   pub fn Options_Save();
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AnimatedComp {
+  pub BobbingHor: f32,
+  pub BobbingVer: f32,
+  pub BobbingModel: f32,
+  pub WalkTime: f32,
+  pub Swing: f32,
+  pub BobStrength: f32,
+  pub WalkTimeO: f32,
+  pub WalkTimeN: f32,
+  pub SwingO: f32,
+  pub SwingN: f32,
+  pub BobStrengthO: f32,
+  pub BobStrengthN: f32,
+  pub LeftLegX: f32,
+  pub LeftLegZ: f32,
+  pub RightLegX: f32,
+  pub RightLegZ: f32,
+  pub LeftArmX: f32,
+  pub LeftArmZ: f32,
+  pub RightArmX: f32,
+  pub RightArmZ: f32,
+}
+#[test]
+fn bindgen_test_layout_AnimatedComp() {
+  assert_eq!(
+    ::std::mem::size_of::<AnimatedComp>(),
+    80usize,
+    concat!("Size of: ", stringify!(AnimatedComp))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<AnimatedComp>(),
+    4usize,
+    concat!("Alignment of ", stringify!(AnimatedComp))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingHor as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(BobbingHor)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingVer as *const _ as usize },
+    4usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(BobbingVer)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingModel as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(BobbingModel)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTime as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(WalkTime)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).Swing as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(Swing)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrength as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(BobStrength)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTimeO as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(WalkTimeO)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTimeN as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(WalkTimeN)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).SwingO as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(SwingO)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).SwingN as *const _ as usize },
+    36usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(SwingN)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrengthO as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(BobStrengthO)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrengthN as *const _ as usize },
+    44usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(BobStrengthN)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftLegX as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(LeftLegX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftLegZ as *const _ as usize },
+    52usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(LeftLegZ)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightLegX as *const _ as usize },
+    56usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(RightLegX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightLegZ as *const _ as usize },
+    60usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(RightLegZ)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftArmX as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(LeftArmX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftArmZ as *const _ as usize },
+    68usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(LeftArmZ)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightArmX as *const _ as usize },
+    72usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(RightArmX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightArmZ as *const _ as usize },
+    76usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(AnimatedComp),
+      "::",
+      stringify!(RightArmZ)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AABB {
+  pub Min: Vec3,
+  pub Max: Vec3,
+}
+#[test]
+fn bindgen_test_layout_AABB() {
+  assert_eq!(
+    ::std::mem::size_of::<AABB>(),
+    24usize,
+    concat!("Size of: ", stringify!(AABB))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<AABB>(),
+    4usize,
+    concat!("Alignment of ", stringify!(AABB))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AABB>())).Min as *const _ as usize },
+    0usize,
+    concat!("Offset of field: ", stringify!(AABB), "::", stringify!(Min))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<AABB>())).Max as *const _ as usize },
+    12usize,
+    concat!("Offset of field: ", stringify!(AABB), "::", stringify!(Max))
+  );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union PackedCol_ {
+  pub __bindgen_anon_1: PackedCol___bindgen_ty_1,
+  pub _raw: cc_uint32,
+  _bindgen_union_align: u32,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PackedCol___bindgen_ty_1 {
+  pub B: cc_uint8,
+  pub G: cc_uint8,
+  pub R: cc_uint8,
+  pub A: cc_uint8,
+}
+#[test]
+fn bindgen_test_layout_PackedCol___bindgen_ty_1() {
+  assert_eq!(
+    ::std::mem::size_of::<PackedCol___bindgen_ty_1>(),
+    4usize,
+    concat!("Size of: ", stringify!(PackedCol___bindgen_ty_1))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<PackedCol___bindgen_ty_1>(),
+    1usize,
+    concat!("Alignment of ", stringify!(PackedCol___bindgen_ty_1))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).B as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PackedCol___bindgen_ty_1),
+      "::",
+      stringify!(B)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).G as *const _ as usize },
+    1usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PackedCol___bindgen_ty_1),
+      "::",
+      stringify!(G)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).R as *const _ as usize },
+    2usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PackedCol___bindgen_ty_1),
+      "::",
+      stringify!(R)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).A as *const _ as usize },
+    3usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PackedCol___bindgen_ty_1),
+      "::",
+      stringify!(A)
+    )
+  );
+}
+#[test]
+fn bindgen_test_layout_PackedCol_() {
+  assert_eq!(
+    ::std::mem::size_of::<PackedCol_>(),
+    4usize,
+    concat!("Size of: ", stringify!(PackedCol_))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<PackedCol_>(),
+    4usize,
+    concat!("Alignment of ", stringify!(PackedCol_))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PackedCol_>()))._raw as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PackedCol_),
+      "::",
+      stringify!(_raw)
+    )
+  );
+}
+pub type PackedCol = PackedCol_;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Model {
+  _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LocationUpdate {
+  pub Pos: Vec3,
+  pub HeadX: f32,
+  pub HeadY: f32,
+  pub RotX: f32,
+  pub RotZ: f32,
+  pub Flags: cc_uint8,
+  pub RelativePos: bool_,
+}
+#[test]
+fn bindgen_test_layout_LocationUpdate() {
+  assert_eq!(
+    ::std::mem::size_of::<LocationUpdate>(),
+    32usize,
+    concat!("Size of: ", stringify!(LocationUpdate))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<LocationUpdate>(),
+    4usize,
+    concat!("Alignment of ", stringify!(LocationUpdate))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).Pos as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(Pos)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).HeadX as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(HeadX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).HeadY as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(HeadY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RotX as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(RotX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RotZ as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(RotZ)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).Flags as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(Flags)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RelativePos as *const _ as usize },
+    29usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(LocationUpdate),
+      "::",
+      stringify!(RelativePos)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct EntityVTABLE {
+  pub Tick: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, delta: f64)>,
+  pub Despawn: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
+  pub SetLocation: ::std::option::Option<
+    unsafe extern "C" fn(e: *mut Entity, update: *mut LocationUpdate, interpolate: bool_),
+  >,
+  pub GetCol: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity) -> PackedCol>,
+  pub RenderModel:
+    ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, deltaTime: f64, t: f32)>,
+  pub RenderName: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
+}
+#[test]
+fn bindgen_test_layout_EntityVTABLE() {
+  assert_eq!(
+    ::std::mem::size_of::<EntityVTABLE>(),
+    48usize,
+    concat!("Size of: ", stringify!(EntityVTABLE))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<EntityVTABLE>(),
+    8usize,
+    concat!("Alignment of ", stringify!(EntityVTABLE))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).Tick as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(EntityVTABLE),
+      "::",
+      stringify!(Tick)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).Despawn as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(EntityVTABLE),
+      "::",
+      stringify!(Despawn)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).SetLocation as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(EntityVTABLE),
+      "::",
+      stringify!(SetLocation)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).GetCol as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(EntityVTABLE),
+      "::",
+      stringify!(GetCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).RenderModel as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(EntityVTABLE),
+      "::",
+      stringify!(RenderModel)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).RenderName as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(EntityVTABLE),
+      "::",
+      stringify!(RenderName)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct Entity {
+  pub VTABLE: *mut EntityVTABLE,
+  pub Position: Vec3,
+  pub HeadX: f32,
+  pub HeadY: f32,
+  pub RotX: f32,
+  pub RotY: f32,
+  pub RotZ: f32,
+  pub Velocity: Vec3,
+  pub Model: *mut Model,
+  pub ModelBlock: BlockID,
+  pub ModelRestrictedScale: bool_,
+  pub ModelAABB: AABB,
+  pub ModelScale: Vec3,
+  pub Size: Vec3,
+  pub StepSize: f32,
+  pub SkinType: cc_uint8,
+  pub SkinFetchState: cc_uint8,
+  pub NoShade: bool_,
+  pub OnGround: bool_,
+  pub TextureId: GfxResourceID,
+  pub MobTextureId: GfxResourceID,
+  pub uScale: f32,
+  pub vScale: f32,
+  pub Transform: Matrix,
+  pub Anim: AnimatedComp,
+  pub SkinNameRaw: [::std::os::raw::c_char; 64usize],
+  pub DisplayNameRaw: [::std::os::raw::c_char; 64usize],
+  pub NameTex: Texture,
+}
+#[test]
+fn bindgen_test_layout_Entity() {
+  assert_eq!(
+    ::std::mem::size_of::<Entity>(),
+    456usize,
+    concat!("Size of: ", stringify!(Entity))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Entity>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Entity))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).VTABLE as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(VTABLE)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).Position as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(Position)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).HeadX as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(HeadX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).HeadY as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(HeadY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).RotX as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(RotX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).RotY as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(RotY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).RotZ as *const _ as usize },
+    36usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(RotZ)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).Velocity as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(Velocity)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).Model as *const _ as usize },
+    56usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(Model)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).ModelBlock as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(ModelBlock)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).ModelRestrictedScale as *const _ as usize },
+    66usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(ModelRestrictedScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).ModelAABB as *const _ as usize },
+    68usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(ModelAABB)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).ModelScale as *const _ as usize },
+    92usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(ModelScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).Size as *const _ as usize },
+    104usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(Size)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).StepSize as *const _ as usize },
+    116usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(StepSize)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).SkinType as *const _ as usize },
+    120usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(SkinType)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).SkinFetchState as *const _ as usize },
+    121usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(SkinFetchState)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).NoShade as *const _ as usize },
+    122usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(NoShade)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).OnGround as *const _ as usize },
+    123usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(OnGround)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).TextureId as *const _ as usize },
+    128usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(TextureId)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).MobTextureId as *const _ as usize },
+    136usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(MobTextureId)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).uScale as *const _ as usize },
+    144usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(uScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).vScale as *const _ as usize },
+    148usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(vScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).Transform as *const _ as usize },
+    152usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(Transform)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).Anim as *const _ as usize },
+    216usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(Anim)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).SkinNameRaw as *const _ as usize },
+    296usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(SkinNameRaw)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).DisplayNameRaw as *const _ as usize },
+    360usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(DisplayNameRaw)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Entity>())).NameTex as *const _ as usize },
+    424usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Entity),
+      "::",
+      stringify!(NameTex)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct _EntitiesData {
+  pub List: [*mut Entity; 256usize],
+  pub NamesMode: cc_uint8,
+  pub ShadowsMode: cc_uint8,
+}
+#[test]
+fn bindgen_test_layout__EntitiesData() {
+  assert_eq!(
+    ::std::mem::size_of::<_EntitiesData>(),
+    2056usize,
+    concat!("Size of: ", stringify!(_EntitiesData))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_EntitiesData>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_EntitiesData))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EntitiesData>())).List as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EntitiesData),
+      "::",
+      stringify!(List)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EntitiesData>())).NamesMode as *const _ as usize },
+    2048usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EntitiesData),
+      "::",
+      stringify!(NamesMode)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EntitiesData>())).ShadowsMode as *const _ as usize },
+    2049usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EntitiesData),
+      "::",
+      stringify!(ShadowsMode)
+    )
+  );
 }
 #[repr(C)]
 #[derive(Copy, Clone)]

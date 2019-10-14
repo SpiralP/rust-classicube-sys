@@ -63,4 +63,5 @@ extern "C" {
   pub static mut Server: _ServerConnectionData;
 
   pub static mut TabList: _TabListData;
+  pub static mut Entities: _EntitiesData;
 }
