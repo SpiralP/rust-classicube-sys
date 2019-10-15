@@ -12,3 +12,19 @@ pub use self::windows::*;
 mod macos;
 #[cfg(target_os = "macos")]
 pub use self::macos::*;
+
+#[cfg(target_os = "macos")]
+#[inline]
+pub(crate) fn as_c_bool(b: bool) -> bool {
+  b
+}
+
+#[cfg(not(target_os = "macos"))]
+#[inline]
+pub(crate) fn as_c_bool(b: bool) -> bool_ {
+  if b {
+    1
+  } else {
+    0
+  }
+}

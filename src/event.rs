@@ -119,11 +119,7 @@ pub unsafe fn Event_UnregisterFloat(
 pub unsafe fn Event_RaiseInput(handlers: &mut Event_Input, key: c_int, repeating: bool) {
   for i in 0..handlers.Count {
     if let Some(f) = handlers.Handlers[i as usize] {
-      (f)(
-        handlers.Objs[i as usize],
-        key,
-        if repeating { 1 } else { 0 },
-      );
+      (f)(handlers.Objs[i as usize], key, as_c_bool(repeating));
     }
   }
 }
