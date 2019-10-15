@@ -4,21 +4,33 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
+      
     - name: Checkout submodules
       uses: textbook/git-checkout-submodule-action@2.0.0
+      
     - name: Install deps
-      run: sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev libgl1-mesa-dev
-    - name: Build
-      run: cargo build --verbose
-    - name: Test
-      run: cargo test --verbose
-    - name: Generate docs
-      run: cargo doc
+      run: sudo apt-get -y update && sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev libgl1-mesa-dev
+      
+    - name: Install nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Run cargo test
+      uses: actions-rs/cargo@v1
+      with:
+        command: test
+    
+    - name: Run cargo doc
+      uses: actions-rs/cargo@v1
+      with:
+        command: doc
+      
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v2.5.0
       env:
