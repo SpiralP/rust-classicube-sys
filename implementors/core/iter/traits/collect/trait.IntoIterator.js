@@ -6,5 +6,4 @@ implementors["arrayvec"] = [{text:"impl&lt;'a, A:&nbsp;<a class=\"trait\" href=\
             } else {
                 window.pending_implementors = implementors;
             }
-        
-})()
+        })()
