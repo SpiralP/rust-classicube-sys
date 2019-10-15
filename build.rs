@@ -193,10 +193,9 @@ fn main() {
     let target = env::var("TARGET").unwrap();
 
     let build_tools_version = match windows_registry::find_vs_version().unwrap() {
-      VsVers::Vs12 => unimplemented!(),
-      VsVers::Vs14 => unimplemented!(),
       VsVers::Vs15 => "v141", // 2017
       VsVers::Vs16 => "v142", // 2019
+      _ => unimplemented!(),
     };
 
     let cmd = windows_registry::find(&target, "msbuild")
