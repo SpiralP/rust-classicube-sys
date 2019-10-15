@@ -141,19 +141,21 @@ fn main() {
 
   #[cfg(target_os = "linux")]
   {
-    // linux doesn't need to build the shared library
+    // linux doesn't need to build or link to the shared library
     return;
   }
+
+  use fs_extra::dir;
 
   let out_dir = env::var("OUT_DIR").unwrap();
   let out_dir = Path::new(&out_dir);
   let classicube_src_dir = Path::new("ClassiCube").join("src");
   let build_dir = &out_dir.join("src");
 
-  let mut copy_options = fs_extra::dir::CopyOptions::new();
+  let mut copy_options = dir::CopyOptions::new();
   copy_options.overwrite = true;
 
-  fs_extra::dir::copy(
+  dir::copy(
     &classicube_src_dir,
     &build_dir.parent().unwrap(),
     &copy_options,
@@ -162,7 +164,9 @@ fn main() {
 
   #[cfg(target_os = "macos")]
   {
-    let cmd = std::process::Command::new("make")
+    use std::{fs, process::Command};
+
+    let cmd = Command::new("make")
       .current_dir(&build_dir)
       .output()
       .unwrap();
@@ -175,7 +179,7 @@ fn main() {
       );
     }
 
-    std::fs::copy(
+    fs::copy(
       &build_dir.join("ClassiCube.dylib"),
       &out_dir.join("libClassiCube.dylib"),
     )
@@ -184,15 +188,24 @@ fn main() {
 
   #[cfg(windows)]
   {
+    use cc::{windows_registry, windows_registry::VsVers};
+
     let target = env::var("TARGET").unwrap();
 
-    let cmd = cc::windows_registry::find(&target, "msbuild")
+    let build_tools_version = match windows_registry::find_vs_version().unwrap() {
+      VsVers::Vs12 => unimplemented!(),
+      VsVers::Vs14 => unimplemented!(),
+      VsVers::Vs15 => "v141", // 2017
+      VsVers::Vs16 => "v142", // 2019
+    };
+
+    let cmd = windows_registry::find(&target, "msbuild")
       .unwrap()
       .current_dir(&build_dir)
       .args(vec![
         "ClassiCube.sln",
         "/p:Configuration=Release",
-        "/p:PlatformToolset=v141",
+        &format!("/p:PlatformToolset={}", build_tools_version),
         "/p:WindowsTargetPlatformVersion=10.0.18362.0",
         &format!("/p:OutDir={}\\", &out_dir.display()),
         &format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
