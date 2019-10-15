@@ -14,9 +14,10 @@ mod builder {
   pub fn build_bindings() {
     let bindings = bindgen::builder()
       .trust_clang_mangling(false)
-      //      .raw_line("#![allow(non_snake_case)]")
-      //    .raw_line("#![allow(non_camel_case_types)]")
-      //  .raw_line("#![allow(non_upper_case_globals)]")
+      .raw_line("#![allow(non_snake_case)]")
+      .raw_line("#![allow(non_camel_case_types)]")
+      .raw_line("#![allow(non_upper_case_globals)]")
+      .raw_line("#![allow(clippy::cognitive_complexity)]")
       .whitelist_type("IGameComponent")
       .whitelist_function("Event_Register")
       .whitelist_function("Event_Unregister")
@@ -138,7 +139,7 @@ fn main() {
     return;
   }
 
-  #[cfg(linux)]
+  #[cfg(target_os = "linux")]
   {
     // linux doesn't need to build the shared library
     return;

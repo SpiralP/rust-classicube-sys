@@ -3,6 +3,7 @@
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
+#![allow(clippy::cognitive_complexity)]
 
 pub const STRING_SIZE: u32 = 64;
 pub type cc_int16 = ::std::os::raw::c_short;
