@@ -45,7 +45,7 @@ mod string;
 pub use crate::{chat::*, command::*, event::*, os::*, string::*};
 
 // strange fix for windows where these don't link right
-#[cfg_attr(windows, link(name = "ClassiCube"))]
+#[link(name = "ClassiCube")]
 extern "C" {
   pub static mut EntityEvents: _EntityEventsList;
   pub static mut TabListEvents: _TabListEventsList;
