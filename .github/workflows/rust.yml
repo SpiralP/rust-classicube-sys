@@ -3,7 +3,7 @@ name: Rust
 on: [push]
 
 jobs:
-  build:
+  build_linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +21,12 @@ jobs:
         toolchain: nightly
         override: true
 
-    - name: Run cargo test
+    - name: Build
       uses: actions-rs/cargo@v1
       with:
-        command: test
+        command: build
     
-    - name: Run cargo doc
+    - name: Build docs
       uses: actions-rs/cargo@v1
       with:
         command: doc
@@ -37,3 +37,52 @@ jobs:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: ./target/doc
+
+    - name: Test
+      uses: actions-rs/cargo@v1
+      with:
+        command: test
+
+
+
+  build_mac:
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.0.0
+      
+    - name: Install nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Test
+      uses: actions-rs/cargo@v1
+      with:
+        command: test
+
+
+
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.0.0
+      
+    - name: Install nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Test
+      uses: actions-rs/cargo@v1
+      with:
+        command: test
