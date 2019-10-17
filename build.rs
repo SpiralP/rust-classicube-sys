@@ -1,5 +1,3 @@
-use std::{env, path::Path};
-
 #[cfg(feature = "bindgen")]
 mod builder {
   #[cfg(target_os = "linux")]
@@ -145,50 +143,33 @@ fn main() {
     return;
   }
 
-  use fs_extra::dir;
-
-  let out_dir = env::var("OUT_DIR").unwrap();
-  let out_dir = Path::new(&out_dir);
-  let classicube_src_dir = Path::new("ClassiCube").join("src");
-  let build_dir = &out_dir.join("src");
-
-  let mut copy_options = dir::CopyOptions::new();
-  copy_options.overwrite = true;
-
-  dir::copy(
-    &classicube_src_dir,
-    &build_dir.parent().unwrap(),
-    &copy_options,
-  )
-  .unwrap();
-
   #[cfg(target_os = "macos")]
   {
-    use std::{fs, process::Command};
-
-    let cmd = Command::new("make")
-      .current_dir(&build_dir)
-      .output()
-      .unwrap();
-
-    if !cmd.status.success() {
-      panic!(
-        "stdout: {}\nstderr: {}",
-        String::from_utf8_lossy(&cmd.stdout),
-        String::from_utf8_lossy(&cmd.stderr)
-      );
-    }
-
-    fs::copy(
-      &build_dir.join("ClassiCube.dylib"),
-      &out_dir.join("libClassiCube.dylib"),
-    )
-    .unwrap();
+    // mac also doesn't need to build/link, but
+    // mac needs to have "-undefined dynamic_lookup" on the compile flags!
+    return;
   }
 
   #[cfg(windows)]
   {
     use cc::{windows_registry, windows_registry::VsVers};
+    use fs_extra::dir;
+    use std::{env, path::Path};
+
+    let out_dir = env::var("OUT_DIR").unwrap();
+    let out_dir = Path::new(&out_dir);
+    let classicube_src_dir = Path::new("ClassiCube").join("src");
+    let build_dir = &out_dir.join("src");
+
+    let mut copy_options = dir::CopyOptions::new();
+    copy_options.overwrite = true;
+
+    dir::copy(
+      &classicube_src_dir,
+      &build_dir.parent().unwrap(),
+      &copy_options,
+    )
+    .unwrap();
 
     let target = env::var("TARGET").unwrap();
 
@@ -219,8 +200,8 @@ fn main() {
         String::from_utf8_lossy(&cmd.stderr)
       );
     }
-  }
 
-  println!("cargo:rustc-link-lib=dylib=ClassiCube");
-  println!("cargo:rustc-link-search=native={}", &out_dir.display());
+    println!("cargo:rustc-link-lib=dylib=ClassiCube");
+    println!("cargo:rustc-link-search=native={}", &out_dir.display());
+  }
 }
