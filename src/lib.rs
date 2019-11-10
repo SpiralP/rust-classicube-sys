@@ -66,5 +66,5 @@ extern "C" {
   pub static mut Entities: _EntitiesData;
 
   pub static mut World: _WorldData;
-
+  pub static mut Env: _EnvData;
 }

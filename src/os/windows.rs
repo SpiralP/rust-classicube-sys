@@ -3630,3 +3630,355 @@ fn bindgen_test_layout__WorldData() {
     )
   );
 }
+extern "C" {
+  pub fn World_Reset();
+}
+extern "C" {
+  pub fn World_SetNewMap(
+    blocks: *mut BlockRaw,
+    width: ::std::os::raw::c_int,
+    height: ::std::os::raw::c_int,
+    length: ::std::os::raw::c_int,
+  );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct _EnvData {
+  pub EdgeBlock: BlockID,
+  pub SidesBlock: BlockID,
+  pub EdgeHeight: ::std::os::raw::c_int,
+  pub SidesOffset: ::std::os::raw::c_int,
+  pub CloudsHeight: ::std::os::raw::c_int,
+  pub CloudsSpeed: f32,
+  pub WeatherSpeed: f32,
+  pub WeatherFade: f32,
+  pub Weather: ::std::os::raw::c_int,
+  pub ExpFog: ::std::os::raw::c_int,
+  pub SkyboxHorSpeed: f32,
+  pub SkyboxVerSpeed: f32,
+  pub SkyCol: PackedCol,
+  pub FogCol: PackedCol,
+  pub CloudsCol: PackedCol,
+  pub SkyboxCol: PackedCol,
+  pub SunCol: PackedCol,
+  pub SunXSide: PackedCol,
+  pub SunZSide: PackedCol,
+  pub SunYMin: PackedCol,
+  pub ShadowCol: PackedCol,
+  pub ShadowXSide: PackedCol,
+  pub ShadowZSide: PackedCol,
+  pub ShadowYMin: PackedCol,
+}
+#[test]
+fn bindgen_test_layout__EnvData() {
+  assert_eq!(
+    ::std::mem::size_of::<_EnvData>(),
+    92usize,
+    concat!("Size of: ", stringify!(_EnvData))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_EnvData>(),
+    4usize,
+    concat!("Alignment of ", stringify!(_EnvData))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).EdgeBlock as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(EdgeBlock)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SidesBlock as *const _ as usize },
+    2usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SidesBlock)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).EdgeHeight as *const _ as usize },
+    4usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(EdgeHeight)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SidesOffset as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SidesOffset)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).CloudsHeight as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(CloudsHeight)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).CloudsSpeed as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(CloudsSpeed)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).WeatherSpeed as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(WeatherSpeed)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).WeatherFade as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(WeatherFade)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).Weather as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(Weather)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).ExpFog as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(ExpFog)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyboxHorSpeed as *const _ as usize },
+    36usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SkyboxHorSpeed)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyboxVerSpeed as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SkyboxVerSpeed)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyCol as *const _ as usize },
+    44usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SkyCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).FogCol as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(FogCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).CloudsCol as *const _ as usize },
+    52usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(CloudsCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyboxCol as *const _ as usize },
+    56usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SkyboxCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SunCol as *const _ as usize },
+    60usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SunCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SunXSide as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SunXSide)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SunZSide as *const _ as usize },
+    68usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SunZSide)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).SunYMin as *const _ as usize },
+    72usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(SunYMin)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowCol as *const _ as usize },
+    76usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(ShadowCol)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowXSide as *const _ as usize },
+    80usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(ShadowXSide)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowZSide as *const _ as usize },
+    84usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(ShadowZSide)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowYMin as *const _ as usize },
+    88usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_EnvData),
+      "::",
+      stringify!(ShadowYMin)
+    )
+  );
+}
+extern "C" {
+  pub fn World_ApplyTexturePack(url: *const String);
+}
+extern "C" {
+  pub fn Env_Reset();
+}
+extern "C" {
+  pub fn Env_SetEdgeBlock(block: BlockID);
+}
+extern "C" {
+  pub fn Env_SetSidesBlock(block: BlockID);
+}
+extern "C" {
+  pub fn Env_SetEdgeHeight(height: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Env_SetSidesOffset(offset: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Env_SetCloudsHeight(height: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Env_SetCloudsSpeed(speed: f32);
+}
+extern "C" {
+  pub fn Env_SetWeatherSpeed(speed: f32);
+}
+extern "C" {
+  pub fn Env_SetWeatherFade(rate: f32);
+}
+extern "C" {
+  pub fn Env_SetWeather(weather: ::std::os::raw::c_int);
+}
+extern "C" {
+  pub fn Env_SetExpFog(expFog: bool_);
+}
+extern "C" {
+  pub fn Env_SetSkyboxHorSpeed(speed: f32);
+}
+extern "C" {
+  pub fn Env_SetSkyboxVerSpeed(speed: f32);
+}
+extern "C" {
+  pub fn Env_SetSkyCol(col: PackedCol);
+}
+extern "C" {
+  pub fn Env_SetFogCol(col: PackedCol);
+}
+extern "C" {
+  pub fn Env_SetCloudsCol(col: PackedCol);
+}
+extern "C" {
+  pub fn Env_SetSkyboxCol(col: PackedCol);
+}
+extern "C" {
+  pub fn Env_SetSunCol(col: PackedCol);
+}
+extern "C" {
+  pub fn Env_SetShadowCol(col: PackedCol);
+}
