@@ -64,45 +64,43 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
-<span id="67">67</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">missing_safety_doc</span>)]</span>
 
-<span class="doccomment">/*!
-```rust
-use classicube_sys::*;
-use std::{os::raw::c_int, ptr};
-
-extern &quot;C&quot; fn init() {
-  let owned_string = OwnedString::new(&quot;hello from rust!&quot;);
-
-  unsafe {
-    Chat_Add(owned_string.as_cc_string());
-  }
-}
-
-#[no_mangle]
-pub static Plugin_ApiVersion: c_int = 1;
-
-#[no_mangle]
-pub static mut Plugin_Component: IGameComponent = IGameComponent {
-  /* Called when the game is being loaded. */
-  Init: Some(init),
-  /* Called when the component is being freed. (e.g. due to game being closed) */
-  Free: None,
-  /* Called to reset the component&#39;s state. (e.g. reconnecting to server) */
-  Reset: None,
-  /* Called to update the component&#39;s state when the user begins loading a new map. */
-  OnNewMap: None,
-  /* Called to update the component&#39;s state when the user has finished loading a new map. */
-  OnNewMapLoaded: None,
-  /* Next component in linked list of components. */
-  next: ptr::null_mut(),
-};
-```
-*/</span>
+<span class="doccomment">//! ```rust</span>
+<span class="doccomment">//! use classicube_sys::*;</span>
+<span class="doccomment">//! use std::{os::raw::c_int, ptr};</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! extern &quot;C&quot; fn init() {</span>
+<span class="doccomment">//! let owned_string = OwnedString::new(&quot;hello from rust!&quot;);</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! unsafe {</span>
+<span class="doccomment">//! Chat_Add(owned_string.as_cc_string());</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! #[no_mangle]</span>
+<span class="doccomment">//! pub static Plugin_ApiVersion: c_int = 1;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! #[no_mangle]</span>
+<span class="doccomment">//! pub static mut Plugin_Component: IGameComponent = IGameComponent {</span>
+<span class="doccomment">//! Called when the game is being loaded. */</span>
+<span class="doccomment">//! Init: Some(init),</span>
+<span class="doccomment">//! Called when the component is being freed. (e.g. due to game being closed) */</span>
+<span class="doccomment">//! Free: None,</span>
+<span class="doccomment">//! Called to reset the component&#39;s state. (e.g. reconnecting to server) */</span>
+<span class="doccomment">//! Reset: None,</span>
+<span class="doccomment">//! Called to update the component&#39;s state when the user begins loading a new map. */</span>
+<span class="doccomment">//! OnNewMap: None,</span>
+<span class="doccomment">//! Called to update the component&#39;s state when the user has finished loading a new map. */</span>
+<span class="doccomment">//! OnNewMapLoaded: None,</span>
+<span class="doccomment">//! Next component in linked list of components. */</span>
+<span class="doccomment">//! next: ptr::null_mut(),</span>
+<span class="doccomment">//! };</span>
+<span class="doccomment">//! ```</span>
 
 <span class="kw">mod</span> <span class="ident">chat</span>;
 <span class="kw">mod</span> <span class="ident">command</span>;
@@ -134,4 +132,4 @@ pub static mut Plugin_Component: IGameComponent = IGameComponent {
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">Entities</span>: <span class="ident">_EntitiesData</span>;
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "classicube_sys";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "classicube_sys";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
