@@ -110,6 +110,7 @@ mod builder {
       .whitelist_type("_EntitiesData")
       .whitelist_function("Game_UpdateBlock")
       .whitelist_function("Game_ChangeBlock")
+      .whitelist_type("_WorldData")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -122,6 +123,7 @@ mod builder {
           #include <Options.h>
           #include <Entity.h>
           #include <Game.h>
+          #include <World.h>
         ",
       );
 

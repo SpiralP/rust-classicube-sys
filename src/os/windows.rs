@@ -13,6 +13,7 @@ pub type cc_uint32 = ::std::os::raw::c_uint;
 pub type cc_uint64 = ::std::os::raw::c_ulonglong;
 pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
+pub type BlockRaw = cc_uint8;
 pub type EntityID = cc_uint8;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -3478,5 +3479,154 @@ extern "C" {
     y: ::std::os::raw::c_int,
     z: ::std::os::raw::c_int,
     block: BlockID,
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _WorldData {
+  pub Blocks: *mut BlockRaw,
+  pub Blocks2: *mut BlockRaw,
+  pub Volume: ::std::os::raw::c_int,
+  pub Width: ::std::os::raw::c_int,
+  pub Height: ::std::os::raw::c_int,
+  pub Length: ::std::os::raw::c_int,
+  pub MaxX: ::std::os::raw::c_int,
+  pub MaxY: ::std::os::raw::c_int,
+  pub MaxZ: ::std::os::raw::c_int,
+  pub OneY: ::std::os::raw::c_int,
+  pub Uuid: [cc_uint8; 16usize],
+  pub IDMask: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout__WorldData() {
+  assert_eq!(
+    ::std::mem::size_of::<_WorldData>(),
+    72usize,
+    concat!("Size of: ", stringify!(_WorldData))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<_WorldData>(),
+    8usize,
+    concat!("Alignment of ", stringify!(_WorldData))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Blocks as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Blocks)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Blocks2 as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Blocks2)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Volume as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Volume)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Width as *const _ as usize },
+    20usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Width)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Height as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Height)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Length as *const _ as usize },
+    28usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Length)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).MaxX as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(MaxX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).MaxY as *const _ as usize },
+    36usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(MaxY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).MaxZ as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(MaxZ)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).OneY as *const _ as usize },
+    44usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(OneY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).Uuid as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(Uuid)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<_WorldData>())).IDMask as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(_WorldData),
+      "::",
+      stringify!(IDMask)
+    )
   );
 }

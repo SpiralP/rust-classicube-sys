@@ -40,8 +40,9 @@ mod command;
 mod event;
 mod os;
 mod string;
+mod world;
 
-pub use crate::{chat::*, command::*, event::*, os::*, string::*};
+pub use crate::{chat::*, command::*, event::*, os::*, string::*, world::*};
 
 // strange fix for windows where these don't link right
 #[cfg_attr(windows, link(name = "ClassiCube"))]
@@ -63,4 +64,7 @@ extern "C" {
 
   pub static mut TabList: _TabListData;
   pub static mut Entities: _EntitiesData;
+
+  pub static mut World: _WorldData;
+
 }
