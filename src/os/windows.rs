@@ -3464,3 +3464,19 @@ extern "C" {
     rank: cc_uint8,
   );
 }
+extern "C" {
+  pub fn Game_UpdateBlock(
+    x: ::std::os::raw::c_int,
+    y: ::std::os::raw::c_int,
+    z: ::std::os::raw::c_int,
+    block: BlockID,
+  );
+}
+extern "C" {
+  pub fn Game_ChangeBlock(
+    x: ::std::os::raw::c_int,
+    y: ::std::os::raw::c_int,
+    z: ::std::os::raw::c_int,
+    block: BlockID,
+  );
+}

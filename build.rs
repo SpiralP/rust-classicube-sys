@@ -108,6 +108,8 @@ mod builder {
       .whitelist_function("TabList_Remove")
       .whitelist_function("TabList_Set")
       .whitelist_type("_EntitiesData")
+      .whitelist_function("Game_UpdateBlock")
+      .whitelist_function("Game_ChangeBlock")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -119,6 +121,7 @@ mod builder {
           #include <Server.h>
           #include <Options.h>
           #include <Entity.h>
+          #include <Game.h>
         ",
       );
 
