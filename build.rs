@@ -134,6 +134,7 @@ mod builder {
       .whitelist_function("Env_SetSkyboxCol")
       .whitelist_function("Env_SetSunCol")
       .whitelist_function("Env_SetShadowCol")
+      .whitelist_type("PickedPos")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -147,6 +148,7 @@ mod builder {
           #include <Entity.h>
           #include <Game.h>
           #include <World.h>
+          #include <Picking.h>
         ",
       );
 

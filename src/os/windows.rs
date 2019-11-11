@@ -15,6 +15,7 @@ pub type bool_ = cc_uint8;
 pub type BlockID = cc_uint16;
 pub type BlockRaw = cc_uint8;
 pub type EntityID = cc_uint8;
+pub type Face = cc_uint8;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct TextureRec_ {
@@ -3463,6 +3464,111 @@ extern "C" {
     list: *const String,
     group: *const String,
     rank: cc_uint8,
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PickedPos {
+  pub Min: Vec3,
+  pub Max: Vec3,
+  pub Intersect: Vec3,
+  pub BlockPos: IVec3,
+  pub TranslatedPos: IVec3,
+  pub Valid: bool_,
+  pub Closest: Face,
+  pub Block: BlockID,
+}
+#[test]
+fn bindgen_test_layout_PickedPos() {
+  assert_eq!(
+    ::std::mem::size_of::<PickedPos>(),
+    64usize,
+    concat!("Size of: ", stringify!(PickedPos))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<PickedPos>(),
+    4usize,
+    concat!("Alignment of ", stringify!(PickedPos))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).Min as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(Min)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).Max as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(Max)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).Intersect as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(Intersect)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).BlockPos as *const _ as usize },
+    36usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(BlockPos)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).TranslatedPos as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(TranslatedPos)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).Valid as *const _ as usize },
+    60usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(Valid)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).Closest as *const _ as usize },
+    61usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(Closest)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<PickedPos>())).Block as *const _ as usize },
+    62usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(PickedPos),
+      "::",
+      stringify!(Block)
+    )
   );
 }
 extern "C" {
