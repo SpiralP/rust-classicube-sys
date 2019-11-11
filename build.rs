@@ -16,6 +16,7 @@ mod builder {
       .raw_line("#![allow(non_camel_case_types)]")
       .raw_line("#![allow(non_upper_case_globals)]")
       .raw_line("#![allow(clippy::cognitive_complexity)]")
+      .whitelist_type("cc_.*")
       .whitelist_type("IGameComponent")
       .whitelist_function("Event_Register")
       .whitelist_function("Event_Unregister")
@@ -31,9 +32,10 @@ mod builder {
       .whitelist_type("_WorldEventsList")
       .whitelist_type("_ChatEventsList")
       .whitelist_type("_WindowEventsList")
-      .whitelist_type("_KeyEventsList")
+      .whitelist_type("_InputEventsList")
       .whitelist_type("_PointerEventsList")
       .whitelist_type("_NetEventsList")
+      .whitelist_type("Event_.*")
       .whitelist_function("Commands_Register")
       .whitelist_function("Chat_Send")
       .whitelist_function("Chat_Add")
@@ -140,6 +142,7 @@ mod builder {
       .header_contents(
         "bindgen.h",
         "
+          #include <Core.h>
           #include <GameStructs.h>
           #include <Event.h>
           #include <Chat.h>

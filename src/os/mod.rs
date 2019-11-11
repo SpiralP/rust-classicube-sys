@@ -21,7 +21,7 @@ pub(crate) fn as_c_bool(b: bool) -> bool {
 
 #[cfg(not(target_os = "macos"))]
 #[inline]
-pub(crate) fn as_c_bool(b: bool) -> bool_ {
+pub(crate) fn as_c_bool(b: bool) -> cc_bool {
   if b {
     1
   } else {

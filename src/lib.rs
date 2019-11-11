@@ -57,7 +57,7 @@ extern "C" {
   pub static mut WorldEvents: _WorldEventsList;
   pub static mut ChatEvents: _ChatEventsList;
   pub static mut WindowEvents: _WindowEventsList;
-  pub static mut InputEvents: _KeyEventsList;
+  pub static mut InputEvents: _InputEventsList;
   pub static mut PointerEvents: _PointerEventsList;
   pub static mut NetEvents: _NetEventsList;
 

@@ -11,5 +11,5 @@ arrayvec = "0.5.1"
 
 [build-dependencies]
 bindgen = { version = "0.51.1", optional = true }
-cc = "1.0.45"
+cc = "1.0.47"
 fs_extra = "1.1.0"
