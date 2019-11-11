@@ -16,6 +16,7 @@ mod builder {
       .raw_line("#![allow(non_camel_case_types)]")
       .raw_line("#![allow(non_upper_case_globals)]")
       .raw_line("#![allow(clippy::cognitive_complexity)]")
+      .raw_line("#![allow(clippy::unreadable_literal)]")
       .whitelist_type("cc_.*")
       .whitelist_type("IGameComponent")
       .whitelist_function("Event_Register")
@@ -138,6 +139,11 @@ mod builder {
       .whitelist_function("Env_SetShadowCol")
       .whitelist_type("PickedPos")
       .whitelist_type("Model")
+      .whitelist_type("PackedCol")
+      .whitelist_var("PACKEDCOL_.*")
+      .whitelist_function("PackedCol_Scale")
+      .whitelist_function("PackedCol_Lerp")
+      .whitelist_function("PackedCol_Tint")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -154,6 +160,7 @@ mod builder {
           #include <World.h>
           #include <Picking.h>
           #include <Model.h>
+          #include <PackedCol.h>
         ",
       );
 

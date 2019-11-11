@@ -39,11 +39,14 @@ mod chat;
 mod command;
 mod event;
 mod os;
+mod packed_col;
 mod string;
 mod vectors;
 mod world;
 
-pub use crate::{chat::*, command::*, event::*, os::*, string::*, vectors::*, world::*};
+pub use crate::{
+  chat::*, command::*, event::*, os::*, packed_col::*, string::*, vectors::*, world::*,
+};
 
 // strange fix for windows where these don't link right
 #[cfg_attr(windows, link(name = "ClassiCube"))]

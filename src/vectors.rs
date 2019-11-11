@@ -1,7 +1,7 @@
 use crate::{IVec3, Vec3};
 
 #[inline]
-pub fn IVec3_Floor(a: &Vec3) -> IVec3 {
+pub const fn IVec3_Floor(a: &Vec3) -> IVec3 {
   IVec3 {
     X: a.X as _,
     Y: a.Y as _,
@@ -10,7 +10,7 @@ pub fn IVec3_Floor(a: &Vec3) -> IVec3 {
 }
 
 #[inline]
-pub fn IVec3_ToVec3(a: &IVec3) -> Vec3 {
+pub const fn IVec3_ToVec3(a: &IVec3) -> Vec3 {
   Vec3 {
     X: a.X as _,
     Y: a.Y as _,
@@ -45,6 +45,6 @@ pub fn Vec3_GetDirVector(yaw_rad: f32, pitch_rad: f32) -> Vec3 {
 }
 
 #[inline]
-pub fn Vec3_Create3(x: f32, y: f32, z: f32) -> Vec3 {
+pub const fn Vec3_Create3(x: f32, y: f32, z: f32) -> Vec3 {
   Vec3 { X: x, Y: y, Z: z }
 }

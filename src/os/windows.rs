@@ -4,8 +4,21 @@
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 #![allow(clippy::cognitive_complexity)]
+#![allow(clippy::unreadable_literal)]
 
 pub const STRING_SIZE: u32 = 64;
+pub const PACKEDCOL_B_SHIFT: u32 = 0;
+pub const PACKEDCOL_G_SHIFT: u32 = 8;
+pub const PACKEDCOL_R_SHIFT: u32 = 16;
+pub const PACKEDCOL_A_SHIFT: u32 = 24;
+pub const PACKEDCOL_R_MASK: u32 = 16711680;
+pub const PACKEDCOL_G_MASK: u32 = 65280;
+pub const PACKEDCOL_B_MASK: u32 = 255;
+pub const PACKEDCOL_A_MASK: u32 = 4278190080;
+pub const PACKEDCOL_RGB_MASK: u32 = 16777215;
+pub const PACKEDCOL_SHADE_X: f64 = 0.6;
+pub const PACKEDCOL_SHADE_Z: f64 = 0.8;
+pub const PACKEDCOL_SHADE_YMIN: f64 = 0.5;
 pub type cc_int8 = ::std::os::raw::c_schar;
 pub type cc_int16 = ::std::os::raw::c_short;
 pub type cc_int32 = ::std::os::raw::c_int;
@@ -2824,6 +2837,15 @@ fn bindgen_test_layout_AABB() {
   );
 }
 pub type PackedCol = cc_uint32;
+extern "C" {
+  pub fn PackedCol_Scale(value: PackedCol, t: f32) -> PackedCol;
+}
+extern "C" {
+  pub fn PackedCol_Lerp(a: PackedCol, b: PackedCol, t: f32) -> PackedCol;
+}
+extern "C" {
+  pub fn PackedCol_Tint(a: PackedCol, b: PackedCol) -> PackedCol;
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct LocationUpdate {
