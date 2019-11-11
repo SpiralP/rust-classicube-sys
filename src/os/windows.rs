@@ -2846,11 +2846,6 @@ fn bindgen_test_layout_PackedCol_() {
 pub type PackedCol = PackedCol_;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct Model {
-  _unused: [u8; 0],
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
 pub struct LocationUpdate {
   pub Pos: Vec3,
   pub HeadX: f32,
@@ -4087,4 +4082,452 @@ extern "C" {
 }
 extern "C" {
   pub fn Env_SetShadowCol(col: PackedCol);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct ModelVertex {
+  pub X: f32,
+  pub Y: f32,
+  pub Z: f32,
+  pub U: cc_uint16,
+  pub V: cc_uint16,
+}
+#[test]
+fn bindgen_test_layout_ModelVertex() {
+  assert_eq!(
+    ::std::mem::size_of::<ModelVertex>(),
+    16usize,
+    concat!("Size of: ", stringify!(ModelVertex))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<ModelVertex>(),
+    4usize,
+    concat!("Alignment of ", stringify!(ModelVertex))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelVertex>())).X as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelVertex),
+      "::",
+      stringify!(X)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelVertex>())).Y as *const _ as usize },
+    4usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelVertex),
+      "::",
+      stringify!(Y)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelVertex>())).Z as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelVertex),
+      "::",
+      stringify!(Z)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelVertex>())).U as *const _ as usize },
+    12usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelVertex),
+      "::",
+      stringify!(U)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelVertex>())).V as *const _ as usize },
+    14usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelVertex),
+      "::",
+      stringify!(V)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct ModelTex {
+  pub Name: *const ::std::os::raw::c_char,
+  pub SkinType: cc_uint8,
+  pub TexID: GfxResourceID,
+  pub next: *mut ModelTex,
+}
+#[test]
+fn bindgen_test_layout_ModelTex() {
+  assert_eq!(
+    ::std::mem::size_of::<ModelTex>(),
+    32usize,
+    concat!("Size of: ", stringify!(ModelTex))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<ModelTex>(),
+    8usize,
+    concat!("Alignment of ", stringify!(ModelTex))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelTex>())).Name as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelTex),
+      "::",
+      stringify!(Name)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelTex>())).SkinType as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelTex),
+      "::",
+      stringify!(SkinType)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelTex>())).TexID as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelTex),
+      "::",
+      stringify!(TexID)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<ModelTex>())).next as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(ModelTex),
+      "::",
+      stringify!(next)
+    )
+  );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Model {
+  pub Name: *const ::std::os::raw::c_char,
+  pub vertices: *mut ModelVertex,
+  pub defaultTex: *mut ModelTex,
+  pub MakeParts: ::std::option::Option<unsafe extern "C" fn()>,
+  pub Draw: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+  pub GetNameY: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity) -> f32>,
+  pub GetEyeY: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity) -> f32>,
+  pub GetCollisionSize: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+  pub GetPickingBounds: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+  pub index: ::std::os::raw::c_int,
+  pub armX: cc_uint8,
+  pub armY: cc_uint8,
+  pub initalised: bool_,
+  pub Bobbing: bool_,
+  pub UsesSkin: bool_,
+  pub CalcHumanAnims: bool_,
+  pub UsesHumanSkin: bool_,
+  pub Pushes: bool_,
+  pub Gravity: f32,
+  pub Drag: Vec3,
+  pub GroundFriction: Vec3,
+  pub GetTransform:
+    ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity, pos: Vec3, m: *mut Matrix)>,
+  pub DrawArm: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+  pub MaxScale: f32,
+  pub ShadowScale: f32,
+  pub NameScale: f32,
+  pub next: *mut Model,
+}
+#[test]
+fn bindgen_test_layout_Model() {
+  assert_eq!(
+    ::std::mem::size_of::<Model>(),
+    152usize,
+    concat!("Size of: ", stringify!(Model))
+  );
+  assert_eq!(
+    ::std::mem::align_of::<Model>(),
+    8usize,
+    concat!("Alignment of ", stringify!(Model))
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).Name as *const _ as usize },
+    0usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(Name)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).vertices as *const _ as usize },
+    8usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(vertices)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).defaultTex as *const _ as usize },
+    16usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(defaultTex)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).MakeParts as *const _ as usize },
+    24usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(MakeParts)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).Draw as *const _ as usize },
+    32usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(Draw)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).GetNameY as *const _ as usize },
+    40usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(GetNameY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).GetEyeY as *const _ as usize },
+    48usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(GetEyeY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).GetCollisionSize as *const _ as usize },
+    56usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(GetCollisionSize)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).GetPickingBounds as *const _ as usize },
+    64usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(GetPickingBounds)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).index as *const _ as usize },
+    72usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(index)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).armX as *const _ as usize },
+    76usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(armX)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).armY as *const _ as usize },
+    77usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(armY)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).initalised as *const _ as usize },
+    78usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(initalised)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).Bobbing as *const _ as usize },
+    79usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(Bobbing)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).UsesSkin as *const _ as usize },
+    80usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(UsesSkin)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).CalcHumanAnims as *const _ as usize },
+    81usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(CalcHumanAnims)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).UsesHumanSkin as *const _ as usize },
+    82usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(UsesHumanSkin)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).Pushes as *const _ as usize },
+    83usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(Pushes)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).Gravity as *const _ as usize },
+    84usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(Gravity)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).Drag as *const _ as usize },
+    88usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(Drag)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).GroundFriction as *const _ as usize },
+    100usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(GroundFriction)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).GetTransform as *const _ as usize },
+    112usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(GetTransform)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).DrawArm as *const _ as usize },
+    120usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(DrawArm)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).MaxScale as *const _ as usize },
+    128usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(MaxScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).ShadowScale as *const _ as usize },
+    132usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(ShadowScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).NameScale as *const _ as usize },
+    136usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(NameScale)
+    )
+  );
+  assert_eq!(
+    unsafe { &(*(::std::ptr::null::<Model>())).next as *const _ as usize },
+    144usize,
+    concat!(
+      "Offset of field: ",
+      stringify!(Model),
+      "::",
+      stringify!(next)
+    )
+  );
 }
