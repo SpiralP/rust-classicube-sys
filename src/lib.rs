@@ -37,6 +37,7 @@
 mod chat;
 mod command;
 mod event;
+mod input;
 mod os;
 mod packed_col;
 mod string;
@@ -44,7 +45,7 @@ mod vectors;
 mod world;
 
 pub use crate::{
-  chat::*, command::*, event::*, os::*, packed_col::*, string::*, vectors::*, world::*,
+  chat::*, command::*, event::*, input::*, os::*, packed_col::*, string::*, vectors::*, world::*,
 };
 
 // strange fix for windows where these don't link right

@@ -105,8 +105,6 @@ mod builder {
       .whitelist_function("Options_SetString")
       .whitelist_function("Options_Load")
       .whitelist_function("Options_Save")
-      .whitelist_type("Key")
-      .whitelist_type("Key_")
       .whitelist_type("_TabListData")
       .whitelist_function("TabList_Remove")
       .whitelist_function("TabList_Set")
@@ -144,6 +142,10 @@ mod builder {
       .whitelist_function("PackedCol_Scale")
       .whitelist_function("PackedCol_Lerp")
       .whitelist_function("PackedCol_Tint")
+      .whitelist_type("Key_")
+      .whitelist_type("Key")
+      .whitelist_type("KeyBind_")
+      .whitelist_type("KeyBind")
       .clang_arg("-I./ClassiCube/src")
       .header_contents(
         "bindgen.h",
@@ -161,6 +163,7 @@ mod builder {
           #include <Picking.h>
           #include <Model.h>
           #include <PackedCol.h>
+          #include <Input.h>
         ",
       );
 
