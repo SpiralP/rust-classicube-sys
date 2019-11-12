@@ -1,4 +1,3 @@
-use crate::os::as_c_bool;
 use crate::ChatCommand;
 use arrayvec::ArrayVec;
 use std::{ffi::CString, os::raw::c_int, ptr};
@@ -23,7 +22,7 @@ impl OwnedChatCommand {
     let command = ChatCommand {
       Name: name.as_ptr(),
       Execute: Some(execute),
-      SingleplayerOnly: as_c_bool(singleplayer_only),
+      SingleplayerOnly: if singleplayer_only { 1 } else { 0 },
       Help: {
         let mut array: ArrayVec<[*const ::std::os::raw::c_char; 5usize]> =
           help.iter().map(|cstr| cstr.as_ptr()).collect();

@@ -4,1967 +4,2070 @@
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 #![allow(clippy::cognitive_complexity)]
+#![allow(clippy::unreadable_literal)]
 
 pub const STRING_SIZE: u32 = 64;
+pub const PACKEDCOL_R_SHIFT: u32 = 0;
+pub const PACKEDCOL_G_SHIFT: u32 = 8;
+pub const PACKEDCOL_B_SHIFT: u32 = 16;
+pub const PACKEDCOL_A_SHIFT: u32 = 24;
+pub const PACKEDCOL_R_MASK: u32 = 255;
+pub const PACKEDCOL_G_MASK: u32 = 65280;
+pub const PACKEDCOL_B_MASK: u32 = 16711680;
+pub const PACKEDCOL_A_MASK: u32 = 4278190080;
+pub const PACKEDCOL_RGB_MASK: u32 = 16777215;
+pub const PACKEDCOL_SHADE_X: f64 = 0.6;
+pub const PACKEDCOL_SHADE_Z: f64 = 0.8;
+pub const PACKEDCOL_SHADE_YMIN: f64 = 0.5;
+pub type cc_int8 = ::std::os::raw::c_schar;
 pub type cc_int16 = ::std::os::raw::c_short;
+pub type cc_int32 = ::std::os::raw::c_int;
+pub type cc_int64 = ::std::os::raw::c_longlong;
 pub type cc_uint8 = ::std::os::raw::c_uchar;
 pub type cc_uint16 = ::std::os::raw::c_ushort;
 pub type cc_uint32 = ::std::os::raw::c_uint;
 pub type cc_uint64 = ::std::os::raw::c_ulonglong;
 pub type cc_uintptr = ::std::os::raw::c_ulong;
+pub type cc_bool = cc_uint8;
 pub type BlockID = cc_uint16;
+pub type BlockRaw = cc_uint8;
 pub type EntityID = cc_uint8;
+pub type Face = cc_uint8;
+pub type cc_result = cc_uint32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct TextureRec_ {
-  pub U1: f32,
-  pub V1: f32,
-  pub U2: f32,
-  pub V2: f32,
+    pub U1: f32,
+    pub V1: f32,
+    pub U2: f32,
+    pub V2: f32,
 }
 #[test]
 fn bindgen_test_layout_TextureRec_() {
-  assert_eq!(
-    ::std::mem::size_of::<TextureRec_>(),
-    16usize,
-    concat!("Size of: ", stringify!(TextureRec_))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<TextureRec_>(),
-    4usize,
-    concat!("Alignment of ", stringify!(TextureRec_))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<TextureRec_>())).U1 as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(TextureRec_),
-      "::",
-      stringify!(U1)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<TextureRec_>())).V1 as *const _ as usize },
-    4usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(TextureRec_),
-      "::",
-      stringify!(V1)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<TextureRec_>())).U2 as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(TextureRec_),
-      "::",
-      stringify!(U2)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<TextureRec_>())).V2 as *const _ as usize },
-    12usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(TextureRec_),
-      "::",
-      stringify!(V2)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<TextureRec_>(),
+        16usize,
+        concat!("Size of: ", stringify!(TextureRec_))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<TextureRec_>(),
+        4usize,
+        concat!("Alignment of ", stringify!(TextureRec_))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<TextureRec_>())).U1 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(TextureRec_),
+            "::",
+            stringify!(U1)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<TextureRec_>())).V1 as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(TextureRec_),
+            "::",
+            stringify!(V1)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<TextureRec_>())).U2 as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(TextureRec_),
+            "::",
+            stringify!(U2)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<TextureRec_>())).V2 as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(TextureRec_),
+            "::",
+            stringify!(V2)
+        )
+    );
 }
 pub type TextureRec = TextureRec_;
 pub type GfxResourceID = cc_uintptr;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Texture {
-  pub ID: GfxResourceID,
-  pub X: cc_int16,
-  pub Y: cc_int16,
-  pub Width: cc_uint16,
-  pub Height: cc_uint16,
-  pub uv: TextureRec,
+    pub ID: GfxResourceID,
+    pub X: cc_int16,
+    pub Y: cc_int16,
+    pub Width: cc_uint16,
+    pub Height: cc_uint16,
+    pub uv: TextureRec,
 }
 #[test]
 fn bindgen_test_layout_Texture() {
-  assert_eq!(
-    ::std::mem::size_of::<Texture>(),
-    32usize,
-    concat!("Size of: ", stringify!(Texture))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Texture>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Texture))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Texture>())).ID as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Texture),
-      "::",
-      stringify!(ID)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Texture>())).X as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Texture),
-      "::",
-      stringify!(X)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Texture>())).Y as *const _ as usize },
-    10usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Texture),
-      "::",
-      stringify!(Y)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Texture>())).Width as *const _ as usize },
-    12usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Texture),
-      "::",
-      stringify!(Width)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Texture>())).Height as *const _ as usize },
-    14usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Texture),
-      "::",
-      stringify!(Height)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Texture>())).uv as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Texture),
-      "::",
-      stringify!(uv)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Texture>(),
+        32usize,
+        concat!("Size of: ", stringify!(Texture))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Texture>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Texture))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Texture>())).ID as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Texture),
+            "::",
+            stringify!(ID)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Texture>())).X as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Texture),
+            "::",
+            stringify!(X)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Texture>())).Y as *const _ as usize },
+        10usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Texture),
+            "::",
+            stringify!(Y)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Texture>())).Width as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Texture),
+            "::",
+            stringify!(Width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Texture>())).Height as *const _ as usize },
+        14usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Texture),
+            "::",
+            stringify!(Height)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Texture>())).uv as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Texture),
+            "::",
+            stringify!(uv)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IGameComponent {
-  pub Init: ::std::option::Option<unsafe extern "C" fn()>,
-  pub Free: ::std::option::Option<unsafe extern "C" fn()>,
-  pub Reset: ::std::option::Option<unsafe extern "C" fn()>,
-  pub OnNewMap: ::std::option::Option<unsafe extern "C" fn()>,
-  pub OnNewMapLoaded: ::std::option::Option<unsafe extern "C" fn()>,
-  pub next: *mut IGameComponent,
+    pub Init: ::std::option::Option<unsafe extern "C" fn()>,
+    pub Free: ::std::option::Option<unsafe extern "C" fn()>,
+    pub Reset: ::std::option::Option<unsafe extern "C" fn()>,
+    pub OnNewMap: ::std::option::Option<unsafe extern "C" fn()>,
+    pub OnNewMapLoaded: ::std::option::Option<unsafe extern "C" fn()>,
+    pub next: *mut IGameComponent,
 }
 #[test]
 fn bindgen_test_layout_IGameComponent() {
-  assert_eq!(
-    ::std::mem::size_of::<IGameComponent>(),
-    48usize,
-    concat!("Size of: ", stringify!(IGameComponent))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<IGameComponent>(),
-    8usize,
-    concat!("Alignment of ", stringify!(IGameComponent))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IGameComponent>())).Init as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(IGameComponent),
-      "::",
-      stringify!(Init)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IGameComponent>())).Free as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(IGameComponent),
-      "::",
-      stringify!(Free)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IGameComponent>())).Reset as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(IGameComponent),
-      "::",
-      stringify!(Reset)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IGameComponent>())).OnNewMap as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(IGameComponent),
-      "::",
-      stringify!(OnNewMap)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IGameComponent>())).OnNewMapLoaded as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(IGameComponent),
-      "::",
-      stringify!(OnNewMapLoaded)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IGameComponent>())).next as *const _ as usize },
-    40usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(IGameComponent),
-      "::",
-      stringify!(next)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<IGameComponent>(),
+        48usize,
+        concat!("Size of: ", stringify!(IGameComponent))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<IGameComponent>(),
+        8usize,
+        concat!("Alignment of ", stringify!(IGameComponent))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IGameComponent>())).Init as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(IGameComponent),
+            "::",
+            stringify!(Init)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IGameComponent>())).Free as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(IGameComponent),
+            "::",
+            stringify!(Free)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IGameComponent>())).Reset as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(IGameComponent),
+            "::",
+            stringify!(Reset)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IGameComponent>())).OnNewMap as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(IGameComponent),
+            "::",
+            stringify!(OnNewMap)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IGameComponent>())).OnNewMapLoaded as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(IGameComponent),
+            "::",
+            stringify!(OnNewMapLoaded)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IGameComponent>())).next as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(IGameComponent),
+            "::",
+            stringify!(next)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct ScheduledTask {
-  pub Accumulator: f64,
-  pub Interval: f64,
-  pub Callback: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
+    pub Accumulator: f64,
+    pub Interval: f64,
+    pub Callback: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
 }
 #[test]
 fn bindgen_test_layout_ScheduledTask() {
-  assert_eq!(
-    ::std::mem::size_of::<ScheduledTask>(),
-    24usize,
-    concat!("Size of: ", stringify!(ScheduledTask))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<ScheduledTask>(),
-    8usize,
-    concat!("Alignment of ", stringify!(ScheduledTask))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Accumulator as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ScheduledTask),
-      "::",
-      stringify!(Accumulator)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Interval as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ScheduledTask),
-      "::",
-      stringify!(Interval)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Callback as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ScheduledTask),
-      "::",
-      stringify!(Callback)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<ScheduledTask>(),
+        24usize,
+        concat!("Size of: ", stringify!(ScheduledTask))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<ScheduledTask>(),
+        8usize,
+        concat!("Alignment of ", stringify!(ScheduledTask))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Accumulator as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ScheduledTask),
+            "::",
+            stringify!(Accumulator)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Interval as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ScheduledTask),
+            "::",
+            stringify!(Interval)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ScheduledTask>())).Callback as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ScheduledTask),
+            "::",
+            stringify!(Callback)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct String_ {
-  pub buffer: *mut ::std::os::raw::c_char,
-  pub length: cc_uint16,
-  pub capacity: cc_uint16,
+    pub buffer: *mut ::std::os::raw::c_char,
+    pub length: cc_uint16,
+    pub capacity: cc_uint16,
 }
 #[test]
 fn bindgen_test_layout_String_() {
-  assert_eq!(
-    ::std::mem::size_of::<String_>(),
-    16usize,
-    concat!("Size of: ", stringify!(String_))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<String_>(),
-    8usize,
-    concat!("Alignment of ", stringify!(String_))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<String_>())).buffer as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(String_),
-      "::",
-      stringify!(buffer)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<String_>())).length as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(String_),
-      "::",
-      stringify!(length)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<String_>())).capacity as *const _ as usize },
-    10usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(String_),
-      "::",
-      stringify!(capacity)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<String_>(),
+        16usize,
+        concat!("Size of: ", stringify!(String_))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<String_>(),
+        8usize,
+        concat!("Alignment of ", stringify!(String_))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<String_>())).buffer as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(String_),
+            "::",
+            stringify!(buffer)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<String_>())).length as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(String_),
+            "::",
+            stringify!(length)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<String_>())).capacity as *const _ as usize },
+        10usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(String_),
+            "::",
+            stringify!(capacity)
+        )
+    );
 }
 pub type String = String_;
 extern "C" {
-  pub fn String_CalcLen(
-    raw: *const ::std::os::raw::c_char,
-    capacity: ::std::os::raw::c_int,
-  ) -> ::std::os::raw::c_int;
+    pub fn String_CalcLen(
+        raw: *const ::std::os::raw::c_char,
+        capacity: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_StripCols(str: *mut String);
+    pub fn String_StripCols(str: *mut String);
 }
 extern "C" {
-  pub fn String_Copy(dst: *mut String, src: *const String);
+    pub fn String_Copy(dst: *mut String, src: *const String);
 }
 extern "C" {
-  pub fn String_CopyToRaw(
-    dst: *mut ::std::os::raw::c_char,
-    capacity: ::std::os::raw::c_int,
-    src: *const String,
-  );
+    pub fn String_CopyToRaw(
+        dst: *mut ::std::os::raw::c_char,
+        capacity: ::std::os::raw::c_int,
+        src: *const String,
+    );
 }
 extern "C" {
-  pub fn String_UNSAFE_Substring(
-    str: *const String,
-    offset: ::std::os::raw::c_int,
-    length: ::std::os::raw::c_int,
-  ) -> String;
+    pub fn String_UNSAFE_Substring(
+        str: *const String,
+        offset: ::std::os::raw::c_int,
+        length: ::std::os::raw::c_int,
+    ) -> String;
 }
 extern "C" {
-  pub fn String_UNSAFE_SubstringAt(str: *const String, offset: ::std::os::raw::c_int) -> String;
+    pub fn String_UNSAFE_SubstringAt(str: *const String, offset: ::std::os::raw::c_int) -> String;
 }
 extern "C" {
-  pub fn String_UNSAFE_Split(
-    str: *const String,
-    c: ::std::os::raw::c_char,
-    subs: *mut String,
-    maxSubs: ::std::os::raw::c_int,
-  ) -> ::std::os::raw::c_int;
+    pub fn String_UNSAFE_Split(
+        str: *const String,
+        c: ::std::os::raw::c_char,
+        subs: *mut String,
+        maxSubs: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_UNSAFE_SplitBy(str: *mut String, c: ::std::os::raw::c_char, part: *mut String);
+    pub fn String_UNSAFE_SplitBy(str: *mut String, c: ::std::os::raw::c_char, part: *mut String);
 }
 extern "C" {
-  pub fn String_UNSAFE_Separate(
-    str: *const String,
-    c: ::std::os::raw::c_char,
-    key: *mut String,
-    value: *mut String,
-  ) -> bool;
+    pub fn String_UNSAFE_Separate(
+        str: *const String,
+        c: ::std::os::raw::c_char,
+        key: *mut String,
+        value: *mut String,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_Equals(a: *const String, b: *const String) -> bool;
+    pub fn String_Equals(a: *const String, b: *const String) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_CaselessEquals(a: *const String, b: *const String) -> bool;
+    pub fn String_CaselessEquals(a: *const String, b: *const String) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_CaselessEqualsConst(a: *const String, b: *const ::std::os::raw::c_char) -> bool;
+    pub fn String_CaselessEqualsConst(
+        a: *const String,
+        b: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_MakeUInt32(
-    num: cc_uint32,
-    digits: *mut ::std::os::raw::c_char,
-  ) -> ::std::os::raw::c_int;
+    pub fn String_MakeUInt32(
+        num: cc_uint32,
+        digits: *mut ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_Append(str: *mut String, c: ::std::os::raw::c_char);
+    pub fn String_Append(str: *mut String, c: ::std::os::raw::c_char);
 }
 extern "C" {
-  pub fn String_AppendBool(str: *mut String, value: bool);
+    pub fn String_AppendBool(str: *mut String, value: cc_bool);
 }
 extern "C" {
-  pub fn String_AppendInt(str: *mut String, num: ::std::os::raw::c_int);
+    pub fn String_AppendInt(str: *mut String, num: ::std::os::raw::c_int);
 }
 extern "C" {
-  pub fn String_AppendUInt32(str: *mut String, num: cc_uint32);
+    pub fn String_AppendUInt32(str: *mut String, num: cc_uint32);
 }
 extern "C" {
-  pub fn String_AppendPaddedInt(
-    str: *mut String,
-    num: ::std::os::raw::c_int,
-    minDigits: ::std::os::raw::c_int,
-  );
+    pub fn String_AppendPaddedInt(
+        str: *mut String,
+        num: ::std::os::raw::c_int,
+        minDigits: ::std::os::raw::c_int,
+    );
 }
 extern "C" {
-  pub fn String_AppendFloat(str: *mut String, num: f32, fracDigits: ::std::os::raw::c_int);
+    pub fn String_AppendFloat(str: *mut String, num: f32, fracDigits: ::std::os::raw::c_int);
 }
 extern "C" {
-  pub fn String_AppendConst(str: *mut String, src: *const ::std::os::raw::c_char);
+    pub fn String_AppendConst(str: *mut String, src: *const ::std::os::raw::c_char);
 }
 extern "C" {
-  pub fn String_AppendString(str: *mut String, src: *const String);
+    pub fn String_AppendString(str: *mut String, src: *const String);
 }
 extern "C" {
-  pub fn String_AppendColorless(str: *mut String, src: *const String);
+    pub fn String_AppendColorless(str: *mut String, src: *const String);
 }
 extern "C" {
-  pub fn String_AppendHex(str: *mut String, value: cc_uint8);
+    pub fn String_AppendHex(str: *mut String, value: cc_uint8);
 }
 extern "C" {
-  pub fn String_IndexOfAt(
-    str: *const String,
-    offset: ::std::os::raw::c_int,
-    c: ::std::os::raw::c_char,
-  ) -> ::std::os::raw::c_int;
+    pub fn String_IndexOfAt(
+        str: *const String,
+        offset: ::std::os::raw::c_int,
+        c: ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_LastIndexOfAt(
-    str: *const String,
-    offset: ::std::os::raw::c_int,
-    c: ::std::os::raw::c_char,
-  ) -> ::std::os::raw::c_int;
+    pub fn String_LastIndexOfAt(
+        str: *const String,
+        offset: ::std::os::raw::c_int,
+        c: ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_InsertAt(
-    str: *mut String,
-    offset: ::std::os::raw::c_int,
-    c: ::std::os::raw::c_char,
-  );
+    pub fn String_InsertAt(
+        str: *mut String,
+        offset: ::std::os::raw::c_int,
+        c: ::std::os::raw::c_char,
+    );
 }
 extern "C" {
-  pub fn String_DeleteAt(str: *mut String, offset: ::std::os::raw::c_int);
+    pub fn String_DeleteAt(str: *mut String, offset: ::std::os::raw::c_int);
 }
 extern "C" {
-  pub fn String_UNSAFE_TrimStart(str: *mut String);
+    pub fn String_UNSAFE_TrimStart(str: *mut String);
 }
 extern "C" {
-  pub fn String_UNSAFE_TrimEnd(str: *mut String);
+    pub fn String_UNSAFE_TrimEnd(str: *mut String);
 }
 extern "C" {
-  pub fn String_IndexOfString(str: *const String, sub: *const String) -> ::std::os::raw::c_int;
+    pub fn String_IndexOfString(str: *const String, sub: *const String) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_CaselessContains(str: *const String, sub: *const String) -> bool;
+    pub fn String_CaselessContains(str: *const String, sub: *const String)
+        -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_CaselessStarts(str: *const String, sub: *const String) -> bool;
+    pub fn String_CaselessStarts(str: *const String, sub: *const String) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_CaselessEnds(str: *const String, sub: *const String) -> bool;
+    pub fn String_CaselessEnds(str: *const String, sub: *const String) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_Compare(a: *const String, b: *const String) -> ::std::os::raw::c_int;
+    pub fn String_Compare(a: *const String, b: *const String) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn String_Format1(
-    str: *mut String,
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-  );
+    pub fn String_Format1(
+        str: *mut String,
+        format: *const ::std::os::raw::c_char,
+        a1: *const ::std::os::raw::c_void,
+    );
 }
 extern "C" {
-  pub fn String_Format2(
-    str: *mut String,
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-    a2: *const ::std::os::raw::c_void,
-  );
+    pub fn String_Format2(
+        str: *mut String,
+        format: *const ::std::os::raw::c_char,
+        a1: *const ::std::os::raw::c_void,
+        a2: *const ::std::os::raw::c_void,
+    );
 }
 extern "C" {
-  pub fn String_Format3(
-    str: *mut String,
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-    a2: *const ::std::os::raw::c_void,
-    a3: *const ::std::os::raw::c_void,
-  );
+    pub fn String_Format3(
+        str: *mut String,
+        format: *const ::std::os::raw::c_char,
+        a1: *const ::std::os::raw::c_void,
+        a2: *const ::std::os::raw::c_void,
+        a3: *const ::std::os::raw::c_void,
+    );
 }
 extern "C" {
-  pub fn String_Format4(
-    str: *mut String,
-    format: *const ::std::os::raw::c_char,
-    a1: *const ::std::os::raw::c_void,
-    a2: *const ::std::os::raw::c_void,
-    a3: *const ::std::os::raw::c_void,
-    a4: *const ::std::os::raw::c_void,
-  );
+    pub fn String_Format4(
+        str: *mut String,
+        format: *const ::std::os::raw::c_char,
+        a1: *const ::std::os::raw::c_void,
+        a2: *const ::std::os::raw::c_void,
+        a3: *const ::std::os::raw::c_void,
+        a4: *const ::std::os::raw::c_void,
+    );
 }
 extern "C" {
-  pub fn Convert_ParseUInt8(str: *const String, value: *mut cc_uint8) -> bool;
+    pub fn Convert_ParseUInt8(str: *const String, value: *mut cc_uint8) -> cc_bool;
 }
 extern "C" {
-  pub fn Convert_ParseUInt16(str: *const String, value: *mut cc_uint16) -> bool;
+    pub fn Convert_ParseUInt16(str: *const String, value: *mut cc_uint16) -> cc_bool;
 }
 extern "C" {
-  pub fn Convert_ParseInt(str: *const String, value: *mut ::std::os::raw::c_int) -> bool;
+    pub fn Convert_ParseInt(str: *const String, value: *mut ::std::os::raw::c_int) -> cc_bool;
 }
 extern "C" {
-  pub fn Convert_ParseUInt64(str: *const String, value: *mut cc_uint64) -> bool;
+    pub fn Convert_ParseUInt64(str: *const String, value: *mut cc_uint64) -> cc_bool;
 }
 extern "C" {
-  pub fn Convert_ParseFloat(str: *const String, value: *mut f32) -> bool;
+    pub fn Convert_ParseFloat(str: *const String, value: *mut f32) -> cc_bool;
 }
 extern "C" {
-  pub fn Convert_ParseBool(str: *const String, value: *mut bool) -> bool;
+    pub fn Convert_ParseBool(str: *const String, value: *mut cc_bool) -> cc_bool;
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct StringsBuffer_ {
-  pub textBuffer: *mut ::std::os::raw::c_char,
-  pub flagsBuffer: *mut cc_uint32,
-  pub count: ::std::os::raw::c_int,
-  pub totalLength: ::std::os::raw::c_int,
-  pub _textCapacity: ::std::os::raw::c_int,
-  pub _flagsCapacity: ::std::os::raw::c_int,
-  pub _defaultBuffer: [::std::os::raw::c_char; 4096usize],
-  pub _defaultFlags: [cc_uint32; 256usize],
+    pub textBuffer: *mut ::std::os::raw::c_char,
+    pub flagsBuffer: *mut cc_uint32,
+    pub count: ::std::os::raw::c_int,
+    pub totalLength: ::std::os::raw::c_int,
+    pub _textCapacity: ::std::os::raw::c_int,
+    pub _flagsCapacity: ::std::os::raw::c_int,
+    pub _defaultBuffer: [::std::os::raw::c_char; 4096usize],
+    pub _defaultFlags: [cc_uint32; 256usize],
 }
 #[test]
 fn bindgen_test_layout_StringsBuffer_() {
-  assert_eq!(
-    ::std::mem::size_of::<StringsBuffer_>(),
-    5152usize,
-    concat!("Size of: ", stringify!(StringsBuffer_))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<StringsBuffer_>(),
-    8usize,
-    concat!("Alignment of ", stringify!(StringsBuffer_))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).textBuffer as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(textBuffer)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).flagsBuffer as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(flagsBuffer)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).count as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(count)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).totalLength as *const _ as usize },
-    20usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(totalLength)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._textCapacity as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(_textCapacity)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._flagsCapacity as *const _ as usize },
-    28usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(_flagsCapacity)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultBuffer as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(_defaultBuffer)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultFlags as *const _ as usize },
-    4128usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(StringsBuffer_),
-      "::",
-      stringify!(_defaultFlags)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<StringsBuffer_>(),
+        5152usize,
+        concat!("Size of: ", stringify!(StringsBuffer_))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<StringsBuffer_>(),
+        8usize,
+        concat!("Alignment of ", stringify!(StringsBuffer_))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).textBuffer as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(textBuffer)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).flagsBuffer as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(flagsBuffer)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).count as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(count)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>())).totalLength as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(totalLength)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._textCapacity as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(_textCapacity)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._flagsCapacity as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(_flagsCapacity)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultBuffer as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(_defaultBuffer)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<StringsBuffer_>()))._defaultFlags as *const _ as usize },
+        4128usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(StringsBuffer_),
+            "::",
+            stringify!(_defaultFlags)
+        )
+    );
 }
 pub type StringsBuffer = StringsBuffer_;
 extern "C" {
-  pub fn StringsBuffer_Clear(buffer: *mut StringsBuffer);
+    pub fn StringsBuffer_Clear(buffer: *mut StringsBuffer);
 }
 extern "C" {
-  pub fn StringsBuffer_UNSAFE_Get(buffer: *mut StringsBuffer, i: ::std::os::raw::c_int) -> String;
+    pub fn StringsBuffer_UNSAFE_Get(buffer: *mut StringsBuffer, i: ::std::os::raw::c_int)
+        -> String;
 }
 extern "C" {
-  pub fn StringsBuffer_Add(buffer: *mut StringsBuffer, str: *const String);
+    pub fn StringsBuffer_Add(buffer: *mut StringsBuffer, str: *const String);
 }
 extern "C" {
-  pub fn StringsBuffer_Remove(buffer: *mut StringsBuffer, index: ::std::os::raw::c_int);
+    pub fn StringsBuffer_Remove(buffer: *mut StringsBuffer, index: ::std::os::raw::c_int);
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Vec3_ {
-  pub X: f32,
-  pub Y: f32,
-  pub Z: f32,
+    pub X: f32,
+    pub Y: f32,
+    pub Z: f32,
 }
 #[test]
 fn bindgen_test_layout_Vec3_() {
-  assert_eq!(
-    ::std::mem::size_of::<Vec3_>(),
-    12usize,
-    concat!("Size of: ", stringify!(Vec3_))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Vec3_>(),
-    4usize,
-    concat!("Alignment of ", stringify!(Vec3_))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec3_>())).X as *const _ as usize },
-    0usize,
-    concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(X))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec3_>())).Y as *const _ as usize },
-    4usize,
-    concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(Y))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec3_>())).Z as *const _ as usize },
-    8usize,
-    concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(Z))
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Vec3_>(),
+        12usize,
+        concat!("Size of: ", stringify!(Vec3_))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Vec3_>(),
+        4usize,
+        concat!("Alignment of ", stringify!(Vec3_))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec3_>())).X as *const _ as usize },
+        0usize,
+        concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(X))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec3_>())).Y as *const _ as usize },
+        4usize,
+        concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(Y))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec3_>())).Z as *const _ as usize },
+        8usize,
+        concat!("Offset of field: ", stringify!(Vec3_), "::", stringify!(Z))
+    );
 }
 pub type Vec3 = Vec3_;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct IVec3_ {
-  pub X: ::std::os::raw::c_int,
-  pub Y: ::std::os::raw::c_int,
-  pub Z: ::std::os::raw::c_int,
+    pub X: ::std::os::raw::c_int,
+    pub Y: ::std::os::raw::c_int,
+    pub Z: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_IVec3_() {
-  assert_eq!(
-    ::std::mem::size_of::<IVec3_>(),
-    12usize,
-    concat!("Size of: ", stringify!(IVec3_))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<IVec3_>(),
-    4usize,
-    concat!("Alignment of ", stringify!(IVec3_))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IVec3_>())).X as *const _ as usize },
-    0usize,
-    concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(X))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IVec3_>())).Y as *const _ as usize },
-    4usize,
-    concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(Y))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<IVec3_>())).Z as *const _ as usize },
-    8usize,
-    concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(Z))
-  );
+    assert_eq!(
+        ::std::mem::size_of::<IVec3_>(),
+        12usize,
+        concat!("Size of: ", stringify!(IVec3_))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<IVec3_>(),
+        4usize,
+        concat!("Alignment of ", stringify!(IVec3_))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IVec3_>())).X as *const _ as usize },
+        0usize,
+        concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(X))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IVec3_>())).Y as *const _ as usize },
+        4usize,
+        concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(Y))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<IVec3_>())).Z as *const _ as usize },
+        8usize,
+        concat!("Offset of field: ", stringify!(IVec3_), "::", stringify!(Z))
+    );
 }
 pub type IVec3 = IVec3_;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Vec4 {
-  pub X: f32,
-  pub Y: f32,
-  pub Z: f32,
-  pub W: f32,
+    pub X: f32,
+    pub Y: f32,
+    pub Z: f32,
+    pub W: f32,
 }
 #[test]
 fn bindgen_test_layout_Vec4() {
-  assert_eq!(
-    ::std::mem::size_of::<Vec4>(),
-    16usize,
-    concat!("Size of: ", stringify!(Vec4))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Vec4>(),
-    4usize,
-    concat!("Alignment of ", stringify!(Vec4))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec4>())).X as *const _ as usize },
-    0usize,
-    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(X))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec4>())).Y as *const _ as usize },
-    4usize,
-    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(Y))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec4>())).Z as *const _ as usize },
-    8usize,
-    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(Z))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Vec4>())).W as *const _ as usize },
-    12usize,
-    concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(W))
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Vec4>(),
+        16usize,
+        concat!("Size of: ", stringify!(Vec4))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Vec4>(),
+        4usize,
+        concat!("Alignment of ", stringify!(Vec4))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec4>())).X as *const _ as usize },
+        0usize,
+        concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(X))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec4>())).Y as *const _ as usize },
+        4usize,
+        concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(Y))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec4>())).Z as *const _ as usize },
+        8usize,
+        concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(Z))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Vec4>())).W as *const _ as usize },
+        12usize,
+        concat!("Offset of field: ", stringify!(Vec4), "::", stringify!(W))
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Matrix {
-  pub Row0: Vec4,
-  pub Row1: Vec4,
-  pub Row2: Vec4,
-  pub Row3: Vec4,
+    pub Row0: Vec4,
+    pub Row1: Vec4,
+    pub Row2: Vec4,
+    pub Row3: Vec4,
 }
 #[test]
 fn bindgen_test_layout_Matrix() {
-  assert_eq!(
-    ::std::mem::size_of::<Matrix>(),
-    64usize,
-    concat!("Size of: ", stringify!(Matrix))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Matrix>(),
-    4usize,
-    concat!("Alignment of ", stringify!(Matrix))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Matrix>())).Row0 as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Matrix),
-      "::",
-      stringify!(Row0)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Matrix>())).Row1 as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Matrix),
-      "::",
-      stringify!(Row1)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Matrix>())).Row2 as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Matrix),
-      "::",
-      stringify!(Row2)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Matrix>())).Row3 as *const _ as usize },
-    48usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Matrix),
-      "::",
-      stringify!(Row3)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Matrix>(),
+        64usize,
+        concat!("Size of: ", stringify!(Matrix))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Matrix>(),
+        4usize,
+        concat!("Alignment of ", stringify!(Matrix))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Matrix>())).Row0 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Matrix),
+            "::",
+            stringify!(Row0)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Matrix>())).Row1 as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Matrix),
+            "::",
+            stringify!(Row1)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Matrix>())).Row2 as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Matrix),
+            "::",
+            stringify!(Row2)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Matrix>())).Row3 as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Matrix),
+            "::",
+            stringify!(Row3)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Stream {
-  _unused: [u8; 0],
+    _unused: [u8; 0],
 }
 pub type Event_Void_Callback =
-  ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void)>;
+    ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void)>;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Void {
-  pub Handlers: [Event_Void_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Void_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Void() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Void>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Void))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Void>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Void))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Void>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Void),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Void>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Void),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Void>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Void),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Void>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Void))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Void>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Void))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Void>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Void),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Void>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Void),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Void>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Void),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_Int_Callback = ::std::option::Option<
-  unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: ::std::os::raw::c_int),
+    unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: ::std::os::raw::c_int),
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Int {
-  pub Handlers: [Event_Int_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Int_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Int() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Int>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Int))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Int>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Int))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Int>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Int),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Int>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Int),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Int>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Int),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Int>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Int))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Int>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Int))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Int>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Int),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Int>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Int),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Int>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Int),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_Float_Callback =
-  ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: f32)>;
+    ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: f32)>;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Float {
-  pub Handlers: [Event_Float_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Float_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Float() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Float>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Float))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Float>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Float))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Float>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Float),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Float>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Float),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Float>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Float),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Float>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Float))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Float>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Float))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Float>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Float),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Float>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Float),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Float>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Float),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_Entry_Callback = ::std::option::Option<
-  unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, stream: *mut Stream, name: *const String),
+    unsafe extern "C" fn(
+        obj: *mut ::std::os::raw::c_void,
+        stream: *mut Stream,
+        name: *const String,
+    ),
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Entry {
-  pub Handlers: [Event_Entry_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Entry_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Entry() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Entry>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Entry))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Entry>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Entry))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Entry>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Entry),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Entry>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Entry),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Entry>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Entry),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Entry>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Entry))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Entry>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Entry))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Entry>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Entry),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Entry>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Entry),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Entry>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Entry),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_Block_Callback = ::std::option::Option<
-  unsafe extern "C" fn(
-    obj: *mut ::std::os::raw::c_void,
-    coords: IVec3,
-    oldBlock: BlockID,
-    block: BlockID,
-  ),
+    unsafe extern "C" fn(
+        obj: *mut ::std::os::raw::c_void,
+        coords: IVec3,
+        oldBlock: BlockID,
+        block: BlockID,
+    ),
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Block {
-  pub Handlers: [Event_Block_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Block_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Block() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Block>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Block))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Block>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Block))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Block>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Block),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Block>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Block),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Block>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Block),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Block>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Block))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Block>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Block))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Block>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Block),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Block>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Block),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Block>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Block),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_PointerMove_Callback = ::std::option::Option<
-  unsafe extern "C" fn(
-    obj: *mut ::std::os::raw::c_void,
-    idx: ::std::os::raw::c_int,
-    xDelta: ::std::os::raw::c_int,
-    yDelta: ::std::os::raw::c_int,
-  ),
+    unsafe extern "C" fn(
+        obj: *mut ::std::os::raw::c_void,
+        idx: ::std::os::raw::c_int,
+        xDelta: ::std::os::raw::c_int,
+        yDelta: ::std::os::raw::c_int,
+    ),
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_PointerMove {
-  pub Handlers: [Event_PointerMove_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_PointerMove_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_PointerMove() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_PointerMove>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_PointerMove))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_PointerMove>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_PointerMove))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_PointerMove),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_PointerMove),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_PointerMove),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_PointerMove>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_PointerMove))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_PointerMove>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_PointerMove))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_PointerMove),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_PointerMove),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_PointerMove>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_PointerMove),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_Chat_Callback = ::std::option::Option<
-  unsafe extern "C" fn(
-    obj: *mut ::std::os::raw::c_void,
-    msg: *const String,
-    msgType: ::std::os::raw::c_int,
-  ),
+    unsafe extern "C" fn(
+        obj: *mut ::std::os::raw::c_void,
+        msg: *const String,
+        msgType: ::std::os::raw::c_int,
+    ),
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Chat {
-  pub Handlers: [Event_Chat_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Chat_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Chat() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Chat>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Chat))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Chat>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Chat))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Chat>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Chat),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Chat>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Chat),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Chat>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Chat),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Chat>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Chat))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Chat>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Chat))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Chat>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Chat),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Chat>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Chat),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Chat>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Chat),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 pub type Event_Input_Callback = ::std::option::Option<
-  unsafe extern "C" fn(
-    obj: *mut ::std::os::raw::c_void,
-    key: ::std::os::raw::c_int,
-    repeating: bool,
-  ),
+    unsafe extern "C" fn(
+        obj: *mut ::std::os::raw::c_void,
+        key: ::std::os::raw::c_int,
+        repeating: cc_bool,
+    ),
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Event_Input {
-  pub Handlers: [Event_Input_Callback; 32usize],
-  pub Objs: [*mut ::std::os::raw::c_void; 32usize],
-  pub Count: ::std::os::raw::c_int,
+    pub Handlers: [Event_Input_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_Event_Input() {
-  assert_eq!(
-    ::std::mem::size_of::<Event_Input>(),
-    520usize,
-    concat!("Size of: ", stringify!(Event_Input))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Event_Input>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Event_Input))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Input>())).Handlers as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Input),
-      "::",
-      stringify!(Handlers)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Input>())).Objs as *const _ as usize },
-    256usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Input),
-      "::",
-      stringify!(Objs)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Event_Input>())).Count as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Event_Input),
-      "::",
-      stringify!(Count)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Event_Input>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_Input))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_Input>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_Input))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Input>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Input),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Input>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Input),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_Input>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_Input),
+            "::",
+            stringify!(Count)
+        )
+    );
+}
+pub type Event_String_Callback = ::std::option::Option<
+    unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, str: *const String),
+>;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Event_String {
+    pub Handlers: [Event_String_Callback; 32usize],
+    pub Objs: [*mut ::std::os::raw::c_void; 32usize],
+    pub Count: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_Event_String() {
+    assert_eq!(
+        ::std::mem::size_of::<Event_String>(),
+        520usize,
+        concat!("Size of: ", stringify!(Event_String))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Event_String>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Event_String))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_String>())).Handlers as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_String),
+            "::",
+            stringify!(Handlers)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_String>())).Objs as *const _ as usize },
+        256usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_String),
+            "::",
+            stringify!(Objs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Event_String>())).Count as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Event_String),
+            "::",
+            stringify!(Count)
+        )
+    );
 }
 extern "C" {
-  pub fn Event_Register(
-    handlers: *mut Event_Void,
-    obj: *mut ::std::os::raw::c_void,
-    handler: Event_Void_Callback,
-  );
+    pub fn Event_Register(
+        handlers: *mut Event_Void,
+        obj: *mut ::std::os::raw::c_void,
+        handler: Event_Void_Callback,
+    );
 }
 extern "C" {
-  pub fn Event_Unregister(
-    handlers: *mut Event_Void,
-    obj: *mut ::std::os::raw::c_void,
-    handler: Event_Void_Callback,
-  );
+    pub fn Event_Unregister(
+        handlers: *mut Event_Void,
+        obj: *mut ::std::os::raw::c_void,
+        handler: Event_Void_Callback,
+    );
 }
 extern "C" {
-  pub fn Event_RaiseVoid(handlers: *mut Event_Void);
+    pub fn Event_RaiseVoid(handlers: *mut Event_Void);
 }
 extern "C" {
-  pub fn Event_RaiseInt(handlers: *mut Event_Int, arg: ::std::os::raw::c_int);
+    pub fn Event_RaiseInt(handlers: *mut Event_Int, arg: ::std::os::raw::c_int);
 }
 extern "C" {
-  pub fn Event_RaiseFloat(handlers: *mut Event_Float, arg: f32);
+    pub fn Event_RaiseFloat(handlers: *mut Event_Float, arg: f32);
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _EntityEventsList {
-  pub Added: Event_Int,
-  pub Removed: Event_Int,
+    pub Added: Event_Int,
+    pub Removed: Event_Int,
 }
 #[test]
 fn bindgen_test_layout__EntityEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_EntityEventsList>(),
-    1040usize,
-    concat!("Size of: ", stringify!(_EntityEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_EntityEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_EntityEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_EntityEventsList>())).Added as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_EntityEventsList),
-      "::",
-      stringify!(Added)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_EntityEventsList>())).Removed as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_EntityEventsList),
-      "::",
-      stringify!(Removed)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_EntityEventsList>(),
+        1040usize,
+        concat!("Size of: ", stringify!(_EntityEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_EntityEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_EntityEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EntityEventsList>())).Added as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EntityEventsList),
+            "::",
+            stringify!(Added)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EntityEventsList>())).Removed as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EntityEventsList),
+            "::",
+            stringify!(Removed)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _TabListEventsList {
-  pub Added: Event_Int,
-  pub Changed: Event_Int,
-  pub Removed: Event_Int,
+    pub Added: Event_Int,
+    pub Changed: Event_Int,
+    pub Removed: Event_Int,
 }
 #[test]
 fn bindgen_test_layout__TabListEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_TabListEventsList>(),
-    1560usize,
-    concat!("Size of: ", stringify!(_TabListEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_TabListEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_TabListEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Added as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TabListEventsList),
-      "::",
-      stringify!(Added)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Changed as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TabListEventsList),
-      "::",
-      stringify!(Changed)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Removed as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TabListEventsList),
-      "::",
-      stringify!(Removed)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_TabListEventsList>(),
+        1560usize,
+        concat!("Size of: ", stringify!(_TabListEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_TabListEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_TabListEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Added as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TabListEventsList),
+            "::",
+            stringify!(Added)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Changed as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TabListEventsList),
+            "::",
+            stringify!(Changed)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TabListEventsList>())).Removed as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TabListEventsList),
+            "::",
+            stringify!(Removed)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _TextureEventsList {
-  pub AtlasChanged: Event_Void,
-  pub PackChanged: Event_Void,
-  pub FileChanged: Event_Entry,
+    pub AtlasChanged: Event_Void,
+    pub PackChanged: Event_Void,
+    pub FileChanged: Event_Entry,
 }
 #[test]
 fn bindgen_test_layout__TextureEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_TextureEventsList>(),
-    1560usize,
-    concat!("Size of: ", stringify!(_TextureEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_TextureEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_TextureEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).AtlasChanged as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TextureEventsList),
-      "::",
-      stringify!(AtlasChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).PackChanged as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TextureEventsList),
-      "::",
-      stringify!(PackChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).FileChanged as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TextureEventsList),
-      "::",
-      stringify!(FileChanged)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_TextureEventsList>(),
+        1560usize,
+        concat!("Size of: ", stringify!(_TextureEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_TextureEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_TextureEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).AtlasChanged as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TextureEventsList),
+            "::",
+            stringify!(AtlasChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).PackChanged as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TextureEventsList),
+            "::",
+            stringify!(PackChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TextureEventsList>())).FileChanged as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TextureEventsList),
+            "::",
+            stringify!(FileChanged)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _GfxEventsList {
-  pub ViewDistanceChanged: Event_Void,
-  pub LowVRAMDetected: Event_Void,
-  pub ProjectionChanged: Event_Void,
-  pub ContextLost: Event_Void,
-  pub ContextRecreated: Event_Void,
+    pub ViewDistanceChanged: Event_Void,
+    pub LowVRAMDetected: Event_Void,
+    pub ProjectionChanged: Event_Void,
+    pub ContextLost: Event_Void,
+    pub ContextRecreated: Event_Void,
 }
 #[test]
 fn bindgen_test_layout__GfxEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_GfxEventsList>(),
-    2600usize,
-    concat!("Size of: ", stringify!(_GfxEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_GfxEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_GfxEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ViewDistanceChanged as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_GfxEventsList),
-      "::",
-      stringify!(ViewDistanceChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).LowVRAMDetected as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_GfxEventsList),
-      "::",
-      stringify!(LowVRAMDetected)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ProjectionChanged as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_GfxEventsList),
-      "::",
-      stringify!(ProjectionChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ContextLost as *const _ as usize },
-    1560usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_GfxEventsList),
-      "::",
-      stringify!(ContextLost)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ContextRecreated as *const _ as usize },
-    2080usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_GfxEventsList),
-      "::",
-      stringify!(ContextRecreated)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_GfxEventsList>(),
+        2600usize,
+        concat!("Size of: ", stringify!(_GfxEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_GfxEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_GfxEventsList))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_GfxEventsList>())).ViewDistanceChanged as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_GfxEventsList),
+            "::",
+            stringify!(ViewDistanceChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).LowVRAMDetected as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_GfxEventsList),
+            "::",
+            stringify!(LowVRAMDetected)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_GfxEventsList>())).ProjectionChanged as *const _ as usize
+        },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_GfxEventsList),
+            "::",
+            stringify!(ProjectionChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ContextLost as *const _ as usize },
+        1560usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_GfxEventsList),
+            "::",
+            stringify!(ContextLost)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_GfxEventsList>())).ContextRecreated as *const _ as usize },
+        2080usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_GfxEventsList),
+            "::",
+            stringify!(ContextRecreated)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _UserEventsList {
-  pub BlockChanged: Event_Block,
-  pub HackPermissionsChanged: Event_Void,
-  pub HeldBlockChanged: Event_Void,
+    pub BlockChanged: Event_Block,
+    pub HackPermissionsChanged: Event_Void,
+    pub HeldBlockChanged: Event_Void,
 }
 #[test]
 fn bindgen_test_layout__UserEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_UserEventsList>(),
-    1560usize,
-    concat!("Size of: ", stringify!(_UserEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_UserEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_UserEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_UserEventsList>())).BlockChanged as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_UserEventsList),
-      "::",
-      stringify!(BlockChanged)
-    )
-  );
-  assert_eq!(
-    unsafe {
-      &(*(::std::ptr::null::<_UserEventsList>())).HackPermissionsChanged as *const _ as usize
-    },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_UserEventsList),
-      "::",
-      stringify!(HackPermissionsChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_UserEventsList>())).HeldBlockChanged as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_UserEventsList),
-      "::",
-      stringify!(HeldBlockChanged)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_UserEventsList>(),
+        1560usize,
+        concat!("Size of: ", stringify!(_UserEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_UserEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_UserEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_UserEventsList>())).BlockChanged as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_UserEventsList),
+            "::",
+            stringify!(BlockChanged)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_UserEventsList>())).HackPermissionsChanged as *const _ as usize
+        },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_UserEventsList),
+            "::",
+            stringify!(HackPermissionsChanged)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_UserEventsList>())).HeldBlockChanged as *const _ as usize
+        },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_UserEventsList),
+            "::",
+            stringify!(HeldBlockChanged)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _BlockEventsList {
-  pub PermissionsChanged: Event_Void,
-  pub BlockDefChanged: Event_Void,
+    pub PermissionsChanged: Event_Void,
+    pub BlockDefChanged: Event_Void,
 }
 #[test]
 fn bindgen_test_layout__BlockEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_BlockEventsList>(),
-    1040usize,
-    concat!("Size of: ", stringify!(_BlockEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_BlockEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_BlockEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_BlockEventsList>())).PermissionsChanged as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_BlockEventsList),
-      "::",
-      stringify!(PermissionsChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_BlockEventsList>())).BlockDefChanged as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_BlockEventsList),
-      "::",
-      stringify!(BlockDefChanged)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_BlockEventsList>(),
+        1040usize,
+        concat!("Size of: ", stringify!(_BlockEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_BlockEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_BlockEventsList))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_BlockEventsList>())).PermissionsChanged as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_BlockEventsList),
+            "::",
+            stringify!(PermissionsChanged)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_BlockEventsList>())).BlockDefChanged as *const _ as usize
+        },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_BlockEventsList),
+            "::",
+            stringify!(BlockDefChanged)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _WorldEventsList {
-  pub NewMap: Event_Void,
-  pub Loading: Event_Float,
-  pub MapLoaded: Event_Void,
-  pub EnvVarChanged: Event_Int,
+    pub NewMap: Event_Void,
+    pub Loading: Event_Float,
+    pub MapLoaded: Event_Void,
+    pub EnvVarChanged: Event_Int,
 }
 #[test]
 fn bindgen_test_layout__WorldEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_WorldEventsList>(),
-    2080usize,
-    concat!("Size of: ", stringify!(_WorldEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_WorldEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_WorldEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).NewMap as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WorldEventsList),
-      "::",
-      stringify!(NewMap)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).Loading as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WorldEventsList),
-      "::",
-      stringify!(Loading)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).MapLoaded as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WorldEventsList),
-      "::",
-      stringify!(MapLoaded)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).EnvVarChanged as *const _ as usize },
-    1560usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WorldEventsList),
-      "::",
-      stringify!(EnvVarChanged)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_WorldEventsList>(),
+        2080usize,
+        concat!("Size of: ", stringify!(_WorldEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_WorldEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_WorldEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).NewMap as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldEventsList),
+            "::",
+            stringify!(NewMap)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).Loading as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldEventsList),
+            "::",
+            stringify!(Loading)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).MapLoaded as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldEventsList),
+            "::",
+            stringify!(MapLoaded)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldEventsList>())).EnvVarChanged as *const _ as usize },
+        1560usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldEventsList),
+            "::",
+            stringify!(EnvVarChanged)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _ChatEventsList {
-  pub FontChanged: Event_Void,
-  pub ChatReceived: Event_Chat,
-  pub ChatSending: Event_Chat,
-  pub ColCodeChanged: Event_Int,
+    pub FontChanged: Event_Void,
+    pub ChatReceived: Event_Chat,
+    pub ChatSending: Event_Chat,
+    pub ColCodeChanged: Event_Int,
 }
 #[test]
 fn bindgen_test_layout__ChatEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_ChatEventsList>(),
-    2080usize,
-    concat!("Size of: ", stringify!(_ChatEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_ChatEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_ChatEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).FontChanged as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ChatEventsList),
-      "::",
-      stringify!(FontChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ChatReceived as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ChatEventsList),
-      "::",
-      stringify!(ChatReceived)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ChatSending as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ChatEventsList),
-      "::",
-      stringify!(ChatSending)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ColCodeChanged as *const _ as usize },
-    1560usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ChatEventsList),
-      "::",
-      stringify!(ColCodeChanged)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_ChatEventsList>(),
+        2080usize,
+        concat!("Size of: ", stringify!(_ChatEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_ChatEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_ChatEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).FontChanged as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ChatEventsList),
+            "::",
+            stringify!(FontChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ChatReceived as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ChatEventsList),
+            "::",
+            stringify!(ChatReceived)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ChatSending as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ChatEventsList),
+            "::",
+            stringify!(ChatSending)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ChatEventsList>())).ColCodeChanged as *const _ as usize },
+        1560usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ChatEventsList),
+            "::",
+            stringify!(ColCodeChanged)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _WindowEventsList {
-  pub Redraw: Event_Void,
-  pub Resized: Event_Void,
-  pub Closing: Event_Void,
-  pub FocusChanged: Event_Void,
-  pub StateChanged: Event_Void,
-  pub Created: Event_Void,
+    pub Redraw: Event_Void,
+    pub Resized: Event_Void,
+    pub Closing: Event_Void,
+    pub FocusChanged: Event_Void,
+    pub StateChanged: Event_Void,
+    pub Created: Event_Void,
 }
 #[test]
 fn bindgen_test_layout__WindowEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_WindowEventsList>(),
-    3120usize,
-    concat!("Size of: ", stringify!(_WindowEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_WindowEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_WindowEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Redraw as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WindowEventsList),
-      "::",
-      stringify!(Redraw)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Resized as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WindowEventsList),
-      "::",
-      stringify!(Resized)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Closing as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WindowEventsList),
-      "::",
-      stringify!(Closing)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).FocusChanged as *const _ as usize },
-    1560usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WindowEventsList),
-      "::",
-      stringify!(FocusChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).StateChanged as *const _ as usize },
-    2080usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WindowEventsList),
-      "::",
-      stringify!(StateChanged)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Created as *const _ as usize },
-    2600usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_WindowEventsList),
-      "::",
-      stringify!(Created)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_WindowEventsList>(),
+        3120usize,
+        concat!("Size of: ", stringify!(_WindowEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_WindowEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_WindowEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Redraw as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WindowEventsList),
+            "::",
+            stringify!(Redraw)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Resized as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WindowEventsList),
+            "::",
+            stringify!(Resized)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Closing as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WindowEventsList),
+            "::",
+            stringify!(Closing)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).FocusChanged as *const _ as usize },
+        1560usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WindowEventsList),
+            "::",
+            stringify!(FocusChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).StateChanged as *const _ as usize },
+        2080usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WindowEventsList),
+            "::",
+            stringify!(StateChanged)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WindowEventsList>())).Created as *const _ as usize },
+        2600usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WindowEventsList),
+            "::",
+            stringify!(Created)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct _KeyEventsList {
-  pub Press: Event_Int,
-  pub Down: Event_Input,
-  pub Up: Event_Int,
-  pub Wheel: Event_Float,
+pub struct _InputEventsList {
+    pub Press: Event_Int,
+    pub Down: Event_Input,
+    pub Up: Event_Int,
+    pub Wheel: Event_Float,
+    pub TextChanged: Event_String,
 }
 #[test]
-fn bindgen_test_layout__KeyEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_KeyEventsList>(),
-    2080usize,
-    concat!("Size of: ", stringify!(_KeyEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_KeyEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_KeyEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Press as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_KeyEventsList),
-      "::",
-      stringify!(Press)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Down as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_KeyEventsList),
-      "::",
-      stringify!(Down)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Up as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_KeyEventsList),
-      "::",
-      stringify!(Up)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_KeyEventsList>())).Wheel as *const _ as usize },
-    1560usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_KeyEventsList),
-      "::",
-      stringify!(Wheel)
-    )
-  );
+fn bindgen_test_layout__InputEventsList() {
+    assert_eq!(
+        ::std::mem::size_of::<_InputEventsList>(),
+        2600usize,
+        concat!("Size of: ", stringify!(_InputEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_InputEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_InputEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_InputEventsList>())).Press as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_InputEventsList),
+            "::",
+            stringify!(Press)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_InputEventsList>())).Down as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_InputEventsList),
+            "::",
+            stringify!(Down)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_InputEventsList>())).Up as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_InputEventsList),
+            "::",
+            stringify!(Up)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_InputEventsList>())).Wheel as *const _ as usize },
+        1560usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_InputEventsList),
+            "::",
+            stringify!(Wheel)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_InputEventsList>())).TextChanged as *const _ as usize },
+        2080usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_InputEventsList),
+            "::",
+            stringify!(TextChanged)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _PointerEventsList {
-  pub Moved: Event_PointerMove,
-  pub Down: Event_Int,
-  pub Up: Event_Int,
-  pub RawMoved: Event_PointerMove,
+    pub Moved: Event_PointerMove,
+    pub Down: Event_Int,
+    pub Up: Event_Int,
+    pub RawMoved: Event_PointerMove,
 }
 #[test]
 fn bindgen_test_layout__PointerEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_PointerEventsList>(),
-    2080usize,
-    concat!("Size of: ", stringify!(_PointerEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_PointerEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_PointerEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Moved as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_PointerEventsList),
-      "::",
-      stringify!(Moved)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Down as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_PointerEventsList),
-      "::",
-      stringify!(Down)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Up as *const _ as usize },
-    1040usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_PointerEventsList),
-      "::",
-      stringify!(Up)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).RawMoved as *const _ as usize },
-    1560usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_PointerEventsList),
-      "::",
-      stringify!(RawMoved)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_PointerEventsList>(),
+        2080usize,
+        concat!("Size of: ", stringify!(_PointerEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_PointerEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_PointerEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Moved as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_PointerEventsList),
+            "::",
+            stringify!(Moved)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Down as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_PointerEventsList),
+            "::",
+            stringify!(Down)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).Up as *const _ as usize },
+        1040usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_PointerEventsList),
+            "::",
+            stringify!(Up)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_PointerEventsList>())).RawMoved as *const _ as usize },
+        1560usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_PointerEventsList),
+            "::",
+            stringify!(RawMoved)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _NetEventsList {
-  pub Connected: Event_Void,
-  pub Disconnected: Event_Void,
+    pub Connected: Event_Void,
+    pub Disconnected: Event_Void,
 }
 #[test]
 fn bindgen_test_layout__NetEventsList() {
-  assert_eq!(
-    ::std::mem::size_of::<_NetEventsList>(),
-    1040usize,
-    concat!("Size of: ", stringify!(_NetEventsList))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_NetEventsList>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_NetEventsList))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_NetEventsList>())).Connected as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_NetEventsList),
-      "::",
-      stringify!(Connected)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_NetEventsList>())).Disconnected as *const _ as usize },
-    520usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_NetEventsList),
-      "::",
-      stringify!(Disconnected)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_NetEventsList>(),
+        1040usize,
+        concat!("Size of: ", stringify!(_NetEventsList))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_NetEventsList>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_NetEventsList))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NetEventsList>())).Connected as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NetEventsList),
+            "::",
+            stringify!(Connected)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NetEventsList>())).Disconnected as *const _ as usize },
+        520usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NetEventsList),
+            "::",
+            stringify!(Disconnected)
+        )
+    );
 }
 pub const MsgType_MSG_TYPE_NORMAL: MsgType = 0;
 pub const MsgType_MSG_TYPE_STATUS_1: MsgType = 1;
@@ -1980,88 +2083,88 @@ pub type MsgType = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct ChatCommand {
-  pub Name: *const ::std::os::raw::c_char,
-  pub Execute: ::std::option::Option<
-    unsafe extern "C" fn(args: *const String, argsCount: ::std::os::raw::c_int),
-  >,
-  pub SingleplayerOnly: bool,
-  pub Help: [*const ::std::os::raw::c_char; 5usize],
-  pub next: *mut ChatCommand,
+    pub Name: *const ::std::os::raw::c_char,
+    pub Execute: ::std::option::Option<
+        unsafe extern "C" fn(args: *const String, argsCount: ::std::os::raw::c_int),
+    >,
+    pub SingleplayerOnly: cc_bool,
+    pub Help: [*const ::std::os::raw::c_char; 5usize],
+    pub next: *mut ChatCommand,
 }
 #[test]
 fn bindgen_test_layout_ChatCommand() {
-  assert_eq!(
-    ::std::mem::size_of::<ChatCommand>(),
-    72usize,
-    concat!("Size of: ", stringify!(ChatCommand))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<ChatCommand>(),
-    8usize,
-    concat!("Alignment of ", stringify!(ChatCommand))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ChatCommand>())).Name as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ChatCommand),
-      "::",
-      stringify!(Name)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ChatCommand>())).Execute as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ChatCommand),
-      "::",
-      stringify!(Execute)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ChatCommand>())).SingleplayerOnly as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ChatCommand),
-      "::",
-      stringify!(SingleplayerOnly)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ChatCommand>())).Help as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ChatCommand),
-      "::",
-      stringify!(Help)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<ChatCommand>())).next as *const _ as usize },
-    64usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(ChatCommand),
-      "::",
-      stringify!(next)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<ChatCommand>(),
+        72usize,
+        concat!("Size of: ", stringify!(ChatCommand))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<ChatCommand>(),
+        8usize,
+        concat!("Alignment of ", stringify!(ChatCommand))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ChatCommand>())).Name as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ChatCommand),
+            "::",
+            stringify!(Name)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ChatCommand>())).Execute as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ChatCommand),
+            "::",
+            stringify!(Execute)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ChatCommand>())).SingleplayerOnly as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ChatCommand),
+            "::",
+            stringify!(SingleplayerOnly)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ChatCommand>())).Help as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ChatCommand),
+            "::",
+            stringify!(Help)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ChatCommand>())).next as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ChatCommand),
+            "::",
+            stringify!(next)
+        )
+    );
 }
 extern "C" {
-  pub fn Commands_Register(cmd: *mut ChatCommand);
+    pub fn Commands_Register(cmd: *mut ChatCommand);
 }
 extern "C" {
-  pub fn Chat_Send(text: *const String, logUsage: bool);
+    pub fn Chat_Send(text: *const String, logUsage: cc_bool);
 }
 extern "C" {
-  pub fn Chat_Add(text: *const String);
+    pub fn Chat_Add(text: *const String);
 }
 extern "C" {
-  pub fn Chat_AddOf(text: *const String, msgType: ::std::os::raw::c_int);
+    pub fn Chat_AddOf(text: *const String, msgType: ::std::os::raw::c_int);
 }
 pub const Key__KEY_NONE: Key_ = 0;
 pub const Key__KEY_F1: Key_ = 1;
@@ -2202,1265 +2305,2260 @@ pub type Key = ::std::os::raw::c_int;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _ServerConnectionData {
-  pub BeginConnect: ::std::option::Option<unsafe extern "C" fn()>,
-  pub Tick: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
-  pub SendBlock: ::std::option::Option<
-    unsafe extern "C" fn(
-      x: ::std::os::raw::c_int,
-      y: ::std::os::raw::c_int,
-      z: ::std::os::raw::c_int,
-      old: BlockID,
-      now: BlockID,
-    ),
-  >,
-  pub SendChat: ::std::option::Option<unsafe extern "C" fn(text: *const String)>,
-  pub SendPosition: ::std::option::Option<unsafe extern "C" fn(pos: Vec3, rotY: f32, headX: f32)>,
-  pub SendData: ::std::option::Option<unsafe extern "C" fn(data: *const cc_uint8, len: cc_uint32)>,
-  pub Name: String,
-  pub MOTD: String,
-  pub AppName: String,
-  pub WriteBuffer: *mut cc_uint8,
-  pub IsSinglePlayer: bool,
-  pub Disconnected: bool,
-  pub SupportsExtPlayerList: bool,
-  pub SupportsPlayerClick: bool,
-  pub SupportsPartialMessages: bool,
-  pub SupportsFullCP437: bool,
-  pub IP: String,
-  pub Port: ::std::os::raw::c_int,
+    pub BeginConnect: ::std::option::Option<unsafe extern "C" fn()>,
+    pub Tick: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
+    pub SendBlock: ::std::option::Option<
+        unsafe extern "C" fn(
+            x: ::std::os::raw::c_int,
+            y: ::std::os::raw::c_int,
+            z: ::std::os::raw::c_int,
+            old: BlockID,
+            now: BlockID,
+        ),
+    >,
+    pub SendChat: ::std::option::Option<unsafe extern "C" fn(text: *const String)>,
+    pub SendPosition: ::std::option::Option<unsafe extern "C" fn(pos: Vec3, rotY: f32, headX: f32)>,
+    pub SendData:
+        ::std::option::Option<unsafe extern "C" fn(data: *const cc_uint8, len: cc_uint32)>,
+    pub Name: String,
+    pub MOTD: String,
+    pub AppName: String,
+    pub WriteBuffer: *mut cc_uint8,
+    pub IsSinglePlayer: cc_bool,
+    pub Disconnected: cc_bool,
+    pub SupportsExtPlayerList: cc_bool,
+    pub SupportsPlayerClick: cc_bool,
+    pub SupportsPartialMessages: cc_bool,
+    pub SupportsFullCP437: cc_bool,
+    pub IP: String,
+    pub Port: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout__ServerConnectionData() {
-  assert_eq!(
-    ::std::mem::size_of::<_ServerConnectionData>(),
-    136usize,
-    concat!("Size of: ", stringify!(_ServerConnectionData))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_ServerConnectionData>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_ServerConnectionData))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).BeginConnect as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(BeginConnect)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Tick as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(Tick)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendBlock as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SendBlock)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendChat as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SendChat)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendPosition as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SendPosition)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendData as *const _ as usize },
-    40usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SendData)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Name as *const _ as usize },
-    48usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(Name)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).MOTD as *const _ as usize },
-    64usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(MOTD)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).AppName as *const _ as usize },
-    80usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(AppName)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).WriteBuffer as *const _ as usize },
-    96usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(WriteBuffer)
-    )
-  );
-  assert_eq!(
-    unsafe {
-      &(*(::std::ptr::null::<_ServerConnectionData>())).IsSinglePlayer as *const _ as usize
-    },
-    104usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(IsSinglePlayer)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Disconnected as *const _ as usize },
-    105usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(Disconnected)
-    )
-  );
-  assert_eq!(
-    unsafe {
-      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsExtPlayerList as *const _ as usize
-    },
-    106usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SupportsExtPlayerList)
-    )
-  );
-  assert_eq!(
-    unsafe {
-      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsPlayerClick as *const _ as usize
-    },
-    107usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SupportsPlayerClick)
-    )
-  );
-  assert_eq!(
-    unsafe {
-      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsPartialMessages as *const _ as usize
-    },
-    108usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SupportsPartialMessages)
-    )
-  );
-  assert_eq!(
-    unsafe {
-      &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsFullCP437 as *const _ as usize
-    },
-    109usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(SupportsFullCP437)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).IP as *const _ as usize },
-    112usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(IP)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Port as *const _ as usize },
-    128usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_ServerConnectionData),
-      "::",
-      stringify!(Port)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_ServerConnectionData>(),
+        136usize,
+        concat!("Size of: ", stringify!(_ServerConnectionData))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_ServerConnectionData>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_ServerConnectionData))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).BeginConnect as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(BeginConnect)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Tick as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(Tick)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendBlock as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SendBlock)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendChat as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SendChat)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).SendPosition as *const _ as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SendPosition)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).SendData as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SendData)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Name as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(Name)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).MOTD as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(MOTD)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).AppName as *const _ as usize },
+        80usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(AppName)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).WriteBuffer as *const _ as usize
+        },
+        96usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(WriteBuffer)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).IsSinglePlayer as *const _ as usize
+        },
+        104usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(IsSinglePlayer)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).Disconnected as *const _ as usize
+        },
+        105usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(Disconnected)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsExtPlayerList as *const _
+                as usize
+        },
+        106usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SupportsExtPlayerList)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsPlayerClick as *const _
+                as usize
+        },
+        107usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SupportsPlayerClick)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsPartialMessages as *const _
+                as usize
+        },
+        108usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SupportsPartialMessages)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_ServerConnectionData>())).SupportsFullCP437 as *const _ as usize
+        },
+        109usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(SupportsFullCP437)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).IP as *const _ as usize },
+        112usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(IP)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_ServerConnectionData>())).Port as *const _ as usize },
+        128usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_ServerConnectionData),
+            "::",
+            stringify!(Port)
+        )
+    );
 }
 extern "C" {
-  pub fn Options_Get(
-    key: *const ::std::os::raw::c_char,
-    value: *mut String,
-    defValue: *const ::std::os::raw::c_char,
-  );
+    pub fn Options_Get(
+        key: *const ::std::os::raw::c_char,
+        value: *mut String,
+        defValue: *const ::std::os::raw::c_char,
+    );
 }
 extern "C" {
-  pub fn Options_GetInt(
-    key: *const ::std::os::raw::c_char,
-    min: ::std::os::raw::c_int,
-    max: ::std::os::raw::c_int,
-    defValue: ::std::os::raw::c_int,
-  ) -> ::std::os::raw::c_int;
+    pub fn Options_GetInt(
+        key: *const ::std::os::raw::c_char,
+        min: ::std::os::raw::c_int,
+        max: ::std::os::raw::c_int,
+        defValue: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn Options_GetBool(key: *const ::std::os::raw::c_char, defValue: bool) -> bool;
+    pub fn Options_GetBool(key: *const ::std::os::raw::c_char, defValue: cc_bool) -> cc_bool;
 }
 extern "C" {
-  pub fn Options_GetFloat(
-    key: *const ::std::os::raw::c_char,
-    min: f32,
-    max: f32,
-    defValue: f32,
-  ) -> f32;
+    pub fn Options_GetFloat(
+        key: *const ::std::os::raw::c_char,
+        min: f32,
+        max: f32,
+        defValue: f32,
+    ) -> f32;
 }
 extern "C" {
-  pub fn Options_GetEnum(
-    key: *const ::std::os::raw::c_char,
-    defValue: ::std::os::raw::c_int,
-    names: *const *const ::std::os::raw::c_char,
-    namesCount: ::std::os::raw::c_int,
-  ) -> ::std::os::raw::c_int;
+    pub fn Options_GetEnum(
+        key: *const ::std::os::raw::c_char,
+        defValue: ::std::os::raw::c_int,
+        names: *const *const ::std::os::raw::c_char,
+        namesCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-  pub fn Options_SetBool(keyRaw: *const ::std::os::raw::c_char, value: bool);
+    pub fn Options_SetBool(keyRaw: *const ::std::os::raw::c_char, value: cc_bool);
 }
 extern "C" {
-  pub fn Options_SetInt(keyRaw: *const ::std::os::raw::c_char, value: ::std::os::raw::c_int);
+    pub fn Options_SetInt(keyRaw: *const ::std::os::raw::c_char, value: ::std::os::raw::c_int);
 }
 extern "C" {
-  pub fn Options_Set(keyRaw: *const ::std::os::raw::c_char, value: *const String);
+    pub fn Options_Set(keyRaw: *const ::std::os::raw::c_char, value: *const String);
 }
 extern "C" {
-  pub fn Options_SetString(key: *const String, value: *const String);
+    pub fn Options_SetString(key: *const String, value: *const String);
 }
 extern "C" {
-  pub fn Options_Load();
+    pub fn Options_Load();
 }
 extern "C" {
-  pub fn Options_Save();
+    pub fn Options_Save();
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct AnimatedComp {
-  pub BobbingHor: f32,
-  pub BobbingVer: f32,
-  pub BobbingModel: f32,
-  pub WalkTime: f32,
-  pub Swing: f32,
-  pub BobStrength: f32,
-  pub WalkTimeO: f32,
-  pub WalkTimeN: f32,
-  pub SwingO: f32,
-  pub SwingN: f32,
-  pub BobStrengthO: f32,
-  pub BobStrengthN: f32,
-  pub LeftLegX: f32,
-  pub LeftLegZ: f32,
-  pub RightLegX: f32,
-  pub RightLegZ: f32,
-  pub LeftArmX: f32,
-  pub LeftArmZ: f32,
-  pub RightArmX: f32,
-  pub RightArmZ: f32,
+    pub BobbingHor: f32,
+    pub BobbingVer: f32,
+    pub BobbingModel: f32,
+    pub WalkTime: f32,
+    pub Swing: f32,
+    pub BobStrength: f32,
+    pub WalkTimeO: f32,
+    pub WalkTimeN: f32,
+    pub SwingO: f32,
+    pub SwingN: f32,
+    pub BobStrengthO: f32,
+    pub BobStrengthN: f32,
+    pub LeftLegX: f32,
+    pub LeftLegZ: f32,
+    pub RightLegX: f32,
+    pub RightLegZ: f32,
+    pub LeftArmX: f32,
+    pub LeftArmZ: f32,
+    pub RightArmX: f32,
+    pub RightArmZ: f32,
 }
 #[test]
 fn bindgen_test_layout_AnimatedComp() {
-  assert_eq!(
-    ::std::mem::size_of::<AnimatedComp>(),
-    80usize,
-    concat!("Size of: ", stringify!(AnimatedComp))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<AnimatedComp>(),
-    4usize,
-    concat!("Alignment of ", stringify!(AnimatedComp))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingHor as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(BobbingHor)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingVer as *const _ as usize },
-    4usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(BobbingVer)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingModel as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(BobbingModel)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTime as *const _ as usize },
-    12usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(WalkTime)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).Swing as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(Swing)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrength as *const _ as usize },
-    20usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(BobStrength)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTimeO as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(WalkTimeO)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTimeN as *const _ as usize },
-    28usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(WalkTimeN)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).SwingO as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(SwingO)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).SwingN as *const _ as usize },
-    36usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(SwingN)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrengthO as *const _ as usize },
-    40usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(BobStrengthO)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrengthN as *const _ as usize },
-    44usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(BobStrengthN)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftLegX as *const _ as usize },
-    48usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(LeftLegX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftLegZ as *const _ as usize },
-    52usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(LeftLegZ)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightLegX as *const _ as usize },
-    56usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(RightLegX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightLegZ as *const _ as usize },
-    60usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(RightLegZ)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftArmX as *const _ as usize },
-    64usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(LeftArmX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftArmZ as *const _ as usize },
-    68usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(LeftArmZ)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightArmX as *const _ as usize },
-    72usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(RightArmX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightArmZ as *const _ as usize },
-    76usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(AnimatedComp),
-      "::",
-      stringify!(RightArmZ)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<AnimatedComp>(),
+        80usize,
+        concat!("Size of: ", stringify!(AnimatedComp))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<AnimatedComp>(),
+        4usize,
+        concat!("Alignment of ", stringify!(AnimatedComp))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingHor as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(BobbingHor)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingVer as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(BobbingVer)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobbingModel as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(BobbingModel)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTime as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(WalkTime)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).Swing as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(Swing)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrength as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(BobStrength)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTimeO as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(WalkTimeO)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).WalkTimeN as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(WalkTimeN)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).SwingO as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(SwingO)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).SwingN as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(SwingN)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrengthO as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(BobStrengthO)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).BobStrengthN as *const _ as usize },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(BobStrengthN)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftLegX as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(LeftLegX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftLegZ as *const _ as usize },
+        52usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(LeftLegZ)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightLegX as *const _ as usize },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(RightLegX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightLegZ as *const _ as usize },
+        60usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(RightLegZ)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftArmX as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(LeftArmX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).LeftArmZ as *const _ as usize },
+        68usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(LeftArmZ)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightArmX as *const _ as usize },
+        72usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(RightArmX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AnimatedComp>())).RightArmZ as *const _ as usize },
+        76usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(AnimatedComp),
+            "::",
+            stringify!(RightArmZ)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct AABB {
-  pub Min: Vec3,
-  pub Max: Vec3,
+    pub Min: Vec3,
+    pub Max: Vec3,
 }
 #[test]
 fn bindgen_test_layout_AABB() {
-  assert_eq!(
-    ::std::mem::size_of::<AABB>(),
-    24usize,
-    concat!("Size of: ", stringify!(AABB))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<AABB>(),
-    4usize,
-    concat!("Alignment of ", stringify!(AABB))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AABB>())).Min as *const _ as usize },
-    0usize,
-    concat!("Offset of field: ", stringify!(AABB), "::", stringify!(Min))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<AABB>())).Max as *const _ as usize },
-    12usize,
-    concat!("Offset of field: ", stringify!(AABB), "::", stringify!(Max))
-  );
+    assert_eq!(
+        ::std::mem::size_of::<AABB>(),
+        24usize,
+        concat!("Size of: ", stringify!(AABB))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<AABB>(),
+        4usize,
+        concat!("Alignment of ", stringify!(AABB))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AABB>())).Min as *const _ as usize },
+        0usize,
+        concat!("Offset of field: ", stringify!(AABB), "::", stringify!(Min))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<AABB>())).Max as *const _ as usize },
+        12usize,
+        concat!("Offset of field: ", stringify!(AABB), "::", stringify!(Max))
+    );
 }
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub union PackedCol_ {
-  pub __bindgen_anon_1: PackedCol___bindgen_ty_1,
-  pub _raw: cc_uint32,
-  _bindgen_union_align: u32,
+pub type PackedCol = cc_uint32;
+extern "C" {
+    pub fn PackedCol_Scale(value: PackedCol, t: f32) -> PackedCol;
 }
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct PackedCol___bindgen_ty_1 {
-  pub R: cc_uint8,
-  pub G: cc_uint8,
-  pub B: cc_uint8,
-  pub A: cc_uint8,
+extern "C" {
+    pub fn PackedCol_Lerp(a: PackedCol, b: PackedCol, t: f32) -> PackedCol;
 }
-#[test]
-fn bindgen_test_layout_PackedCol___bindgen_ty_1() {
-  assert_eq!(
-    ::std::mem::size_of::<PackedCol___bindgen_ty_1>(),
-    4usize,
-    concat!("Size of: ", stringify!(PackedCol___bindgen_ty_1))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<PackedCol___bindgen_ty_1>(),
-    1usize,
-    concat!("Alignment of ", stringify!(PackedCol___bindgen_ty_1))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).R as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(PackedCol___bindgen_ty_1),
-      "::",
-      stringify!(R)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).G as *const _ as usize },
-    1usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(PackedCol___bindgen_ty_1),
-      "::",
-      stringify!(G)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).B as *const _ as usize },
-    2usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(PackedCol___bindgen_ty_1),
-      "::",
-      stringify!(B)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<PackedCol___bindgen_ty_1>())).A as *const _ as usize },
-    3usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(PackedCol___bindgen_ty_1),
-      "::",
-      stringify!(A)
-    )
-  );
-}
-#[test]
-fn bindgen_test_layout_PackedCol_() {
-  assert_eq!(
-    ::std::mem::size_of::<PackedCol_>(),
-    4usize,
-    concat!("Size of: ", stringify!(PackedCol_))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<PackedCol_>(),
-    4usize,
-    concat!("Alignment of ", stringify!(PackedCol_))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<PackedCol_>()))._raw as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(PackedCol_),
-      "::",
-      stringify!(_raw)
-    )
-  );
-}
-pub type PackedCol = PackedCol_;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct Model {
-  _unused: [u8; 0],
+extern "C" {
+    pub fn PackedCol_Tint(a: PackedCol, b: PackedCol) -> PackedCol;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct LocationUpdate {
-  pub Pos: Vec3,
-  pub HeadX: f32,
-  pub HeadY: f32,
-  pub RotX: f32,
-  pub RotZ: f32,
-  pub Flags: cc_uint8,
-  pub RelativePos: bool,
+    pub Pos: Vec3,
+    pub HeadX: f32,
+    pub HeadY: f32,
+    pub RotX: f32,
+    pub RotZ: f32,
+    pub Flags: cc_uint8,
+    pub RelativePos: cc_bool,
 }
 #[test]
 fn bindgen_test_layout_LocationUpdate() {
-  assert_eq!(
-    ::std::mem::size_of::<LocationUpdate>(),
-    32usize,
-    concat!("Size of: ", stringify!(LocationUpdate))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<LocationUpdate>(),
-    4usize,
-    concat!("Alignment of ", stringify!(LocationUpdate))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).Pos as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(Pos)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).HeadX as *const _ as usize },
-    12usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(HeadX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).HeadY as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(HeadY)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RotX as *const _ as usize },
-    20usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(RotX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RotZ as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(RotZ)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).Flags as *const _ as usize },
-    28usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(Flags)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RelativePos as *const _ as usize },
-    29usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(LocationUpdate),
-      "::",
-      stringify!(RelativePos)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<LocationUpdate>(),
+        32usize,
+        concat!("Size of: ", stringify!(LocationUpdate))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LocationUpdate>(),
+        4usize,
+        concat!("Alignment of ", stringify!(LocationUpdate))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).Pos as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(Pos)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).HeadX as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(HeadX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).HeadY as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(HeadY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RotX as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(RotX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RotZ as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(RotZ)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).Flags as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(Flags)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<LocationUpdate>())).RelativePos as *const _ as usize },
+        29usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LocationUpdate),
+            "::",
+            stringify!(RelativePos)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct EntityVTABLE {
-  pub Tick: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, delta: f64)>,
-  pub Despawn: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
-  pub SetLocation: ::std::option::Option<
-    unsafe extern "C" fn(e: *mut Entity, update: *mut LocationUpdate, interpolate: bool),
-  >,
-  pub GetCol: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity) -> PackedCol>,
-  pub RenderModel:
-    ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, deltaTime: f64, t: f32)>,
-  pub RenderName: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
+    pub Tick: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, delta: f64)>,
+    pub Despawn: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
+    pub SetLocation: ::std::option::Option<
+        unsafe extern "C" fn(e: *mut Entity, update: *mut LocationUpdate, interpolate: cc_bool),
+    >,
+    pub GetCol: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity) -> PackedCol>,
+    pub RenderModel:
+        ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, deltaTime: f64, t: f32)>,
+    pub RenderName: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
 }
 #[test]
 fn bindgen_test_layout_EntityVTABLE() {
-  assert_eq!(
-    ::std::mem::size_of::<EntityVTABLE>(),
-    48usize,
-    concat!("Size of: ", stringify!(EntityVTABLE))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<EntityVTABLE>(),
-    8usize,
-    concat!("Alignment of ", stringify!(EntityVTABLE))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).Tick as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(EntityVTABLE),
-      "::",
-      stringify!(Tick)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).Despawn as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(EntityVTABLE),
-      "::",
-      stringify!(Despawn)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).SetLocation as *const _ as usize },
-    16usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(EntityVTABLE),
-      "::",
-      stringify!(SetLocation)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).GetCol as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(EntityVTABLE),
-      "::",
-      stringify!(GetCol)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).RenderModel as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(EntityVTABLE),
-      "::",
-      stringify!(RenderModel)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).RenderName as *const _ as usize },
-    40usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(EntityVTABLE),
-      "::",
-      stringify!(RenderName)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<EntityVTABLE>(),
+        48usize,
+        concat!("Size of: ", stringify!(EntityVTABLE))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<EntityVTABLE>(),
+        8usize,
+        concat!("Alignment of ", stringify!(EntityVTABLE))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).Tick as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(EntityVTABLE),
+            "::",
+            stringify!(Tick)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).Despawn as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(EntityVTABLE),
+            "::",
+            stringify!(Despawn)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).SetLocation as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(EntityVTABLE),
+            "::",
+            stringify!(SetLocation)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).GetCol as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(EntityVTABLE),
+            "::",
+            stringify!(GetCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).RenderModel as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(EntityVTABLE),
+            "::",
+            stringify!(RenderModel)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<EntityVTABLE>())).RenderName as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(EntityVTABLE),
+            "::",
+            stringify!(RenderName)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct Entity {
-  pub VTABLE: *mut EntityVTABLE,
-  pub Position: Vec3,
-  pub HeadX: f32,
-  pub HeadY: f32,
-  pub RotX: f32,
-  pub RotY: f32,
-  pub RotZ: f32,
-  pub Velocity: Vec3,
-  pub Model: *mut Model,
-  pub ModelBlock: BlockID,
-  pub ModelRestrictedScale: bool,
-  pub ModelAABB: AABB,
-  pub ModelScale: Vec3,
-  pub Size: Vec3,
-  pub StepSize: f32,
-  pub SkinType: cc_uint8,
-  pub SkinFetchState: cc_uint8,
-  pub NoShade: bool,
-  pub OnGround: bool,
-  pub TextureId: GfxResourceID,
-  pub MobTextureId: GfxResourceID,
-  pub uScale: f32,
-  pub vScale: f32,
-  pub Transform: Matrix,
-  pub Anim: AnimatedComp,
-  pub SkinNameRaw: [::std::os::raw::c_char; 64usize],
-  pub DisplayNameRaw: [::std::os::raw::c_char; 64usize],
-  pub NameTex: Texture,
+    pub VTABLE: *mut EntityVTABLE,
+    pub Position: Vec3,
+    pub HeadX: f32,
+    pub HeadY: f32,
+    pub RotX: f32,
+    pub RotY: f32,
+    pub RotZ: f32,
+    pub Velocity: Vec3,
+    pub Model: *mut Model,
+    pub ModelBlock: BlockID,
+    pub ModelRestrictedScale: cc_bool,
+    pub ModelAABB: AABB,
+    pub ModelScale: Vec3,
+    pub Size: Vec3,
+    pub StepSize: f32,
+    pub SkinType: cc_uint8,
+    pub SkinFetchState: cc_uint8,
+    pub NoShade: cc_bool,
+    pub OnGround: cc_bool,
+    pub TextureId: GfxResourceID,
+    pub MobTextureId: GfxResourceID,
+    pub uScale: f32,
+    pub vScale: f32,
+    pub Transform: Matrix,
+    pub Anim: AnimatedComp,
+    pub SkinNameRaw: [::std::os::raw::c_char; 64usize],
+    pub DisplayNameRaw: [::std::os::raw::c_char; 64usize],
+    pub NameTex: Texture,
 }
 #[test]
 fn bindgen_test_layout_Entity() {
-  assert_eq!(
-    ::std::mem::size_of::<Entity>(),
-    456usize,
-    concat!("Size of: ", stringify!(Entity))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<Entity>(),
-    8usize,
-    concat!("Alignment of ", stringify!(Entity))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).VTABLE as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(VTABLE)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).Position as *const _ as usize },
-    8usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(Position)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).HeadX as *const _ as usize },
-    20usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(HeadX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).HeadY as *const _ as usize },
-    24usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(HeadY)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).RotX as *const _ as usize },
-    28usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(RotX)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).RotY as *const _ as usize },
-    32usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(RotY)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).RotZ as *const _ as usize },
-    36usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(RotZ)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).Velocity as *const _ as usize },
-    40usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(Velocity)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).Model as *const _ as usize },
-    56usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(Model)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).ModelBlock as *const _ as usize },
-    64usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(ModelBlock)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).ModelRestrictedScale as *const _ as usize },
-    66usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(ModelRestrictedScale)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).ModelAABB as *const _ as usize },
-    68usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(ModelAABB)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).ModelScale as *const _ as usize },
-    92usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(ModelScale)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).Size as *const _ as usize },
-    104usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(Size)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).StepSize as *const _ as usize },
-    116usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(StepSize)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).SkinType as *const _ as usize },
-    120usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(SkinType)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).SkinFetchState as *const _ as usize },
-    121usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(SkinFetchState)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).NoShade as *const _ as usize },
-    122usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(NoShade)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).OnGround as *const _ as usize },
-    123usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(OnGround)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).TextureId as *const _ as usize },
-    128usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(TextureId)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).MobTextureId as *const _ as usize },
-    136usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(MobTextureId)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).uScale as *const _ as usize },
-    144usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(uScale)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).vScale as *const _ as usize },
-    148usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(vScale)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).Transform as *const _ as usize },
-    152usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(Transform)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).Anim as *const _ as usize },
-    216usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(Anim)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).SkinNameRaw as *const _ as usize },
-    296usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(SkinNameRaw)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).DisplayNameRaw as *const _ as usize },
-    360usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(DisplayNameRaw)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<Entity>())).NameTex as *const _ as usize },
-    424usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(Entity),
-      "::",
-      stringify!(NameTex)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<Entity>(),
+        456usize,
+        concat!("Size of: ", stringify!(Entity))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Entity>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Entity))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).VTABLE as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(VTABLE)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).Position as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(Position)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).HeadX as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(HeadX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).HeadY as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(HeadY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).RotX as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(RotX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).RotY as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(RotY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).RotZ as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(RotZ)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).Velocity as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(Velocity)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).Model as *const _ as usize },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(Model)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).ModelBlock as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(ModelBlock)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).ModelRestrictedScale as *const _ as usize },
+        66usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(ModelRestrictedScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).ModelAABB as *const _ as usize },
+        68usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(ModelAABB)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).ModelScale as *const _ as usize },
+        92usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(ModelScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).Size as *const _ as usize },
+        104usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(Size)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).StepSize as *const _ as usize },
+        116usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(StepSize)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).SkinType as *const _ as usize },
+        120usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(SkinType)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).SkinFetchState as *const _ as usize },
+        121usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(SkinFetchState)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).NoShade as *const _ as usize },
+        122usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(NoShade)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).OnGround as *const _ as usize },
+        123usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(OnGround)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).TextureId as *const _ as usize },
+        128usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(TextureId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).MobTextureId as *const _ as usize },
+        136usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(MobTextureId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).uScale as *const _ as usize },
+        144usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(uScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).vScale as *const _ as usize },
+        148usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(vScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).Transform as *const _ as usize },
+        152usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(Transform)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).Anim as *const _ as usize },
+        216usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(Anim)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).SkinNameRaw as *const _ as usize },
+        296usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(SkinNameRaw)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).DisplayNameRaw as *const _ as usize },
+        360usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(DisplayNameRaw)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Entity>())).NameTex as *const _ as usize },
+        424usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Entity),
+            "::",
+            stringify!(NameTex)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct _EntitiesData {
-  pub List: [*mut Entity; 256usize],
-  pub NamesMode: cc_uint8,
-  pub ShadowsMode: cc_uint8,
+    pub List: [*mut Entity; 256usize],
+    pub NamesMode: cc_uint8,
+    pub ShadowsMode: cc_uint8,
 }
 #[test]
 fn bindgen_test_layout__EntitiesData() {
-  assert_eq!(
-    ::std::mem::size_of::<_EntitiesData>(),
-    2056usize,
-    concat!("Size of: ", stringify!(_EntitiesData))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_EntitiesData>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_EntitiesData))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_EntitiesData>())).List as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_EntitiesData),
-      "::",
-      stringify!(List)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_EntitiesData>())).NamesMode as *const _ as usize },
-    2048usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_EntitiesData),
-      "::",
-      stringify!(NamesMode)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_EntitiesData>())).ShadowsMode as *const _ as usize },
-    2049usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_EntitiesData),
-      "::",
-      stringify!(ShadowsMode)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_EntitiesData>(),
+        2056usize,
+        concat!("Size of: ", stringify!(_EntitiesData))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_EntitiesData>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_EntitiesData))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EntitiesData>())).List as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EntitiesData),
+            "::",
+            stringify!(List)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EntitiesData>())).NamesMode as *const _ as usize },
+        2048usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EntitiesData),
+            "::",
+            stringify!(NamesMode)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EntitiesData>())).ShadowsMode as *const _ as usize },
+        2049usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EntitiesData),
+            "::",
+            stringify!(ShadowsMode)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct _TabListData {
-  pub NameOffsets: [cc_uint16; 256usize],
-  pub GroupRanks: [cc_uint8; 256usize],
-  pub _buffer: StringsBuffer,
+    pub NameOffsets: [cc_uint16; 256usize],
+    pub GroupRanks: [cc_uint8; 256usize],
+    pub _buffer: StringsBuffer,
 }
 #[test]
 fn bindgen_test_layout__TabListData() {
-  assert_eq!(
-    ::std::mem::size_of::<_TabListData>(),
-    5920usize,
-    concat!("Size of: ", stringify!(_TabListData))
-  );
-  assert_eq!(
-    ::std::mem::align_of::<_TabListData>(),
-    8usize,
-    concat!("Alignment of ", stringify!(_TabListData))
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TabListData>())).NameOffsets as *const _ as usize },
-    0usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TabListData),
-      "::",
-      stringify!(NameOffsets)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TabListData>())).GroupRanks as *const _ as usize },
-    512usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TabListData),
-      "::",
-      stringify!(GroupRanks)
-    )
-  );
-  assert_eq!(
-    unsafe { &(*(::std::ptr::null::<_TabListData>()))._buffer as *const _ as usize },
-    768usize,
-    concat!(
-      "Offset of field: ",
-      stringify!(_TabListData),
-      "::",
-      stringify!(_buffer)
-    )
-  );
+    assert_eq!(
+        ::std::mem::size_of::<_TabListData>(),
+        5920usize,
+        concat!("Size of: ", stringify!(_TabListData))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_TabListData>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_TabListData))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TabListData>())).NameOffsets as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TabListData),
+            "::",
+            stringify!(NameOffsets)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TabListData>())).GroupRanks as *const _ as usize },
+        512usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TabListData),
+            "::",
+            stringify!(GroupRanks)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_TabListData>()))._buffer as *const _ as usize },
+        768usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_TabListData),
+            "::",
+            stringify!(_buffer)
+        )
+    );
 }
 extern "C" {
-  pub fn TabList_Remove(id: EntityID);
+    pub fn TabList_Remove(id: EntityID);
 }
 extern "C" {
-  pub fn TabList_Set(
-    id: EntityID,
-    player: *const String,
-    list: *const String,
-    group: *const String,
-    rank: cc_uint8,
-  );
+    pub fn TabList_Set(
+        id: EntityID,
+        player: *const String,
+        list: *const String,
+        group: *const String,
+        rank: cc_uint8,
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PickedPos {
+    pub Min: Vec3,
+    pub Max: Vec3,
+    pub Intersect: Vec3,
+    pub BlockPos: IVec3,
+    pub TranslatedPos: IVec3,
+    pub Valid: cc_bool,
+    pub Closest: Face,
+    pub Block: BlockID,
+}
+#[test]
+fn bindgen_test_layout_PickedPos() {
+    assert_eq!(
+        ::std::mem::size_of::<PickedPos>(),
+        64usize,
+        concat!("Size of: ", stringify!(PickedPos))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<PickedPos>(),
+        4usize,
+        concat!("Alignment of ", stringify!(PickedPos))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).Min as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(Min)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).Max as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(Max)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).Intersect as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(Intersect)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).BlockPos as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(BlockPos)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).TranslatedPos as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(TranslatedPos)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).Valid as *const _ as usize },
+        60usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(Valid)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).Closest as *const _ as usize },
+        61usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(Closest)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<PickedPos>())).Block as *const _ as usize },
+        62usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(PickedPos),
+            "::",
+            stringify!(Block)
+        )
+    );
+}
+extern "C" {
+    pub fn Game_UpdateBlock(
+        x: ::std::os::raw::c_int,
+        y: ::std::os::raw::c_int,
+        z: ::std::os::raw::c_int,
+        block: BlockID,
+    );
+}
+extern "C" {
+    pub fn Game_ChangeBlock(
+        x: ::std::os::raw::c_int,
+        y: ::std::os::raw::c_int,
+        z: ::std::os::raw::c_int,
+        block: BlockID,
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _WorldData {
+    pub Blocks: *mut BlockRaw,
+    pub Blocks2: *mut BlockRaw,
+    pub Volume: ::std::os::raw::c_int,
+    pub Width: ::std::os::raw::c_int,
+    pub Height: ::std::os::raw::c_int,
+    pub Length: ::std::os::raw::c_int,
+    pub MaxX: ::std::os::raw::c_int,
+    pub MaxY: ::std::os::raw::c_int,
+    pub MaxZ: ::std::os::raw::c_int,
+    pub OneY: ::std::os::raw::c_int,
+    pub Uuid: [cc_uint8; 16usize],
+    pub IDMask: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout__WorldData() {
+    assert_eq!(
+        ::std::mem::size_of::<_WorldData>(),
+        72usize,
+        concat!("Size of: ", stringify!(_WorldData))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_WorldData>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_WorldData))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Blocks as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Blocks)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Blocks2 as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Blocks2)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Volume as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Volume)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Width as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Height as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Height)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Length as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Length)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).MaxX as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(MaxX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).MaxY as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(MaxY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).MaxZ as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(MaxZ)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).OneY as *const _ as usize },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(OneY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).Uuid as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(Uuid)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_WorldData>())).IDMask as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_WorldData),
+            "::",
+            stringify!(IDMask)
+        )
+    );
+}
+extern "C" {
+    pub fn World_Reset();
+}
+extern "C" {
+    pub fn World_SetNewMap(
+        blocks: *mut BlockRaw,
+        width: ::std::os::raw::c_int,
+        height: ::std::os::raw::c_int,
+        length: ::std::os::raw::c_int,
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _EnvData {
+    pub EdgeBlock: BlockID,
+    pub SidesBlock: BlockID,
+    pub EdgeHeight: ::std::os::raw::c_int,
+    pub SidesOffset: ::std::os::raw::c_int,
+    pub CloudsHeight: ::std::os::raw::c_int,
+    pub CloudsSpeed: f32,
+    pub WeatherSpeed: f32,
+    pub WeatherFade: f32,
+    pub Weather: ::std::os::raw::c_int,
+    pub ExpFog: ::std::os::raw::c_int,
+    pub SkyboxHorSpeed: f32,
+    pub SkyboxVerSpeed: f32,
+    pub SkyCol: PackedCol,
+    pub FogCol: PackedCol,
+    pub CloudsCol: PackedCol,
+    pub SkyboxCol: PackedCol,
+    pub SunCol: PackedCol,
+    pub SunXSide: PackedCol,
+    pub SunZSide: PackedCol,
+    pub SunYMin: PackedCol,
+    pub ShadowCol: PackedCol,
+    pub ShadowXSide: PackedCol,
+    pub ShadowZSide: PackedCol,
+    pub ShadowYMin: PackedCol,
+}
+#[test]
+fn bindgen_test_layout__EnvData() {
+    assert_eq!(
+        ::std::mem::size_of::<_EnvData>(),
+        92usize,
+        concat!("Size of: ", stringify!(_EnvData))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_EnvData>(),
+        4usize,
+        concat!("Alignment of ", stringify!(_EnvData))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).EdgeBlock as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(EdgeBlock)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SidesBlock as *const _ as usize },
+        2usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SidesBlock)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).EdgeHeight as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(EdgeHeight)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SidesOffset as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SidesOffset)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).CloudsHeight as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(CloudsHeight)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).CloudsSpeed as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(CloudsSpeed)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).WeatherSpeed as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(WeatherSpeed)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).WeatherFade as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(WeatherFade)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).Weather as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(Weather)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).ExpFog as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(ExpFog)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyboxHorSpeed as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SkyboxHorSpeed)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyboxVerSpeed as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SkyboxVerSpeed)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyCol as *const _ as usize },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SkyCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).FogCol as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(FogCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).CloudsCol as *const _ as usize },
+        52usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(CloudsCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SkyboxCol as *const _ as usize },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SkyboxCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SunCol as *const _ as usize },
+        60usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SunCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SunXSide as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SunXSide)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SunZSide as *const _ as usize },
+        68usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SunZSide)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).SunYMin as *const _ as usize },
+        72usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(SunYMin)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowCol as *const _ as usize },
+        76usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(ShadowCol)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowXSide as *const _ as usize },
+        80usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(ShadowXSide)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowZSide as *const _ as usize },
+        84usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(ShadowZSide)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_EnvData>())).ShadowYMin as *const _ as usize },
+        88usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_EnvData),
+            "::",
+            stringify!(ShadowYMin)
+        )
+    );
+}
+extern "C" {
+    pub fn World_ApplyTexturePack(url: *const String);
+}
+extern "C" {
+    pub fn Env_Reset();
+}
+extern "C" {
+    pub fn Env_SetEdgeBlock(block: BlockID);
+}
+extern "C" {
+    pub fn Env_SetSidesBlock(block: BlockID);
+}
+extern "C" {
+    pub fn Env_SetEdgeHeight(height: ::std::os::raw::c_int);
+}
+extern "C" {
+    pub fn Env_SetSidesOffset(offset: ::std::os::raw::c_int);
+}
+extern "C" {
+    pub fn Env_SetCloudsHeight(height: ::std::os::raw::c_int);
+}
+extern "C" {
+    pub fn Env_SetCloudsSpeed(speed: f32);
+}
+extern "C" {
+    pub fn Env_SetWeatherSpeed(speed: f32);
+}
+extern "C" {
+    pub fn Env_SetWeatherFade(rate: f32);
+}
+extern "C" {
+    pub fn Env_SetWeather(weather: ::std::os::raw::c_int);
+}
+extern "C" {
+    pub fn Env_SetExpFog(expFog: cc_bool);
+}
+extern "C" {
+    pub fn Env_SetSkyboxHorSpeed(speed: f32);
+}
+extern "C" {
+    pub fn Env_SetSkyboxVerSpeed(speed: f32);
+}
+extern "C" {
+    pub fn Env_SetSkyCol(col: PackedCol);
+}
+extern "C" {
+    pub fn Env_SetFogCol(col: PackedCol);
+}
+extern "C" {
+    pub fn Env_SetCloudsCol(col: PackedCol);
+}
+extern "C" {
+    pub fn Env_SetSkyboxCol(col: PackedCol);
+}
+extern "C" {
+    pub fn Env_SetSunCol(col: PackedCol);
+}
+extern "C" {
+    pub fn Env_SetShadowCol(col: PackedCol);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct ModelVertex {
+    pub X: f32,
+    pub Y: f32,
+    pub Z: f32,
+    pub U: cc_uint16,
+    pub V: cc_uint16,
+}
+#[test]
+fn bindgen_test_layout_ModelVertex() {
+    assert_eq!(
+        ::std::mem::size_of::<ModelVertex>(),
+        16usize,
+        concat!("Size of: ", stringify!(ModelVertex))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<ModelVertex>(),
+        4usize,
+        concat!("Alignment of ", stringify!(ModelVertex))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelVertex>())).X as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelVertex),
+            "::",
+            stringify!(X)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelVertex>())).Y as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelVertex),
+            "::",
+            stringify!(Y)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelVertex>())).Z as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelVertex),
+            "::",
+            stringify!(Z)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelVertex>())).U as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelVertex),
+            "::",
+            stringify!(U)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelVertex>())).V as *const _ as usize },
+        14usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelVertex),
+            "::",
+            stringify!(V)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct ModelTex {
+    pub Name: *const ::std::os::raw::c_char,
+    pub SkinType: cc_uint8,
+    pub TexID: GfxResourceID,
+    pub next: *mut ModelTex,
+}
+#[test]
+fn bindgen_test_layout_ModelTex() {
+    assert_eq!(
+        ::std::mem::size_of::<ModelTex>(),
+        32usize,
+        concat!("Size of: ", stringify!(ModelTex))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<ModelTex>(),
+        8usize,
+        concat!("Alignment of ", stringify!(ModelTex))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelTex>())).Name as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelTex),
+            "::",
+            stringify!(Name)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelTex>())).SkinType as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelTex),
+            "::",
+            stringify!(SkinType)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelTex>())).TexID as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelTex),
+            "::",
+            stringify!(TexID)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<ModelTex>())).next as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(ModelTex),
+            "::",
+            stringify!(next)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Model {
+    pub Name: *const ::std::os::raw::c_char,
+    pub vertices: *mut ModelVertex,
+    pub defaultTex: *mut ModelTex,
+    pub MakeParts: ::std::option::Option<unsafe extern "C" fn()>,
+    pub Draw: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+    pub GetNameY: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity) -> f32>,
+    pub GetEyeY: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity) -> f32>,
+    pub GetCollisionSize: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+    pub GetPickingBounds: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+    pub index: ::std::os::raw::c_int,
+    pub armX: cc_uint8,
+    pub armY: cc_uint8,
+    pub initalised: cc_bool,
+    pub Bobbing: cc_bool,
+    pub UsesSkin: cc_bool,
+    pub CalcHumanAnims: cc_bool,
+    pub UsesHumanSkin: cc_bool,
+    pub Pushes: cc_bool,
+    pub Gravity: f32,
+    pub Drag: Vec3,
+    pub GroundFriction: Vec3,
+    pub GetTransform:
+        ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity, pos: Vec3, m: *mut Matrix)>,
+    pub DrawArm: ::std::option::Option<unsafe extern "C" fn(entity: *mut Entity)>,
+    pub MaxScale: f32,
+    pub ShadowScale: f32,
+    pub NameScale: f32,
+    pub next: *mut Model,
+}
+#[test]
+fn bindgen_test_layout_Model() {
+    assert_eq!(
+        ::std::mem::size_of::<Model>(),
+        152usize,
+        concat!("Size of: ", stringify!(Model))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<Model>(),
+        8usize,
+        concat!("Alignment of ", stringify!(Model))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).Name as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(Name)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).vertices as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(vertices)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).defaultTex as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(defaultTex)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).MakeParts as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(MakeParts)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).Draw as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(Draw)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).GetNameY as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(GetNameY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).GetEyeY as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(GetEyeY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).GetCollisionSize as *const _ as usize },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(GetCollisionSize)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).GetPickingBounds as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(GetPickingBounds)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).index as *const _ as usize },
+        72usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(index)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).armX as *const _ as usize },
+        76usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(armX)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).armY as *const _ as usize },
+        77usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(armY)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).initalised as *const _ as usize },
+        78usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(initalised)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).Bobbing as *const _ as usize },
+        79usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(Bobbing)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).UsesSkin as *const _ as usize },
+        80usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(UsesSkin)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).CalcHumanAnims as *const _ as usize },
+        81usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(CalcHumanAnims)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).UsesHumanSkin as *const _ as usize },
+        82usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(UsesHumanSkin)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).Pushes as *const _ as usize },
+        83usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(Pushes)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).Gravity as *const _ as usize },
+        84usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(Gravity)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).Drag as *const _ as usize },
+        88usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(Drag)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).GroundFriction as *const _ as usize },
+        100usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(GroundFriction)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).GetTransform as *const _ as usize },
+        112usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(GetTransform)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).DrawArm as *const _ as usize },
+        120usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(DrawArm)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).MaxScale as *const _ as usize },
+        128usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(MaxScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).ShadowScale as *const _ as usize },
+        132usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(ShadowScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).NameScale as *const _ as usize },
+        136usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(NameScale)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<Model>())).next as *const _ as usize },
+        144usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(Model),
+            "::",
+            stringify!(next)
+        )
+    );
 }
