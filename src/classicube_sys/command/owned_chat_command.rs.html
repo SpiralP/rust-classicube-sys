@@ -43,9 +43,7 @@
 <span id="43">43</span>
 <span id="44">44</span>
 <span id="45">45</span>
-<span id="46">46</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">os</span>::<span class="ident">as_c_bool</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">ChatCommand</span>;
 <span class="kw">use</span> <span class="ident">arrayvec</span>::<span class="ident">ArrayVec</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">ffi</span>::<span class="ident">CString</span>, <span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>, <span class="ident">ptr</span>};
@@ -70,7 +68,7 @@
     <span class="kw">let</span> <span class="ident">command</span> <span class="op">=</span> <span class="ident">ChatCommand</span> {
       <span class="ident">Name</span>: <span class="ident">name</span>.<span class="ident">as_ptr</span>(),
       <span class="ident">Execute</span>: <span class="prelude-val">Some</span>(<span class="ident">execute</span>),
-      <span class="ident">SingleplayerOnly</span>: <span class="ident">as_c_bool</span>(<span class="ident">singleplayer_only</span>),
+      <span class="ident">SingleplayerOnly</span>: <span class="kw">if</span> <span class="ident">singleplayer_only</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
       <span class="ident">Help</span>: {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span>: <span class="ident">ArrayVec</span><span class="op">&lt;</span>[<span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>; <span class="number">5usize</span>]<span class="op">&gt;</span> <span class="op">=</span>
           <span class="ident">help</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">cstr</span><span class="op">|</span> <span class="ident">cstr</span>.<span class="ident">as_ptr</span>()).<span class="ident">collect</span>();
