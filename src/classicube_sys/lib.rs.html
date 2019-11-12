@@ -71,6 +71,7 @@
 <span id="71">71</span>
 <span id="72">72</span>
 <span id="73">73</span>
+<span id="74">74</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -111,6 +112,7 @@
 <span class="kw">mod</span> <span class="ident">chat</span>;
 <span class="kw">mod</span> <span class="ident">command</span>;
 <span class="kw">mod</span> <span class="ident">event</span>;
+<span class="kw">mod</span> <span class="ident">input</span>;
 <span class="kw">mod</span> <span class="ident">os</span>;
 <span class="kw">mod</span> <span class="ident">packed_col</span>;
 <span class="kw">mod</span> <span class="ident">string</span>;
@@ -118,7 +120,7 @@
 <span class="kw">mod</span> <span class="ident">world</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
-  <span class="ident">chat</span>::<span class="kw-2">*</span>, <span class="ident">command</span>::<span class="kw-2">*</span>, <span class="ident">event</span>::<span class="kw-2">*</span>, <span class="ident">os</span>::<span class="kw-2">*</span>, <span class="ident">packed_col</span>::<span class="kw-2">*</span>, <span class="ident">string</span>::<span class="kw-2">*</span>, <span class="ident">vectors</span>::<span class="kw-2">*</span>, <span class="ident">world</span>::<span class="kw-2">*</span>,
+  <span class="ident">chat</span>::<span class="kw-2">*</span>, <span class="ident">command</span>::<span class="kw-2">*</span>, <span class="ident">event</span>::<span class="kw-2">*</span>, <span class="ident">input</span>::<span class="kw-2">*</span>, <span class="ident">os</span>::<span class="kw-2">*</span>, <span class="ident">packed_col</span>::<span class="kw-2">*</span>, <span class="ident">string</span>::<span class="kw-2">*</span>, <span class="ident">vectors</span>::<span class="kw-2">*</span>, <span class="ident">world</span>::<span class="kw-2">*</span>,
 };
 
 <span class="comment">// strange fix for windows where these don&#39;t link right</span>
