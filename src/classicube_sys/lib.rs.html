@@ -64,6 +64,14 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -106,9 +114,14 @@
 <span class="kw">mod</span> <span class="ident">command</span>;
 <span class="kw">mod</span> <span class="ident">event</span>;
 <span class="kw">mod</span> <span class="ident">os</span>;
+<span class="kw">mod</span> <span class="ident">packed_col</span>;
 <span class="kw">mod</span> <span class="ident">string</span>;
+<span class="kw">mod</span> <span class="ident">vectors</span>;
+<span class="kw">mod</span> <span class="ident">world</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">chat</span>::<span class="kw-2">*</span>, <span class="ident">command</span>::<span class="kw-2">*</span>, <span class="ident">event</span>::<span class="kw-2">*</span>, <span class="ident">os</span>::<span class="kw-2">*</span>, <span class="ident">string</span>::<span class="kw-2">*</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
+  <span class="ident">chat</span>::<span class="kw-2">*</span>, <span class="ident">command</span>::<span class="kw-2">*</span>, <span class="ident">event</span>::<span class="kw-2">*</span>, <span class="ident">os</span>::<span class="kw-2">*</span>, <span class="ident">packed_col</span>::<span class="kw-2">*</span>, <span class="ident">string</span>::<span class="kw-2">*</span>, <span class="ident">vectors</span>::<span class="kw-2">*</span>, <span class="ident">world</span>::<span class="kw-2">*</span>,
+};
 
 <span class="comment">// strange fix for windows where these don&#39;t link right</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">windows</span>, <span class="ident">link</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;ClassiCube&quot;</span>))]</span>
@@ -122,7 +135,7 @@
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">WorldEvents</span>: <span class="ident">_WorldEventsList</span>;
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">ChatEvents</span>: <span class="ident">_ChatEventsList</span>;
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">WindowEvents</span>: <span class="ident">_WindowEventsList</span>;
-  <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">InputEvents</span>: <span class="ident">_KeyEventsList</span>;
+  <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">InputEvents</span>: <span class="ident">_InputEventsList</span>;
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">PointerEvents</span>: <span class="ident">_PointerEventsList</span>;
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">NetEvents</span>: <span class="ident">_NetEventsList</span>;
 
@@ -130,6 +143,9 @@
 
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">TabList</span>: <span class="ident">_TabListData</span>;
   <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">Entities</span>: <span class="ident">_EntitiesData</span>;
+
+  <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">World</span>: <span class="ident">_WorldData</span>;
+  <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">Env</span>: <span class="ident">_EnvData</span>;
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "classicube_sys";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
