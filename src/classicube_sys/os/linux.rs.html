@@ -4609,7 +4609,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Face</span> <span class="op">=</span> <span class="ident">cc_uint8</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">cc_result</span> <span class="op">=</span> <span class="ident">cc_uint32</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TextureRec_</span> {
   <span class="kw">pub</span> <span class="ident">U1</span>: <span class="ident">f32</span>,
   <span class="kw">pub</span> <span class="ident">V1</span>: <span class="ident">f32</span>,
@@ -4672,7 +4672,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TextureRec</span> <span class="op">=</span> <span class="ident">TextureRec_</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">GfxResourceID</span> <span class="op">=</span> <span class="ident">cc_uintptr</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Texture</span> {
   <span class="kw">pub</span> <span class="ident">ID</span>: <span class="ident">GfxResourceID</span>,
   <span class="kw">pub</span> <span class="ident">X</span>: <span class="ident">cc_int16</span>,
@@ -4755,7 +4755,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IGameComponent</span> {
   <span class="kw">pub</span> <span class="ident">Init</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>()<span class="op">&gt;</span>,
   <span class="kw">pub</span> <span class="ident">Free</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>()<span class="op">&gt;</span>,
@@ -4838,7 +4838,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ScheduledTask</span> {
   <span class="kw">pub</span> <span class="ident">Accumulator</span>: <span class="ident">f64</span>,
   <span class="kw">pub</span> <span class="ident">Interval</span>: <span class="ident">f64</span>,
@@ -4888,7 +4888,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">String_</span> {
   <span class="kw">pub</span> <span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
   <span class="kw">pub</span> <span class="ident">length</span>: <span class="ident">cc_uint16</span>,
@@ -5254,7 +5254,7 @@
   <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">StringsBuffer_Remove</span>(<span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">StringsBuffer</span>, <span class="ident">index</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>);
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Vec3_</span> {
   <span class="kw">pub</span> <span class="ident">X</span>: <span class="ident">f32</span>,
   <span class="kw">pub</span> <span class="ident">Y</span>: <span class="ident">f32</span>,
@@ -5290,7 +5290,7 @@
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Vec3</span> <span class="op">=</span> <span class="ident">Vec3_</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IVec3_</span> {
   <span class="kw">pub</span> <span class="ident">X</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
   <span class="kw">pub</span> <span class="ident">Y</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
@@ -5326,7 +5326,7 @@
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">IVec3</span> <span class="op">=</span> <span class="ident">IVec3_</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Vec4</span> {
   <span class="kw">pub</span> <span class="ident">X</span>: <span class="ident">f32</span>,
   <span class="kw">pub</span> <span class="ident">Y</span>: <span class="ident">f32</span>,
@@ -5367,7 +5367,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Matrix</span> {
   <span class="kw">pub</span> <span class="ident">Row0</span>: <span class="ident">Vec4</span>,
   <span class="kw">pub</span> <span class="ident">Row1</span>: <span class="ident">Vec4</span>,
@@ -5435,7 +5435,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Event_Void_Callback</span> <span class="op">=</span>
   ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)<span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Void</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Void_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5488,7 +5488,7 @@
   <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>, <span class="ident">argument</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>),
 <span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Int</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Int_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5540,7 +5540,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Event_Float_Callback</span> <span class="op">=</span>
   ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>, <span class="ident">argument</span>: <span class="ident">f32</span>)<span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Float</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Float_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5593,7 +5593,7 @@
   <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>, <span class="ident">stream</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Stream</span>, <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span>),
 <span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Entry</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Entry_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5651,7 +5651,7 @@
   ),
 <span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Block</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Block_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5709,7 +5709,7 @@
   ),
 <span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_PointerMove</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_PointerMove_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5766,7 +5766,7 @@
   ),
 <span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Chat</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Chat_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5823,7 +5823,7 @@
   ),
 <span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_Input</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_Input_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5875,7 +5875,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Event_String_Callback</span> <span class="op">=</span>
   ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>, <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span>)<span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Event_String</span> {
   <span class="kw">pub</span> <span class="ident">Handlers</span>: [<span class="ident">Event_String_Callback</span>; <span class="number">32usize</span>],
   <span class="kw">pub</span> <span class="ident">Objs</span>: [<span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>; <span class="number">32usize</span>],
@@ -5948,7 +5948,7 @@
   <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Event_RaiseFloat</span>(<span class="ident">handlers</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Event_Float</span>, <span class="ident">arg</span>: <span class="ident">f32</span>);
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_EntityEventsList</span> {
   <span class="kw">pub</span> <span class="ident">Added</span>: <span class="ident">Event_Int</span>,
   <span class="kw">pub</span> <span class="ident">Removed</span>: <span class="ident">Event_Int</span>,
@@ -5987,7 +5987,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_TabListEventsList</span> {
   <span class="kw">pub</span> <span class="ident">Added</span>: <span class="ident">Event_Int</span>,
   <span class="kw">pub</span> <span class="ident">Changed</span>: <span class="ident">Event_Int</span>,
@@ -6037,7 +6037,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_TextureEventsList</span> {
   <span class="kw">pub</span> <span class="ident">AtlasChanged</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">PackChanged</span>: <span class="ident">Event_Void</span>,
@@ -6087,7 +6087,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_GfxEventsList</span> {
   <span class="kw">pub</span> <span class="ident">ViewDistanceChanged</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">LowVRAMDetected</span>: <span class="ident">Event_Void</span>,
@@ -6159,7 +6159,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_UserEventsList</span> {
   <span class="kw">pub</span> <span class="ident">BlockChanged</span>: <span class="ident">Event_Block</span>,
   <span class="kw">pub</span> <span class="ident">HackPermissionsChanged</span>: <span class="ident">Event_Void</span>,
@@ -6211,7 +6211,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_BlockEventsList</span> {
   <span class="kw">pub</span> <span class="ident">PermissionsChanged</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">BlockDefChanged</span>: <span class="ident">Event_Void</span>,
@@ -6250,7 +6250,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_WorldEventsList</span> {
   <span class="kw">pub</span> <span class="ident">NewMap</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">Loading</span>: <span class="ident">Event_Float</span>,
@@ -6311,7 +6311,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_ChatEventsList</span> {
   <span class="kw">pub</span> <span class="ident">FontChanged</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">ChatReceived</span>: <span class="ident">Event_Chat</span>,
@@ -6372,7 +6372,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_WindowEventsList</span> {
   <span class="kw">pub</span> <span class="ident">Redraw</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">Resized</span>: <span class="ident">Event_Void</span>,
@@ -6455,7 +6455,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_InputEventsList</span> {
   <span class="kw">pub</span> <span class="ident">Press</span>: <span class="ident">Event_Int</span>,
   <span class="kw">pub</span> <span class="ident">Down</span>: <span class="ident">Event_Input</span>,
@@ -6527,7 +6527,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_PointerEventsList</span> {
   <span class="kw">pub</span> <span class="ident">Moved</span>: <span class="ident">Event_PointerMove</span>,
   <span class="kw">pub</span> <span class="ident">Down</span>: <span class="ident">Event_Int</span>,
@@ -6588,7 +6588,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_NetEventsList</span> {
   <span class="kw">pub</span> <span class="ident">Connected</span>: <span class="ident">Event_Void</span>,
   <span class="kw">pub</span> <span class="ident">Disconnected</span>: <span class="ident">Event_Void</span>,
@@ -6638,7 +6638,7 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MsgType_MSG_TYPE_CLIENTSTATUS_2</span>: <span class="ident">MsgType</span> <span class="op">=</span> <span class="number">257</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MsgType</span> <span class="op">=</span> <span class="ident">u32</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ChatCommand</span> {
   <span class="kw">pub</span> <span class="ident">Name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
   <span class="kw">pub</span> <span class="ident">Execute</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span>
@@ -6898,7 +6898,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">KeyBind_</span> <span class="op">=</span> <span class="ident">u32</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">KeyBind</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_ServerConnectionData</span> {
   <span class="kw">pub</span> <span class="ident">BeginConnect</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>()<span class="op">&gt;</span>,
   <span class="kw">pub</span> <span class="ident">Tick</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">task</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ScheduledTask</span>)<span class="op">&gt;</span>,
@@ -7183,7 +7183,7 @@
   <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Options_Save</span>();
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AnimatedComp</span> {
   <span class="kw">pub</span> <span class="ident">BobbingHor</span>: <span class="ident">f32</span>,
   <span class="kw">pub</span> <span class="ident">BobbingVer</span>: <span class="ident">f32</span>,
@@ -7420,7 +7420,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AABB</span> {
   <span class="kw">pub</span> <span class="ident">Min</span>: <span class="ident">Vec3</span>,
   <span class="kw">pub</span> <span class="ident">Max</span>: <span class="ident">Vec3</span>,
@@ -7459,7 +7459,7 @@
   <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PackedCol_Tint</span>(<span class="ident">a</span>: <span class="ident">PackedCol</span>, <span class="ident">b</span>: <span class="ident">PackedCol</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PackedCol</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LocationUpdate</span> {
   <span class="kw">pub</span> <span class="ident">Pos</span>: <span class="ident">Vec3</span>,
   <span class="kw">pub</span> <span class="ident">HeadX</span>: <span class="ident">f32</span>,
@@ -7553,7 +7553,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EntityVTABLE</span> {
   <span class="kw">pub</span> <span class="ident">Tick</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">e</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Entity</span>, <span class="ident">delta</span>: <span class="ident">f64</span>)<span class="op">&gt;</span>,
   <span class="kw">pub</span> <span class="ident">Despawn</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">e</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Entity</span>)<span class="op">&gt;</span>,
@@ -8076,7 +8076,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PickedPos</span> {
   <span class="kw">pub</span> <span class="ident">Min</span>: <span class="ident">Vec3</span>,
   <span class="kw">pub</span> <span class="ident">Max</span>: <span class="ident">Vec3</span>,
@@ -8197,7 +8197,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_WorldData</span> {
   <span class="kw">pub</span> <span class="ident">Blocks</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">BlockRaw</span>,
   <span class="kw">pub</span> <span class="ident">Blocks2</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">BlockRaw</span>,
@@ -8357,7 +8357,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">_EnvData</span> {
   <span class="kw">pub</span> <span class="ident">EdgeBlock</span>: <span class="ident">BlockID</span>,
   <span class="kw">pub</span> <span class="ident">SidesBlock</span>: <span class="ident">BlockID</span>,
@@ -8698,7 +8698,7 @@
   <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Env_SetShadowCol</span>(<span class="ident">col</span>: <span class="ident">PackedCol</span>);
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModelVertex</span> {
   <span class="kw">pub</span> <span class="ident">X</span>: <span class="ident">f32</span>,
   <span class="kw">pub</span> <span class="ident">Y</span>: <span class="ident">f32</span>,
@@ -8770,7 +8770,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModelTex</span> {
   <span class="kw">pub</span> <span class="ident">Name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
   <span class="kw">pub</span> <span class="ident">SkinType</span>: <span class="ident">cc_uint8</span>,
@@ -8831,7 +8831,7 @@
   );
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Model</span> {
   <span class="kw">pub</span> <span class="ident">Name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
   <span class="kw">pub</span> <span class="ident">vertices</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ModelVertex</span>,
