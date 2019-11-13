@@ -35,7 +35,7 @@ pub type EntityID = cc_uint8;
 pub type Face = cc_uint8;
 pub type cc_result = cc_uint32;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct TextureRec_ {
   pub U1: f32,
   pub V1: f32,
@@ -98,7 +98,7 @@ fn bindgen_test_layout_TextureRec_() {
 pub type TextureRec = TextureRec_;
 pub type GfxResourceID = *mut ::std::os::raw::c_void;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Texture {
   pub ID: GfxResourceID,
   pub X: cc_int16,
@@ -181,7 +181,7 @@ fn bindgen_test_layout_Texture() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct IGameComponent {
   pub Init: ::std::option::Option<unsafe extern "C" fn()>,
   pub Free: ::std::option::Option<unsafe extern "C" fn()>,
@@ -264,7 +264,7 @@ fn bindgen_test_layout_IGameComponent() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct ScheduledTask {
   pub Accumulator: f64,
   pub Interval: f64,
@@ -314,7 +314,7 @@ fn bindgen_test_layout_ScheduledTask() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct String_ {
   pub buffer: *mut ::std::os::raw::c_char,
   pub length: cc_uint16,
@@ -680,7 +680,7 @@ extern "C" {
   pub fn StringsBuffer_Remove(buffer: *mut StringsBuffer, index: ::std::os::raw::c_int);
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Vec3_ {
   pub X: f32,
   pub Y: f32,
@@ -716,7 +716,7 @@ fn bindgen_test_layout_Vec3_() {
 }
 pub type Vec3 = Vec3_;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct IVec3_ {
   pub X: ::std::os::raw::c_int,
   pub Y: ::std::os::raw::c_int,
@@ -752,7 +752,7 @@ fn bindgen_test_layout_IVec3_() {
 }
 pub type IVec3 = IVec3_;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Vec4 {
   pub X: f32,
   pub Y: f32,
@@ -793,7 +793,7 @@ fn bindgen_test_layout_Vec4() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Matrix {
   pub Row0: Vec4,
   pub Row1: Vec4,
@@ -861,7 +861,7 @@ pub struct Stream {
 pub type Event_Void_Callback =
   ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void)>;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Void {
   pub Handlers: [Event_Void_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -914,7 +914,7 @@ pub type Event_Int_Callback = ::std::option::Option<
   unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: ::std::os::raw::c_int),
 >;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Int {
   pub Handlers: [Event_Int_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -966,7 +966,7 @@ fn bindgen_test_layout_Event_Int() {
 pub type Event_Float_Callback =
   ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, argument: f32)>;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Float {
   pub Handlers: [Event_Float_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1019,7 +1019,7 @@ pub type Event_Entry_Callback = ::std::option::Option<
   unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, stream: *mut Stream, name: *const String),
 >;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Entry {
   pub Handlers: [Event_Entry_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1077,7 +1077,7 @@ pub type Event_Block_Callback = ::std::option::Option<
   ),
 >;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Block {
   pub Handlers: [Event_Block_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1135,7 +1135,7 @@ pub type Event_PointerMove_Callback = ::std::option::Option<
   ),
 >;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_PointerMove {
   pub Handlers: [Event_PointerMove_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1192,7 +1192,7 @@ pub type Event_Chat_Callback = ::std::option::Option<
   ),
 >;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Chat {
   pub Handlers: [Event_Chat_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1249,7 +1249,7 @@ pub type Event_Input_Callback = ::std::option::Option<
   ),
 >;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_Input {
   pub Handlers: [Event_Input_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1301,7 +1301,7 @@ fn bindgen_test_layout_Event_Input() {
 pub type Event_String_Callback =
   ::std::option::Option<unsafe extern "C" fn(obj: *mut ::std::os::raw::c_void, str: *const String)>;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct Event_String {
   pub Handlers: [Event_String_Callback; 32usize],
   pub Objs: [*mut ::std::os::raw::c_void; 32usize],
@@ -1374,7 +1374,7 @@ extern "C" {
   pub fn Event_RaiseFloat(handlers: *mut Event_Float, arg: f32);
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _EntityEventsList {
   pub Added: Event_Int,
   pub Removed: Event_Int,
@@ -1413,7 +1413,7 @@ fn bindgen_test_layout__EntityEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _TabListEventsList {
   pub Added: Event_Int,
   pub Changed: Event_Int,
@@ -1463,7 +1463,7 @@ fn bindgen_test_layout__TabListEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _TextureEventsList {
   pub AtlasChanged: Event_Void,
   pub PackChanged: Event_Void,
@@ -1513,7 +1513,7 @@ fn bindgen_test_layout__TextureEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _GfxEventsList {
   pub ViewDistanceChanged: Event_Void,
   pub LowVRAMDetected: Event_Void,
@@ -1585,7 +1585,7 @@ fn bindgen_test_layout__GfxEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _UserEventsList {
   pub BlockChanged: Event_Block,
   pub HackPermissionsChanged: Event_Void,
@@ -1637,7 +1637,7 @@ fn bindgen_test_layout__UserEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _BlockEventsList {
   pub PermissionsChanged: Event_Void,
   pub BlockDefChanged: Event_Void,
@@ -1676,7 +1676,7 @@ fn bindgen_test_layout__BlockEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _WorldEventsList {
   pub NewMap: Event_Void,
   pub Loading: Event_Float,
@@ -1737,7 +1737,7 @@ fn bindgen_test_layout__WorldEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _ChatEventsList {
   pub FontChanged: Event_Void,
   pub ChatReceived: Event_Chat,
@@ -1798,7 +1798,7 @@ fn bindgen_test_layout__ChatEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _WindowEventsList {
   pub Redraw: Event_Void,
   pub Resized: Event_Void,
@@ -1881,7 +1881,7 @@ fn bindgen_test_layout__WindowEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _InputEventsList {
   pub Press: Event_Int,
   pub Down: Event_Input,
@@ -1953,7 +1953,7 @@ fn bindgen_test_layout__InputEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _PointerEventsList {
   pub Moved: Event_PointerMove,
   pub Down: Event_Int,
@@ -2014,7 +2014,7 @@ fn bindgen_test_layout__PointerEventsList() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _NetEventsList {
   pub Connected: Event_Void,
   pub Disconnected: Event_Void,
@@ -2064,7 +2064,7 @@ pub const MsgType_MSG_TYPE_CLIENTSTATUS_1: MsgType = 256;
 pub const MsgType_MSG_TYPE_CLIENTSTATUS_2: MsgType = 257;
 pub type MsgType = i32;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct ChatCommand {
   pub Name: *const ::std::os::raw::c_char,
   pub Execute: ::std::option::Option<
@@ -2324,7 +2324,7 @@ pub const KeyBind__KEYBIND_COUNT: KeyBind_ = 35;
 pub type KeyBind_ = i32;
 pub type KeyBind = ::std::os::raw::c_int;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _ServerConnectionData {
   pub BeginConnect: ::std::option::Option<unsafe extern "C" fn()>,
   pub Tick: ::std::option::Option<unsafe extern "C" fn(task: *mut ScheduledTask)>,
@@ -2609,7 +2609,7 @@ extern "C" {
   pub fn Options_Save();
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct AnimatedComp {
   pub BobbingHor: f32,
   pub BobbingVer: f32,
@@ -2846,7 +2846,7 @@ fn bindgen_test_layout_AnimatedComp() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct AABB {
   pub Min: Vec3,
   pub Max: Vec3,
@@ -2885,7 +2885,7 @@ extern "C" {
   pub fn PackedCol_Tint(a: PackedCol, b: PackedCol) -> PackedCol;
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct LocationUpdate {
   pub Pos: Vec3,
   pub HeadX: f32,
@@ -2979,7 +2979,7 @@ fn bindgen_test_layout_LocationUpdate() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct EntityVTABLE {
   pub Tick: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity, delta: f64)>,
   pub Despawn: ::std::option::Option<unsafe extern "C" fn(e: *mut Entity)>,
@@ -3502,7 +3502,7 @@ extern "C" {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct PickedPos {
   pub Min: Vec3,
   pub Max: Vec3,
@@ -3623,7 +3623,7 @@ extern "C" {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct _WorldData {
   pub Blocks: *mut BlockRaw,
   pub Blocks2: *mut BlockRaw,
@@ -3783,7 +3783,7 @@ extern "C" {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct _EnvData {
   pub EdgeBlock: BlockID,
   pub SidesBlock: BlockID,
@@ -4124,7 +4124,7 @@ extern "C" {
   pub fn Env_SetShadowCol(col: PackedCol);
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct ModelVertex {
   pub X: f32,
   pub Y: f32,
@@ -4196,7 +4196,7 @@ fn bindgen_test_layout_ModelVertex() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub struct ModelTex {
   pub Name: *const ::std::os::raw::c_char,
   pub SkinType: cc_uint8,
@@ -4257,7 +4257,7 @@ fn bindgen_test_layout_ModelTex() {
   );
 }
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Model {
   pub Name: *const ::std::os::raw::c_char,
   pub vertices: *mut ModelVertex,
