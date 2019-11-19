@@ -164,6 +164,30 @@ pub unsafe fn Event_UnregisterPointerMove(
   )
 }
 
+pub unsafe fn Event_RegisterString(
+  handlers: *mut Event_String,
+  obj: *mut c_void,
+  handler: Event_String_Callback,
+) {
+  Event_Register(
+    handlers as *mut Event_Void,
+    obj,
+    mem::transmute::<Event_String_Callback, Event_Void_Callback>(handler),
+  )
+}
+
+pub unsafe fn Event_UnregisterString(
+  handlers: *mut Event_String,
+  obj: *mut c_void,
+  handler: Event_String_Callback,
+) {
+  Event_Unregister(
+    handlers as *mut Event_Void,
+    obj,
+    mem::transmute::<Event_String_Callback, Event_Void_Callback>(handler),
+  )
+}
+
 pub unsafe fn Event_RaiseInput(handlers: &mut Event_Input, key: c_int, repeating: bool) {
   for i in 0..handlers.Count {
     if let Some(f) = handlers.Handlers[i as usize] {
