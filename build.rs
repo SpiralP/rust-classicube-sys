@@ -208,6 +208,8 @@ fn build_bindings() {
     .whitelist_type("KeyBind_")
     .whitelist_type("KeyBind")
     .whitelist_function("Gfx_.*")
+    .whitelist_var("Atlas2D")
+    .whitelist_var("Atlas1D")
     .clang_arg("-I./ClassiCube/src")
     .header_contents(
       "bindgen.h",
@@ -227,6 +229,7 @@ fn build_bindings() {
           #include <PackedCol.h>
           #include <Input.h>
           #include <Graphics.h>
+          #include <TexturePack.h>
         ",
     )
     .generate()
