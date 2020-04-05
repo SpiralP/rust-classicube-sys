@@ -207,7 +207,7 @@ fn build_bindings() {
     .whitelist_type("Key")
     .whitelist_type("KeyBind_")
     .whitelist_type("KeyBind")
-    .whitelist_function("Gfx_*")
+    .whitelist_function("Gfx_.*")
     .clang_arg("-I./ClassiCube/src")
     .header_contents(
       "bindgen.h",
