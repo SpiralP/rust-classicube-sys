@@ -1,4 +1,4 @@
-use crate::os::*;
+use crate::bindings::*;
 use std::{
   mem,
   os::raw::{c_int, c_void},

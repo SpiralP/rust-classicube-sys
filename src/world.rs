@@ -3,7 +3,7 @@
 // 	return (BlockID)((World.Blocks[i] | (World.Blocks2[i] << 8)) & World.IDMask);
 // }
 
-use crate::{os::*, World};
+use crate::{bindings::*, World};
 use std::{os::raw::c_int, slice};
 
 // /* Unpacka an index into x,y,z (slow!) */

@@ -34,18 +34,19 @@
 //!   next: ptr::null_mut(),
 //! };
 
+mod bindings;
 mod chat;
 mod command;
 mod event;
 mod input;
-mod os;
 mod packed_col;
 mod string;
 mod vectors;
 mod world;
 
 pub use crate::{
-  chat::*, command::*, event::*, input::*, os::*, packed_col::*, string::*, vectors::*, world::*,
+  bindings::*, chat::*, command::*, event::*, input::*, packed_col::*, string::*, vectors::*,
+  world::*,
 };
 
 // strange fix for windows where these don't link right

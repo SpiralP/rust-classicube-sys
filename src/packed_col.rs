@@ -1,4 +1,4 @@
-use crate::os::*;
+use crate::bindings::*;
 
 pub const fn PackedCol_R_Bits(col: u8) -> PackedCol {
   (col as PackedCol) << PACKEDCOL_R_SHIFT
