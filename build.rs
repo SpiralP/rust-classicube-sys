@@ -208,8 +208,8 @@ fn build_bindings() {
     .whitelist_type("KeyBind_")
     .whitelist_type("KeyBind")
     .whitelist_function("Gfx_.*")
-    .whitelist_var("Atlas2D")
-    .whitelist_var("Atlas1D")
+    .whitelist_type("_Atlas2DData")
+    .whitelist_type("_Atlas1DData")
     .clang_arg("-I./ClassiCube/src")
     .header_contents(
       "bindgen.h",

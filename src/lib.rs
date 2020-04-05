@@ -72,4 +72,7 @@ extern "C" {
 
   pub static mut World: _WorldData;
   pub static mut Env: _EnvData;
+
+  pub static mut Atlas2D: _Atlas1DData;
+  pub static mut Atlas1D: _Atlas1DData;
 }
