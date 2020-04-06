@@ -1,3 +1,9 @@
+use regex::Regex;
+use std::collections::HashSet;
+use std::env;
+use std::fs;
+use std::path::Path;
+
 fn main() {
   build_bindings();
 
@@ -14,11 +20,10 @@ fn main() {
     return;
   }
 
-  #[cfg(windows)]
+  #[cfg(target_os = "windows")]
   {
     use cc::{windows_registry, windows_registry::VsVers};
     use fs_extra::dir;
-    use std::{env, path::Path};
 
     let out_dir = env::var("OUT_DIR").unwrap();
     let out_dir = Path::new(&out_dir);
@@ -65,179 +70,156 @@ fn main() {
       );
     }
 
-    println!("cargo:rustc-link-lib=dylib=ClassiCube");
     println!("cargo:rustc-link-search=native={}", &out_dir.display());
+    println!("cargo:rustc-link-lib=dylib=ClassiCube");
   }
 }
 
 fn build_bindings() {
-  use std::env;
-  use std::path::Path;
+  let (header_filenames, var_types, function_names) = get_exports();
 
-  let bindings = bindgen::builder()
+  let mut bindings = bindgen::builder()
+    .parse_callbacks(Box::new(bindgen::CargoCallbacks))
     .derive_partialeq(true)
     .derive_eq(true)
     .derive_hash(true)
-    .whitelist_type("cc_.*")
-    .whitelist_type("IGameComponent")
-    .whitelist_function("Event_Register")
-    .whitelist_function("Event_Unregister")
-    .whitelist_function("Event_RaiseVoid")
-    .whitelist_function("Event_RaiseInt")
-    .whitelist_function("Event_RaiseFloat")
-    .whitelist_type("_EntityEventsList")
-    .whitelist_type("_TabListEventsList")
-    .whitelist_type("_TextureEventsList")
-    .whitelist_type("_GfxEventsList")
-    .whitelist_type("_UserEventsList")
-    .whitelist_type("_BlockEventsList")
-    .whitelist_type("_WorldEventsList")
-    .whitelist_type("_ChatEventsList")
-    .whitelist_type("_WindowEventsList")
-    .whitelist_type("_InputEventsList")
-    .whitelist_type("_PointerEventsList")
-    .whitelist_type("_NetEventsList")
-    .whitelist_type("Event_.*")
-    .whitelist_function("Commands_Register")
-    .whitelist_function("Chat_Send")
-    .whitelist_function("Chat_Add")
-    .whitelist_function("Chat_AddOf")
-    .whitelist_type("MsgType")
-    .whitelist_type("String")
-    .whitelist_function("String_Init")
-    .whitelist_function("String_CalcLen")
-    .whitelist_function("String_StripCols")
-    .whitelist_function("String_Copy")
-    .whitelist_function("String_CopyToRaw")
-    .whitelist_function("String_UNSAFE_Substring")
-    .whitelist_function("String_UNSAFE_SubstringAt")
-    .whitelist_function("String_UNSAFE_Split")
-    .whitelist_function("String_UNSAFE_SplitBy")
-    .whitelist_function("String_UNSAFE_Separate")
-    .whitelist_function("String_Equals")
-    .whitelist_function("String_CaselessEquals")
-    .whitelist_function("String_CaselessEqualsConst")
-    .whitelist_function("String_MakeUInt32")
-    .whitelist_function("String_Append")
-    .whitelist_function("String_AppendBool")
-    .whitelist_function("String_AppendInt")
-    .whitelist_function("String_AppendUInt32")
-    .whitelist_function("String_AppendPaddedInt")
-    .whitelist_function("String_AppendFloat")
-    .whitelist_function("String_AppendConst")
-    .whitelist_function("String_AppendString")
-    .whitelist_function("String_AppendColorless")
-    .whitelist_function("String_AppendHex")
-    .whitelist_function("String_IndexOfAt")
-    .whitelist_function("String_LastIndexOfAt")
-    .whitelist_function("String_InsertAt")
-    .whitelist_function("String_DeleteAt")
-    .whitelist_function("String_UNSAFE_TrimStart")
-    .whitelist_function("String_UNSAFE_TrimEnd")
-    .whitelist_function("String_IndexOfString")
-    .whitelist_function("String_CaselessContains")
-    .whitelist_function("String_CaselessStarts")
-    .whitelist_function("String_CaselessEnds")
-    .whitelist_function("String_Compare")
-    .whitelist_function("String_Format1")
-    .whitelist_function("String_Format2")
-    .whitelist_function("String_Format3")
-    .whitelist_function("String_Format4")
-    .whitelist_function("Convert_ParseUInt8")
-    .whitelist_function("Convert_ParseUInt16")
-    .whitelist_function("Convert_ParseInt")
-    .whitelist_function("Convert_ParseUInt64")
-    .whitelist_function("Convert_ParseFloat")
-    .whitelist_function("Convert_ParseBool")
-    .whitelist_function("StringsBuffer_Clear")
-    .whitelist_function("StringsBuffer_UNSAFE_Get")
-    .whitelist_function("StringsBuffer_Add")
-    .whitelist_function("StringsBuffer_Remove")
-    .whitelist_var("STRING_SIZE")
-    .whitelist_type("_ServerConnectionData")
-    .whitelist_function("Options_Get")
-    .whitelist_function("Options_GetInt")
-    .whitelist_function("Options_GetBool")
-    .whitelist_function("Options_GetFloat")
-    .whitelist_function("Options_GetEnum")
-    .whitelist_function("Options_SetBool")
-    .whitelist_function("Options_SetInt")
-    .whitelist_function("Options_Set")
-    .whitelist_function("Options_SetString")
-    .whitelist_function("Options_Load")
-    .whitelist_function("Options_Save")
-    .whitelist_type("_TabListData")
-    .whitelist_function("TabList_Remove")
-    .whitelist_function("TabList_Set")
-    .whitelist_type("_EntitiesData")
-    .whitelist_function("Game_UpdateBlock")
-    .whitelist_function("Game_ChangeBlock")
-    .whitelist_type("_WorldData")
-    .whitelist_type("_EnvData")
-    .whitelist_function("World_Reset")
-    .whitelist_function("World_SetNewMap")
-    .whitelist_function("World_ApplyTexturePack")
-    .whitelist_function("Env_Reset")
-    .whitelist_function("Env_SetEdgeBlock")
-    .whitelist_function("Env_SetSidesBlock")
-    .whitelist_function("Env_SetEdgeHeight")
-    .whitelist_function("Env_SetSidesOffset")
-    .whitelist_function("Env_SetCloudsHeight")
-    .whitelist_function("Env_SetCloudsSpeed")
-    .whitelist_function("Env_SetWeatherSpeed")
-    .whitelist_function("Env_SetWeatherFade")
-    .whitelist_function("Env_SetWeather")
-    .whitelist_function("Env_SetExpFog")
-    .whitelist_function("Env_SetSkyboxHorSpeed")
-    .whitelist_function("Env_SetSkyboxVerSpeed")
-    .whitelist_function("Env_SetSkyCol")
-    .whitelist_function("Env_SetFogCol")
-    .whitelist_function("Env_SetCloudsCol")
-    .whitelist_function("Env_SetSkyboxCol")
-    .whitelist_function("Env_SetSunCol")
-    .whitelist_function("Env_SetShadowCol")
-    .whitelist_type("PickedPos")
-    .whitelist_type("Model")
-    .whitelist_type("PackedCol")
-    .whitelist_var("PACKEDCOL_.*")
-    .whitelist_function("PackedCol_Scale")
-    .whitelist_function("PackedCol_Lerp")
-    .whitelist_function("PackedCol_Tint")
-    .whitelist_type("Key_")
-    .whitelist_type("Key")
-    .whitelist_type("KeyBind_")
-    .whitelist_type("KeyBind")
-    .whitelist_function("Gfx_.*")
-    .whitelist_type("_Atlas2DData")
-    .whitelist_type("_Atlas1DData")
     .clang_arg("-I./ClassiCube/src")
     .header_contents(
       "bindgen.h",
-      "
-          #include <Core.h>
-          #include <GameStructs.h>
-          #include <Event.h>
-          #include <Chat.h>
-          #include <String.h>
-          #include <Server.h>
-          #include <Options.h>
-          #include <Entity.h>
-          #include <Game.h>
-          #include <World.h>
-          #include <Picking.h>
-          #include <Model.h>
-          #include <PackedCol.h>
-          #include <Input.h>
-          #include <Graphics.h>
-          #include <TexturePack.h>
-        ",
+      &header_filenames
+        .iter()
+        .map(|filename| format!("#include <{}>\n", filename))
+        .collect::<String>(),
     )
-    .generate()
-    .unwrap();
+    .whitelist_type(".*");
+
+  for var_type in var_types {
+    match var_type {
+      VarType::Other(var_name) => {
+        bindings = bindings.whitelist_var(var_name);
+      }
+
+      VarType::Static {
+        var_name,
+        type_name,
+      } => {
+        // fix windows not dllimporting from the rustc-link-lib build println
+        #[cfg(target_os = "windows")]
+        {
+          bindings = bindings.raw_line(r#"#[link(name = "ClassiCube", kind = "dylib")]"#);
+          bindings = bindings.raw_line(r#"extern "C" {"#);
+          bindings = bindings.raw_line(format!(
+            r#"    pub static mut {}: {};"#,
+            var_name, type_name
+          ));
+          bindings = bindings.raw_line(r#"}"#);
+        }
+
+        #[cfg(not(target_os = "windows"))]
+        {
+          bindings = bindings.whitelist_var(var_name);
+        }
+      }
+    }
+  }
+
+  for function_name in function_names {
+    bindings = bindings.whitelist_function(function_name);
+  }
+
+  let bindings = bindings.generate().unwrap();
 
   // Write the bindings to the $OUT_DIR/bindings.rs file.
   let out_dir = env::var("OUT_DIR").unwrap();
   bindings
     .write_to_file(Path::new(&out_dir).join("bindings.rs"))
     .expect("Couldn't write bindings!");
+}
+
+#[derive(Debug, Hash, PartialEq, Eq)]
+enum VarType {
+  Static { var_name: String, type_name: String },
+  Other(String),
+}
+
+/// We don't want to include functions/vars that aren't exported.
+///
+/// returns (header_filenames, var names, function names)
+fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
+  let mut header_filenames = Vec::new();
+  let mut var_names = HashSet::new();
+  let mut function_names = HashSet::new();
+
+  for entry in fs::read_dir("ClassiCube/src").unwrap() {
+    let entry = entry.unwrap();
+    let file_name = entry.file_name();
+    if file_name.to_string_lossy().ends_with(".h") && entry.file_type().unwrap().is_file() {
+      header_filenames.push(file_name.to_str().unwrap().to_string());
+
+      let data = fs::read_to_string(entry.path())
+        .unwrap()
+        .replace("\r\n", "\n");
+
+      // exported vars
+      for mat in Regex::new(r"(?m)^CC_VAR.*$").unwrap().find_iter(&data) {
+        let part = &data[mat.start()..];
+
+        // need ?s for .* to match \n
+        let captures =
+          Regex::new(r"(?s)^CC_VAR +extern +struct +([[:word:]]+) +\{.*?\n\} +([[:word:]]+);")
+            .unwrap()
+            .captures(part)
+            .expect(&format!(
+              "couldn't get capture in file {:?} from {:?}",
+              file_name, part
+            ));
+        let type_name = captures
+          .get(1)
+          .expect(&format!("couldn't get capture 1 from {:?}", part));
+
+        let var_name = captures
+          .get(2)
+          .expect(&format!("couldn't get capture 2 from {:?}", part));
+
+        var_names.insert(VarType::Static {
+          var_name: var_name.as_str().to_string(),
+          type_name: type_name.as_str().to_string(),
+        });
+      }
+
+      // C macros/defines
+      for captures in Regex::new(r"(?m)^#define +([[:word:]]+).*$")
+        .unwrap()
+        .captures_iter(&data)
+      {
+        let macro_name = captures.get(1).expect(&format!("couldn't get capture 1"));
+
+        var_names.insert(VarType::Other(macro_name.as_str().to_string()));
+      }
+
+      // exported functions
+      for mat in Regex::new(r"(?m)^CC_API.*$").unwrap().find_iter(&data) {
+        let part = mat.as_str();
+        let function_name = Regex::new(
+          r"(?m)^CC_API(?: +STRING_REF| +struct)? +[[:word:]]+ *\*? +([[:word:]]+)\(.*$",
+        )
+        .unwrap()
+        .captures(part)
+        .expect(&format!(
+          "couldn't get capture in file {:?} from {:?}",
+          file_name, part
+        ))
+        .get(1)
+        .expect(&format!("couldn't get capture 1 from {:?}", part));
+
+        function_names.insert(function_name.as_str().to_string());
+      }
+    }
+  }
+
+  return (
+    header_filenames,
+    var_names.drain().collect(),
+    function_names.drain().collect(),
+  );
 }

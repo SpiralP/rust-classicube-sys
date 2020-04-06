@@ -49,30 +49,14 @@ pub use crate::{
   world::*,
 };
 
-// strange fix for windows where these don't link right
-#[cfg_attr(windows, link(name = "ClassiCube"))]
-extern "C" {
-  pub static mut EntityEvents: _EntityEventsList;
-  pub static mut TabListEvents: _TabListEventsList;
-  pub static mut TextureEvents: _TextureEventsList;
-  pub static mut GfxEvents: _GfxEventsList;
-  pub static mut UserEvents: _UserEventsList;
-  pub static mut BlockEvents: _BlockEventsList;
-  pub static mut WorldEvents: _WorldEventsList;
-  pub static mut ChatEvents: _ChatEventsList;
-  pub static mut WindowEvents: _WindowEventsList;
-  pub static mut InputEvents: _InputEventsList;
-  pub static mut PointerEvents: _PointerEventsList;
-  pub static mut NetEvents: _NetEventsList;
-
-  pub static mut Server: _ServerConnectionData;
-
-  pub static mut TabList: _TabListData;
-  pub static mut Entities: _EntitiesData;
-
-  pub static mut World: _WorldData;
-  pub static mut Env: _EnvData;
-
-  pub static mut Atlas2D: _Atlas1DData;
-  pub static mut Atlas1D: _Atlas1DData;
+/// On windows, external statics have to be tagged with dllimport,
+/// but rust only tags them if you use the #[link] attribute
+/// on the exact extern "C" { block } containing the static.
+///
+/// https://github.com/rust-lang/rust/issues/37403
+#[test]
+fn test_dllimport_linking() {
+  unsafe {
+    println!("{:?}", &Server as *const _);
+  }
 }
