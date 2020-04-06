@@ -54,6 +54,7 @@ pub use crate::{
 /// on the exact extern "C" { block } containing the static.
 ///
 /// https://github.com/rust-lang/rust/issues/37403
+#[cfg(target_os = "windows")]
 #[test]
 fn test_dllimport_linking() {
     unsafe {

@@ -96,26 +96,27 @@ fn build_bindings() {
                 bindings = bindings.whitelist_var(var_name);
             }
 
+            #[cfg(not(target_os = "windows"))]
+            VarType::Static {
+                var_name,
+                type_name: _,
+            } => {
+                bindings = bindings.whitelist_var(var_name);
+            }
+
+            // fix windows not dllimporting from the rustc-link-lib build println
+            #[cfg(target_os = "windows")]
             VarType::Static {
                 var_name,
                 type_name,
             } => {
-                // fix windows not dllimporting from the rustc-link-lib build println
-                #[cfg(target_os = "windows")]
-                {
-                    bindings = bindings.raw_line(r#"#[link(name = "ClassiCube", kind = "dylib")]"#);
-                    bindings = bindings.raw_line(r#"extern "C" {"#);
-                    bindings = bindings.raw_line(format!(
-                        r#"    pub static mut {}: {};"#,
-                        var_name, type_name
-                    ));
-                    bindings = bindings.raw_line(r#"}"#);
-                }
-
-                #[cfg(not(target_os = "windows"))]
-                {
-                    bindings = bindings.whitelist_var(var_name);
-                }
+                bindings = bindings.raw_line(r#"#[link(name = "ClassiCube", kind = "dylib")]"#);
+                bindings = bindings.raw_line(r#"extern "C" {"#);
+                bindings = bindings.raw_line(format!(
+                    r#"    pub static mut {}: {};"#,
+                    var_name, type_name
+                ));
+                bindings = bindings.raw_line(r#"}"#);
             }
         }
     }
