@@ -45,8 +45,8 @@ mod vectors;
 mod world;
 
 pub use crate::{
-  bindings::*, chat::*, command::*, event::*, input::*, packed_col::*, string::*, vectors::*,
-  world::*,
+    bindings::*, chat::*, command::*, event::*, input::*, packed_col::*, string::*, vectors::*,
+    world::*,
 };
 
 /// On windows, external statics have to be tagged with dllimport,
@@ -56,7 +56,7 @@ pub use crate::{
 /// https://github.com/rust-lang/rust/issues/37403
 #[test]
 fn test_dllimport_linking() {
-  unsafe {
-    println!("{:?}", &Server as *const _);
-  }
+    unsafe {
+        println!("{:?}", &Server as *const _);
+    }
 }
