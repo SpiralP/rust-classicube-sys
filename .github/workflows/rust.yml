@@ -3,8 +3,8 @@ name: Rust
 on: [push]
 
 jobs:
-  build_linux:
-    runs-on: ubuntu-latest
+  windows:
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v1
@@ -12,7 +12,13 @@ jobs:
           submodules: recursive
 
       - name: Install deps
-        run: sudo apt-get -y update && sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev libgl1-mesa-dev
+        run: |
+          iwr -useb get.scoop.sh | iex
+          echo "##[add-path]$HOME\scoop\shims"
+          echo "##[add-path]C:\ProgramData\scoop\shims"
+          scoop install aria2
+          scoop install llvm
+          echo "::set-env name=LIBCLANG_PATH::$HOME\scoop\apps\llvm\current\bin"
 
       - name: Install nightly
         uses: actions-rs/toolchain@v1
@@ -31,18 +37,49 @@ jobs:
           command: doc
 
       - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v2.5.0
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./target/doc
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
 
       - name: Test
         uses: actions-rs/cargo@v1
         with:
           command: test
+          args: -- --nocapture
 
-  build_mac:
+  linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: recursive
+
+      - name: Install deps
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install clang llvm
+          sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev libgl1-mesa-dev
+
+      - name: Install nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
+      - name: Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: -- --nocapture
+
+  mac:
     runs-on: macOS-latest
 
     steps:
@@ -50,24 +87,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install nightly
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: nightly
-          override: true
-
-      - name: Test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-
-  build_windows:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          submodules: recursive
+      - name: Install deps
+        run: |
+          brew install llvm
+          echo "##[add-path]/usr/local/opt/llvm/bin"
 
       - name: Install nightly
         uses: actions-rs/toolchain@v1
@@ -75,7 +98,13 @@ jobs:
           toolchain: nightly
           override: true
 
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
       - name: Test
         uses: actions-rs/cargo@v1
         with:
           command: test
+          args: -- --nocapture
