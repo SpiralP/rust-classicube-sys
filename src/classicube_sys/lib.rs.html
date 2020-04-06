@@ -60,6 +60,7 @@
 <span id="60">60</span>
 <span id="61">61</span>
 <span id="62">62</span>
+<span id="63">63</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -117,6 +118,7 @@
 <span class="doccomment">/// on the exact extern &quot;C&quot; { block } containing the static.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// https://github.com/rust-lang/rust/issues/37403</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">test_dllimport_linking</span>() {
     <span class="kw">unsafe</span> {
