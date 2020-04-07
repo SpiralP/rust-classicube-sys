@@ -5,9 +5,9 @@ use std::{
 };
 
 macro_rules! make {
-    ($name:ident) => {
+    ($func_name:ident, $name:ident) => {
         paste::item! {
-            pub unsafe fn [<Event_Register $name>] (
+            pub unsafe fn [<Event_Register $func_name>] (
                 handlers: *mut [<Event_ $name>],
                 obj: *mut c_void,
                 handler: [<Event_ $name _Callback>],
@@ -19,7 +19,7 @@ macro_rules! make {
                 )
             }
 
-            pub unsafe fn [<Event_Unregister $name>] (
+            pub unsafe fn [<Event_Unregister $func_name>] (
                 handlers: *mut [<Event_ $name>],
                 obj: *mut c_void,
                 handler: [<Event_ $name _Callback>],
@@ -32,25 +32,62 @@ macro_rules! make {
             }
         }
     };
+
+    ($name:ident) => {
+        make!($name, $name);
+    };
+}
+
+macro_rules! make_raise {
+    (
+        $func_name:ident,
+        $name:ident,
+        ( $($arg:ident: $arg_type:ty),* )
+    ) => {
+        paste::item! {
+            pub unsafe fn [<Event_Raise $func_name>] (
+                handlers: &mut [<Event_ $name>],
+                $($arg: $arg_type),*
+            ) {
+                for i in 0..handlers.Count {
+                    if let Some(f) = handlers.Handlers[i as usize] {
+                        (f)(
+                            handlers.Objs[i as usize],
+                            $($arg),*
+                        );
+                    }
+                }
+            }
+        }
+    };
+
+    (
+        $name:ident,
+        ( $($arg:ident: $arg_type:ty),* )
+    ) => {
+        make_raise!($name, $name, ( $($arg: $arg_type),* ));
+    }
 }
 
 make!(Void);
-make!(Chat);
 make!(Int);
-make!(Input);
 make!(Float);
+make!(Entry);
 make!(Block);
-make!(PointerMove);
+make!(Move, PointerMove);
+make!(Chat);
+make!(Input);
 make!(String);
 
-pub unsafe fn Event_RaiseInput(handlers: &mut Event_Input, key: c_int, repeating: bool) {
-    for i in 0..handlers.Count {
-        if let Some(f) = handlers.Handlers[i as usize] {
-            (f)(
-                handlers.Objs[i as usize],
-                key,
-                if repeating { 1 } else { 0 },
-            );
-        }
-    }
-}
+// Void, Int, Float are already exported
+
+make_raise!(Entry, (stream: *mut Stream, name: *const String));
+make_raise!(Block, (coords: IVec3, oldBlock: BlockID, block: BlockID));
+make_raise!(
+    Move,
+    PointerMove,
+    (idx: c_int, xDelta: c_int, yDelta: c_int)
+);
+make_raise!(Chat, (msg: *const String, msgType: c_int));
+make_raise!(Input, (key: c_int, repeating: cc_bool));
+make_raise!(String, (str: *const String));
