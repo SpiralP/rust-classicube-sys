@@ -1,14 +1,13 @@
-use crate::bindings::*;
+use crate::bindings::{String as CCString, String_CalcLen};
 use std::{
     borrow::Borrow,
     convert::TryInto,
     ffi::CString,
     os::raw::{c_char, c_int},
     slice,
-    string::String as StdString,
 };
 
-impl String {
+impl CCString {
     pub fn as_slice(&self) -> &'static [u8] {
         let data = self.buffer as *const u8;
         let len = self.length as usize;
@@ -16,14 +15,20 @@ impl String {
     }
 }
 
-impl ToString for String {
-    fn to_string(&self) -> StdString {
-        StdString::from_utf8_lossy(self.as_slice()).to_string()
+impl ToString for CCString {
+    fn to_string(&self) -> String {
+        String::from_utf8_lossy(self.as_slice()).to_string()
+    }
+}
+
+impl From<CCString> for String {
+    fn from(cc_string: CCString) -> Self {
+        cc_string.to_string()
     }
 }
 
 pub struct OwnedString {
-    cc_string: String,
+    cc_string: CCString,
     _c_string: CString,
 }
 
@@ -38,7 +43,7 @@ impl OwnedString {
 
         Self {
             _c_string,
-            cc_string: String {
+            cc_string: CCString {
                 buffer,
                 length,
                 capacity,
@@ -46,13 +51,13 @@ impl OwnedString {
         }
     }
 
-    pub fn as_cc_string(&self) -> &String {
+    pub fn as_cc_string(&self) -> &CCString {
         &self.cc_string
     }
 }
 
-impl Borrow<String> for OwnedString {
-    fn borrow(&self) -> &String {
+impl Borrow<CCString> for OwnedString {
+    fn borrow(&self) -> &CCString {
         self.as_cc_string()
     }
 }
@@ -61,24 +66,26 @@ impl Borrow<String> for OwnedString {
 fn test_owned_string() {
     let owned_string = OwnedString::new("hello");
 
-    fn use_cc_string<T: Borrow<String>>(s: T) {
+    fn use_cc_string<T: Borrow<CCString>>(s: T) {
         println!("{:?}", s.borrow());
     }
 
     use_cc_string(owned_string.as_cc_string());
 
     use_cc_string(owned_string);
+
+    // let s: CCString = owned_string.into();
 }
 
-pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> String {
-    String {
+pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> CCString {
+    CCString {
         buffer,
         length: length.try_into().unwrap(),
         capacity: capacity.try_into().unwrap(),
     }
 }
 
-pub unsafe fn String_FromReadonly(buffer: *const c_char) -> String {
+pub unsafe fn String_FromReadonly(buffer: *const c_char) -> CCString {
     let len = String_CalcLen(buffer, std::u16::MAX.try_into().unwrap());
     String_Init(buffer as *mut c_char, len, len)
 }
