@@ -66,10 +66,6 @@
 <span id="66">66</span>
 <span id="67">67</span>
 <span id="68">68</span>
-<span id="69">69</span>
-<span id="70">70</span>
-<span id="71">71</span>
-<span id="72">72</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="ident">Commands_Register</span>, <span class="ident">ChatCommand</span>};
 <span class="kw">use</span> <span class="ident">pin_project</span>::{<span class="ident">pin_project</span>, <span class="ident">project</span>};
@@ -118,15 +114,11 @@
             <span class="ident">command</span>,
         })
     }
-}
 
-<span class="attribute">#[<span class="ident">project</span>]</span>
-<span class="kw">impl</span> <span class="ident">OwnedChatCommand</span> {
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="attribute">#[<span class="ident">project</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register</span>(<span class="self">self</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">OwnedChatCommand</span><span class="op">&gt;</span>) {
         <span class="attribute">#[<span class="ident">project</span>]</span>
-        <span class="kw">let</span> <span class="ident">OwnedChatCommand</span> { <span class="ident">command</span>, .. } <span class="op">=</span> <span class="self">self</span>;
+        <span class="kw">let</span> <span class="ident">OwnedChatCommand</span> { <span class="kw-2">mut</span> <span class="ident">command</span>, .. } <span class="op">=</span> <span class="self">self</span>.<span class="ident">project</span>();
 
         <span class="kw">unsafe</span> {
             <span class="ident">Commands_Register</span>(<span class="ident">command</span>.<span class="ident">as_mut</span>().<span class="ident">get_unchecked_mut</span>());
@@ -141,7 +133,7 @@
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">OwnedChatCommand</span>::<span class="ident">new</span>(<span class="string">&quot;Roll&quot;</span>, <span class="ident">c_command_callback</span>, <span class="bool-val">false</span>, <span class="macro">vec</span><span class="macro">!</span>[]);
 
-    <span class="ident">cmd</span>.<span class="ident">as_mut</span>().<span class="ident">project</span>().<span class="ident">register</span>();
+    <span class="ident">cmd</span>.<span class="ident">as_mut</span>().<span class="ident">register</span>();
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "classicube_sys";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
