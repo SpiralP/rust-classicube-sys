@@ -9,7 +9,7 @@ impl OwnedGfxVertexBuffer {
         let resource_id = unsafe { Gfx_CreateDynamicVb(fmt, max_vertices) };
         println!("Gfx_CreateVertexBuffer {:#?}", resource_id);
 
-        assert!(!resource_id.is_null());
+        assert!(resource_id as usize != 0);
 
         Self { resource_id }
     }

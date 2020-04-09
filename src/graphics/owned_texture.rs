@@ -15,7 +15,7 @@ impl OwnedGfxTexture {
         };
         println!("Gfx_CreateTexture {:#?}", resource_id);
 
-        assert!(!resource_id.is_null());
+        assert!(resource_id as usize != 0);
 
         Self { resource_id }
     }
