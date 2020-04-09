@@ -57,12 +57,9 @@ impl OwnedChatCommand {
     }
 }
 
-#[ignore]
-#[test]
-fn test_owned_chat_command() {
-    extern "C" fn c_command_callback(_args: *const crate::String, _args_count: c_int) {}
-
-    let mut cmd = OwnedChatCommand::new("Roll", c_command_callback, false, vec![]);
-
-    cmd.as_mut().register();
-}
+// #[test]
+// fn test_owned_chat_command() {
+//     extern "C" fn c_command_callback(_args: *const crate::String, _args_count: c_int) {}
+//     let mut cmd = OwnedChatCommand::new("Roll", c_command_callback, false, vec![]);
+//     cmd.as_mut().register();
+// }
