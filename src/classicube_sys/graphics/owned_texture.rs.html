@@ -47,7 +47,7 @@
         };
         <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Gfx_CreateTexture {:#?}&quot;</span>, <span class="ident">resource_id</span>);
 
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">resource_id</span>.<span class="ident">is_null</span>());
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">resource_id</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
 
         <span class="self">Self</span> { <span class="ident">resource_id</span> }
     }
