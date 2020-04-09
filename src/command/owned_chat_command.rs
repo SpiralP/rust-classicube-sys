@@ -45,15 +45,11 @@ impl OwnedChatCommand {
             command,
         })
     }
-}
 
-#[project]
-impl OwnedChatCommand {
-    #[allow(dead_code)]
     #[project]
-    pub fn register(&mut self) {
+    pub fn register(self: Pin<&mut OwnedChatCommand>) {
         #[project]
-        let OwnedChatCommand { command, .. } = self;
+        let OwnedChatCommand { mut command, .. } = self.project();
 
         unsafe {
             Commands_Register(command.as_mut().get_unchecked_mut());
@@ -68,5 +64,5 @@ fn test_owned_chat_command() {
 
     let mut cmd = OwnedChatCommand::new("Roll", c_command_callback, false, vec![]);
 
-    cmd.as_mut().project().register();
+    cmd.as_mut().register();
 }
