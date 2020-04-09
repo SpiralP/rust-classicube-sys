@@ -1,8 +1,9 @@
 var ALIASES = {};
-ALIASES["arrayvec"] = {};
 ALIASES["classicube_sys"] = {};
 ALIASES["paste"] = {};
 ALIASES["paste_impl"] = {};
+ALIASES["pin_project"] = {};
+ALIASES["pin_project_internal"] = {};
 ALIASES["proc_macro2"] = {};
 ALIASES["proc_macro_hack"] = {};
 ALIASES["quote"] = {};

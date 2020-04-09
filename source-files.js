@@ -1,11 +1,12 @@
 var N = null;var sourcesIndex = {};
-sourcesIndex["arrayvec"] = {"name":"","files":["array.rs","array_string.rs","char.rs","errors.rs","lib.rs","maybe_uninit.rs"]};
 sourcesIndex["classicube_sys"] = {"name":"","dirs":[{"name":"command","files":["mod.rs","owned_chat_command.rs"]},{"name":"graphics","files":["mod.rs","owned_texture.rs","owned_vertex_buffer.rs"]},{"name":"vectors","files":["ivec3.rs","mod.rs","vec3.rs"]}],"files":["bindings.rs","chat.rs","entity.rs","event.rs","input.rs","lib.rs","model.rs","packed_col.rs","string.rs","world.rs"]};
 sourcesIndex["paste"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["paste_impl"] = {"name":"","files":["enum_hack.rs","lib.rs"]};
+sourcesIndex["pin_project"] = {"name":"","files":["lib.rs"]};
+sourcesIndex["pin_project_internal"] = {"name":"","dirs":[{"name":"pin_project","files":["attribute.rs","derive.rs","mod.rs"]}],"files":["lib.rs","pinned_drop.rs","project.rs","utils.rs"]};
 sourcesIndex["proc_macro2"] = {"name":"","files":["fallback.rs","lib.rs","strnom.rs","wrapper.rs"]};
 sourcesIndex["proc_macro_hack"] = {"name":"","files":["error.rs","lib.rs","parse.rs","quote.rs"]};
 sourcesIndex["quote"] = {"name":"","files":["ext.rs","format.rs","ident_fragment.rs","lib.rs","runtime.rs","spanned.rs","to_tokens.rs"]};
-sourcesIndex["syn"] = {"name":"","dirs":[{"name":"gen","files":["gen_helper.rs"]}],"files":["attr.rs","bigint.rs","buffer.rs","custom_keyword.rs","custom_punctuation.rs","data.rs","derive.rs","discouraged.rs","error.rs","export.rs","expr.rs","ext.rs","generics.rs","group.rs","ident.rs","lib.rs","lifetime.rs","lit.rs","lookahead.rs","mac.rs","macros.rs","op.rs","parse.rs","parse_macro_input.rs","parse_quote.rs","path.rs","print.rs","punctuated.rs","sealed.rs","span.rs","spanned.rs","thread.rs","token.rs","ty.rs"]};
+sourcesIndex["syn"] = {"name":"","dirs":[{"name":"gen","files":["gen_helper.rs","visit_mut.rs"]}],"files":["attr.rs","bigint.rs","buffer.rs","custom_keyword.rs","custom_punctuation.rs","data.rs","derive.rs","discouraged.rs","error.rs","export.rs","expr.rs","ext.rs","file.rs","generics.rs","group.rs","ident.rs","item.rs","lib.rs","lifetime.rs","lit.rs","lookahead.rs","mac.rs","macros.rs","op.rs","parse.rs","parse_macro_input.rs","parse_quote.rs","pat.rs","path.rs","print.rs","punctuated.rs","sealed.rs","span.rs","spanned.rs","stmt.rs","thread.rs","token.rs","ty.rs","verbatim.rs"]};
 sourcesIndex["unicode_xid"] = {"name":"","files":["lib.rs","tables.rs"]};
 createSourceSidebar();
