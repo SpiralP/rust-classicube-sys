@@ -1,15 +1,10 @@
 use crate::{bindings::Commands_Register, ChatCommand};
-use pin_project::{pin_project, project};
 use std::{ffi::CString, os::raw::c_int, pin::Pin, ptr};
 
-#[pin_project]
 pub struct OwnedChatCommand {
-    #[pin]
-    pub name: CString,
-    #[pin]
-    pub help: Vec<CString>,
-    #[pin]
-    pub command: ChatCommand,
+    pub name: Pin<Box<CString>>,
+    pub help: Vec<Pin<Box<CString>>>,
+    pub command: Pin<Box<ChatCommand>>,
 }
 
 impl OwnedChatCommand {
@@ -18,10 +13,13 @@ impl OwnedChatCommand {
         execute: unsafe extern "C" fn(args: *const crate::String, argsCount: c_int),
         singleplayer_only: bool,
         mut help: Vec<&str>,
-    ) -> Pin<Box<OwnedChatCommand>> {
-        let name = CString::new(name).unwrap();
+    ) -> Self {
+        let name = Box::pin(CString::new(name).unwrap());
 
-        let help: Vec<CString> = help.drain(..).map(|s| CString::new(s).unwrap()).collect();
+        let help: Vec<Pin<Box<CString>>> = help
+            .drain(..)
+            .map(|s| Box::pin(CString::new(s).unwrap()))
+            .collect();
 
         let help_array = [
             help.get(0).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
@@ -31,25 +29,23 @@ impl OwnedChatCommand {
             help.get(4).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
         ];
 
-        let command = ChatCommand {
+        let command = Box::pin(ChatCommand {
             Name: name.as_ptr(),
             Execute: Some(execute),
             SingleplayerOnly: if singleplayer_only { 1 } else { 0 },
             Help: help_array,
             next: ptr::null_mut(),
-        };
+        });
 
-        Box::pin(Self {
+        Self {
             name,
             help,
             command,
-        })
+        }
     }
 
-    #[project]
-    pub fn register(self: Pin<&mut OwnedChatCommand>) {
-        #[project]
-        let OwnedChatCommand { mut command, .. } = self.project();
+    pub fn register(&mut self) {
+        let OwnedChatCommand { command, .. } = self;
 
         unsafe {
             Commands_Register(command.as_mut().get_unchecked_mut());

@@ -6,7 +6,6 @@ edition = "2018"
 
 [dependencies]
 paste = "0.1.10"
-pin-project = "0.4.8"
 
 [build-dependencies]
 bindgen = "0.53.2"
