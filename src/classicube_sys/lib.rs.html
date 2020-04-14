@@ -64,6 +64,7 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -75,11 +76,11 @@
 <span class="doccomment">//! use std::{os::raw::c_int, ptr};</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! extern &quot;C&quot; fn init() {</span>
-<span class="doccomment">//!   let owned_string = OwnedString::new(&quot;hello from rust!&quot;);</span>
+<span class="doccomment">//!     let owned_string = OwnedString::new(&quot;hello from rust!&quot;);</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//!   unsafe {</span>
-<span class="doccomment">//!     Chat_Add(owned_string.as_cc_string());</span>
-<span class="doccomment">//!   }</span>
+<span class="doccomment">//!     unsafe {</span>
+<span class="doccomment">//!         Chat_Add(owned_string.as_cc_string());</span>
+<span class="doccomment">//!     }</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! #[no_mangle]</span>
@@ -87,19 +88,20 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! #[no_mangle]</span>
 <span class="doccomment">//! pub static mut Plugin_Component: IGameComponent = IGameComponent {</span>
-<span class="doccomment">//!   /* Called when the game is being loaded. */</span>
-<span class="doccomment">//!   Init: Some(init),</span>
-<span class="doccomment">//!   /* Called when the component is being freed. (e.g. due to game being closed) */</span>
-<span class="doccomment">//!   Free: None,</span>
-<span class="doccomment">//!   /* Called to reset the component&#39;s state. (e.g. reconnecting to server) */</span>
-<span class="doccomment">//!   Reset: None,</span>
-<span class="doccomment">//!   /* Called to update the component&#39;s state when the user begins loading a new map. */</span>
-<span class="doccomment">//!   OnNewMap: None,</span>
-<span class="doccomment">//!   /* Called to update the component&#39;s state when the user has finished loading a new map. */</span>
-<span class="doccomment">//!   OnNewMapLoaded: None,</span>
-<span class="doccomment">//!   /* Next component in linked list of components. */</span>
-<span class="doccomment">//!   next: ptr::null_mut(),</span>
+<span class="doccomment">//!     // Called when the game is being loaded.</span>
+<span class="doccomment">//!     Init: Some(init),</span>
+<span class="doccomment">//!     // Called when the component is being freed. (e.g. due to game being closed)</span>
+<span class="doccomment">//!     Free: None,</span>
+<span class="doccomment">//!     // Called to reset the component&#39;s state. (e.g. reconnecting to server)</span>
+<span class="doccomment">//!     Reset: None,</span>
+<span class="doccomment">//!     // Called to update the component&#39;s state when the user begins loading a new map.</span>
+<span class="doccomment">//!     OnNewMap: None,</span>
+<span class="doccomment">//!     // Called to update the component&#39;s state when the user has finished loading a new map.</span>
+<span class="doccomment">//!     OnNewMapLoaded: None,</span>
+<span class="doccomment">//!     // Next component in linked list of components.</span>
+<span class="doccomment">//!     next: ptr::null_mut(),</span>
 <span class="doccomment">//! };</span>
+<span class="doccomment">//! ```</span>
 
 <span class="kw">mod</span> <span class="ident">bindings</span>;
 <span class="kw">mod</span> <span class="ident">chat</span>;
