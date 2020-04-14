@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["classicube_sys"] = [{"text":"impl PinnedDrop for <a class=\"struct\" href=\"classicube_sys/struct.OwnedChatCommand.html\" title=\"struct classicube_sys::OwnedChatCommand\">OwnedChatCommand</a>","synthetic":false,"types":["classicube_sys::command::owned_chat_command::OwnedChatCommand"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
