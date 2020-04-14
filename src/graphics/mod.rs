@@ -15,20 +15,10 @@ pub unsafe fn Gfx_UpdateDynamicVb_IndexedTris(
 }
 
 pub unsafe fn Gfx_Make2DQuad(tex: &mut Texture, col: PackedCol) -> [VertexP3fT2fC4b; 4] {
-    let mut x1: f32 = tex.X as _;
-    let mut x2: f32 = (tex.X as f32 + tex.Width as f32) as _;
-    let mut y1: f32 = tex.Y as _;
-    let mut y2: f32 = (tex.Y as f32 + tex.Height as f32) as _;
-    // VertexP3fT2fC4b* v = *vertices;
-
-    // #ifdef CC_BUILD_D3D9
-    // NOTE: see "https://msdn.microsoft.com/en-us/library/windows/desktop/bb219690(v=vs.85).aspx",
-    // i.e. the msdn article called "Directly Mapping Texels to Pixels (Direct3D 9)" for why we have to do this.
-    x1 -= 0.5;
-    x2 -= 0.5;
-    y1 -= 0.5;
-    y2 -= 0.5;
-    // #endif
+    let x1: f32 = tex.X as _;
+    let x2: f32 = (tex.X as f32 + tex.Width as f32) as _;
+    let y1: f32 = tex.Y as _;
+    let y2: f32 = (tex.Y as f32 + tex.Height as f32) as _;
 
     [
         VertexP3fT2fC4b {
