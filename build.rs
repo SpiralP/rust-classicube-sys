@@ -45,12 +45,25 @@ fn main() {
             _ => unimplemented!(),
         };
 
+        let configuration = if cfg!(debug_assertions) {
+            "Debug"
+        } else {
+            "Release"
+        };
+
+        #[cfg(all(target_os = "windows", target_pointer_width = "64"))]
+        let platform = "x64";
+
+        #[cfg(all(target_os = "windows", target_pointer_width = "32"))]
+        let platform = "x86";
+
         let cmd = windows_registry::find(&target, "msbuild")
             .unwrap()
             .current_dir(&build_dir)
             .args(vec![
                 "ClassiCube.sln",
-                "/p:Configuration=Release",
+                &format!("/p:Configuration={}", configuration),
+                &format!("/p:Platform={}", platform),
                 &format!("/p:PlatformToolset={}", build_tools_version),
                 "/p:WindowsTargetPlatformVersion=10.0.18362.0",
                 &format!("/p:OutDir={}\\", &out_dir.display()),
