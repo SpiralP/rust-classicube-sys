@@ -1,10 +1,10 @@
 use crate::bindings::*;
 use std::{
     mem,
-    os::raw::{c_int, c_void},
+    os::raw::{c_float, c_int, c_void},
 };
 
-macro_rules! make {
+macro_rules! make_register {
     ($func_name:ident, $name:ident) => {
         paste::item! {
             pub unsafe fn [<Event_Register $func_name>] (
@@ -34,7 +34,7 @@ macro_rules! make {
     };
 
     ($name:ident) => {
-        make!($name, $name);
+        make_register!($name, $name);
     };
 }
 
@@ -69,25 +69,33 @@ macro_rules! make_raise {
     }
 }
 
-make!(Void);
-make!(Int);
-make!(Float);
-make!(Entry);
-make!(Block);
-make!(Move, PointerMove);
-make!(Chat);
-make!(Input);
-make!(String);
+// Raise_ Void, Int, Float are already exported
 
-// Void, Int, Float are already exported
+make_register!(Void);
+make_register!(Int);
+make_register!(Float);
 
+make_register!(Entry);
 make_raise!(Entry, (stream: *mut Stream, name: *const String));
+
+make_register!(Block);
 make_raise!(Block, (coords: IVec3, oldBlock: BlockID, block: BlockID));
+
+make_register!(Move, PointerMove);
 make_raise!(
     Move,
     PointerMove,
     (idx: c_int, xDelta: c_int, yDelta: c_int)
 );
+
+make_register!(Chat);
 make_raise!(Chat, (msg: *const String, msgType: c_int));
+
+make_register!(Input);
 make_raise!(Input, (key: c_int, repeating: cc_bool));
+
+make_register!(String);
 make_raise!(String, (str: *const String));
+
+make_register!(RawMove);
+make_raise!(RawMove, (x_delta: c_float, y_delta: c_float));
