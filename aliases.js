@@ -1,9 +1,0 @@
-var ALIASES = {};
-ALIASES["classicube_sys"] = {};
-ALIASES["paste"] = {};
-ALIASES["paste_impl"] = {};
-ALIASES["proc_macro2"] = {};
-ALIASES["proc_macro_hack"] = {};
-ALIASES["quote"] = {};
-ALIASES["syn"] = {};
-ALIASES["unicode_xid"] = {};
