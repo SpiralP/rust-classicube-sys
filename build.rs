@@ -65,7 +65,7 @@ fn main() {
                 &format!("/p:Configuration={}", configuration),
                 &format!("/p:Platform={}", platform),
                 &format!("/p:PlatformToolset={}", build_tools_version),
-                "/p:WindowsTargetPlatformVersion=10.0.18362.0",
+                "/p:WindowsTargetPlatformVersion=10.0",
                 &format!("/p:OutDir={}\\", &out_dir.display()),
                 &format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
             ])
