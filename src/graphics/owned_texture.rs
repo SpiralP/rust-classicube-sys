@@ -13,7 +13,6 @@ impl OwnedGfxTexture {
                 if mipmaps { 1 } else { 0 },
             )
         };
-        println!("Gfx_CreateTexture {:#?}", resource_id);
 
         assert!(resource_id as usize != 0);
 
@@ -23,7 +22,6 @@ impl OwnedGfxTexture {
 
 impl Drop for OwnedGfxTexture {
     fn drop(&mut self) {
-        println!("Gfx_DeleteTexture {:#?}", self.resource_id);
         unsafe {
             Gfx_DeleteTexture(&mut self.resource_id);
         }
