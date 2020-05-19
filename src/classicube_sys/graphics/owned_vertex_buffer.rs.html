@@ -21,8 +21,6 @@
 <span id="21">21</span>
 <span id="22">22</span>
 <span id="23">23</span>
-<span id="24">24</span>
-<span id="25">25</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">bindings</span>::<span class="kw-2">*</span>;
 
@@ -33,7 +31,6 @@
 <span class="kw">impl</span> <span class="ident">OwnedGfxVertexBuffer</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">fmt</span>: <span class="ident">VertexFormat</span>, <span class="ident">max_vertices</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">resource_id</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Gfx_CreateDynamicVb</span>(<span class="ident">fmt</span>, <span class="ident">max_vertices</span>) };
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Gfx_CreateVertexBuffer {:#?}&quot;</span>, <span class="ident">resource_id</span>);
 
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">resource_id</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
 
@@ -43,7 +40,6 @@
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">OwnedGfxVertexBuffer</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Gfx_DeleteVb {:#?}&quot;</span>, <span class="self">self</span>.<span class="ident">resource_id</span>);
         <span class="kw">unsafe</span> {
             <span class="ident">Gfx_DeleteVb</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">resource_id</span>);
         }
