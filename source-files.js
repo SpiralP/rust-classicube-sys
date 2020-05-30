@@ -1,5 +1,5 @@
 var N = null;var sourcesIndex = {};
-sourcesIndex["classicube_sys"] = {"name":"","dirs":[{"name":"command","files":["mod.rs","owned_chat_command.rs"]},{"name":"graphics","files":["mod.rs","owned_texture.rs","owned_vertex_buffer.rs"]},{"name":"vectors","files":["ivec3.rs","mod.rs","vec3.rs"]}],"files":["bindings.rs","chat.rs","entity.rs","event.rs","input.rs","lib.rs","model.rs","packed_col.rs","string.rs","world.rs"]};
+sourcesIndex["classicube_sys"] = {"name":"","dirs":[{"name":"command","files":["mod.rs","owned_chat_command.rs"]},{"name":"graphics","files":["mod.rs","owned_texture.rs","owned_vertex_buffer.rs"]},{"name":"gui","files":["mod.rs","screen.rs"]},{"name":"vectors","files":["ivec3.rs","mod.rs","vec3.rs"]}],"files":["bindings.rs","chat.rs","entity.rs","event.rs","input.rs","lib.rs","model.rs","packed_col.rs","string.rs","world.rs"]};
 sourcesIndex["paste"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["paste_impl"] = {"name":"","files":["enum_hack.rs","lib.rs"]};
 sourcesIndex["proc_macro2"] = {"name":"","files":["detection.rs","fallback.rs","lib.rs","parse.rs","wrapper.rs"]};
