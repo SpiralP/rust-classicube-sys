@@ -11,6 +11,7 @@ mod command;
 mod entity;
 mod event;
 mod graphics;
+mod gui;
 mod input;
 mod model;
 mod packed_col;
@@ -19,7 +20,7 @@ mod vectors;
 mod world;
 
 pub use crate::{
-    bindings::*, chat::*, command::*, entity::*, event::*, graphics::*, input::*, model::*,
+    bindings::*, chat::*, command::*, entity::*, event::*, graphics::*, gui::*, input::*, model::*,
     packed_col::*, string::*, vectors::*, world::*,
 };
 
