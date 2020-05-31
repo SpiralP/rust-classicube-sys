@@ -31,9 +31,9 @@ macro_rules! BoxDesc_Tex {
 macro_rules! BoxDesc_Dims {
     ($x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
         (
-            BoxDesc_Dim!($x1, $x2),
-            BoxDesc_Dim!($y1, $y2),
-            BoxDesc_Dim!($z1, $z2),
+            $crate::BoxDesc_Dim!($x1, $x2),
+            $crate::BoxDesc_Dim!($y1, $y2),
+            $crate::BoxDesc_Dim!($z1, $z2),
         )
     };
 }
@@ -66,8 +66,8 @@ macro_rules! BoxDesc_Rot {
 macro_rules! BoxDesc_Box {
     ($x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
         (
-            BoxDesc_Dims!($x1, $y1, $z1, $x2, $y2, $z2),
-            BoxDesc_Bounds!($x1, $y1, $z1, $x2, $y2, $z2),
+            $crate::BoxDesc_Dims!($x1, $y1, $z1, $x2, $y2, $z2),
+            $crate::BoxDesc_Bounds!($x1, $y1, $z1, $x2, $y2, $z2),
         )
     };
 }
