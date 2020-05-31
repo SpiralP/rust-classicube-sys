@@ -144,3 +144,18 @@ fn test_model_macros() {
     let mut e: Entity = unsafe { std::mem::zeroed() };
     Model_RetAABB!(e, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
+
+pub fn ModelPart_Init(
+    part: &mut ModelPart,
+    offset: cc_uint16,
+    count: cc_uint16,
+    rotX: c_float,
+    rotY: c_float,
+    rotZ: c_float,
+) {
+    part.offset = offset;
+    part.count = count;
+    part.rotX = rotX;
+    part.rotY = rotY;
+    part.rotZ = rotZ;
+}
