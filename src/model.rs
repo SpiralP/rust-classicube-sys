@@ -104,7 +104,7 @@ impl BoxDesc {
 #[macro_export]
 macro_rules! Model_RetSize {
     ($e:expr, $x:expr, $y:expr, $z:expr) => {
-        static P: Vec3 = $crate::Vec3::new(
+        static P: $crate::Vec3 = $crate::Vec3::new(
             $x/16.0,
             $y/16.0,
             $z/16.0
@@ -116,7 +116,7 @@ macro_rules! Model_RetSize {
 #[macro_export]
 macro_rules! Model_RetAABB {
     ($e:expr, $x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
-        static BB: AABB = $crate::AABB {
+        static BB: $crate::AABB = $crate::AABB {
             Min: $crate::Vec3::new($x1 / 16.0, $y1 / 16.0, $z1 / 16.0),
             Max: $crate::Vec3::new($x2 / 16.0, $y2 / 16.0, $z2 / 16.0),
         };
