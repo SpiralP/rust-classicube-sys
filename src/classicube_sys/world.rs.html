@@ -19,31 +19,9 @@
 <span id="19">19</span>
 <span id="20">20</span>
 <span id="21">21</span>
-<span id="22">22</span>
-<span id="23">23</span>
-<span id="24">24</span>
-<span id="25">25</span>
-<span id="26">26</span>
-<span id="27">27</span>
-<span id="28">28</span>
-<span id="29">29</span>
-<span id="30">30</span>
-<span id="31">31</span>
-<span id="32">32</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="comment">// static CC_INLINE BlockID World_GetBlock(int x, int y, int z) {</span>
-<span class="comment">// 	int i = World_Pack(x, y, z);</span>
-<span class="comment">// 	return (BlockID)((World.Blocks[i] | (World.Blocks2[i] &lt;&lt; 8)) &amp; World.IDMask);</span>
-<span class="comment">// }</span>
-
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">World</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>, <span class="ident">slice</span>};
-
-<span class="comment">// /* Unpacka an index into x,y,z (slow!) */</span>
-<span class="comment">// #define World_Unpack(idx, x, y, z) x = idx % World.Width; z = (idx /</span>
-<span class="comment">// World.Width) % World.Length; y = (idx / World.Width) / World.Length; /* Packs</span>
-<span class="comment">// an x,y,z into a single index */ #define World_Pack(x, y, z) (((y) *</span>
-<span class="comment">// World.Length + (z)) * World.Width + (x))</span>
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Pack</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
     ((<span class="ident">y</span>) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Length</span> } <span class="op">+</span> (<span class="ident">z</span>)) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Width</span> } <span class="op">+</span> (<span class="ident">x</span>)
