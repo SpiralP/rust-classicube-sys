@@ -13,6 +13,7 @@ mod event;
 mod graphics;
 mod gui;
 mod input;
+mod inventory;
 mod model;
 mod packed_col;
 mod string;
@@ -20,8 +21,8 @@ mod vectors;
 mod world;
 
 pub use crate::{
-    bindings::*, chat::*, command::*, entity::*, event::*, graphics::*, gui::*, input::*, model::*,
-    packed_col::*, string::*, vectors::*, world::*,
+    bindings::*, chat::*, command::*, entity::*, event::*, graphics::*, gui::*, input::*,
+    inventory::*, model::*, packed_col::*, string::*, vectors::*, world::*,
 };
 
 /// On windows, external statics have to be tagged with dllimport,
