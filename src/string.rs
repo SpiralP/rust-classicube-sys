@@ -1,7 +1,6 @@
 use crate::bindings::{String as CCString, String_CalcLen};
 use std::{
     borrow::Borrow,
-    convert::TryInto,
     ffi::CString,
     os::raw::{c_char, c_int},
     slice,
@@ -80,12 +79,12 @@ fn test_owned_string() {
 pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> CCString {
     CCString {
         buffer,
-        length: length.try_into().unwrap(),
-        capacity: capacity.try_into().unwrap(),
+        length: length as _,
+        capacity: capacity as _,
     }
 }
 
 pub unsafe fn String_FromReadonly(buffer: *const c_char) -> CCString {
-    let len = String_CalcLen(buffer, std::u16::MAX.try_into().unwrap());
+    let len = String_CalcLen(buffer, std::u16::MAX as _);
     String_Init(buffer as *mut c_char, len, len)
 }
