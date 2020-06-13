@@ -88,12 +88,10 @@
 <span id="88">88</span>
 <span id="89">89</span>
 <span id="90">90</span>
-<span id="91">91</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">bindings</span>::{<span class="ident">String</span> <span class="kw">as</span> <span class="ident">CCString</span>, <span class="ident">String_CalcLen</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">borrow</span>::<span class="ident">Borrow</span>,
-    <span class="ident">convert</span>::<span class="ident">TryInto</span>,
     <span class="ident">ffi</span>::<span class="ident">CString</span>,
     <span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_int</span>},
     <span class="ident">slice</span>,
@@ -172,13 +170,13 @@
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">String_Init</span>(<span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_char</span>, <span class="ident">length</span>: <span class="ident">c_int</span>, <span class="ident">capacity</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CCString</span> {
     <span class="ident">CCString</span> {
         <span class="ident">buffer</span>,
-        <span class="ident">length</span>: <span class="ident">length</span>.<span class="ident">try_into</span>().<span class="ident">unwrap</span>(),
-        <span class="ident">capacity</span>: <span class="ident">capacity</span>.<span class="ident">try_into</span>().<span class="ident">unwrap</span>(),
+        <span class="ident">length</span>: <span class="ident">length</span> <span class="kw">as</span> <span class="kw">_</span>,
+        <span class="ident">capacity</span>: <span class="ident">capacity</span> <span class="kw">as</span> <span class="kw">_</span>,
     }
 }
 
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">String_FromReadonly</span>(<span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CCString</span> {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">String_CalcLen</span>(<span class="ident">buffer</span>, <span class="ident">std</span>::<span class="ident">u16</span>::<span class="ident">MAX</span>.<span class="ident">try_into</span>().<span class="ident">unwrap</span>());
+    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">String_CalcLen</span>(<span class="ident">buffer</span>, <span class="ident">std</span>::<span class="ident">u16</span>::<span class="ident">MAX</span> <span class="kw">as</span> <span class="kw">_</span>);
     <span class="ident">String_Init</span>(<span class="ident">buffer</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_char</span>, <span class="ident">len</span>, <span class="ident">len</span>)
 }
 </pre></div>
