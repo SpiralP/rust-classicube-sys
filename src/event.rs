@@ -95,7 +95,7 @@ make_register!(Input);
 make_raise!(Input, (key: c_int, repeating: cc_bool));
 
 make_register!(String);
-make_raise!(String, (str: *const String));
+make_raise!(String, (s: *const String));
 
 make_register!(RawMove);
 make_raise!(RawMove, (x_delta: c_float, y_delta: c_float));
