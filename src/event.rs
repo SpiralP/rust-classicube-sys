@@ -47,7 +47,7 @@ macro_rules! make_raise {
         paste::item! {
             pub unsafe fn [<Event_Raise $func_name>] (
                 handlers: &mut [<Event_ $name>],
-                $($arg: $arg_type),*
+                $($arg: $arg_type,)*
             ) {
                 for i in 0..handlers.Count {
                     if let Some(f) = handlers.Handlers[i as usize] {
