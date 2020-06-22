@@ -1,16 +1,14 @@
+mod ops;
+
+pub use self::ops::*;
 use crate::{bindings::*, Int32_MaxValue};
-use std::{
-    ops::{Add, Div, Mul, Neg, Sub},
-    os::raw::{c_float, c_int},
-};
+use std::os::raw::{c_float, c_int};
 
 impl Vec3 {
-    #[inline]
     pub const fn new(x: c_float, y: c_float, z: c_float) -> Self {
         Self { X: x, Y: y, Z: z }
     }
 
-    #[inline]
     pub const fn zero() -> Self {
         Self {
             X: 0.0,
@@ -21,12 +19,10 @@ impl Vec3 {
 }
 
 impl IVec3 {
-    #[inline]
     pub const fn new(x: c_int, y: c_int, z: c_int) -> Self {
         Self { X: x, Y: y, Z: z }
     }
 
-    #[inline]
     pub const fn zero() -> Self {
         Self { X: 0, Y: 0, Z: 0 }
     }
@@ -118,172 +114,6 @@ pub fn Vec3_LengthSquared(v: &Vec3) -> c_float {
 impl Vec3 {
     pub fn length_squared(&mut self) -> c_float {
         Vec3_LengthSquared(self)
-    }
-}
-
-/// Adds components of two vectors together.
-pub fn Vec3_Add(result: &mut Vec3, a: &Vec3, b: &Vec3) {
-    result.X = a.X + b.X;
-    result.Y = a.Y + b.Y;
-    result.Z = a.Z + b.Z;
-}
-impl Add<Self> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn add(self, other: Self) -> Self {
-        let mut result = Self::zero();
-        Vec3_Add(&mut result, &self, &other);
-        result
-    }
-}
-
-/// Adds a value to each component of a vector.
-pub fn Vec3_Add1(result: &mut Vec3, a: &Vec3, b: c_float) {
-    result.X = a.X + b;
-    result.Y = a.Y + b;
-    result.Z = a.Z + b;
-}
-impl Add<c_float> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn add(self, other: c_float) -> Self {
-        let mut result = Self::zero();
-        Vec3_Add1(&mut result, &self, other);
-        result
-    }
-}
-
-/// Subtracts components of two vectors from each other.
-pub fn Vec3_Sub(result: &mut Vec3, a: &Vec3, b: &Vec3) {
-    result.X = a.X - b.X;
-    result.Y = a.Y - b.Y;
-    result.Z = a.Z - b.Z;
-}
-impl Sub<Self> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn sub(self, other: Self) -> Self {
-        let mut result = Self::zero();
-        Vec3_Sub(&mut result, &self, &other);
-        result
-    }
-}
-
-pub fn Vec3_Sub1(result: &mut Vec3, a: &Vec3, b: c_float) {
-    result.X = a.X - b;
-    result.Y = a.Y - b;
-    result.Z = a.Z - b;
-}
-impl Sub<c_float> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn sub(self, other: c_float) -> Self {
-        let mut result = Self::zero();
-        Vec3_Sub1(&mut result, &self, other);
-        result
-    }
-}
-
-/// Multiplies components of two vectors together.
-pub fn Vec3_Mul3(result: &mut Vec3, a: &Vec3, b: &Vec3) {
-    result.X = a.X * b.X;
-    result.Y = a.Y * b.Y;
-    result.Z = a.Z * b.Z;
-}
-impl Mul<Self> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn mul(self, other: Self) -> Self {
-        let mut result = Self::zero();
-        Vec3_Mul3(&mut result, &self, &other);
-        result
-    }
-}
-
-/// Mulitplies each component of a vector by a value.
-pub fn Vec3_Mul1(result: &mut Vec3, a: &Vec3, b: c_float) {
-    result.X = a.X * b;
-    result.Y = a.Y * b;
-    result.Z = a.Z * b;
-}
-impl Mul<c_float> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn mul(self, other: c_float) -> Self {
-        let mut result = Self::zero();
-        Vec3_Mul1(&mut result, &self, other);
-        result
-    }
-}
-
-pub fn Vec3_Div3(result: &mut Vec3, a: &Vec3, b: &Vec3) {
-    result.X = a.X * b.X;
-    result.Y = a.Y * b.Y;
-    result.Z = a.Z * b.Z;
-}
-impl Div<Self> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn div(self, other: Self) -> Self {
-        let mut result = Self::zero();
-        Vec3_Div3(&mut result, &self, &other);
-        result
-    }
-}
-
-pub fn Vec3_Div1(result: &mut Vec3, a: &Vec3, b: c_float) {
-    result.X = a.X * b;
-    result.Y = a.Y * b;
-    result.Z = a.Z * b;
-}
-impl Div<c_float> for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn div(self, other: c_float) -> Self {
-        let mut result = Self::zero();
-        Vec3_Div1(&mut result, &self, other);
-        result
-    }
-}
-
-/// Negats the components of a vector.
-pub fn Vec3_Negate(result: &mut Vec3, a: &Vec3) {
-    result.X = -a.X;
-    result.Y = -a.Y;
-    result.Z = -a.Z;
-}
-impl Neg for Vec3 {
-    type Output = Self;
-
-    #[inline]
-    fn neg(self) -> Self {
-        let mut result = Self::zero();
-        Vec3_Negate(&mut result, &self);
-        result
-    }
-}
-
-pub fn IVec3_Negate(result: &mut IVec3, a: &IVec3) {
-    result.X = -a.X;
-    result.Y = -a.Y;
-    result.Z = -a.Z;
-}
-impl Neg for IVec3 {
-    type Output = Self;
-
-    #[inline]
-    fn neg(self) -> Self {
-        let mut result = Self::zero();
-        IVec3_Negate(&mut result, &self);
-        result
     }
 }
 
