@@ -24,7 +24,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>, <span class="ident">slice</span>};
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Pack</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
-    ((<span class="ident">y</span>) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Length</span> } <span class="op">+</span> (<span class="ident">z</span>)) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Width</span> } <span class="op">+</span> (<span class="ident">x</span>)
+    (<span class="ident">y</span> <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Length</span> } <span class="op">+</span> <span class="ident">z</span>) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Width</span> } <span class="op">+</span> <span class="ident">x</span>
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_GetBlock</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockID</span> {
