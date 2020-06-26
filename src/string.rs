@@ -1,8 +1,9 @@
-use crate::bindings::{String as CCString, String_CalcLen};
+use crate::bindings::{cc_uint16, String as CCString, String_CalcLen};
 use std::{
     borrow::Borrow,
     ffi::CString,
     os::raw::{c_char, c_int},
+    pin::Pin,
     slice,
 };
 
@@ -28,24 +29,24 @@ impl From<CCString> for String {
 
 pub struct OwnedString {
     cc_string: CCString,
-    _c_string: CString,
+    _c_string: Pin<Box<CString>>,
 }
 
 impl OwnedString {
     pub fn new<S: Into<Vec<u8>>>(s: S) -> Self {
         let chars = s.into();
-        let length = chars.len() as u16;
-        let capacity = chars.len() as u16;
+        let length = chars.len();
+        let capacity = chars.len();
 
-        let _c_string = CString::new(chars).unwrap();
-        let buffer = _c_string.as_ptr() as *mut c_char;
+        let mut c_string = Box::pin(CString::new(chars).unwrap());
+        let buffer: *const c_char = unsafe { c_string.as_mut().get_unchecked_mut().as_ptr() };
 
         Self {
-            _c_string,
+            _c_string: c_string,
             cc_string: CCString {
-                buffer,
-                length,
-                capacity,
+                buffer: buffer as *mut c_char,
+                length: length as cc_uint16,
+                capacity: capacity as cc_uint16,
             },
         }
     }
