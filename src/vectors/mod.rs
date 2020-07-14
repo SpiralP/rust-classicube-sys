@@ -95,12 +95,12 @@ macro_rules! Vec3_IsZero {
     };
 }
 impl Vec3 {
-    pub fn is_zero(&mut self) -> bool {
+    pub fn is_zero(&self) -> bool {
         Vec3_IsZero!(self)
     }
 }
 impl IVec3 {
-    pub fn is_zero(&mut self) -> bool {
+    pub fn is_zero(&self) -> bool {
         Vec3_IsZero!(self)
     }
 }
@@ -112,7 +112,7 @@ pub fn Vec3_LengthSquared(v: &Vec3) -> c_float {
     v.X * v.X + v.Y * v.Y + v.Z * v.Z
 }
 impl Vec3 {
-    pub fn length_squared(&mut self) -> c_float {
+    pub fn length_squared(&self) -> c_float {
         Vec3_LengthSquared(self)
     }
 }
