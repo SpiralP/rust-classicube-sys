@@ -324,7 +324,7 @@ pub fn Vec3_GetDirVector(yawRad: c_float, pitchRad: c_float) -> Vec3 {
     Vec3_Create3(x, y, z)
 }
 impl Vec3 {
-    pub fn max(yawRad: c_float, pitchRad: c_float) -> Self {
+    pub fn get_dir_vector(yawRad: c_float, pitchRad: c_float) -> Self {
         Vec3_GetDirVector(yawRad, pitchRad)
     }
 }
