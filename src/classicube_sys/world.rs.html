@@ -23,22 +23,22 @@
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">World</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>, <span class="ident">slice</span>};
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Pack</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Pack</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">c_int</span> {
     (<span class="ident">y</span> <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Length</span> } <span class="op">+</span> <span class="ident">z</span>) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Width</span> } <span class="op">+</span> <span class="ident">x</span>
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_GetBlock</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockID</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_GetBlock</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">BlockID</span> {
     <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">World_Pack</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>) <span class="kw">as</span> <span class="ident">usize</span>;
 
-    (((<span class="ident">World_Blocks</span>()[<span class="ident">i</span>] <span class="kw">as</span> <span class="ident">c_int</span>) <span class="op">|</span> ((<span class="ident">World_Blocks2</span>()[<span class="ident">i</span>] <span class="kw">as</span> <span class="ident">c_int</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span>))
+    (((<span class="ident">World_Blocks</span>()[<span class="ident">i</span>] <span class="kw">as</span> <span class="ident">c_int</span>) <span class="op">|</span> ((<span class="ident">World_Blocks2</span>()[<span class="ident">i</span>] <span class="kw">as</span> <span class="ident">c_int</span>) <span class="op">&lt;&lt;</span> <span class="number">8</span>))
         <span class="op">&amp;</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">IDMask</span> }) <span class="kw">as</span> <span class="ident">BlockID</span>
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Blocks</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> [<span class="ident">BlockRaw</span>] {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Blocks</span>() <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> [<span class="ident">BlockRaw</span>] {
     <span class="kw">unsafe</span> { <span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">World</span>.<span class="ident">Blocks</span>, <span class="ident">World</span>.<span class="ident">Volume</span> <span class="kw">as</span> <span class="kw">_</span>) }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Blocks2</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> [<span class="ident">BlockRaw</span>] {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Blocks2</span>() <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> [<span class="ident">BlockRaw</span>] {
     <span class="kw">unsafe</span> { <span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">World</span>.<span class="ident">Blocks2</span>, <span class="ident">World</span>.<span class="ident">Volume</span> <span class="kw">as</span> <span class="kw">_</span>) }
 }
 </pre></div>

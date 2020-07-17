@@ -72,14 +72,14 @@
     <span class="ident">Gfx_DrawVb_IndexedTris</span>(<span class="ident">vCount</span>);
 }
 
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Gfx_Make2DQuad</span>(<span class="ident">tex</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Texture</span>, <span class="ident">col</span>: <span class="ident">PackedCol</span>) <span class="op">-</span><span class="op">&gt;</span> [<span class="ident">VertexP3fT2fC4b</span>; <span class="number">4</span>] {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Gfx_Make2DQuad</span>(<span class="ident">tex</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Texture</span>, <span class="ident">col</span>: <span class="ident">PackedCol</span>) <span class="op">-&gt;</span> [<span class="ident">VertexTextured</span>; <span class="number">4</span>] {
     <span class="kw">let</span> <span class="ident">x1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">tex</span>.<span class="ident">X</span> <span class="kw">as</span> <span class="kw">_</span>;
     <span class="kw">let</span> <span class="ident">x2</span>: <span class="ident">f32</span> <span class="op">=</span> (<span class="ident">tex</span>.<span class="ident">X</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="ident">tex</span>.<span class="ident">Width</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="kw">as</span> <span class="kw">_</span>;
     <span class="kw">let</span> <span class="ident">y1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">tex</span>.<span class="ident">Y</span> <span class="kw">as</span> <span class="kw">_</span>;
     <span class="kw">let</span> <span class="ident">y2</span>: <span class="ident">f32</span> <span class="op">=</span> (<span class="ident">tex</span>.<span class="ident">Y</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="ident">tex</span>.<span class="ident">Height</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="kw">as</span> <span class="kw">_</span>;
 
     [
-        <span class="ident">VertexP3fT2fC4b</span> {
+        <span class="ident">VertexTextured</span> {
             <span class="ident">X</span>: <span class="ident">x1</span>,
             <span class="ident">Y</span>: <span class="ident">y1</span>,
             <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
@@ -87,7 +87,7 @@
             <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U1</span>,
             <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V1</span>,
         },
-        <span class="ident">VertexP3fT2fC4b</span> {
+        <span class="ident">VertexTextured</span> {
             <span class="ident">X</span>: <span class="ident">x2</span>,
             <span class="ident">Y</span>: <span class="ident">y1</span>,
             <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
@@ -95,7 +95,7 @@
             <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U2</span>,
             <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V1</span>,
         },
-        <span class="ident">VertexP3fT2fC4b</span> {
+        <span class="ident">VertexTextured</span> {
             <span class="ident">X</span>: <span class="ident">x2</span>,
             <span class="ident">Y</span>: <span class="ident">y2</span>,
             <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
@@ -103,7 +103,7 @@
             <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U2</span>,
             <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V2</span>,
         },
-        <span class="ident">VertexP3fT2fC4b</span> {
+        <span class="ident">VertexTextured</span> {
             <span class="ident">X</span>: <span class="ident">x1</span>,
             <span class="ident">Y</span>: <span class="ident">y2</span>,
             <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,

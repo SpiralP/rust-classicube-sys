@@ -21,20 +21,20 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">bindings</span>::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_R_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PackedCol</span> {
-    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">PACKEDCOL_R_SHIFT</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_R_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">PackedCol</span> {
+    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;&lt;</span> <span class="ident">PACKEDCOL_R_SHIFT</span>
 }
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_G_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PackedCol</span> {
-    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">PACKEDCOL_G_SHIFT</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_G_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">PackedCol</span> {
+    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;&lt;</span> <span class="ident">PACKEDCOL_G_SHIFT</span>
 }
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_B_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PackedCol</span> {
-    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">PACKEDCOL_B_SHIFT</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_B_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">PackedCol</span> {
+    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;&lt;</span> <span class="ident">PACKEDCOL_B_SHIFT</span>
 }
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_A_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PackedCol</span> {
-    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">PACKEDCOL_A_SHIFT</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_A_Bits</span>(<span class="ident">col</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">PackedCol</span> {
+    (<span class="ident">col</span> <span class="kw">as</span> <span class="ident">PackedCol</span>) <span class="op">&lt;&lt;</span> <span class="ident">PACKEDCOL_A_SHIFT</span>
 }
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_Make</span>(<span class="ident">r</span>: <span class="ident">u8</span>, <span class="ident">g</span>: <span class="ident">u8</span>, <span class="ident">b</span>: <span class="ident">u8</span>, <span class="ident">a</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PackedCol</span> {
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">PackedCol_Make</span>(<span class="ident">r</span>: <span class="ident">u8</span>, <span class="ident">g</span>: <span class="ident">u8</span>, <span class="ident">b</span>: <span class="ident">u8</span>, <span class="ident">a</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">PackedCol</span> {
     <span class="ident">PackedCol_R_Bits</span>(<span class="ident">r</span>) <span class="op">|</span> <span class="ident">PackedCol_G_Bits</span>(<span class="ident">g</span>) <span class="op">|</span> <span class="ident">PackedCol_B_Bits</span>(<span class="ident">b</span>) <span class="op">|</span> <span class="ident">PackedCol_A_Bits</span>(<span class="ident">a</span>)
 }
 

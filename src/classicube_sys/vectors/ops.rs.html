@@ -213,10 +213,10 @@
 <span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -224,10 +224,10 @@
 <span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">c_float</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -235,10 +235,10 @@
 <span class="kw">impl</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -246,10 +246,10 @@
 <span class="kw">impl</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">c_float</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -257,10 +257,10 @@
 <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">*=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">*=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">*=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -268,10 +268,10 @@
 <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">c_float</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">*=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">*=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">*=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -279,10 +279,10 @@
 <span class="kw">impl</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -290,10 +290,10 @@
 <span class="kw">impl</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">c_float</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_float</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -301,7 +301,7 @@
 <span class="kw">impl</span> <span class="ident">Neg</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">X</span> <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">X</span>;
         <span class="self">self</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">Y</span>;
         <span class="self">self</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">Z</span>;
@@ -312,10 +312,10 @@
 <span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -325,10 +325,10 @@
 <span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">c_int</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">+=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">+=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">+=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -336,10 +336,10 @@
 <span class="kw">impl</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -347,10 +347,10 @@
 <span class="kw">impl</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">c_int</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">-=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">-=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">-=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -358,10 +358,10 @@
 <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">*=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">*=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">*=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -369,10 +369,10 @@
 <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">c_int</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">*=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">*=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">*=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -380,10 +380,10 @@
 <span class="kw">impl</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">X</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
+    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/=</span> <span class="ident">other</span>.<span class="ident">X</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/=</span> <span class="ident">other</span>.<span class="ident">Y</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/=</span> <span class="ident">other</span>.<span class="ident">Z</span>;
         <span class="self">self</span>
     }
 }
@@ -391,10 +391,10 @@
 <span class="kw">impl</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">c_int</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
+    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">X</span> <span class="op">/=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Y</span> <span class="op">/=</span> <span class="ident">other</span>;
+        <span class="self">self</span>.<span class="ident">Z</span> <span class="op">/=</span> <span class="ident">other</span>;
         <span class="self">self</span>
     }
 }
@@ -402,7 +402,7 @@
 <span class="kw">impl</span> <span class="ident">Neg</span> <span class="kw">for</span> <span class="ident">IVec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">X</span> <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">X</span>;
         <span class="self">self</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">Y</span>;
         <span class="self">self</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">Z</span>;

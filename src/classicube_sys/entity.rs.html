@@ -72,12 +72,12 @@
 }
 
 <span class="doccomment">/// Clamps the given angle so it lies between [0, 360).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">LocationUpdate_Clamp</span>(<span class="kw-2">mut</span> <span class="ident">degrees</span>: <span class="ident">c_float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_float</span> {
-    <span class="kw">while</span> <span class="ident">degrees</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">360.0</span> {
-        <span class="ident">degrees</span> <span class="op">-</span><span class="op">=</span> <span class="number">360.0</span>;
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">LocationUpdate_Clamp</span>(<span class="kw-2">mut</span> <span class="ident">degrees</span>: <span class="ident">c_float</span>) <span class="op">-&gt;</span> <span class="ident">c_float</span> {
+    <span class="kw">while</span> <span class="ident">degrees</span> <span class="op">&gt;=</span> <span class="number">360.0</span> {
+        <span class="ident">degrees</span> <span class="op">-=</span> <span class="number">360.0</span>;
     }
     <span class="kw">while</span> <span class="ident">degrees</span> <span class="op">&lt;</span> <span class="number">0.0</span> {
-        <span class="ident">degrees</span> <span class="op">+</span><span class="op">=</span> <span class="number">360.0</span>;
+        <span class="ident">degrees</span> <span class="op">+=</span> <span class="number">360.0</span>;
     }
     <span class="ident">degrees</span>
 }

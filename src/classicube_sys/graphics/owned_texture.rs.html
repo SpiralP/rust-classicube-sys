@@ -35,7 +35,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">OwnedGfxTexture</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">bmp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Bitmap</span>, <span class="ident">managed_pool</span>: <span class="ident">bool</span>, <span class="ident">mipmaps</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">bmp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Bitmap</span>, <span class="ident">managed_pool</span>: <span class="ident">bool</span>, <span class="ident">mipmaps</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">resource_id</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">Gfx_CreateTexture</span>(
                 <span class="ident">bmp</span>,
@@ -44,7 +44,7 @@
             )
         };
 
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">resource_id</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">resource_id</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!=</span> <span class="number">0</span>);
 
         <span class="self">Self</span> { <span class="ident">resource_id</span> }
     }

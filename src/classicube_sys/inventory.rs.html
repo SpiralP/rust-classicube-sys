@@ -22,7 +22,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 
 <span class="doccomment">/// Gets the block at the nth index in the current hotbar.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Inventory_Get</span>(<span class="ident">idx</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockID</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Inventory_Get</span>(<span class="ident">idx</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">BlockID</span> {
     <span class="kw">unsafe</span> { <span class="ident">Inventory</span>.<span class="ident">Table</span>[(<span class="ident">Inventory</span>.<span class="ident">Offset</span> <span class="op">+</span> <span class="ident">idx</span>) <span class="kw">as</span> <span class="ident">usize</span>] }
 }
 
@@ -34,7 +34,7 @@
 }
 
 <span class="doccomment">/// Gets the currently selected block.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Inventory_SelectedBlock</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockID</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Inventory_SelectedBlock</span>() <span class="op">-&gt;</span> <span class="ident">BlockID</span> {
     <span class="kw">unsafe</span> { <span class="ident">Inventory_Get</span>(<span class="ident">Inventory</span>.<span class="ident">SelectedIndex</span>) }
 }
 </pre></div>
