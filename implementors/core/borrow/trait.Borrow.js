@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["classicube_sys"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/borrow/trait.Borrow.html\" title=\"trait core::borrow::Borrow\">Borrow</a>&lt;<a class=\"struct\" href=\"classicube_sys/struct.String_.html\" title=\"struct classicube_sys::String_\">String_</a>&gt; for <a class=\"struct\" href=\"classicube_sys/struct.OwnedString.html\" title=\"struct classicube_sys::OwnedString\">OwnedString</a>","synthetic":false,"types":["classicube_sys::string::OwnedString"]}];
+implementors["classicube_sys"] = [{"text":"impl Borrow&lt;String_&gt; for OwnedString","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
