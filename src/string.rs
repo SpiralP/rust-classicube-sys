@@ -1,4 +1,4 @@
-use crate::bindings::{cc_uint16, String as CCString, String_CalcLen};
+use crate::bindings::{cc_uint16, String as CCString, String_CalcLen, STRING_SIZE};
 use std::{
     borrow::Borrow,
     ffi::CString,
@@ -8,10 +8,10 @@ use std::{
 };
 
 impl CCString {
-    pub fn as_slice(&self) -> &'static [u8] {
+    pub fn as_slice(&self) -> &[u8] {
         let data = self.buffer as *const u8;
         let len = self.length as usize;
-        unsafe { slice::from_raw_parts::<'static>(data, len) }
+        unsafe { slice::from_raw_parts(data, len) }
     }
 }
 
@@ -88,4 +88,37 @@ pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -
 pub unsafe fn String_FromReadonly(buffer: *const c_char) -> CCString {
     let len = String_CalcLen(buffer, std::u16::MAX as _);
     String_Init(buffer as *mut c_char, len, len)
+}
+
+pub unsafe fn UNSAFE_GetString(data: &[u8]) -> CCString {
+    let mut length = 0;
+    for i in (0..STRING_SIZE).rev() {
+        let code = data[i as usize];
+        if code == b'\0' || code == b' ' {
+            continue;
+        } else {
+            length = i + 1;
+            break;
+        }
+    }
+
+    String_Init(
+        data.as_ptr() as *mut c_char,
+        length as c_int,
+        STRING_SIZE as c_int,
+    )
+}
+
+#[test]
+fn test_get_string() {
+    unsafe {
+        let mut s =
+            b"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl0000000000000000"
+                .to_vec();
+        s.resize(STRING_SIZE as usize, 0);
+        assert_eq!(
+            UNSAFE_GetString(&s).to_string(),
+            "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl"
+        );
+    }
 }
