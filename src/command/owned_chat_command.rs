@@ -30,10 +30,10 @@ impl OwnedChatCommand {
         ];
 
         let command = Box::pin(ChatCommand {
-            Name: name.as_ptr(),
+            name: name.as_ptr(),
             Execute: Some(execute),
-            SingleplayerOnly: if singleplayer_only { 1 } else { 0 },
-            Help: help_array,
+            singleplayerOnly: if singleplayer_only { 1 } else { 0 },
+            help: help_array,
             next: ptr::null_mut(),
         });
 

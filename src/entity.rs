@@ -7,7 +7,7 @@ pub unsafe fn Entity_Init(e: &mut Entity) {
     e.ModelScale.set(1.0, 1.0, 1.0);
     e.uScale = 1.0;
     e.vScale = 1.0;
-    e.StepSize = 0.5;
+    e._skinReqID = 0;
     e.SkinRaw[0] = 0;
     e.NameRaw[0] = 0;
     Entity_SetModel(e, model.as_cc_string());
