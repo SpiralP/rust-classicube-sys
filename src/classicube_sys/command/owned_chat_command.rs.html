@@ -93,10 +93,10 @@
         ];
 
         <span class="kw">let</span> <span class="ident">command</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">pin</span>(<span class="ident">ChatCommand</span> {
-            <span class="ident">name</span>: <span class="ident">name</span>.<span class="ident">as_ptr</span>(),
+            <span class="ident">Name</span>: <span class="ident">name</span>.<span class="ident">as_ptr</span>(),
             <span class="ident">Execute</span>: <span class="prelude-val">Some</span>(<span class="ident">execute</span>),
-            <span class="ident">singleplayerOnly</span>: <span class="kw">if</span> <span class="ident">singleplayer_only</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-            <span class="ident">help</span>: <span class="ident">help_array</span>,
+            <span class="ident">SingleplayerOnly</span>: <span class="kw">if</span> <span class="ident">singleplayer_only</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+            <span class="ident">Help</span>: <span class="ident">help_array</span>,
             <span class="ident">next</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
         });
 
