@@ -1,13 +1,13 @@
 #![allow(non_snake_case)]
 
 use crate::bindings::{
-    GuiPriority_GUI_PRIORITY_CHAT, GuiPriority_GUI_PRIORITY_DISCONNECT,
+    cc_string, GuiPriority_GUI_PRIORITY_CHAT, GuiPriority_GUI_PRIORITY_DISCONNECT,
     GuiPriority_GUI_PRIORITY_HUD, GuiPriority_GUI_PRIORITY_INVENTORY,
     GuiPriority_GUI_PRIORITY_LOADING, GuiPriority_GUI_PRIORITY_MENU,
     GuiPriority_GUI_PRIORITY_OLDLOADING, GuiPriority_GUI_PRIORITY_TEXIDS,
     GuiPriority_GUI_PRIORITY_TEXPACK, GuiPriority_GUI_PRIORITY_TOUCH,
     GuiPriority_GUI_PRIORITY_TOUCHMORE, GuiPriority_GUI_PRIORITY_URLWARNING, Gui_Add, Gui_Remove,
-    Screen as CCScreen, ScreenVTABLE, String as CCString,
+    Screen as CCScreen, ScreenVTABLE,
 };
 use std::{
     mem,
@@ -121,7 +121,7 @@ impl Screen {
         0
     }
 
-    unsafe extern "C" fn HandlesTextChanged(_elem: *mut c_void, _str: *const CCString) -> c_int {
+    unsafe extern "C" fn HandlesTextChanged(_elem: *mut c_void, _str: *const cc_string) -> c_int {
         0
     }
 
@@ -286,7 +286,7 @@ pub struct Callbacks {
     /// Returns non-zero if a key character press is handled.
     /// Currently only raised by on-screen keyboard in web client.
     pub handles_text_changed:
-        Option<unsafe extern "C" fn(elem: *mut c_void, str: *const CCString) -> c_int>,
+        Option<unsafe extern "C" fn(elem: *mut c_void, str: *const cc_string) -> c_int>,
     /// Returns non-zero if a pointer press is handled.
     pub handles_pointer_down:
         Option<unsafe extern "C" fn(elem: *mut c_void, id: c_int, x: c_int, y: c_int) -> c_int>,

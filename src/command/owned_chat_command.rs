@@ -1,4 +1,7 @@
-use crate::{bindings::Commands_Register, ChatCommand};
+use crate::{
+    bindings::{cc_string, Commands_Register},
+    ChatCommand,
+};
 use std::{ffi::CString, os::raw::c_int, pin::Pin, ptr};
 
 pub struct OwnedChatCommand {
@@ -10,7 +13,7 @@ pub struct OwnedChatCommand {
 impl OwnedChatCommand {
     pub fn new(
         name: &str,
-        execute: unsafe extern "C" fn(args: *const crate::String, argsCount: c_int),
+        execute: unsafe extern "C" fn(args: *const cc_string, argsCount: c_int),
         singleplayer_only: bool,
         mut help: Vec<&str>,
     ) -> Self {

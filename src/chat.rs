@@ -1,4 +1,4 @@
-use crate::{bindings::*, string::*};
+use crate::bindings::*;
 use std::os::raw::c_char;
 
 pub unsafe fn Chat_AddRaw(raw: *const c_char) {
