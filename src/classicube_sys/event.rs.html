@@ -181,7 +181,7 @@
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">Float</span>);
 
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">Entry</span>);
-<span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">Entry</span>, (<span class="ident">stream</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Stream</span>, <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span>));
+<span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">Entry</span>, (<span class="ident">stream</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Stream</span>, <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>));
 
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">Block</span>);
 <span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">Block</span>, (<span class="ident">coords</span>: <span class="ident">IVec3</span>, <span class="ident">oldBlock</span>: <span class="ident">BlockID</span>, <span class="ident">block</span>: <span class="ident">BlockID</span>));
@@ -194,13 +194,13 @@
 );
 
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">Chat</span>);
-<span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">Chat</span>, (<span class="ident">msg</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span>, <span class="ident">msgType</span>: <span class="ident">c_int</span>));
+<span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">Chat</span>, (<span class="ident">msg</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>, <span class="ident">msgType</span>: <span class="ident">c_int</span>));
 
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">Input</span>);
 <span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">Input</span>, (<span class="ident">key</span>: <span class="ident">c_int</span>, <span class="ident">repeating</span>: <span class="ident">cc_bool</span>));
 
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">String</span>);
-<span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">String</span>, (<span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span>));
+<span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">String</span>, (<span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>));
 
 <span class="macro">make_register</span><span class="macro">!</span>(<span class="ident">RawMove</span>);
 <span class="macro">make_raise</span><span class="macro">!</span>(<span class="ident">RawMove</span>, (<span class="ident">x_delta</span>: <span class="ident">c_float</span>, <span class="ident">y_delta</span>: <span class="ident">c_float</span>));

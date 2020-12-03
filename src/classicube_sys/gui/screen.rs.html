@@ -362,13 +362,13 @@
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">bindings</span>::{
-    <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span>, <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span>,
+    <span class="ident">cc_string</span>, <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span>, <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span>, <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span>, <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span>, <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span>, <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span>, <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span>, <span class="ident">Gui_Add</span>, <span class="ident">Gui_Remove</span>,
-    <span class="ident">Screen</span> <span class="kw">as</span> <span class="ident">CCScreen</span>, <span class="ident">ScreenVTABLE</span>, <span class="ident">String</span> <span class="kw">as</span> <span class="ident">CCString</span>,
+    <span class="ident">Screen</span> <span class="kw">as</span> <span class="ident">CCScreen</span>, <span class="ident">ScreenVTABLE</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">mem</span>,
@@ -482,7 +482,7 @@
         <span class="number">0</span>
     }
 
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesTextChanged</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">CCString</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesTextChanged</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
@@ -647,7 +647,7 @@
     <span class="doccomment">/// Returns non-zero if a key character press is handled.</span>
     <span class="doccomment">/// Currently only raised by on-screen keyboard in web client.</span>
     <span class="kw">pub</span> <span class="ident">handles_text_changed</span>:
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">CCString</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a pointer press is handled.</span>
     <span class="kw">pub</span> <span class="ident">handles_pointer_down</span>:
         <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">id</span>: <span class="ident">c_int</span>, <span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,

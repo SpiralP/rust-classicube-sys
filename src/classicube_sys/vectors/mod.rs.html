@@ -378,9 +378,9 @@
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">Vec3_BigPos</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec3</span> {
     <span class="ident">Vec3</span> {
-        <span class="ident">X</span>: <span class="number">1e25</span> <span class="kw">as</span> <span class="kw">_</span>,
-        <span class="ident">Y</span>: <span class="number">1e25</span> <span class="kw">as</span> <span class="kw">_</span>,
-        <span class="ident">Z</span>: <span class="number">1e25</span> <span class="kw">as</span> <span class="kw">_</span>,
+        <span class="ident">X</span>: <span class="number">1e25_f32</span>,
+        <span class="ident">Y</span>: <span class="number">1e25_f32</span>,
+        <span class="ident">Z</span>: <span class="number">1e25_f32</span>,
     }
 }
 <span class="kw">impl</span> <span class="ident">Vec3</span> {

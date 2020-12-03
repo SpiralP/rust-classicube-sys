@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["classicube_sys"] = [{"text":"impl From&lt;u8&gt; for Priority","synthetic":false,"types":[]},{"text":"impl From&lt;String_&gt; for String","synthetic":false,"types":[]},{"text":"impl From&lt;IVec3_&gt; for Vec3","synthetic":false,"types":[]}];
+implementors["classicube_sys"] = [{"text":"impl From&lt;u8&gt; for Priority","synthetic":false,"types":[]},{"text":"impl From&lt;cc_string_&gt; for String","synthetic":false,"types":[]},{"text":"impl From&lt;IVec3_&gt; for Vec3","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

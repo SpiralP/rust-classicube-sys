@@ -11,10 +11,10 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">bindings</span>::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt8_MaxValue</span>: <span class="ident">cc_uint8</span> <span class="op">=</span> <span class="number">255</span> <span class="kw">as</span> <span class="ident">cc_uint8</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int16_MaxValue</span>: <span class="ident">cc_int16</span> <span class="op">=</span> <span class="number">32767</span> <span class="kw">as</span> <span class="ident">cc_int16</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt16_MaxValue</span>: <span class="ident">cc_uint16</span> <span class="op">=</span> <span class="number">65535</span> <span class="kw">as</span> <span class="ident">cc_uint16</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int32_MinValue</span>: <span class="ident">cc_int32</span> <span class="op">=</span> <span class="op">-</span><span class="number">2147483647</span> <span class="kw">as</span> <span class="ident">cc_int32</span> <span class="op">-</span> <span class="number">1</span> <span class="kw">as</span> <span class="ident">cc_int32</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int32_MaxValue</span>: <span class="ident">cc_int32</span> <span class="op">=</span> <span class="number">2147483647</span> <span class="kw">as</span> <span class="ident">cc_int32</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt8_MaxValue</span>: <span class="ident">cc_uint8</span> <span class="op">=</span> <span class="number">255_u8</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int16_MaxValue</span>: <span class="ident">cc_int16</span> <span class="op">=</span> <span class="number">32767_i16</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt16_MaxValue</span>: <span class="ident">cc_uint16</span> <span class="op">=</span> <span class="number">65535_u16</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int32_MinValue</span>: <span class="ident">cc_int32</span> <span class="op">=</span> <span class="op">-</span><span class="number">2147483647_i32</span> <span class="op">-</span> <span class="number">1_i32</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int32_MaxValue</span>: <span class="ident">cc_int32</span> <span class="op">=</span> <span class="number">2147483647_i32</span>;
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "classicube_sys";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
