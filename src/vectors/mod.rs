@@ -44,9 +44,9 @@ impl IVec3 {
 
 pub const fn Vec3_BigPos() -> Vec3 {
     Vec3 {
-        X: 1e25 as _,
-        Y: 1e25 as _,
-        Z: 1e25 as _,
+        X: 1e25_f32,
+        Y: 1e25_f32,
+        Z: 1e25_f32,
     }
 }
 impl Vec3 {
