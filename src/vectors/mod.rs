@@ -178,9 +178,9 @@ impl Vec3 {
 /// Transforms a vector by the given matrix.
 pub fn Vec3_Transform(result: &mut Vec3, a: &Vec3, mat: &Matrix) {
     // a could be pointing to result - can't directly assign X/Y/Z therefore
-    let x = a.X * mat.Row0.X + a.Y * mat.Row1.X + a.Z * mat.Row2.X + mat.Row3.X;
-    let y = a.X * mat.Row0.Y + a.Y * mat.Row1.Y + a.Z * mat.Row2.Y + mat.Row3.Y;
-    let z = a.X * mat.Row0.Z + a.Y * mat.Row1.Z + a.Z * mat.Row2.Z + mat.Row3.Z;
+    let x = a.X * mat.row1.X + a.Y * mat.row2.X + a.Z * mat.row3.X + mat.row4.X;
+    let y = a.X * mat.row1.Y + a.Y * mat.row2.Y + a.Z * mat.row3.Y + mat.row4.Y;
+    let z = a.X * mat.row1.Z + a.Y * mat.row2.Z + a.Z * mat.row3.Z + mat.row4.Z;
     result.X = x;
     result.Y = y;
     result.Z = z;
@@ -195,9 +195,9 @@ impl Vec3 {
 
 /// Same as Vec3_Transform, but faster since X and Z are assumed as 0.
 pub fn Vec3_TransformY(result: &mut Vec3, y: c_float, mat: &Matrix) {
-    result.X = y * mat.Row1.X + mat.Row3.X;
-    result.Y = y * mat.Row1.Y + mat.Row3.Y;
-    result.Z = y * mat.Row1.Z + mat.Row3.Z;
+    result.X = y * mat.row2.X + mat.row4.X;
+    result.Y = y * mat.row2.Y + mat.row4.Y;
+    result.Z = y * mat.row2.Z + mat.row4.Z;
 }
 impl Vec3 {
     pub fn transform_y(y: c_float, mat: &Matrix) -> Self {

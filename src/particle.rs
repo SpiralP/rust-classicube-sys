@@ -12,12 +12,12 @@ pub fn Particle_DoRender(
     centre.Y += sY;
     let view = unsafe { &Gfx.View };
 
-    let aX = view.Row0.X * sX;
-    let aY = view.Row1.X * sX;
-    let aZ = view.Row2.X * sX; // right * size.X * 0.5f
-    let bX = view.Row0.Y * sY;
-    let bY = view.Row1.Y * sY;
-    let bZ = view.Row2.Y * sY; // up    * size.Y * 0.5f
+    let aX = view.row1.X * sX;
+    let aY = view.row2.X * sX;
+    let aZ = view.row3.X * sX; // right * size.X * 0.5f
+    let bX = view.row1.Y * sY;
+    let bY = view.row2.Y * sY;
+    let bZ = view.row3.Y * sY; // up    * size.Y * 0.5f
 
     [
         VertexTextured {

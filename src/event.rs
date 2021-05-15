@@ -81,13 +81,6 @@ make_raise!(Entry, (stream: *mut Stream, name: *const cc_string));
 make_register!(Block);
 make_raise!(Block, (coords: IVec3, oldBlock: BlockID, block: BlockID));
 
-make_register!(Move, PointerMove);
-make_raise!(
-    Move,
-    PointerMove,
-    (idx: c_int, xDelta: c_int, yDelta: c_int)
-);
-
 make_register!(Chat);
 make_raise!(Chat, (msg: *const cc_string, msgType: c_int));
 

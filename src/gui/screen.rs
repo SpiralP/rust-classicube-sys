@@ -33,7 +33,7 @@ impl Screen {
                     .handles_input_down
                     .unwrap_or(Self::HandlesInputDown),
             ),
-            HandlesInputUp: Some(callbacks.handles_input_up.unwrap_or(Self::HandlesInputUp)),
+            OnInputUp: Some(callbacks.on_input_up.unwrap_or(Self::OnInputUp)),
             HandlesKeyPress: Some(callbacks.handles_key_press.unwrap_or(Self::HandlesKeyPress)),
             HandlesTextChanged: Some(
                 callbacks
@@ -45,11 +45,7 @@ impl Screen {
                     .handles_pointer_down
                     .unwrap_or(Self::HandlesPointerDown),
             ),
-            HandlesPointerUp: Some(
-                callbacks
-                    .handles_pointer_up
-                    .unwrap_or(Self::HandlesPointerUp),
-            ),
+            OnPointerUp: Some(callbacks.on_pointer_up.unwrap_or(Self::OnPointerUp)),
             HandlesPointerMove: Some(
                 callbacks
                     .handles_pointer_move
@@ -113,9 +109,7 @@ impl Screen {
         0
     }
 
-    unsafe extern "C" fn HandlesInputUp(_elem: *mut c_void, _key: c_int) -> c_int {
-        0
-    }
+    unsafe extern "C" fn OnInputUp(_elem: *mut c_void, _key: c_int) {}
 
     unsafe extern "C" fn HandlesKeyPress(_elem: *mut c_void, _keyChar: c_char) -> c_int {
         0
@@ -134,14 +128,7 @@ impl Screen {
         0
     }
 
-    unsafe extern "C" fn HandlesPointerUp(
-        _elem: *mut c_void,
-        _id: c_int,
-        _x: c_int,
-        _y: c_int,
-    ) -> c_int {
-        0
-    }
+    unsafe extern "C" fn OnPointerUp(_elem: *mut c_void, _id: c_int, _x: c_int, _y: c_int) {}
 
     unsafe extern "C" fn HandlesPointerMove(
         _elem: *mut c_void,
@@ -279,7 +266,7 @@ pub struct Callbacks {
     /// Returns non-zero if an input press is handled.
     pub handles_input_down: Option<unsafe extern "C" fn(elem: *mut c_void, key: c_int) -> c_int>,
     /// Returns non-zero if an input release is handled.
-    pub handles_input_up: Option<unsafe extern "C" fn(elem: *mut c_void, key: c_int) -> c_int>,
+    pub on_input_up: Option<unsafe extern "C" fn(elem: *mut c_void, key: c_int)>,
     /// Returns non-zero if a key character press is handled.
     pub handles_key_press:
         Option<unsafe extern "C" fn(elem: *mut c_void, keyChar: c_char) -> c_int>,
@@ -291,8 +278,8 @@ pub struct Callbacks {
     pub handles_pointer_down:
         Option<unsafe extern "C" fn(elem: *mut c_void, id: c_int, x: c_int, y: c_int) -> c_int>,
     /// Returns non-zero if a pointer release is handled.
-    pub handles_pointer_up:
-        Option<unsafe extern "C" fn(elem: *mut c_void, id: c_int, x: c_int, y: c_int) -> c_int>,
+    pub on_pointer_up:
+        Option<unsafe extern "C" fn(elem: *mut c_void, id: c_int, x: c_int, y: c_int)>,
     /// Returns non-zero if a pointer movement is handled.
     pub handles_pointer_move:
         Option<unsafe extern "C" fn(elem: *mut c_void, id: c_int, x: c_int, y: c_int) -> c_int>,
@@ -320,17 +307,16 @@ pub struct Callbacks {
 // 	void (*BuildMesh)(void* elem);
 // 	/* Returns non-zero if an input press is handled. */
 // 	int  (*HandlesInputDown)(void* elem, int key);
-// 	/* Returns non-zero if an input release is handled. */
-// 	int  (*HandlesInputUp)(void* elem, int key);
+// 	/* Called when an input key or button is released */
+// 	void (*OnInputUp)(void* elem, int key);
 // 	/* Returns non-zero if a key character press is handled. */
 // 	int  (*HandlesKeyPress)(void* elem, char keyChar);
-// 	/* Returns non-zero if a key character press is handled. */
-// 	/* Currently only raised by on-screen keyboard in web client. */
-// 	int  (*HandlesTextChanged)(void* elem, const String* str);
+// 	/* Returns non-zero if on-screen keyboard text changed is handled. */
+// 	int  (*HandlesTextChanged)(void* elem, const cc_string* str);
 // 	/* Returns non-zero if a pointer press is handled. */
 // 	int  (*HandlesPointerDown)(void* elem, int id, int x, int y);
-// 	/* Returns non-zero if a pointer release is handled. */
-// 	int  (*HandlesPointerUp)(void* elem,   int id, int x, int y);
+// 	/* Called when a pointer is released. */
+// 	void (*OnPointerUp)(void* elem,   int id, int x, int y);
 // 	/* Returns non-zero if a pointer movement is handled. */
 // 	int  (*HandlesPointerMove)(void* elem, int id, int x, int y);
 // 	/* Returns non-zero if a mouse wheel scroll is handled. */
