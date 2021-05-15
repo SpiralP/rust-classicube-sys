@@ -101,12 +101,12 @@ fn build_bindings() {
                 .map(|filename| format!("#include <{}>\n", filename))
                 .collect::<String>(),
         )
-        .whitelist_type(".*");
+        .allowlist_type(".*");
 
     for var_type in var_types {
         match var_type {
             VarType::Other(var_name) => {
-                bindings = bindings.whitelist_var(var_name);
+                bindings = bindings.allowlist_var(var_name);
             }
 
             #[cfg(not(target_os = "windows"))]
@@ -114,7 +114,7 @@ fn build_bindings() {
                 var_name,
                 type_name: _,
             } => {
-                bindings = bindings.whitelist_var(var_name);
+                bindings = bindings.allowlist_var(var_name);
             }
 
             // fix windows not dllimporting from the rustc-link-lib build println
@@ -135,7 +135,7 @@ fn build_bindings() {
     }
 
     for function_name in function_names {
-        bindings = bindings.whitelist_function(function_name);
+        bindings = bindings.allowlist_function(function_name);
     }
 
     let bindings = bindings.generate().unwrap();
