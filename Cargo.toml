@@ -8,7 +8,7 @@ edition = "2018"
 paste = "1"
 
 [build-dependencies]
-bindgen = "0.56"
+bindgen = "0.58"
 cc = "1"
 fs_extra = "1"
 regex = "1"
