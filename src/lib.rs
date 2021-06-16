@@ -1,9 +1,9 @@
-#![feature(external_doc)]
+#![feature(negative_impls)]
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 #![allow(clippy::missing_safety_doc)]
-#![doc(include = "../README.md")]
+#![doc = include_str!("../README.md")]
 
 mod bindings;
 mod chat;
