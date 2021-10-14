@@ -1,6 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\gui\screen.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>screen.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../classicube_sys/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img src="../../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img src="../../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\gui\screen.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>screen.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../classicube_sys/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -343,10 +341,9 @@
 <span id="341">341</span>
 <span id="342">342</span>
 <span id="343">343</span>
-</pre><pre class="rust">
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
+</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::bindings</span>::{
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::{
     <span class="ident">cc_string</span>, <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span>, <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span>, <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span>, <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span>,
@@ -367,47 +364,47 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Screen</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">callbacks</span>: <span class="ident">Callbacks</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">callbacks</span>: <span class="ident">Callbacks</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vtable</span> <span class="op">=</span> <span class="ident">Box::pin</span>(<span class="ident">ScreenVTABLE</span> {
-            <span class="ident">Init</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">init</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::Init</span>)),
-            <span class="ident">Update</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">update</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::Update</span>)),
-            <span class="ident">Free</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">free</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::Free</span>)),
-            <span class="ident">Render</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">render</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::Render</span>)),
-            <span class="ident">BuildMesh</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">build_mesh</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::BuildMesh</span>)),
+            <span class="ident">Init</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">init</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::Init</span>)),
+            <span class="ident">Update</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">update</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::Update</span>)),
+            <span class="ident">Free</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">free</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::Free</span>)),
+            <span class="ident">Render</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">render</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::Render</span>)),
+            <span class="ident">BuildMesh</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">build_mesh</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::BuildMesh</span>)),
             <span class="ident">HandlesInputDown</span>: <span class="prelude-val">Some</span>(
                 <span class="ident">callbacks</span>
                     .<span class="ident">handles_input_down</span>
-                    .<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::HandlesInputDown</span>),
+                    .<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::HandlesInputDown</span>),
             ),
-            <span class="ident">OnInputUp</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">on_input_up</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::OnInputUp</span>)),
-            <span class="ident">HandlesKeyPress</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">handles_key_press</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::HandlesKeyPress</span>)),
+            <span class="ident">OnInputUp</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">on_input_up</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::OnInputUp</span>)),
+            <span class="ident">HandlesKeyPress</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">handles_key_press</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::HandlesKeyPress</span>)),
             <span class="ident">HandlesTextChanged</span>: <span class="prelude-val">Some</span>(
                 <span class="ident">callbacks</span>
                     .<span class="ident">handles_text_changed</span>
-                    .<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::HandlesTextChanged</span>),
+                    .<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::HandlesTextChanged</span>),
             ),
             <span class="ident">HandlesPointerDown</span>: <span class="prelude-val">Some</span>(
                 <span class="ident">callbacks</span>
                     .<span class="ident">handles_pointer_down</span>
-                    .<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::HandlesPointerDown</span>),
+                    .<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::HandlesPointerDown</span>),
             ),
-            <span class="ident">OnPointerUp</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">on_pointer_up</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::OnPointerUp</span>)),
+            <span class="ident">OnPointerUp</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">on_pointer_up</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::OnPointerUp</span>)),
             <span class="ident">HandlesPointerMove</span>: <span class="prelude-val">Some</span>(
                 <span class="ident">callbacks</span>
                     .<span class="ident">handles_pointer_move</span>
-                    .<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::HandlesPointerMove</span>),
+                    .<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::HandlesPointerMove</span>),
             ),
             <span class="ident">HandlesMouseScroll</span>: <span class="prelude-val">Some</span>(
                 <span class="ident">callbacks</span>
                     .<span class="ident">handles_mouse_scroll</span>
-                    .<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::HandlesMouseScroll</span>),
+                    .<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::HandlesMouseScroll</span>),
             ),
-            <span class="ident">Layout</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">layout</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::Layout</span>)),
-            <span class="ident">ContextLost</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">context_lost</span>.<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::ContextLost</span>)),
+            <span class="ident">Layout</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">layout</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::Layout</span>)),
+            <span class="ident">ContextLost</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">context_lost</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::ContextLost</span>)),
             <span class="ident">ContextRecreated</span>: <span class="prelude-val">Some</span>(
                 <span class="ident">callbacks</span>
                     .<span class="ident">context_recreated</span>
-                    .<span class="ident">unwrap_or</span>(<span class="self">Self</span><span class="ident">::ContextRecreated</span>),
+                    .<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::ContextRecreated</span>),
             ),
         });
 
@@ -451,17 +448,17 @@
 
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">BuildMesh</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) {}
 
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesInputDown</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_key</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesInputDown</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_key</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">OnInputUp</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_key</span>: <span class="ident">c_int</span>) {}
 
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesKeyPress</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_keyChar</span>: <span class="ident">c_char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesKeyPress</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_keyChar</span>: <span class="ident">c_char</span>) -&gt; <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesTextChanged</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesTextChanged</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>) -&gt; <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
@@ -470,7 +467,7 @@
         <span class="ident">_id</span>: <span class="ident">c_int</span>,
         <span class="ident">_x</span>: <span class="ident">c_int</span>,
         <span class="ident">_y</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    ) -&gt; <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
@@ -481,11 +478,11 @@
         <span class="ident">_id</span>: <span class="ident">c_int</span>,
         <span class="ident">_x</span>: <span class="ident">c_int</span>,
         <span class="ident">_y</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    ) -&gt; <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesMouseScroll</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_delta</span>: <span class="ident">f32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span> {
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">HandlesMouseScroll</span>(<span class="ident">_elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">_delta</span>: <span class="ident">f32</span>) -&gt; <span class="ident">c_int</span> {
         <span class="number">0</span>
     }
 
@@ -546,53 +543,53 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Priority</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">n</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::Custom</span>(<span class="ident">n</span>)
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">n</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
+        <span class="ident"><span class="self">Self</span>::Custom</span>(<span class="ident">n</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Priority</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span><span class="ident">::UnderDisconnect</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Disconnect</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverDisconnect</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderOldLoading</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::OldLoading</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverOldLoading</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderMenu</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Menu</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverMenu</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderTouchMore</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::TouchMore</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverTouchMore</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderUrlWarning</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UrlWarning</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverUrlWarning</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderTexPack</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::TexPack</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverTexPack</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderTexIds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::TexIds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverTexIds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderTouch</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Touch</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverTouch</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderInventory</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Inventory</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverInventory</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderChat</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Chat</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverChat</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderHud</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Hud</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverHud</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderLoading</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Loading</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="self">Self</span><span class="ident">::OverLoading</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::UnderEverything</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">0</span>,
-            <span class="self">Self</span><span class="ident">::OverEverything</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">255</span>,
-            <span class="self">Self</span><span class="ident">::Custom</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">n</span>,
+            <span class="ident"><span class="self">Self</span>::UnderDisconnect</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Disconnect</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverDisconnect</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderOldLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::OldLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverOldLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderMenu</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Menu</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverMenu</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderTouchMore</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::TouchMore</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverTouchMore</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderUrlWarning</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UrlWarning</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverUrlWarning</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderTexPack</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::TexPack</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverTexPack</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderTexIds</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::TexIds</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverTexIds</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderTouch</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Touch</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverTouch</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderInventory</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Inventory</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverInventory</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderChat</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Chat</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverChat</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderHud</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Hud</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverHud</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Loading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident"><span class="self">Self</span>::OverLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::UnderEverything</span> =&gt; <span class="number">0</span>,
+            <span class="ident"><span class="self">Self</span>::OverEverything</span> =&gt; <span class="number">255</span>,
+            <span class="ident"><span class="self">Self</span>::Custom</span>(<span class="ident">n</span>) =&gt; <span class="kw-2">*</span><span class="ident">n</span>,
         }
     }
 }
@@ -610,27 +607,27 @@
     <span class="doccomment">/// Builds the vertex mesh for all the widgets in the screen.</span>
     <span class="kw">pub</span> <span class="ident">build_mesh</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>)<span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if an input press is handled.</span>
-    <span class="kw">pub</span> <span class="ident">handles_input_down</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">key</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">handles_input_down</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">key</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if an input release is handled.</span>
     <span class="kw">pub</span> <span class="ident">on_input_up</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">key</span>: <span class="ident">c_int</span>)<span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a key character press is handled.</span>
     <span class="kw">pub</span> <span class="ident">handles_key_press</span>:
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">keyChar</span>: <span class="ident">c_char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">keyChar</span>: <span class="ident">c_char</span>) -&gt; <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a key character press is handled.</span>
     <span class="doccomment">/// Currently only raised by on-screen keyboard in web client.</span>
     <span class="kw">pub</span> <span class="ident">handles_text_changed</span>:
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cc_string</span>) -&gt; <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a pointer press is handled.</span>
     <span class="kw">pub</span> <span class="ident">handles_pointer_down</span>:
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">id</span>: <span class="ident">c_int</span>, <span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">id</span>: <span class="ident">c_int</span>, <span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a pointer release is handled.</span>
     <span class="kw">pub</span> <span class="ident">on_pointer_up</span>:
         <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">id</span>: <span class="ident">c_int</span>, <span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>)<span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a pointer movement is handled.</span>
     <span class="kw">pub</span> <span class="ident">handles_pointer_move</span>:
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">id</span>: <span class="ident">c_int</span>, <span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">id</span>: <span class="ident">c_int</span>, <span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Returns non-zero if a mouse wheel scroll is handled.</span>
-    <span class="kw">pub</span> <span class="ident">handles_mouse_scroll</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">delta</span>: <span class="ident">f32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">handles_mouse_scroll</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">delta</span>: <span class="ident">f32</span>) -&gt; <span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Positions widgets on screen. Typically called on window resize.</span>
     <span class="kw">pub</span> <span class="ident">layout</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">elem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>)<span class="op">&gt;</span>,
     <span class="doccomment">/// Destroys graphics resources. (textures, vertex buffers, etc)</span>
@@ -687,5 +684,7 @@
 <span class="comment">//     struct Widget** widgets;</span>
 <span class="comment">//     int numWidgets;</span>
 <span class="comment">// };</span>
-</pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script></body></html>
+</code></pre></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
+    <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
+</body></html>
