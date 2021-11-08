@@ -181,17 +181,19 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
                 )
                 .unwrap()
                 .captures(part)
-                .expect(&format!(
-                    "couldn't get capture in file {:?} from {:?}",
-                    file_name, part
-                ));
+                .unwrap_or_else(|| {
+                    panic!(
+                        "couldn't get capture in file {:?} from {:?}",
+                        file_name, part
+                    )
+                });
                 let type_name = captures
                     .get(1)
-                    .expect(&format!("couldn't get capture 1 from {:?}", part));
+                    .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part));
 
                 let var_name = captures
                     .get(2)
-                    .expect(&format!("couldn't get capture 2 from {:?}", part));
+                    .unwrap_or_else(|| panic!("couldn't get capture 2 from {:?}", part));
 
                 var_names.insert(VarType::Static {
                     var_name: var_name.as_str().to_string(),
@@ -204,7 +206,9 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
                 .unwrap()
                 .captures_iter(&data)
             {
-                let macro_name = captures.get(1).expect(&format!("couldn't get capture 1"));
+                let macro_name = captures
+                    .get(1)
+                    .unwrap_or_else(|| panic!("couldn't get capture 1"));
 
                 var_names.insert(VarType::Other(macro_name.as_str().to_string()));
             }
@@ -217,12 +221,14 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
                 )
                 .unwrap()
                 .captures(part)
-                .expect(&format!(
-                    "couldn't get capture in file {:?} from {:?}",
-                    file_name, part
-                ))
+                .unwrap_or_else(|| {
+                    panic!(
+                        "couldn't get capture in file {:?} from {:?}",
+                        file_name, part
+                    )
+                })
                 .get(1)
-                .expect(&format!("couldn't get capture 1 from {:?}", part));
+                .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part));
 
                 function_names.insert(function_name.as_str().to_string());
             }
