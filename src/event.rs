@@ -92,3 +92,6 @@ make_raise!(String, (s: *const cc_string));
 
 make_register!(RawMove);
 make_raise!(RawMove, (x_delta: c_float, y_delta: c_float));
+
+make_register!(PluginMessage);
+make_raise!(PluginMessage, (channel: u8, data: *mut u8));
