@@ -92,6 +92,9 @@
 <span id="92">92</span>
 <span id="93">93</span>
 <span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">mem</span>,
@@ -186,6 +189,9 @@
 
 <span class="macro">make_register!</span>(<span class="ident">RawMove</span>);
 <span class="macro">make_raise!</span>(<span class="ident">RawMove</span>, (<span class="ident">x_delta</span>: <span class="ident">c_float</span>, <span class="ident">y_delta</span>: <span class="ident">c_float</span>));
+
+<span class="macro">make_register!</span>(<span class="ident">PluginMessage</span>);
+<span class="macro">make_raise!</span>(<span class="ident">PluginMessage</span>, (<span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">data</span>: <span class="kw-2">*mut</span> <span class="ident">u8</span>));
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="classicube_sys" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
