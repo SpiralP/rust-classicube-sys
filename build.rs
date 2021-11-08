@@ -164,7 +164,10 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
     for entry in fs::read_dir("ClassiCube/src").unwrap() {
         let entry = entry.unwrap();
         let file_name = entry.file_name();
-        if file_name.to_string_lossy().ends_with(".h") && entry.file_type().unwrap().is_file() {
+        if entry.file_type().unwrap().is_file()
+            && file_name.to_string_lossy().ends_with(".h")
+            && !file_name.to_string_lossy().starts_with('_')
+        {
             header_filenames.push(file_name.to_str().unwrap().to_string());
 
             let data = fs::read_to_string(entry.path())

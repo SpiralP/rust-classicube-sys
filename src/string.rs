@@ -24,7 +24,6 @@ impl ToString for cc_string {
                 .map(|c| Convert_CP437ToUnicode(*c))
                 .collect::<Vec<_>>(),
         )
-        .to_string()
     }
 }
 
@@ -188,7 +187,7 @@ fn ReduceEmoji(cp: cc_codepoint) -> cc_codepoint {
 }
 
 fn Convert_TryCodepointToCP437(mut cp: cc_codepoint, c: &mut u8) -> bool {
-    if cp >= 0x20 && cp < 0x7F {
+    if (0x20..0x7F).contains(&cp) {
         *c = cp as u8;
         return true;
     }
@@ -211,7 +210,7 @@ fn Convert_TryCodepointToCP437(mut cp: cc_codepoint, c: &mut u8) -> bool {
     }
 
     *c = b'?';
-    return false;
+    false
 }
 
 #[test]
