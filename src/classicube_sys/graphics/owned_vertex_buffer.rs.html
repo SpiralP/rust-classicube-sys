@@ -21,14 +21,16 @@
 <span id="21">21</span>
 <span id="22">22</span>
 <span id="23">23</span>
+<span id="24">24</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::os::raw::c_int</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedGfxVertexBuffer</span> {
     <span class="kw">pub</span> <span class="ident">resource_id</span>: <span class="ident">GfxResourceID</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">OwnedGfxVertexBuffer</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">fmt</span>: <span class="ident">VertexFormat</span>, <span class="ident">max_vertices</span>: <span class="ident">::std::os::raw::c_int</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">fmt</span>: <span class="ident">VertexFormat</span>, <span class="ident">max_vertices</span>: <span class="ident">c_int</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">resource_id</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Gfx_CreateDynamicVb</span>(<span class="ident">fmt</span>, <span class="ident">max_vertices</span>) };
 
         <span class="macro">assert!</span>(<span class="ident">resource_id</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
