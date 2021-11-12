@@ -350,7 +350,7 @@
     <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span>, <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span>, <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span>,
     <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span>, <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span>, <span class="ident">Gui_Add</span>, <span class="ident">Gui_Remove</span>,
-    <span class="ident">Screen</span> <span class="kw">as</span> <span class="ident">CCScreen</span>, <span class="ident">ScreenVTABLE</span>,
+    <span class="ident">Screen</span>, <span class="ident">ScreenVTABLE</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">mem</span>,
@@ -358,12 +358,12 @@
     <span class="ident">pin::Pin</span>,
 };
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Screen</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedScreen</span> {
     <span class="ident">_vtable</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ScreenVTABLE</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">screen</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">CCScreen</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">screen</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Screen</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">Screen</span> {
+<span class="kw">impl</span> <span class="ident">OwnedScreen</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">callbacks</span>: <span class="ident">Callbacks</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vtable</span> <span class="op">=</span> <span class="ident">Box::pin</span>(<span class="ident">ScreenVTABLE</span> {
             <span class="ident">Init</span>: <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>.<span class="ident">init</span>.<span class="ident">unwrap_or</span>(<span class="ident"><span class="self">Self</span>::Init</span>)),
@@ -409,7 +409,7 @@
         });
 
         <span class="kw">let</span> <span class="ident">screen</span> <span class="op">=</span> <span class="ident">Box::pin</span>(<span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">screen</span>: <span class="ident">CCScreen</span> <span class="op">=</span> <span class="ident">mem::zeroed</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">screen</span>: <span class="ident">Screen</span> <span class="op">=</span> <span class="ident">mem::zeroed</span>();
             <span class="ident">screen</span>.<span class="ident">VTABLE</span> <span class="op">=</span> <span class="ident">vtable</span>.<span class="ident">as_mut</span>().<span class="ident">get_unchecked_mut</span>();
             <span class="ident">screen</span>
         });
@@ -493,7 +493,7 @@
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">ContextRecreated</span>(<span class="ident">_elem</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>) {}
 }
 
-<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Screen</span> {
+<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">OwnedScreen</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">remove</span>();
     }
