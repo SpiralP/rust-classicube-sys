@@ -1,0 +1,103 @@
+use crate::bindings::{
+    GuiPriority_GUI_PRIORITY_CHAT, GuiPriority_GUI_PRIORITY_DISCONNECT,
+    GuiPriority_GUI_PRIORITY_HUD, GuiPriority_GUI_PRIORITY_INVENTORY,
+    GuiPriority_GUI_PRIORITY_LOADING, GuiPriority_GUI_PRIORITY_MENU,
+    GuiPriority_GUI_PRIORITY_OLDLOADING, GuiPriority_GUI_PRIORITY_TEXIDS,
+    GuiPriority_GUI_PRIORITY_TEXPACK, GuiPriority_GUI_PRIORITY_TOUCH,
+    GuiPriority_GUI_PRIORITY_TOUCHMORE, GuiPriority_GUI_PRIORITY_URLWARNING,
+};
+
+#[derive(Debug, Clone)]
+pub enum Priority {
+    UnderDisconnect,
+    Disconnect,
+    OverDisconnect,
+    UnderOldLoading,
+    OldLoading,
+    OverOldLoading,
+    UnderMenu,
+    Menu,
+    OverMenu,
+    UnderTouchMore,
+    TouchMore,
+    OverTouchMore,
+    UnderUrlWarning,
+    UrlWarning,
+    OverUrlWarning,
+    UnderTexPack,
+    TexPack,
+    OverTexPack,
+    UnderTexIds,
+    TexIds,
+    OverTexIds,
+    UnderTouch,
+    Touch,
+    OverTouch,
+    UnderInventory,
+    Inventory,
+    OverInventory,
+    UnderChat,
+    Chat,
+    OverChat,
+    UnderHud,
+    Hud,
+    OverHud,
+    UnderLoading,
+    Loading,
+    OverLoading,
+    UnderEverything,
+    OverEverything,
+    Custom(u8),
+}
+
+impl From<u8> for Priority {
+    fn from(n: u8) -> Self {
+        Self::Custom(n)
+    }
+}
+
+impl Priority {
+    pub fn to_u8(&self) -> u8 {
+        match self {
+            Self::UnderDisconnect => GuiPriority_GUI_PRIORITY_DISCONNECT as u8 - 1,
+            Self::Disconnect => GuiPriority_GUI_PRIORITY_DISCONNECT as u8,
+            Self::OverDisconnect => GuiPriority_GUI_PRIORITY_DISCONNECT as u8 + 1,
+            Self::UnderOldLoading => GuiPriority_GUI_PRIORITY_OLDLOADING as u8 - 1,
+            Self::OldLoading => GuiPriority_GUI_PRIORITY_OLDLOADING as u8,
+            Self::OverOldLoading => GuiPriority_GUI_PRIORITY_OLDLOADING as u8 + 1,
+            Self::UnderMenu => GuiPriority_GUI_PRIORITY_MENU as u8 - 1,
+            Self::Menu => GuiPriority_GUI_PRIORITY_MENU as u8,
+            Self::OverMenu => GuiPriority_GUI_PRIORITY_MENU as u8 + 1,
+            Self::UnderTouchMore => GuiPriority_GUI_PRIORITY_TOUCHMORE as u8 - 1,
+            Self::TouchMore => GuiPriority_GUI_PRIORITY_TOUCHMORE as u8,
+            Self::OverTouchMore => GuiPriority_GUI_PRIORITY_TOUCHMORE as u8 + 1,
+            Self::UnderUrlWarning => GuiPriority_GUI_PRIORITY_URLWARNING as u8 - 1,
+            Self::UrlWarning => GuiPriority_GUI_PRIORITY_URLWARNING as u8,
+            Self::OverUrlWarning => GuiPriority_GUI_PRIORITY_URLWARNING as u8 + 1,
+            Self::UnderTexPack => GuiPriority_GUI_PRIORITY_TEXPACK as u8 - 1,
+            Self::TexPack => GuiPriority_GUI_PRIORITY_TEXPACK as u8,
+            Self::OverTexPack => GuiPriority_GUI_PRIORITY_TEXPACK as u8 + 1,
+            Self::UnderTexIds => GuiPriority_GUI_PRIORITY_TEXIDS as u8 - 1,
+            Self::TexIds => GuiPriority_GUI_PRIORITY_TEXIDS as u8,
+            Self::OverTexIds => GuiPriority_GUI_PRIORITY_TEXIDS as u8 + 1,
+            Self::UnderTouch => GuiPriority_GUI_PRIORITY_TOUCH as u8 - 1,
+            Self::Touch => GuiPriority_GUI_PRIORITY_TOUCH as u8,
+            Self::OverTouch => GuiPriority_GUI_PRIORITY_TOUCH as u8 + 1,
+            Self::UnderInventory => GuiPriority_GUI_PRIORITY_INVENTORY as u8 - 1,
+            Self::Inventory => GuiPriority_GUI_PRIORITY_INVENTORY as u8,
+            Self::OverInventory => GuiPriority_GUI_PRIORITY_INVENTORY as u8 + 1,
+            Self::UnderChat => GuiPriority_GUI_PRIORITY_CHAT as u8 - 1,
+            Self::Chat => GuiPriority_GUI_PRIORITY_CHAT as u8,
+            Self::OverChat => GuiPriority_GUI_PRIORITY_CHAT as u8 + 1,
+            Self::UnderHud => GuiPriority_GUI_PRIORITY_HUD as u8 - 1,
+            Self::Hud => GuiPriority_GUI_PRIORITY_HUD as u8,
+            Self::OverHud => GuiPriority_GUI_PRIORITY_HUD as u8 + 1,
+            Self::UnderLoading => GuiPriority_GUI_PRIORITY_LOADING as u8 - 1,
+            Self::Loading => GuiPriority_GUI_PRIORITY_LOADING as u8,
+            Self::OverLoading => GuiPriority_GUI_PRIORITY_LOADING as u8 + 1,
+            Self::UnderEverything => 0,
+            Self::OverEverything => 255,
+            Self::Custom(n) => *n,
+        }
+    }
+}
