@@ -37,9 +37,9 @@ impl Vec3 {
         Vec3_LengthSquared(self)
     }
 
-    pub fn lerp(&self, b: &Vec3, blend: c_float) -> Self {
+    pub fn lerp(&self, b: Vec3, blend: c_float) -> Self {
         let mut result = Self::zero();
-        Vec3_Lerp(&mut result, self, b, blend);
+        Vec3_Lerp(&mut result, self, &b, blend);
         result
     }
 
@@ -49,15 +49,15 @@ impl Vec3 {
         result
     }
 
-    pub fn transform(&self, mat: &Matrix) -> Self {
+    pub fn transform(&self, mat: Matrix) -> Self {
         let mut result = Self::zero();
-        Vec3_Transform(&mut result, self, mat);
+        Vec3_Transform(&mut result, self, &mat);
         result
     }
 
-    pub fn transform_y(y: c_float, mat: &Matrix) -> Self {
+    pub fn transform_y(y: c_float, mat: Matrix) -> Self {
         let mut result = Self::zero();
-        Vec3_TransformY(&mut result, y, mat);
+        Vec3_TransformY(&mut result, y, &mat);
         result
     }
 

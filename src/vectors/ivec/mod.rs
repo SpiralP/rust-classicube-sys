@@ -34,15 +34,15 @@ impl IVec3 {
         result
     }
 
-    pub fn min(&self, b: &IVec3) -> Self {
+    pub fn min(&self, b: IVec3) -> Self {
         let mut result = Self::zero();
-        IVec3_Min(&mut result, self, b);
+        IVec3_Min(&mut result, self, &b);
         result
     }
 
-    pub fn max(&self, b: &IVec3) -> Self {
+    pub fn max(&self, b: IVec3) -> Self {
         let mut result = Self::zero();
-        IVec3_Max(&mut result, self, b);
+        IVec3_Max(&mut result, self, &b);
         result
     }
 }
