@@ -3,6 +3,8 @@ mod matrix;
 mod vec;
 
 pub use self::{ivec::*, matrix::*, vec::*};
+use crate::bindings::*;
+use std::os::raw::c_double;
 
 /// Sets the X, Y, and Z components of a 3D vector
 #[macro_export]
@@ -51,4 +53,8 @@ macro_rules! Vec3_Mul3By {
     ($dst:expr, $value:expr) => {
         $crate::Vec3_Mul3($dst, $dst, $value)
     };
+}
+
+pub fn Tan_Simple(x: c_double) -> c_double {
+    unsafe { Math_Sin(x) / Math_Cos(x) }
 }
