@@ -209,6 +209,7 @@ impl Default for OwnedScreen {
 
 impl Drop for OwnedScreen {
     fn drop(&mut self) {
+        #[cfg(not(test))]
         self.remove();
     }
 }

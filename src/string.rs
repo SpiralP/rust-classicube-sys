@@ -195,15 +195,15 @@ fn Convert_TryCodepointToCP437(mut cp: cc_codepoint, c: &mut u8) -> bool {
         cp = ReduceEmoji(cp);
     }
 
-    for i in 0..controlChars.len() {
-        if controlChars[i] as cc_codepoint == cp {
+    for (i, &chr) in controlChars.iter().enumerate() {
+        if chr as cc_codepoint == cp {
             *c = i as u8;
             return true;
         }
     }
 
-    for i in 0..extendedChars.len() {
-        if extendedChars[i] as cc_codepoint == cp {
+    for (i, &chr) in extendedChars.iter().enumerate() {
+        if chr as cc_codepoint == cp {
             *c = (i + 0x7F) as u8;
             return true;
         }
