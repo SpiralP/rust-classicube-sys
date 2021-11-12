@@ -11,6 +11,7 @@ use std::{
 pub struct OwnedScreen {
     screen: Pin<Box<Screen>>,
     vtable: Pin<Box<ScreenVTABLE>>,
+    added: bool,
 }
 
 impl OwnedScreen {
@@ -40,22 +41,32 @@ impl OwnedScreen {
             screen
         });
 
-        Self { screen, vtable }
+        Self {
+            screen,
+            vtable,
+            added: false,
+        }
     }
 
     pub fn add<T: Into<Priority>>(&mut self, priority: T) {
-        unsafe {
-            // priority is stored as a u8 even though api is c_int
-            Gui_Add(
-                self.screen.as_mut().get_unchecked_mut(),
-                priority.into().to_u8() as _,
-            );
+        if !self.added {
+            unsafe {
+                // priority is stored as a u8 even though api is c_int
+                Gui_Add(
+                    self.screen.as_mut().get_unchecked_mut(),
+                    priority.into().to_u8() as _,
+                );
+            }
+            self.added = true;
         }
     }
 
     pub fn remove(&mut self) {
-        unsafe {
-            Gui_Remove(self.screen.as_mut().get_unchecked_mut());
+        if self.added {
+            unsafe {
+                Gui_Remove(self.screen.as_mut().get_unchecked_mut());
+            }
+            self.added = false;
         }
     }
 
