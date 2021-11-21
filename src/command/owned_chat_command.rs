@@ -1,6 +1,6 @@
 use crate::{
     bindings::{cc_string, Commands_Register},
-    ChatCommand,
+    ChatCommand, COMMAND_FLAG_SINGLEPLAYER_ONLY,
 };
 use std::{ffi::CString, os::raw::c_int, pin::Pin, ptr};
 
@@ -35,7 +35,11 @@ impl OwnedChatCommand {
         let command = Box::pin(ChatCommand {
             name: name.as_ptr(),
             Execute: Some(execute),
-            singleplayerOnly: if singleplayer_only { 1 } else { 0 },
+            flags: if singleplayer_only {
+                COMMAND_FLAG_SINGLEPLAYER_ONLY as _
+            } else {
+                0
+            },
             help: help_array,
             next: ptr::null_mut(),
         });
