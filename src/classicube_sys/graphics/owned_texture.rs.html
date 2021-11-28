@@ -28,6 +28,9 @@
 <span id="27">27</span>
 <span id="28">28</span>
 <span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedGfxTexture</span> {
@@ -35,6 +38,9 @@
 }
 
 <span class="kw">impl</span> <span class="ident">OwnedGfxTexture</span> {
+    <span class="doccomment">/// # Panics</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Will panic if `bmp` doesn&#39;t have a power of two dimensions.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">bmp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Bitmap</span>, <span class="ident">managed_pool</span>: <span class="ident">bool</span>, <span class="ident">mipmaps</span>: <span class="ident">bool</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">resource_id</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">Gfx_CreateTexture</span>(
