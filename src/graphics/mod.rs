@@ -1,7 +1,7 @@
-mod owned_texture;
+mod owned_gfx_texture;
 mod owned_vertex_buffer;
 
-pub use self::{owned_texture::*, owned_vertex_buffer::*};
+pub use self::{owned_gfx_texture::*, owned_vertex_buffer::*};
 use crate::bindings::*;
 use std::os::raw::{c_int, c_void};
 

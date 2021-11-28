@@ -73,11 +73,7 @@ impl OwnedString {
     ///
     /// The `OwnedString` needs to live longer than the `cc_string` return here.
     pub unsafe fn get_cc_string(&self) -> cc_string {
-        cc_string {
-            buffer: self.cc_string.buffer,
-            length: self.cc_string.length,
-            capacity: self.cc_string.capacity,
-        }
+        cc_string { ..self.cc_string }
     }
 }
 

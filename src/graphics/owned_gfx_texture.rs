@@ -8,7 +8,7 @@ impl OwnedGfxTexture {
     /// # Panics
     ///
     /// Will panic if `bmp` doesn't have a power of two dimensions.
-    pub fn create(bmp: &mut Bitmap, managed_pool: bool, mipmaps: bool) -> Self {
+    pub fn new(bmp: &mut Bitmap, managed_pool: bool, mipmaps: bool) -> Self {
         let resource_id = unsafe {
             Gfx_CreateTexture(
                 bmp,

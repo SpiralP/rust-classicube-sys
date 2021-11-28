@@ -6,7 +6,7 @@ pub struct OwnedGfxVertexBuffer {
 }
 
 impl OwnedGfxVertexBuffer {
-    pub fn create(fmt: VertexFormat, max_vertices: c_int) -> Self {
+    pub fn new(fmt: VertexFormat, max_vertices: c_int) -> Self {
         let resource_id = unsafe { Gfx_CreateDynamicVb(fmt, max_vertices) };
 
         assert!(resource_id as usize != 0);

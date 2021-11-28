@@ -46,11 +46,7 @@ impl OwnedBitmap {
     ///
     /// The `OwnedBitmap` needs to live longer than the `Bitmap` return here.
     pub unsafe fn get_bitmap(&self) -> Bitmap {
-        Bitmap {
-            scan0: self.bitmap.scan0,
-            width: self.bitmap.width,
-            height: self.bitmap.height,
-        }
+        Bitmap { ..self.bitmap }
     }
 }
 

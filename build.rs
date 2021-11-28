@@ -96,6 +96,7 @@ fn build_bindings() {
         .derive_copy(true)
         .no_copy("cc_string_")
         .no_copy("Bitmap")
+        .no_copy("Texture")
         .clang_arg("-I./ClassiCube/src")
         .header_contents(
             "bindgen.h",
