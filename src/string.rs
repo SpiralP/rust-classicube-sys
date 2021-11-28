@@ -35,7 +35,9 @@ impl From<cc_string> for String {
 
 pub struct OwnedString {
     cc_string: cc_string,
-    _c_string: Pin<Box<CString>>,
+
+    #[allow(dead_code)]
+    c_string: Pin<Box<CString>>,
 }
 
 impl OwnedString {
@@ -54,7 +56,7 @@ impl OwnedString {
         let buffer: *const c_char = unsafe { c_string.as_mut().get_unchecked_mut().as_ptr() };
 
         Self {
-            _c_string: c_string,
+            c_string,
             cc_string: cc_string {
                 buffer: buffer as *mut c_char,
                 length: length as cc_uint16,
@@ -65,6 +67,17 @@ impl OwnedString {
 
     pub fn as_cc_string(&self) -> &cc_string {
         &self.cc_string
+    }
+
+    /// # Safety
+    ///
+    /// The `OwnedString` needs to live longer than the `cc_string` return here.
+    pub unsafe fn get_cc_string(&self) -> cc_string {
+        cc_string {
+            buffer: self.cc_string.buffer,
+            length: self.cc_string.length,
+            capacity: self.cc_string.capacity,
+        }
     }
 }
 
@@ -89,6 +102,9 @@ fn test_owned_string() {
     // let s: cc_string = owned_string.into();
 }
 
+/// # Safety
+///
+/// The `buffer` needs to live longer than the `cc_string`.
 pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> cc_string {
     cc_string {
         buffer,
@@ -97,6 +113,7 @@ pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -
     }
 }
 
+#[allow(clippy::missing_safety_doc)]
 pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
     let mut length = 0;
     for i in (0..STRING_SIZE).rev() {

@@ -6,7 +6,7 @@ use std::os::raw::{c_double, c_float};
 impl Matrix {
     pub const IDENTITY: Self = Matrix_IdentityValue();
 
-    pub fn identity_value() -> Self {
+    pub const fn identity_value() -> Self {
         Matrix_IdentityValue()
     }
 
@@ -40,14 +40,18 @@ impl Matrix {
     /// Returns a matrix representing a translation to the given coordinates.
     pub fn translate(x: c_float, y: c_float, z: c_float) -> Self {
         let mut result = Self::IDENTITY;
-        unsafe { Matrix_Translate(&mut result, x, y, z) }
+        unsafe {
+            Matrix_Translate(&mut result, x, y, z);
+        }
         result
     }
 
     /// Returns a matrix representing a scaling by the given factors.
     pub fn scale(x: c_float, y: c_float, z: c_float) -> Self {
         let mut result = Self::IDENTITY;
-        unsafe { Matrix_Scale(&mut result, x, y, z) }
+        unsafe {
+            Matrix_Scale(&mut result, x, y, z);
+        }
         result
     }
 

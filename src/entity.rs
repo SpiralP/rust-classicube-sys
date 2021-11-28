@@ -2,6 +2,7 @@ use super::OwnedString;
 use crate::bindings::*;
 use std::{mem, os::raw::c_float};
 
+#[allow(clippy::missing_safety_doc)]
 pub unsafe fn Entity_Init(e: &mut Entity) {
     let model = OwnedString::new("humanoid");
     e.ModelScale.set(1.0, 1.0, 1.0);

@@ -5,6 +5,7 @@ pub use self::{owned_texture::*, owned_vertex_buffer::*};
 use crate::bindings::*;
 use std::os::raw::{c_int, c_void};
 
+#[allow(clippy::missing_safety_doc)]
 pub unsafe fn Gfx_UpdateDynamicVb_IndexedTris(
     vb: GfxResourceID,
     vertices: *mut c_void,
@@ -14,7 +15,7 @@ pub unsafe fn Gfx_UpdateDynamicVb_IndexedTris(
     Gfx_DrawVb_IndexedTris(vCount);
 }
 
-pub unsafe fn Gfx_Make2DQuad(tex: &mut Texture, col: PackedCol) -> [VertexTextured; 4] {
+pub fn Gfx_Make2DQuad(tex: &mut Texture, col: PackedCol) -> [VertexTextured; 4] {
     let x1: f32 = tex.X as _;
     let x2: f32 = (tex.X as f32 + tex.Width as f32) as _;
     let y1: f32 = tex.Y as _;
