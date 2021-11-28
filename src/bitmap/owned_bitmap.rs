@@ -27,6 +27,10 @@ impl OwnedBitmap {
         }
     }
 
+    pub fn new_cleared(width: c_int, height: c_int) -> Self {
+        Self::new(width, height, 0x0000_0000)
+    }
+
     pub fn new_pow_of_2(width: c_int, height: c_int, color: BitmapCol) -> OwnedBitmap {
         let width = Math_NextPowOf2(width);
         let height = Math_NextPowOf2(height);
