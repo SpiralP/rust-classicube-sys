@@ -41,6 +41,7 @@
 <span id="40">40</span>
 <span id="41">41</span>
 <span id="42">42</span>
+<span id="43">43</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
@@ -51,6 +52,7 @@
 <span class="kw">mod</span> <span class="ident">chat</span>;
 <span class="kw">mod</span> <span class="ident">command</span>;
 <span class="kw">mod</span> <span class="ident">constants</span>;
+<span class="kw">mod</span> <span class="ident">core</span>;
 <span class="kw">mod</span> <span class="ident">entity</span>;
 <span class="kw">mod</span> <span class="ident">event</span>;
 <span class="kw">mod</span> <span class="ident">graphics</span>;
@@ -66,9 +68,9 @@
 <span class="kw">mod</span> <span class="ident">world</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">bitmap</span>::<span class="kw-2">*</span>, <span class="ident">chat</span>::<span class="kw-2">*</span>, <span class="ident">command</span>::<span class="kw-2">*</span>, <span class="ident">constants</span>::<span class="kw-2">*</span>, <span class="ident">entity</span>::<span class="kw-2">*</span>, <span class="ident">event</span>::<span class="kw-2">*</span>, <span class="ident">graphics</span>::<span class="kw-2">*</span>,
-    <span class="ident">input</span>::<span class="kw-2">*</span>, <span class="ident">inventory</span>::<span class="kw-2">*</span>, <span class="ident">math</span>::<span class="kw-2">*</span>, <span class="ident">model</span>::<span class="kw-2">*</span>, <span class="ident">packed_col</span>::<span class="kw-2">*</span>, <span class="ident">particle</span>::<span class="kw-2">*</span>, <span class="ident">screen::OwnedScreen</span>,
-    <span class="ident">string</span>::<span class="kw-2">*</span>, <span class="ident">vectors</span>::<span class="kw-2">*</span>, <span class="ident">world</span>::<span class="kw-2">*</span>,
+    <span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">bitmap</span>::<span class="kw-2">*</span>, <span class="ident">chat</span>::<span class="kw-2">*</span>, <span class="ident">command</span>::<span class="kw-2">*</span>, <span class="ident">constants</span>::<span class="kw-2">*</span>, <span class="ident">core</span>::<span class="kw-2">*</span>, <span class="ident">entity</span>::<span class="kw-2">*</span>, <span class="ident">event</span>::<span class="kw-2">*</span>,
+    <span class="ident">graphics</span>::<span class="kw-2">*</span>, <span class="ident">input</span>::<span class="kw-2">*</span>, <span class="ident">inventory</span>::<span class="kw-2">*</span>, <span class="ident">math</span>::<span class="kw-2">*</span>, <span class="ident">model</span>::<span class="kw-2">*</span>, <span class="ident">packed_col</span>::<span class="kw-2">*</span>, <span class="ident">particle</span>::<span class="kw-2">*</span>,
+    <span class="ident">screen::OwnedScreen</span>, <span class="ident">string</span>::<span class="kw-2">*</span>, <span class="ident">vectors</span>::<span class="kw-2">*</span>, <span class="ident">world</span>::<span class="kw-2">*</span>,
 };
 
 <span class="doccomment">/// On windows, external statics have to be tagged with dllimport,</span>

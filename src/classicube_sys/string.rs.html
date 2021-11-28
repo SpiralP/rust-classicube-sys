@@ -251,10 +251,6 @@
 <span id="250">250</span>
 <span id="251">251</span>
 <span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::{<span class="ident">cc_codepoint</span>, <span class="ident">cc_string</span>, <span class="ident">cc_uint16</span>, <span class="ident">cc_unichar</span>, <span class="ident">STRING_SIZE</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">borrow::Borrow</span>,
@@ -330,11 +326,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `OwnedString` needs to live longer than the `cc_string` return here.</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_cc_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">cc_string</span> {
-        <span class="ident">cc_string</span> {
-            <span class="ident">buffer</span>: <span class="self">self</span>.<span class="ident">cc_string</span>.<span class="ident">buffer</span>,
-            <span class="ident">length</span>: <span class="self">self</span>.<span class="ident">cc_string</span>.<span class="ident">length</span>,
-            <span class="ident">capacity</span>: <span class="self">self</span>.<span class="ident">cc_string</span>.<span class="ident">capacity</span>,
-        }
+        <span class="ident">cc_string</span> { ..<span class="self">self</span>.<span class="ident">cc_string</span> }
     }
 }
 

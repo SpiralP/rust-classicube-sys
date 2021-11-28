@@ -56,10 +56,6 @@
 <span id="55">55</span>
 <span id="56">56</span>
 <span id="57">57</span>
-<span id="58">58</span>
-<span id="59">59</span>
-<span id="60">60</span>
-<span id="61">61</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">bindings</span>::{<span class="ident">Bitmap</span>, <span class="ident">BitmapCol</span>},
     <span class="ident">Math_NextPowOf2</span>,
@@ -108,11 +104,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `OwnedBitmap` needs to live longer than the `Bitmap` return here.</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_bitmap</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Bitmap</span> {
-        <span class="ident">Bitmap</span> {
-            <span class="ident">scan0</span>: <span class="self">self</span>.<span class="ident">bitmap</span>.<span class="ident">scan0</span>,
-            <span class="ident">width</span>: <span class="self">self</span>.<span class="ident">bitmap</span>.<span class="ident">width</span>,
-            <span class="ident">height</span>: <span class="self">self</span>.<span class="ident">bitmap</span>.<span class="ident">height</span>,
-        }
+        <span class="ident">Bitmap</span> { ..<span class="self">self</span>.<span class="ident">bitmap</span> }
     }
 }
 
