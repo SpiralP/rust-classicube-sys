@@ -38,6 +38,10 @@ impl OwnedTexture {
         &self.texture
     }
 
+    pub fn as_texture_mut(&mut self) -> &mut Texture {
+        &mut self.texture
+    }
+
     /// # Safety
     ///
     /// The `OwnedTexture` needs to live longer than the `Texture` return here.
