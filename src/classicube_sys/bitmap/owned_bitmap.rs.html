@@ -50,6 +50,10 @@
 <span id="49">49</span>
 <span id="50">50</span>
 <span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">bindings</span>::{<span class="ident">Bitmap</span>, <span class="ident">BitmapCol</span>},
     <span class="ident">Math_NextPowOf2</span>,
@@ -65,18 +69,29 @@
 }
 
 <span class="kw">impl</span> <span class="ident">OwnedBitmap</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">width</span>: <span class="ident">usize</span>, <span class="ident">height</span>: <span class="ident">usize</span>, <span class="ident">color</span>: <span class="ident">BitmapCol</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">width</span>: <span class="ident">c_int</span>, <span class="ident">height</span>: <span class="ident">c_int</span>, <span class="ident">color</span>: <span class="ident">BitmapCol</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pixels</span> <span class="op">=</span> <span class="ident">Box::pin</span>(<span class="macro">vec!</span>[<span class="ident">color</span>; <span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>]);
         <span class="kw">let</span> <span class="ident">scan0</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">pixels</span>.<span class="ident">as_mut</span>().<span class="ident">get_unchecked_mut</span>().<span class="ident">as_mut_ptr</span>() };
 
         <span class="self">Self</span> {
             <span class="ident">pixels</span>,
             <span class="ident">bitmap</span>: <span class="ident">Bitmap</span> {
-                <span class="ident">width</span>: <span class="ident">width</span> <span class="kw">as</span> <span class="kw">_</span>,
-                <span class="ident">height</span>: <span class="ident">height</span> <span class="kw">as</span> <span class="kw">_</span>,
+                <span class="ident">width</span>,
+                <span class="ident">height</span>,
                 <span class="ident">scan0</span>,
             },
         }
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_pow_of_2</span>(<span class="ident">width</span>: <span class="ident">c_int</span>, <span class="ident">height</span>: <span class="ident">c_int</span>, <span class="ident">color</span>: <span class="ident">BitmapCol</span>) -&gt; <span class="ident">OwnedBitmap</span> {
+        <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">Math_NextPowOf2</span>(<span class="ident">width</span>);
+        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">Math_NextPowOf2</span>(<span class="ident">height</span>);
+
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">color</span>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_pow_of_2_cleared</span>(<span class="ident">width</span>: <span class="ident">c_int</span>, <span class="ident">height</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">OwnedBitmap</span> {
+        <span class="ident"><span class="self">Self</span>::new_pow_of_2</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="number">0x0000_0000</span>)
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_bitmap</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Bitmap</span> {
@@ -93,13 +108,6 @@
             <span class="ident">height</span>: <span class="self">self</span>.<span class="ident">bitmap</span>.<span class="ident">height</span>,
         }
     }
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Bitmap_AllocateClearedPow2</span>(<span class="ident">width</span>: <span class="ident">c_int</span>, <span class="ident">height</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">OwnedBitmap</span> {
-    <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">Math_NextPowOf2</span>(<span class="ident">width</span>);
-    <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">Math_NextPowOf2</span>(<span class="ident">height</span>);
-
-    <span class="ident">OwnedBitmap::new</span>(<span class="ident">width</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">height</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="number">0x00FF_FFFF</span>)
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (686e313a9 2021-11-27)" ></div>
