@@ -95,6 +95,7 @@ fn build_bindings() {
         .derive_hash(true)
         .derive_copy(true)
         .no_copy("cc_string_")
+        .no_copy("Bitmap")
         .clang_arg("-I./ClassiCube/src")
         .header_contents(
             "bindgen.h",

@@ -4,6 +4,7 @@
 #![doc = include_str!("../README.md")]
 
 mod bindings;
+mod bitmap;
 mod chat;
 mod command;
 mod constants;
@@ -22,9 +23,9 @@ mod vectors;
 mod world;
 
 pub use crate::{
-    bindings::*, chat::*, command::*, constants::*, entity::*, event::*, graphics::*, input::*,
-    inventory::*, math::*, model::*, packed_col::*, particle::*, screen::OwnedScreen, string::*,
-    vectors::*, world::*,
+    bindings::*, bitmap::*, chat::*, command::*, constants::*, entity::*, event::*, graphics::*,
+    input::*, inventory::*, math::*, model::*, packed_col::*, particle::*, screen::OwnedScreen,
+    string::*, vectors::*, world::*,
 };
 
 /// On windows, external statics have to be tagged with dllimport,
