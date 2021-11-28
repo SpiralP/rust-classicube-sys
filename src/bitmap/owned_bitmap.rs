@@ -13,18 +13,29 @@ pub struct OwnedBitmap {
 }
 
 impl OwnedBitmap {
-    pub fn new(width: usize, height: usize, color: BitmapCol) -> Self {
+    pub fn new(width: c_int, height: c_int, color: BitmapCol) -> Self {
         let mut pixels = Box::pin(vec![color; width as usize * height as usize]);
         let scan0 = unsafe { pixels.as_mut().get_unchecked_mut().as_mut_ptr() };
 
         Self {
             pixels,
             bitmap: Bitmap {
-                width: width as _,
-                height: height as _,
+                width,
+                height,
                 scan0,
             },
         }
+    }
+
+    pub fn new_pow_of_2(width: c_int, height: c_int, color: BitmapCol) -> OwnedBitmap {
+        let width = Math_NextPowOf2(width);
+        let height = Math_NextPowOf2(height);
+
+        Self::new(width, height, color)
+    }
+
+    pub fn new_pow_of_2_cleared(width: c_int, height: c_int) -> OwnedBitmap {
+        Self::new_pow_of_2(width, height, 0x0000_0000)
     }
 
     pub fn as_bitmap(&self) -> &Bitmap {
@@ -41,11 +52,4 @@ impl OwnedBitmap {
             height: self.bitmap.height,
         }
     }
-}
-
-pub fn Bitmap_AllocateClearedPow2(width: c_int, height: c_int) -> OwnedBitmap {
-    let width = Math_NextPowOf2(width);
-    let height = Math_NextPowOf2(height);
-
-    OwnedBitmap::new(width as _, height as _, 0x00FF_FFFF)
 }
