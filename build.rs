@@ -93,6 +93,8 @@ fn build_bindings() {
         .derive_partialeq(true)
         .derive_eq(true)
         .derive_hash(true)
+        .derive_copy(true)
+        .no_copy("cc_string_")
         .clang_arg("-I./ClassiCube/src")
         .header_contents(
             "bindgen.h",
