@@ -238,9 +238,23 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
         }
     }
 
-    return (
-        header_filenames,
-        var_names.drain().collect(),
-        function_names.drain().collect(),
-    );
+    header_filenames.sort();
+
+    let mut var_names = var_names.drain().collect::<Vec<_>>();
+    var_names.sort_unstable_by(|a, b| {
+        let a = match a {
+            VarType::Other(var_name) => var_name,
+            VarType::Static { var_name, .. } => var_name,
+        };
+        let b = match b {
+            VarType::Other(var_name) => var_name,
+            VarType::Static { var_name, .. } => var_name,
+        };
+        a.partial_cmp(b).unwrap()
+    });
+
+    let mut function_names = function_names.drain().collect::<Vec<_>>();
+    function_names.sort();
+
+    (header_filenames, var_names, function_names)
 }
