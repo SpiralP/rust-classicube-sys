@@ -42,6 +42,10 @@ impl OwnedBitmap {
         &self.bitmap
     }
 
+    pub fn as_bitmap_mut(&mut self) -> &mut Bitmap {
+        &mut self.bitmap
+    }
+
     /// # Safety
     ///
     /// The `OwnedBitmap` needs to live longer than the `Bitmap` return here.
