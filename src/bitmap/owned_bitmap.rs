@@ -53,3 +53,9 @@ impl OwnedBitmap {
         }
     }
 }
+
+impl std::borrow::Borrow<Bitmap> for OwnedBitmap {
+    fn borrow(&self) -> &Bitmap {
+        self.as_bitmap()
+    }
+}
