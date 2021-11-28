@@ -54,6 +54,12 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">bindings</span>::{<span class="ident">Bitmap</span>, <span class="ident">BitmapCol</span>},
     <span class="ident">Math_NextPowOf2</span>,
@@ -107,6 +113,12 @@
             <span class="ident">width</span>: <span class="self">self</span>.<span class="ident">bitmap</span>.<span class="ident">width</span>,
             <span class="ident">height</span>: <span class="self">self</span>.<span class="ident">bitmap</span>.<span class="ident">height</span>,
         }
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">std::borrow::Borrow</span><span class="op">&lt;</span><span class="ident">Bitmap</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OwnedBitmap</span> {
+    <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Bitmap</span> {
+        <span class="self">self</span>.<span class="ident">as_bitmap</span>()
     }
 }
 </code></pre></div>
