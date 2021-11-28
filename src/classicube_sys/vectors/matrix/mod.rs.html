@@ -173,6 +173,10 @@
 <span id="172">172</span>
 <span id="173">173</span>
 <span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ops</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">Tan_Simple</span>};
@@ -181,7 +185,7 @@
 <span class="kw">impl</span> <span class="ident">Matrix</span> {
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IDENTITY</span>: <span class="self">Self</span> <span class="op">=</span> <span class="ident">Matrix_IdentityValue</span>();
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">identity_value</span>() -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">identity_value</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">Matrix_IdentityValue</span>()
     }
 
@@ -215,14 +219,18 @@
     <span class="doccomment">/// Returns a matrix representing a translation to the given coordinates.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translate</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> { <span class="ident">Matrix_Translate</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>) }
+        <span class="kw">unsafe</span> {
+            <span class="ident">Matrix_Translate</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>);
+        }
         <span class="ident">result</span>
     }
 
     <span class="doccomment">/// Returns a matrix representing a scaling by the given factors.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> { <span class="ident">Matrix_Scale</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>) }
+        <span class="kw">unsafe</span> {
+            <span class="ident">Matrix_Scale</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>);
+        }
         <span class="ident">result</span>
     }
 

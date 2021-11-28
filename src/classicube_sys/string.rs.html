@@ -238,6 +238,23 @@
 <span id="237">237</span>
 <span id="238">238</span>
 <span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::{<span class="ident">cc_codepoint</span>, <span class="ident">cc_string</span>, <span class="ident">cc_uint16</span>, <span class="ident">cc_unichar</span>, <span class="ident">STRING_SIZE</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">borrow::Borrow</span>,
@@ -275,7 +292,9 @@
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedString</span> {
     <span class="ident">cc_string</span>: <span class="ident">cc_string</span>,
-    <span class="ident">_c_string</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">CString</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+    <span class="ident">c_string</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">CString</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">OwnedString</span> {
@@ -294,7 +313,7 @@
         <span class="kw">let</span> <span class="ident">buffer</span>: <span class="kw-2">*const</span> <span class="ident">c_char</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">c_string</span>.<span class="ident">as_mut</span>().<span class="ident">get_unchecked_mut</span>().<span class="ident">as_ptr</span>() };
 
         <span class="self">Self</span> {
-            <span class="ident">_c_string</span>: <span class="ident">c_string</span>,
+            <span class="ident">c_string</span>,
             <span class="ident">cc_string</span>: <span class="ident">cc_string</span> {
                 <span class="ident">buffer</span>: <span class="ident">buffer</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">c_char</span>,
                 <span class="ident">length</span>: <span class="ident">length</span> <span class="kw">as</span> <span class="ident">cc_uint16</span>,
@@ -305,6 +324,17 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_cc_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">cc_string</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cc_string</span>
+    }
+
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `OwnedString` needs to live longer than the `cc_string` return here.</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_cc_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">cc_string</span> {
+        <span class="ident">cc_string</span> {
+            <span class="ident">buffer</span>: <span class="self">self</span>.<span class="ident">cc_string</span>.<span class="ident">buffer</span>,
+            <span class="ident">length</span>: <span class="self">self</span>.<span class="ident">cc_string</span>.<span class="ident">length</span>,
+            <span class="ident">capacity</span>: <span class="self">self</span>.<span class="ident">cc_string</span>.<span class="ident">capacity</span>,
+        }
     }
 }
 
@@ -329,6 +359,9 @@
     <span class="comment">// let s: cc_string = owned_string.into();</span>
 }
 
+<span class="doccomment">/// # Safety</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The `buffer` needs to live longer than the `cc_string`.</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">String_Init</span>(<span class="ident">buffer</span>: <span class="kw-2">*mut</span> <span class="ident">c_char</span>, <span class="ident">length</span>: <span class="ident">c_int</span>, <span class="ident">capacity</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">cc_string</span> {
     <span class="ident">cc_string</span> {
         <span class="ident">buffer</span>,
@@ -337,6 +370,7 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">UNSAFE_GetString</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">cc_string</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">length</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">STRING_SIZE</span>).<span class="ident">rev</span>() {

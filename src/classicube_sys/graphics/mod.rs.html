@@ -56,6 +56,7 @@
 <span id="55">55</span>
 <span id="56">56</span>
 <span id="57">57</span>
+<span id="58">58</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">owned_texture</span>;
 <span class="kw">mod</span> <span class="ident">owned_vertex_buffer</span>;
 
@@ -63,6 +64,7 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std::os::raw</span>::{<span class="ident">c_int</span>, <span class="ident">c_void</span>};
 
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Gfx_UpdateDynamicVb_IndexedTris</span>(
     <span class="ident">vb</span>: <span class="ident">GfxResourceID</span>,
     <span class="ident">vertices</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
@@ -72,7 +74,7 @@
     <span class="ident">Gfx_DrawVb_IndexedTris</span>(<span class="ident">vCount</span>);
 }
 
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Gfx_Make2DQuad</span>(<span class="ident">tex</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Texture</span>, <span class="ident">col</span>: <span class="ident">PackedCol</span>) -&gt; [<span class="ident">VertexTextured</span>; <span class="number">4</span>] {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Gfx_Make2DQuad</span>(<span class="ident">tex</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Texture</span>, <span class="ident">col</span>: <span class="ident">PackedCol</span>) -&gt; [<span class="ident">VertexTextured</span>; <span class="number">4</span>] {
     <span class="kw">let</span> <span class="ident">x1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">tex</span>.<span class="ident">X</span> <span class="kw">as</span> <span class="kw">_</span>;
     <span class="kw">let</span> <span class="ident">x2</span>: <span class="ident">f32</span> <span class="op">=</span> (<span class="ident">tex</span>.<span class="ident">X</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="ident">tex</span>.<span class="ident">Width</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="kw">as</span> <span class="kw">_</span>;
     <span class="kw">let</span> <span class="ident">y1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">tex</span>.<span class="ident">Y</span> <span class="kw">as</span> <span class="kw">_</span>;

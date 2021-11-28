@@ -96,7 +96,11 @@
 <span id="95">95</span>
 <span id="96">96</span>
 <span id="97">97</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
+<span id="98">98</span>
+<span id="99">99</span>
+</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">mem</span>,
     <span class="ident">os::raw</span>::{<span class="ident">c_float</span>, <span class="ident">c_int</span>, <span class="ident">c_void</span>},
