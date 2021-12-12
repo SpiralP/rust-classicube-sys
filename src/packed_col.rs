@@ -1,5 +1,18 @@
 use crate::bindings::*;
 
+pub const fn PackedCol_R(col: PackedCol) -> u8 {
+    (col >> PACKEDCOL_R_SHIFT) as u8
+}
+pub const fn PackedCol_G(col: PackedCol) -> u8 {
+    (col >> PACKEDCOL_G_SHIFT) as u8
+}
+pub const fn PackedCol_B(col: PackedCol) -> u8 {
+    (col >> PACKEDCOL_B_SHIFT) as u8
+}
+pub const fn PackedCol_A(col: PackedCol) -> u8 {
+    (col >> PACKEDCOL_A_SHIFT) as u8
+}
+
 pub const fn PackedCol_R_Bits(col: u8) -> PackedCol {
     (col as PackedCol) << PACKEDCOL_R_SHIFT
 }
