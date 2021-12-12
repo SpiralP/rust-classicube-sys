@@ -31,3 +31,13 @@ pub const fn PackedCol_Make(r: u8, g: u8, b: u8, a: u8) -> PackedCol {
 }
 
 pub const PACKEDCOL_WHITE: PackedCol = PackedCol_Make(255, 255, 255, 255);
+
+#[test]
+fn test_packed_col() {
+    let c = PackedCol_Make(1, 2, 3, 4);
+
+    assert_eq!(PackedCol_R(c), 1);
+    assert_eq!(PackedCol_G(c), 2);
+    assert_eq!(PackedCol_B(c), 3);
+    assert_eq!(PackedCol_A(c), 4);
+}
