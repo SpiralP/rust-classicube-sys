@@ -57,6 +57,6 @@ Copy the `.dll`/`.so`/`.dylib` from `target/{debug,release}/` to the `plugins` f
 
 [ClassiCube source](https://github.com/UnknownShadow200/ClassiCube)
 
-[ClassiCube Plugin help](https://github.com/UnknownShadow200/ClassiCube/blob/master/doc/plugin-dev.md)
+[ClassiCube Plugin help](https://github.com/UnknownShadow200/ClassiCube/blob/HEAD/doc/plugin-dev.md)
 
 [ClassiCube Plugin examples](https://github.com/UnknownShadow200/ClassiCube-Plugins)

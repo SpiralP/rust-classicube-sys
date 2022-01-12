@@ -182,30 +182,50 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
             for mat in Regex::new(r"(?m)^CC_VAR.*$").unwrap().find_iter(&data) {
                 let part = &data[mat.start()..];
 
-                // need ?s for .* to match \n
-                let captures = Regex::new(
-                    r"(?s)^CC_VAR +extern +struct +([[:word:]]+) +\{.*?\n\} +([[:word:]]+);",
-                )
-                .unwrap()
-                .captures(part)
-                .unwrap_or_else(|| {
-                    panic!(
-                        "couldn't get capture in file {:?} from {:?}",
-                        file_name, part
+                if let Some(captures) = Regex::new(r"^CC_VAR +extern +int +([[:word:]]+);")
+                    .unwrap()
+                    .captures(part)
+                {
+                    let var_name = captures
+                        .get(1)
+                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part))
+                        .as_str()
+                        .to_string();
+
+                    var_names.insert(VarType::Static {
+                        var_name,
+                        type_name: "::std::os::raw::c_int".to_string(),
+                    });
+                } else {
+                    // need ?s for .* to match \n
+                    let captures = Regex::new(
+                        r"(?s)^CC_VAR +extern +struct +([[:word:]]+) +\{.*?\n\} +([[:word:]]+);",
                     )
-                });
-                let type_name = captures
-                    .get(1)
-                    .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part));
+                    .unwrap()
+                    .captures(part)
+                    .unwrap_or_else(|| {
+                        panic!(
+                            "couldn't get capture in file {:?} from {:?}",
+                            file_name, part
+                        )
+                    });
 
-                let var_name = captures
-                    .get(2)
-                    .unwrap_or_else(|| panic!("couldn't get capture 2 from {:?}", part));
+                    let type_name = captures
+                        .get(1)
+                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part))
+                        .as_str()
+                        .to_string();
+                    let var_name = captures
+                        .get(2)
+                        .unwrap_or_else(|| panic!("couldn't get capture 2 from {:?}", part))
+                        .as_str()
+                        .to_string();
 
-                var_names.insert(VarType::Static {
-                    var_name: var_name.as_str().to_string(),
-                    type_name: type_name.as_str().to_string(),
-                });
+                    var_names.insert(VarType::Static {
+                        var_name,
+                        type_name,
+                    });
+                }
             }
 
             // C macros/defines
