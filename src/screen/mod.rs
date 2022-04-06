@@ -9,7 +9,7 @@ use std::{
 };
 
 pub struct OwnedScreen {
-    screen: Pin<Box<Screen>>,
+    pub screen: Pin<Box<Screen>>,
     vtable: Pin<Box<ScreenVTABLE>>,
     added: bool,
 }
