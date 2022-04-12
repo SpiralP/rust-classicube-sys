@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   windows:
@@ -34,11 +34,12 @@ jobs:
           scoop install llvm
           echo "LIBCLANG_PATH=$HOME\scoop\apps\llvm\current\bin" >> $env:GITHUB_ENV
 
-      - name: Install nightly
+      - name: Install rust stable
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
+          components: rustfmt
 
       - name: Build
         uses: actions-rs/cargo@v1
@@ -77,11 +78,12 @@ jobs:
           sudo apt-get -y install clang llvm
           sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev libgl1-mesa-dev
 
-      - name: Install nightly
+      - name: Install rust stable
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
+          components: rustfmt
 
       - name: Build
         uses: actions-rs/cargo@v1
@@ -107,11 +109,12 @@ jobs:
           brew install llvm
           echo "/usr/local/opt/llvm/bin" >> $GITHUB_PATH
 
-      - name: Install nightly
+      - name: Install rust stable
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
+          components: rustfmt
 
       - name: Build
         uses: actions-rs/cargo@v1
