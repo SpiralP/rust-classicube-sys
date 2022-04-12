@@ -19,7 +19,7 @@ fn main() {
 
     #[cfg(target_os = "windows")]
     {
-        use cc::{windows_registry, windows_registry::VsVers};
+        use cc::windows_registry;
         use fs_extra::dir;
 
         let out_dir = env::var("OUT_DIR").unwrap();
@@ -39,11 +39,7 @@ fn main() {
 
         let target = env::var("TARGET").unwrap();
 
-        let build_tools_version = match windows_registry::find_vs_version().unwrap() {
-            VsVers::Vs15 => "v141", // 2017
-            VsVers::Vs16 => "v142", // 2019
-            _ => unimplemented!(),
-        };
+        let platform_toolset_version = "v142";
 
         let configuration = if cfg!(debug_assertions) {
             "Debug"
@@ -64,7 +60,7 @@ fn main() {
                 "ClassiCube.sln",
                 &format!("/p:Configuration={}", configuration),
                 &format!("/p:Platform={}", platform),
-                &format!("/p:PlatformToolset={}", build_tools_version),
+                &format!("/p:PlatformToolset={}", platform_toolset_version),
                 "/p:WindowsTargetPlatformVersion=10.0",
                 &format!("/p:OutDir={}\\", &out_dir.display()),
                 &format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
