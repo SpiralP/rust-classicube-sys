@@ -21,6 +21,7 @@ fn main() {
     {
         use cc::windows_registry;
         use fs_extra::dir;
+        use std::process::Command;
 
         let out_dir = env::var("OUT_DIR").unwrap();
         let out_dir = Path::new(&out_dir);
@@ -39,8 +40,6 @@ fn main() {
 
         let target = env::var("TARGET").unwrap();
 
-        let platform_toolset_version = "v142";
-
         let configuration = if cfg!(debug_assertions) {
             "Debug"
         } else {
@@ -53,20 +52,38 @@ fn main() {
         #[cfg(all(target_os = "windows", target_pointer_width = "32"))]
         let platform = "x86";
 
-        let cmd = windows_registry::find(&target, "msbuild")
-            .unwrap()
+        let platform_toolset_version = "v142";
+
+        let args = vec![
+            format!("ClassiCube.sln"),
+            format!("/p:Configuration={}", configuration),
+            format!("/p:Platform={}", platform),
+            format!("/p:PlatformToolset={}", platform_toolset_version),
+            format!("/p:WindowsTargetPlatformVersion=10.0"),
+            format!("/p:OutDir={}\\", &out_dir.display()),
+            format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
+        ];
+
+        let cmd = match Command::new("msbuild")
             .current_dir(&build_dir)
-            .args(vec![
-                "ClassiCube.sln",
-                &format!("/p:Configuration={}", configuration),
-                &format!("/p:Platform={}", platform),
-                &format!("/p:PlatformToolset={}", platform_toolset_version),
-                "/p:WindowsTargetPlatformVersion=10.0",
-                &format!("/p:OutDir={}\\", &out_dir.display()),
-                &format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
-            ])
+            .args(&args)
             .output()
-            .unwrap();
+        {
+            Ok(result) => result,
+            Err(e) => {
+                eprintln!(
+                    "msbuild in PATH failed, trying cc::windows_registry: {:#?}",
+                    e
+                );
+
+                windows_registry::find(&target, "msbuild")
+                    .unwrap()
+                    .current_dir(&build_dir)
+                    .args(&args)
+                    .output()
+                    .unwrap()
+            }
+        };
 
         if !cmd.status.success() {
             panic!(
