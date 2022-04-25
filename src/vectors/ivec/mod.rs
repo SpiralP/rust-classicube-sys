@@ -1,11 +1,12 @@
 mod ops;
 
+use std::os::raw::c_int;
+
 pub use self::ops::*;
 use crate::{
     bindings::{IVec3, Vec3},
     Int32_MaxValue, Vec3_IsZero, Vec3_Set,
 };
-use std::os::raw::c_int;
 
 impl IVec3 {
     pub const fn new(x: c_int, y: c_int, z: c_int) -> Self {

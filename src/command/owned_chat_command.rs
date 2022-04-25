@@ -1,8 +1,9 @@
+use std::{ffi::CString, os::raw::c_int, pin::Pin, ptr};
+
 use crate::{
     bindings::{cc_string, Commands_Register},
     ChatCommand, COMMAND_FLAG_SINGLEPLAYER_ONLY,
 };
-use std::{ffi::CString, os::raw::c_int, pin::Pin, ptr};
 
 pub struct OwnedChatCommand {
     pub name: Pin<Box<CString>>,

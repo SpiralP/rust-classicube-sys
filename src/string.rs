@@ -1,4 +1,3 @@
-use crate::bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE};
 use std::{
     borrow::Borrow,
     ffi::CString,
@@ -6,6 +5,8 @@ use std::{
     pin::Pin,
     slice,
 };
+
+use crate::bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE};
 
 impl cc_string {
     pub fn as_slice(&self) -> &[u8] {

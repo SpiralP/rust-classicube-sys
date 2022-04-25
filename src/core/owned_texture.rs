@@ -1,8 +1,9 @@
+use std::os::raw::c_short;
+
 use crate::{
     bindings::{cc_uint16, Bitmap, Texture, TextureRec},
     OwnedGfxTexture,
 };
-use std::os::raw::c_short;
 
 pub struct OwnedTexture {
     texture: Texture,

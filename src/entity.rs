@@ -1,6 +1,7 @@
+use std::{mem, os::raw::c_float};
+
 use super::OwnedString;
 use crate::bindings::*;
-use std::{mem, os::raw::c_float};
 
 #[allow(clippy::missing_safety_doc)]
 pub unsafe fn Entity_Init(e: &mut Entity) {

@@ -1,8 +1,9 @@
-use crate::bindings::*;
 use std::{
     ops::{Add, Div, Mul, Neg, Sub},
     os::raw::c_int,
 };
+
+use crate::bindings::*;
 
 impl Add<Self> for IVec3 {
     type Output = Self;

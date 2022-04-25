@@ -1,5 +1,6 @@
-use regex::Regex;
 use std::{collections::HashSet, env, fs, path::Path};
+
+use regex::Regex;
 
 fn main() {
     build_bindings();
@@ -19,9 +20,10 @@ fn main() {
 
     #[cfg(target_os = "windows")]
     {
+        use std::process::Command;
+
         use cc::windows_registry;
         use fs_extra::dir;
-        use std::process::Command;
 
         let out_dir = env::var("OUT_DIR").unwrap();
         let out_dir = Path::new(&out_dir);

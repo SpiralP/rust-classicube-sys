@@ -1,5 +1,6 @@
-use crate::{bindings::*, Matrix_Identity};
 use std::ops::Mul;
+
+use crate::{bindings::*, Matrix_Identity};
 
 impl Mul<Self> for Matrix {
     type Output = Self;

@@ -1,5 +1,6 @@
-use crate::{bindings::*, World};
 use std::{os::raw::c_int, slice};
+
+use crate::{bindings::*, World};
 
 pub fn World_Pack(x: c_int, y: c_int, z: c_int) -> c_int {
     (y * unsafe { World.Length } + z) * unsafe { World.Width } + x

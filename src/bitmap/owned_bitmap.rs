@@ -1,8 +1,9 @@
+use std::{os::raw::c_int, pin::Pin};
+
 use crate::{
     bindings::{Bitmap, BitmapCol},
     Math_NextPowOf2,
 };
-use std::{os::raw::c_int, pin::Pin};
 
 pub struct OwnedBitmap {
     bitmap: Bitmap,

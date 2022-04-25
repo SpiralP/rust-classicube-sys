@@ -1,7 +1,8 @@
 mod ops;
 
-use crate::{bindings::*, Tan_Simple};
 use std::os::raw::{c_double, c_float};
+
+use crate::{bindings::*, Tan_Simple};
 
 impl Matrix {
     pub const IDENTITY: Self = Matrix_IdentityValue();

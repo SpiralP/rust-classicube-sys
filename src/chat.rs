@@ -1,5 +1,6 @@
-use crate::bindings::*;
 use std::os::raw::c_char;
+
+use crate::bindings::*;
 
 #[allow(clippy::missing_safety_doc)]
 pub unsafe fn Chat_AddRaw(raw: *const c_char) {

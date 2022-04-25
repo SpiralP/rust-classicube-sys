@@ -1,8 +1,9 @@
-use crate::bindings::*;
 use std::{
     ops::{Add, Div, Mul, Neg, Sub},
     os::raw::c_float,
 };
+
+use crate::bindings::*;
 
 impl Add<Self> for Vec3 {
     type Output = Self;

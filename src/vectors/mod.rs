@@ -2,9 +2,10 @@ mod ivec;
 mod matrix;
 mod vec;
 
+use std::os::raw::c_double;
+
 pub use self::{ivec::*, matrix::*, vec::*};
 use crate::bindings::*;
-use std::os::raw::c_double;
 
 /// Sets the X, Y, and Z components of a 3D vector
 #[macro_export]

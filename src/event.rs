@@ -1,10 +1,11 @@
 #![allow(clippy::missing_safety_doc)]
 
-use crate::bindings::*;
 use std::{
     mem,
     os::raw::{c_float, c_int, c_void},
 };
+
+use crate::bindings::*;
 
 macro_rules! make_register {
     ($func_name:ident, $name:ident) => {

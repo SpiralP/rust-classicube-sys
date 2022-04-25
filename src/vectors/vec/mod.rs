@@ -1,8 +1,9 @@
 mod ops;
 
+use std::os::raw::c_float;
+
 pub use self::ops::*;
 use crate::{bindings::*, Vec3_IsZero, Vec3_Set};
-use std::os::raw::c_float;
 
 impl Vec3 {
     pub const fn new(x: c_float, y: c_float, z: c_float) -> Self {

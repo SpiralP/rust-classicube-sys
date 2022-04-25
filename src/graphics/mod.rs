@@ -1,9 +1,10 @@
 mod owned_gfx_texture;
 mod owned_vertex_buffer;
 
+use std::os::raw::{c_int, c_void};
+
 pub use self::{owned_gfx_texture::*, owned_vertex_buffer::*};
 use crate::bindings::*;
-use std::os::raw::{c_int, c_void};
 
 #[allow(clippy::missing_safety_doc)]
 pub unsafe fn Gfx_UpdateDynamicVb_IndexedTris(

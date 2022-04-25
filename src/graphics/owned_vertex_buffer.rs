@@ -1,5 +1,6 @@
-use crate::bindings::*;
 use std::os::raw::c_int;
+
+use crate::bindings::*;
 
 pub struct OwnedGfxVertexBuffer {
     pub resource_id: GfxResourceID,

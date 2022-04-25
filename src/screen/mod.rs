@@ -1,12 +1,13 @@
 mod priority;
 
-pub use self::priority::Priority;
-use crate::bindings::{cc_string, Gui_Add, Gui_Remove, Screen, ScreenVTABLE};
 use std::{
     mem,
     os::raw::{c_char, c_int, c_void},
     pin::Pin,
 };
+
+pub use self::priority::Priority;
+use crate::bindings::{cc_string, Gui_Add, Gui_Remove, Screen, ScreenVTABLE};
 
 pub struct OwnedScreen {
     pub screen: Pin<Box<Screen>>,
