@@ -17,8 +17,10 @@
 <span id="12">12</span>
 <span id="13">13</span>
 <span id="14">14</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">Matrix_Identity</span>};
-<span class="kw">use</span> <span class="ident">std::ops::Mul</span>;
+<span id="15">15</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::ops::Mul</span>;
+
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">Matrix_Identity</span>};
 
 <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;

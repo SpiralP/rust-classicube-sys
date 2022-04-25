@@ -16,7 +16,7 @@
 <span id="11">11</span>
 <span id="12">12</span>
 <span id="13">13</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::os::raw::c_int</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std_types::c_int</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Math_NextPowOf2</span>(<span class="ident">value</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">c_int</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">next</span> <span class="op">=</span> <span class="number">1</span>;

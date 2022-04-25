@@ -107,11 +107,11 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>},
-    <span class="ident">os::raw::c_float</span>,
-};
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std_types::c_float</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
 
 <span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec3</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;

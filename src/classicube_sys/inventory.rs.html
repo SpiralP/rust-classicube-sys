@@ -21,9 +21,7 @@
 <span id="16">16</span>
 <span id="17">17</span>
 <span id="18">18</span>
-<span id="19">19</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::os::raw::c_int</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">std_types::c_int</span>};
 
 <span class="doccomment">/// Gets the block at the nth index in the current hotbar.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Inventory_Get</span>(<span class="ident">idx</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">BlockID</span> {

@@ -26,9 +26,7 @@
 <span id="21">21</span>
 <span id="22">22</span>
 <span id="23">23</span>
-<span id="24">24</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::os::raw::c_int</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">std_types::c_int</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedGfxVertexBuffer</span> {
     <span class="kw">pub</span> <span class="ident">resource_id</span>: <span class="ident">GfxResourceID</span>,

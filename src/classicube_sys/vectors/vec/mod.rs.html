@@ -194,11 +194,17 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ops</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::ops</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">Vec3_IsZero</span>, <span class="ident">Vec3_Set</span>};
-<span class="kw">use</span> <span class="ident">std::os::raw::c_float</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">bindings</span>::<span class="kw-2">*</span>,
+    <span class="ident">std_types</span>::{<span class="ident">c_float</span>, <span class="ident">cosf</span>, <span class="ident">floorf</span>, <span class="ident">sinf</span>, <span class="ident">sqrtf</span>},
+    <span class="ident">Vec3_IsZero</span>, <span class="ident">Vec3_Set</span>,
+};
 
 <span class="kw">impl</span> <span class="ident">Vec3</span> {
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
@@ -316,7 +322,7 @@
 <span class="doccomment">/// Scales all components of a vector to lie in [-1, 1]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_Normalize</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec3</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>) {
     <span class="kw">let</span> <span class="ident">lenSquared</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">a</span>.<span class="ident">Z</span>;
-    <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="number">1.0</span> <span class="op">/</span> <span class="ident">lenSquared</span>.<span class="ident">sqrt</span>();
+    <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="number">1.0</span> <span class="op">/</span> <span class="ident">sqrtf</span>(<span class="ident">lenSquared</span>);
     <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">scale</span>;
     <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">scale</span>;
     <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">scale</span>;
@@ -341,26 +347,26 @@
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateX</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">cos</span>();
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin</span>();
+    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
+    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
     <span class="ident">Vec3_Create3</span>(<span class="ident">v</span>.<span class="ident">X</span>, <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>, <span class="op">-</span><span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateY</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">cos</span>();
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin</span>();
+    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
+    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
     <span class="ident">Vec3_Create3</span>(<span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">-</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>, <span class="ident">v</span>.<span class="ident">Y</span>, <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateY3</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">cos</span>();
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin</span>();
+    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
+    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
     <span class="ident">Vec3_Create3</span>(<span class="ident">cosA</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">z</span>, <span class="ident">y</span>, <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">z</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateZ</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">cos</span>();
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin</span>();
+    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
+    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
     <span class="ident">Vec3_Create3</span>(<span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span>, <span class="op">-</span><span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span>, <span class="ident">v</span>.<span class="ident">Z</span>)
 }
 
@@ -373,16 +379,16 @@
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">IVec3_Floor</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">IVec3</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>) {
-    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span>.<span class="ident">floor</span>() <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">Y</span>.<span class="ident">floor</span>() <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">Z</span>.<span class="ident">floor</span>() <span class="kw">as</span> <span class="kw">_</span>;
+    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">floorf</span>(<span class="ident">a</span>.<span class="ident">X</span>) <span class="kw">as</span> <span class="kw">_</span>;
+    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">floorf</span>(<span class="ident">a</span>.<span class="ident">Y</span>) <span class="kw">as</span> <span class="kw">_</span>;
+    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">floorf</span>(<span class="ident">a</span>.<span class="ident">Z</span>) <span class="kw">as</span> <span class="kw">_</span>;
 }
 
 <span class="doccomment">/// Returns a normalised vector facing in the direction described by the given yaw and pitch.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_GetDirVector</span>(<span class="ident">yawRad</span>: <span class="ident">c_float</span>, <span class="ident">pitchRad</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="op">-</span><span class="ident">pitchRad</span>.<span class="ident">cos</span>() <span class="op">*</span> <span class="op">-</span><span class="ident">yawRad</span>.<span class="ident">sin</span>();
-    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="op">-</span><span class="ident">pitchRad</span>.<span class="ident">sin</span>();
-    <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="op">-</span><span class="ident">pitchRad</span>.<span class="ident">cos</span>() <span class="op">*</span> <span class="ident">yawRad</span>.<span class="ident">cos</span>();
+    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="op">-</span><span class="ident">cosf</span>(<span class="ident">pitchRad</span>) <span class="op">*</span> <span class="op">-</span><span class="ident">sinf</span>(<span class="ident">yawRad</span>);
+    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="op">-</span><span class="ident">sinf</span>(<span class="ident">pitchRad</span>);
+    <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="op">-</span><span class="ident">cosf</span>(<span class="ident">pitchRad</span>) <span class="op">*</span> <span class="ident">cosf</span>(<span class="ident">yawRad</span>);
     <span class="ident">Vec3_Create3</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>)
 }
 </code></pre></div>

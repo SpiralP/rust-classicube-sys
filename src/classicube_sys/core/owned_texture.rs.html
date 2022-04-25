@@ -60,11 +60,15 @@
 <span id="55">55</span>
 <span id="56">56</span>
 <span id="57">57</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
+<span id="58">58</span>
+<span id="59">59</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
+
+<span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">bindings</span>::{<span class="ident">cc_uint16</span>, <span class="ident">Bitmap</span>, <span class="ident">Texture</span>, <span class="ident">TextureRec</span>},
+    <span class="ident">std_types::c_short</span>,
     <span class="ident">OwnedGfxTexture</span>,
 };
-<span class="kw">use</span> <span class="ident">std::os::raw::c_short</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedTexture</span> {
     <span class="ident">texture</span>: <span class="ident">Texture</span>,
@@ -112,7 +116,7 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::borrow::Borrow</span><span class="op">&lt;</span><span class="ident">Texture</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OwnedTexture</span> {
+<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Texture</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OwnedTexture</span> {
     <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Texture</span> {
         <span class="self">self</span>.<span class="ident">as_texture</span>()
     }

@@ -62,14 +62,12 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-<span id="60">60</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ivec</span>;
 <span class="kw">mod</span> <span class="ident">matrix</span>;
 <span class="kw">mod</span> <span class="ident">vec</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::{<span class="ident">ivec</span>::<span class="kw-2">*</span>, <span class="ident">matrix</span>::<span class="kw-2">*</span>, <span class="ident">vec</span>::<span class="kw-2">*</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::os::raw::c_double</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">std_types::c_double</span>};
 
 <span class="doccomment">/// Sets the X, Y, and Z components of a 3D vector</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>

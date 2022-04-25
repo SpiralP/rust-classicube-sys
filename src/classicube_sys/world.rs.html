@@ -24,8 +24,10 @@
 <span id="19">19</span>
 <span id="20">20</span>
 <span id="21">21</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">World</span>};
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">os::raw::c_int</span>, <span class="ident">slice</span>};
+<span id="22">22</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::slice</span>;
+
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">std_types::c_int</span>, <span class="ident">World</span>};
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">World_Pack</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">c_int</span> {
     (<span class="ident">y</span> <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Length</span> } <span class="op">+</span> <span class="ident">z</span>) <span class="op">*</span> <span class="kw">unsafe</span> { <span class="ident">World</span>.<span class="ident">Width</span> } <span class="op">+</span> <span class="ident">x</span>

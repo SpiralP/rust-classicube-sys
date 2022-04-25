@@ -71,11 +71,15 @@
 <span id="66">66</span>
 <span id="67">67</span>
 <span id="68">68</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
+<span id="69">69</span>
+<span id="70">70</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">pin::Pin</span>, <span class="ident">ptr</span>};
+
+<span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">bindings</span>::{<span class="ident">cc_string</span>, <span class="ident">Commands_Register</span>},
+    <span class="ident">std_types</span>::{<span class="ident">c_int</span>, <span class="ident">Box</span>, <span class="ident">CString</span>, <span class="ident">Vec</span>},
     <span class="ident">ChatCommand</span>, <span class="ident">COMMAND_FLAG_SINGLEPLAYER_ONLY</span>,
 };
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">ffi::CString</span>, <span class="ident">os::raw::c_int</span>, <span class="ident">pin::Pin</span>, <span class="ident">ptr</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedChatCommand</span> {
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">CString</span><span class="op">&gt;</span><span class="op">&gt;</span>,

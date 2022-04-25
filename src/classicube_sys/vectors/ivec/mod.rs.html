@@ -86,14 +86,16 @@
 <span id="81">81</span>
 <span id="82">82</span>
 <span id="83">83</span>
+<span id="84">84</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ops</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std_types::c_int</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::ops</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">bindings</span>::{<span class="ident">IVec3</span>, <span class="ident">Vec3</span>},
     <span class="ident">Int32_MaxValue</span>, <span class="ident">Vec3_IsZero</span>, <span class="ident">Vec3_Set</span>,
 };
-<span class="kw">use</span> <span class="ident">std::os::raw::c_int</span>;
 
 <span class="kw">impl</span> <span class="ident">IVec3</span> {
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">c_int</span>, <span class="ident">y</span>: <span class="ident">c_int</span>, <span class="ident">z</span>: <span class="ident">c_int</span>) -&gt; <span class="self">Self</span> {

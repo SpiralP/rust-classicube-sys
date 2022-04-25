@@ -181,10 +181,16 @@
 <span id="176">176</span>
 <span id="177">177</span>
 <span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ops</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bindings</span>::<span class="kw-2">*</span>, <span class="ident">Tan_Simple</span>};
-<span class="kw">use</span> <span class="ident">std::os::raw</span>::{<span class="ident">c_double</span>, <span class="ident">c_float</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">bindings</span>::<span class="kw-2">*</span>,
+    <span class="ident">std_types</span>::{<span class="ident">c_double</span>, <span class="ident">c_float</span>},
+    <span class="ident">Tan_Simple</span>,
+};
 
 <span class="kw">impl</span> <span class="ident">Matrix</span> {
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IDENTITY</span>: <span class="self">Self</span> <span class="op">=</span> <span class="ident">Matrix_IdentityValue</span>();

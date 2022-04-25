@@ -255,13 +255,12 @@
 <span id="250">250</span>
 <span id="251">251</span>
 <span id="252">252</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::{<span class="ident">cc_codepoint</span>, <span class="ident">cc_string</span>, <span class="ident">cc_uint16</span>, <span class="ident">cc_unichar</span>, <span class="ident">STRING_SIZE</span>};
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">borrow::Borrow</span>,
-    <span class="ident">ffi::CString</span>,
-    <span class="ident">os::raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_int</span>},
-    <span class="ident">pin::Pin</span>,
-    <span class="ident">slice</span>,
+<span id="253">253</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">borrow::Borrow</span>, <span class="ident">pin::Pin</span>, <span class="ident">slice</span>};
+
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">bindings</span>::{<span class="ident">cc_codepoint</span>, <span class="ident">cc_string</span>, <span class="ident">cc_uint16</span>, <span class="ident">cc_unichar</span>, <span class="ident">STRING_SIZE</span>},
+    <span class="ident">std_types</span>::{<span class="ident">c_char</span>, <span class="ident">c_int</span>, <span class="ident">Box</span>, <span class="ident">CString</span>, <span class="ident">String</span>, <span class="ident">ToString</span>, <span class="ident">Vec</span>},
 };
 
 <span class="kw">impl</span> <span class="ident">cc_string</span> {
@@ -345,7 +344,10 @@
     <span class="kw">let</span> <span class="ident">owned_string</span> <span class="op">=</span> <span class="ident">OwnedString::new</span>(<span class="string">&quot;hello&quot;</span>);
 
     <span class="kw">fn</span> <span class="ident">use_cc_string</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">cc_string</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">T</span>) {
-        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">s</span>.<span class="ident">borrow</span>());
+        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no_std&quot;</span>))]</span>
+        {
+            <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">s</span>.<span class="ident">borrow</span>());
+        }
     }
 
     <span class="ident">use_cc_string</span>(<span class="ident">owned_string</span>.<span class="ident">as_cc_string</span>());

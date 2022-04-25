@@ -61,9 +61,15 @@
 <span id="56">56</span>
 <span id="57">57</span>
 <span id="58">58</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::OwnedString</span>;
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::mem</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std_types::c_float</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::OwnedString</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">mem</span>, <span class="ident">os::raw::c_float</span>};
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Entity_Init</span>(<span class="ident">e</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Entity</span>) {
