@@ -1,7 +1,8 @@
-use std::{os::raw::c_int, pin::Pin};
+use core::{borrow::Borrow, pin::Pin};
 
 use crate::{
     bindings::{Bitmap, BitmapCol},
+    std_types::{c_int, vec, Box, Vec},
     Math_NextPowOf2,
 };
 
@@ -59,7 +60,7 @@ impl OwnedBitmap {
     }
 }
 
-impl std::borrow::Borrow<Bitmap> for OwnedBitmap {
+impl Borrow<Bitmap> for OwnedBitmap {
     fn borrow(&self) -> &Bitmap {
         self.as_bitmap()
     }

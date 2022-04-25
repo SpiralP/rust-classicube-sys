@@ -1,4 +1,6 @@
-use std::{mem, os::raw::c_float};
+use core::mem;
+
+use crate::std_types::c_float;
 
 use super::OwnedString;
 use crate::bindings::*;

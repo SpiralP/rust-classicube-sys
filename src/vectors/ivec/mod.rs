@@ -1,6 +1,6 @@
 mod ops;
 
-use std::os::raw::c_int;
+use crate::std_types::c_int;
 
 pub use self::ops::*;
 use crate::{

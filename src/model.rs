@@ -1,6 +1,4 @@
-use std::os::raw::c_float;
-
-use crate::bindings::*;
+use crate::{bindings::*, std_types::c_float};
 
 // pub const MODEL_QUAD_VERTICES: u32 = 4;
 pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT as u32 * MODEL_QUAD_VERTICES as u32;
@@ -40,6 +38,21 @@ macro_rules! BoxDesc_Dims {
 }
 
 /// gives (x1, y1, z1, x2, y2, z2)
+#[cfg(feature = "no_std")]
+#[macro_export]
+macro_rules! BoxDesc_Bounds {
+    ($x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
+        (
+            $x1 as ::libc::c_float / 16.0,
+            $y1 as ::libc::c_float / 16.0,
+            $z1 as ::libc::c_float / 16.0,
+            $x2 as ::libc::c_float / 16.0,
+            $y2 as ::libc::c_float / 16.0,
+            $z2 as ::libc::c_float / 16.0,
+        )
+    };
+}
+#[cfg(not(feature = "no_std"))]
 #[macro_export]
 macro_rules! BoxDesc_Bounds {
     ($x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
@@ -128,21 +141,22 @@ macro_rules! Model_RetAABB {
 #[test]
 fn test_model_macros() {
     fn BoxDesc_BuildBox(_part: *mut ModelPart, desc: *const BoxDesc) {
+        #[cfg(not(feature = "no_std"))]
         unsafe {
             println!("{:#?}", *desc);
         }
     }
 
-    let mut part: ModelPart = unsafe { std::mem::zeroed() };
+    let mut part: ModelPart = unsafe { core::mem::zeroed() };
     BoxDesc_BuildBox(
         &mut part,
         &BoxDesc::from_macros(BoxDesc_Tex!(0, 16), BoxDesc_Box!(-3, 1, -3, 3, 7, 3)),
     );
 
-    let mut e: Entity = unsafe { std::mem::zeroed() };
+    let mut e: Entity = unsafe { core::mem::zeroed() };
     Model_RetSize!(e, 0.0, 0.0, 0.0);
 
-    let mut e: Entity = unsafe { std::mem::zeroed() };
+    let mut e: Entity = unsafe { core::mem::zeroed() };
     Model_RetAABB!(e, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 

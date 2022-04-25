@@ -1,4 +1,4 @@
-use std::os::raw::c_char;
+use crate::std_types::c_char;
 
 use crate::bindings::*;
 

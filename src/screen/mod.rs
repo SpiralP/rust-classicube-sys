@@ -1,13 +1,12 @@
 mod priority;
 
-use std::{
-    mem,
-    os::raw::{c_char, c_int, c_void},
-    pin::Pin,
-};
+use core::{mem, pin::Pin};
 
 pub use self::priority::Priority;
-use crate::bindings::{cc_string, Gui_Add, Gui_Remove, Screen, ScreenVTABLE};
+use crate::{
+    bindings::{cc_string, Gui_Add, Gui_Remove, Screen, ScreenVTABLE},
+    std_types::{c_char, c_int, c_void, Box},
+};
 
 pub struct OwnedScreen {
     pub screen: Pin<Box<Screen>>,
@@ -50,16 +49,17 @@ impl OwnedScreen {
     }
 
     pub fn add<T: Into<Priority>>(&mut self, priority: T) {
-        if !self.added {
-            unsafe {
-                // priority is stored as a u8 even though api is c_int
-                Gui_Add(
-                    self.screen.as_mut().get_unchecked_mut(),
-                    priority.into().to_u8() as _,
-                );
-            }
-            self.added = true;
+        if self.added {
+            return;
         }
+        unsafe {
+            // priority is stored as a u8 even though api is c_int
+            Gui_Add(
+                self.screen.as_mut().get_unchecked_mut(),
+                priority.into().to_u8() as _,
+            );
+        }
+        self.added = true;
     }
 
     pub fn remove(&mut self) {

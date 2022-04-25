@@ -1,7 +1,11 @@
+#![cfg_attr(feature = "no_std", no_std)]
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 #![doc = include_str!("../README.md")]
+
+#[cfg(feature = "no_std")]
+extern crate alloc;
 
 mod bindings;
 mod bitmap;
@@ -9,6 +13,7 @@ mod chat;
 mod command;
 mod constants;
 mod core;
+mod std_types;
 mod entity;
 mod event;
 mod graphics;

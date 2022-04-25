@@ -1,7 +1,8 @@
-use std::{ffi::CString, os::raw::c_int, pin::Pin, ptr};
+use core::{pin::Pin, ptr};
 
 use crate::{
     bindings::{cc_string, Commands_Register},
+    std_types::{c_int, Box, CString, Vec},
     ChatCommand, COMMAND_FLAG_SINGLEPLAYER_ONLY,
 };
 

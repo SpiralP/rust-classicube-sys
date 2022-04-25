@@ -8,14 +8,12 @@ fn main() {
     #[cfg(target_os = "linux")]
     {
         // linux doesn't need to build or link to the shared library
-        return;
     }
 
     #[cfg(target_os = "macos")]
     {
         // mac also doesn't need to build/link, but
         // mac needs to have "-undefined dynamic_lookup" on the compile flags!
-        return;
     }
 
     #[cfg(target_os = "windows")]
@@ -103,24 +101,28 @@ fn main() {
 fn build_bindings() {
     let (header_filenames, var_types, function_names) = get_exports();
 
-    let mut bindings = bindgen::builder()
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
-        .derive_partialeq(true)
-        .derive_eq(true)
-        .derive_hash(true)
-        .derive_copy(true)
-        .no_copy("cc_string_")
-        .no_copy("Bitmap")
-        .no_copy("Texture")
-        .clang_arg("-I./ClassiCube/src")
-        .header_contents(
-            "bindgen.h",
-            &header_filenames
-                .iter()
-                .map(|filename| format!("#include <{}>\n", filename))
-                .collect::<String>(),
-        )
-        .allowlist_type(".*");
+    let mut bindings = if cfg!(feature = "no_std") {
+        bindgen::builder().use_core().ctypes_prefix("libc")
+    } else {
+        bindgen::builder()
+    }
+    .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+    .derive_partialeq(true)
+    .derive_eq(true)
+    .derive_hash(true)
+    .derive_copy(true)
+    .no_copy("cc_string_")
+    .no_copy("Bitmap")
+    .no_copy("Texture")
+    .clang_arg("-I./ClassiCube/src")
+    .header_contents(
+        "bindgen.h",
+        &header_filenames
+            .iter()
+            .map(|filename| format!("#include <{}>\n", filename))
+            .collect::<String>(),
+    )
+    .allowlist_type(".*");
 
     for var_type in var_types {
         match var_type {

@@ -1,4 +1,4 @@
-use std::os::raw::c_int;
+use crate::std_types::c_int;
 
 pub fn Math_NextPowOf2(value: c_int) -> c_int {
     let mut next = 1;

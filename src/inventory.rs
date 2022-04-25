@@ -1,6 +1,4 @@
-use std::os::raw::c_int;
-
-use crate::bindings::*;
+use crate::{bindings::*, std_types::c_int};
 
 /// Gets the block at the nth index in the current hotbar.
 pub fn Inventory_Get(idx: c_int) -> BlockID {

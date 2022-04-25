@@ -1,7 +1,8 @@
-use std::os::raw::c_short;
+use core::borrow::Borrow;
 
 use crate::{
     bindings::{cc_uint16, Bitmap, Texture, TextureRec},
+    std_types::c_short,
     OwnedGfxTexture,
 };
 
@@ -51,7 +52,7 @@ impl OwnedTexture {
     }
 }
 
-impl std::borrow::Borrow<Texture> for OwnedTexture {
+impl Borrow<Texture> for OwnedTexture {
     fn borrow(&self) -> &Texture {
         self.as_texture()
     }

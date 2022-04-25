@@ -1,9 +1,11 @@
 mod ops;
 
-use std::os::raw::c_float;
-
 pub use self::ops::*;
-use crate::{bindings::*, Vec3_IsZero, Vec3_Set};
+use crate::{
+    bindings::*,
+    std_types::{c_float, cosf, floorf, sinf, sqrtf},
+    Vec3_IsZero, Vec3_Set,
+};
 
 impl Vec3 {
     pub const fn new(x: c_float, y: c_float, z: c_float) -> Self {
@@ -121,7 +123,7 @@ pub fn Vec3_Lerp(result: &mut Vec3, a: &Vec3, b: &Vec3, blend: c_float) {
 /// Scales all components of a vector to lie in [-1, 1]
 pub fn Vec3_Normalize(result: &mut Vec3, a: &Vec3) {
     let lenSquared = a.X * a.X + a.Y * a.Y + a.Z * a.Z;
-    let scale = 1.0 / lenSquared.sqrt();
+    let scale = 1.0 / sqrtf(lenSquared);
     result.X = a.X * scale;
     result.Y = a.Y * scale;
     result.Z = a.Z * scale;
@@ -146,26 +148,26 @@ pub fn Vec3_TransformY(result: &mut Vec3, y: c_float, mat: &Matrix) {
 }
 
 pub fn Vec3_RotateX(v: Vec3, angle: c_float) -> Vec3 {
-    let cosA = angle.cos();
-    let sinA = angle.sin();
+    let cosA = cosf(angle);
+    let sinA = sinf(angle);
     Vec3_Create3(v.X, cosA * v.Y + sinA * v.Z, -sinA * v.Y + cosA * v.Z)
 }
 
 pub fn Vec3_RotateY(v: Vec3, angle: c_float) -> Vec3 {
-    let cosA = angle.cos();
-    let sinA = angle.sin();
+    let cosA = cosf(angle);
+    let sinA = sinf(angle);
     Vec3_Create3(cosA * v.X - sinA * v.Z, v.Y, sinA * v.X + cosA * v.Z)
 }
 
 pub fn Vec3_RotateY3(x: c_float, y: c_float, z: c_float, angle: c_float) -> Vec3 {
-    let cosA = angle.cos();
-    let sinA = angle.sin();
+    let cosA = cosf(angle);
+    let sinA = sinf(angle);
     Vec3_Create3(cosA * x - sinA * z, y, sinA * x + cosA * z)
 }
 
 pub fn Vec3_RotateZ(v: Vec3, angle: c_float) -> Vec3 {
-    let cosA = angle.cos();
-    let sinA = angle.sin();
+    let cosA = cosf(angle);
+    let sinA = sinf(angle);
     Vec3_Create3(cosA * v.X + sinA * v.Y, -sinA * v.X + cosA * v.Y, v.Z)
 }
 
@@ -178,15 +180,15 @@ pub fn Vec3_Equals(a: &Vec3, b: &Vec3) -> bool {
 }
 
 pub fn IVec3_Floor(result: &mut IVec3, a: &Vec3) {
-    result.X = a.X.floor() as _;
-    result.Y = a.Y.floor() as _;
-    result.Z = a.Z.floor() as _;
+    result.X = floorf(a.X) as _;
+    result.Y = floorf(a.Y) as _;
+    result.Z = floorf(a.Z) as _;
 }
 
 /// Returns a normalised vector facing in the direction described by the given yaw and pitch.
 pub fn Vec3_GetDirVector(yawRad: c_float, pitchRad: c_float) -> Vec3 {
-    let x = -pitchRad.cos() * -yawRad.sin();
-    let y = -pitchRad.sin();
-    let z = -pitchRad.cos() * yawRad.cos();
+    let x = -cosf(pitchRad) * -sinf(yawRad);
+    let y = -sinf(pitchRad);
+    let z = -cosf(pitchRad) * cosf(yawRad);
     Vec3_Create3(x, y, z)
 }

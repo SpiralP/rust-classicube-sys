@@ -1,12 +1,9 @@
-use std::{
-    borrow::Borrow,
-    ffi::CString,
-    os::raw::{c_char, c_int},
-    pin::Pin,
-    slice,
-};
+use core::{borrow::Borrow, pin::Pin, slice};
 
-use crate::bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE};
+use crate::{
+    bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE},
+    std_types::{c_char, c_int, Box, CString, String, ToString, Vec},
+};
 
 impl cc_string {
     pub fn as_slice(&self) -> &[u8] {
@@ -89,7 +86,10 @@ fn test_owned_string() {
     let owned_string = OwnedString::new("hello");
 
     fn use_cc_string<T: Borrow<cc_string>>(s: T) {
-        println!("{:?}", s.borrow());
+        #[cfg(not(feature = "no_std"))]
+        {
+            println!("{:?}", s.borrow());
+        }
     }
 
     use_cc_string(owned_string.as_cc_string());

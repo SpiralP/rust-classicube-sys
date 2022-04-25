@@ -1,7 +1,6 @@
-use std::{
-    ops::{Add, Div, Mul, Neg, Sub},
-    os::raw::c_float,
-};
+use core::ops::{Add, Div, Mul, Neg, Sub};
+
+use crate::std_types::c_float;
 
 use crate::bindings::*;
 
