@@ -34,15 +34,15 @@ jobs:
           scoop install llvm
           echo "LIBCLANG_PATH=$HOME\scoop\apps\llvm\current\bin" >> $env:GITHUB_ENV
 
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+
       - name: Install rust stable
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
           components: rustfmt
-
-      - name: setup-msbuild
-        uses: microsoft/setup-msbuild@v1.1
 
       - name: Build
         uses: actions-rs/cargo@v1

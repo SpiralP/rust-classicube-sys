@@ -52,13 +52,12 @@ fn main() {
         #[cfg(all(target_os = "windows", target_pointer_width = "32"))]
         let platform = "x86";
 
-        let platform_toolset_version = "v142";
-
         let args = vec![
             format!("ClassiCube.sln"),
             format!("/p:Configuration={}", configuration),
             format!("/p:Platform={}", platform),
-            format!("/p:PlatformToolset={}", platform_toolset_version),
+            // TODO detect toolset version
+            format!("/p:PlatformToolset=v143"),
             format!("/p:WindowsTargetPlatformVersion=10.0"),
             format!("/p:OutDir={}\\", &out_dir.display()),
             format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
