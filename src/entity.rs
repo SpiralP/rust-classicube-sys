@@ -1,9 +1,7 @@
 use core::mem;
 
-use crate::std_types::c_float;
-
 use super::OwnedString;
-use crate::bindings::*;
+use crate::{bindings::*, std_types::c_float};
 
 #[allow(clippy::missing_safety_doc)]
 pub unsafe fn Entity_Init(e: &mut Entity) {
