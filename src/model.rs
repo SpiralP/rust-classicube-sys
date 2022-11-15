@@ -1,7 +1,6 @@
 use crate::{bindings::*, std_types::c_float};
 
-// pub const MODEL_QUAD_VERTICES: u32 = 4;
-pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT as u32 * MODEL_QUAD_VERTICES as u32;
+pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT * MODEL_QUAD_VERTICES;
 
 #[macro_export]
 macro_rules! BoxDesc_Dim {
