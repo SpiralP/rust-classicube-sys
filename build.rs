@@ -32,8 +32,8 @@ fn main() {
         copy_options.overwrite = true;
 
         dir::copy(
-            &classicube_src_dir,
-            &build_dir.parent().unwrap(),
+            classicube_src_dir,
+            build_dir.parent().unwrap(),
             &copy_options,
         )
         .unwrap();
@@ -54,8 +54,8 @@ fn main() {
 
         let args = vec![
             format!("ClassiCube.sln"),
-            format!("/p:Configuration={}", configuration),
-            format!("/p:Platform={}", platform),
+            format!("/p:Configuration={configuration}"),
+            format!("/p:Platform={platform}"),
             // TODO detect toolset version
             format!("/p:PlatformToolset=v143"),
             format!("/p:WindowsTargetPlatformVersion=10.0"),
@@ -63,24 +63,32 @@ fn main() {
             format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
         ];
 
-        let cmd = match Command::new("msbuild")
-            .current_dir(&build_dir)
+        let cmd = match Command::new("msbuild.exe")
+            .current_dir(build_dir)
             .args(&args)
             .output()
         {
             Ok(result) => result,
             Err(e) => {
-                eprintln!(
-                    "msbuild in PATH failed, trying cc::windows_registry: {:#?}",
-                    e
-                );
+                eprintln!("msbuild from PATH failed, trying hardcoded path: {e:#?}");
 
-                windows_registry::find(&target, "msbuild")
-                    .unwrap()
-                    .current_dir(&build_dir)
+                match Command::new(r"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe")
+                    .current_dir(build_dir)
                     .args(&args)
                     .output()
-                    .unwrap()
+                {
+                    Ok(result) => result,
+                    Err(e) => {
+                        eprintln!("msbuild from hardcoded path failed, trying cc::windows_registry: {e:#?}");
+
+                        windows_registry::find(&target, "msbuild.exe")
+                            .unwrap()
+                            .current_dir(build_dir)
+                            .args(&args)
+                            .output()
+                            .unwrap()
+                    }
+                }
             }
         };
 
@@ -118,7 +126,7 @@ fn build_bindings() {
         "bindgen.h",
         &header_filenames
             .iter()
-            .map(|filename| format!("#include <{}>\n", filename))
+            .map(|filename| format!("#include <{filename}>\n"))
             .collect::<String>(),
     )
     .allowlist_type(".*");
@@ -145,10 +153,8 @@ fn build_bindings() {
             } => {
                 bindings = bindings.raw_line(r#"#[link(name = "ClassiCube", kind = "dylib")]"#);
                 bindings = bindings.raw_line(r#"extern "C" {"#);
-                bindings = bindings.raw_line(format!(
-                    r#"    pub static mut {}: {};"#,
-                    var_name, type_name
-                ));
+                bindings =
+                    bindings.raw_line(format!(r#"    pub static mut {var_name}: {type_name};"#));
                 bindings = bindings.raw_line(r#"}"#);
             }
         }
@@ -204,7 +210,7 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
                 {
                     let var_name = captures
                         .get(1)
-                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part))
+                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"))
                         .as_str()
                         .to_string();
 
@@ -220,20 +226,17 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
                     .unwrap()
                     .captures(part)
                     .unwrap_or_else(|| {
-                        panic!(
-                            "couldn't get capture in file {:?} from {:?}",
-                            file_name, part
-                        )
+                        panic!("couldn't get capture in file {file_name:?} from {part:?}")
                     });
 
                     let type_name = captures
                         .get(1)
-                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part))
+                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"))
                         .as_str()
                         .to_string();
                     let var_name = captures
                         .get(2)
-                        .unwrap_or_else(|| panic!("couldn't get capture 2 from {:?}", part))
+                        .unwrap_or_else(|| panic!("couldn't get capture 2 from {part:?}"))
                         .as_str()
                         .to_string();
 
@@ -265,13 +268,10 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
                 .unwrap()
                 .captures(part)
                 .unwrap_or_else(|| {
-                    panic!(
-                        "couldn't get capture in file {:?} from {:?}",
-                        file_name, part
-                    )
+                    panic!("couldn't get capture in file {file_name:?} from {part:?}")
                 })
                 .get(1)
-                .unwrap_or_else(|| panic!("couldn't get capture 1 from {:?}", part));
+                .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"));
 
                 function_names.insert(function_name.as_str().to_string());
             }
