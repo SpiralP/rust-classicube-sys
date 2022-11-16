@@ -1,6 +1,7 @@
 use crate::{bindings::*, std_types::c_float};
 
-pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT * MODEL_QUAD_VERTICES;
+#[allow(clippy::unnecessary_cast)]
+pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT as u32 * MODEL_QUAD_VERTICES as u32;
 
 #[macro_export]
 macro_rules! BoxDesc_Dim {
