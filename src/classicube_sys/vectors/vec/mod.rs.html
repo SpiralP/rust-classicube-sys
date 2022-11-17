@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\vectors\vec\mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../classicube_sys/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\vectors\vec\mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../classicube_sys/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -192,199 +192,199 @@
 <span id="192">192</span>
 <span id="193">193</span>
 <span id="194">194</span>
-</pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ops</span>;
+</pre><pre class="rust"><code><span class="kw">mod </span>ops;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::ops</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">bindings</span>::<span class="kw-2">*</span>,
-    <span class="ident">std_types</span>::{<span class="ident">c_float</span>, <span class="ident">cosf</span>, <span class="ident">floorf</span>, <span class="ident">sinf</span>, <span class="ident">sqrtf</span>},
-    <span class="ident">Vec3_IsZero</span>, <span class="ident">Vec3_Set</span>,
+<span class="kw">pub use </span><span class="self">self</span>::ops::<span class="kw-2">*</span>;
+<span class="kw">use crate</span>::{
+    bindings::<span class="kw-2">*</span>,
+    std_types::{c_float, cosf, floorf, sinf, sqrtf},
+    Vec3_IsZero, Vec3_Set,
 };
 
-<span class="kw">impl</span> <span class="ident">Vec3</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">X</span>: <span class="ident">x</span>, <span class="ident">Y</span>: <span class="ident">y</span>, <span class="ident">Z</span>: <span class="ident">z</span> }
+<span class="kw">impl </span>Vec3 {
+    <span class="kw">pub const fn </span>new(x: c_float, y: c_float, z: c_float) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ X: x, Y: y, Z: z }
     }
 
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">zero</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">X</span>: <span class="number">0.0</span>,
-            <span class="ident">Y</span>: <span class="number">0.0</span>,
-            <span class="ident">Z</span>: <span class="number">0.0</span>,
+    <span class="kw">pub const fn </span>zero() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            X: <span class="number">0.0</span>,
+            Y: <span class="number">0.0</span>,
+            Z: <span class="number">0.0</span>,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">big_pos</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_BigPos</span>()
+    <span class="kw">pub const fn </span>big_pos() -&gt; <span class="self">Self </span>{
+        Vec3_BigPos()
     }
 
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_Create3</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>)
+    <span class="kw">pub const fn </span>create(x: c_float, y: c_float, z: c_float) -&gt; <span class="self">Self </span>{
+        Vec3_Create3(x, y, z)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) {
-        <span class="macro">Vec3_Set!</span>(<span class="self">self</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>);
+    <span class="kw">pub fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: c_float, y: c_float, z: c_float) {
+        <span class="macro">Vec3_Set!</span>(<span class="self">self</span>, x, y, z);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_zero</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+    <span class="kw">pub fn </span>is_zero(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="macro">Vec3_IsZero!</span>(<span class="self">self</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length_squared</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">c_float</span> {
-        <span class="ident">Vec3_LengthSquared</span>(<span class="self">self</span>)
+    <span class="kw">pub fn </span>length_squared(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; c_float {
+        Vec3_LengthSquared(<span class="self">self</span>)
     }
 
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lerp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">b</span>: <span class="ident">Vec3</span>, <span class="ident">blend</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::zero</span>();
-        <span class="ident">Vec3_Lerp</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>, <span class="ident">blend</span>);
-        <span class="ident">result</span>
+    <span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>lerp(<span class="kw-2">&amp;</span><span class="self">self</span>, b: Vec3, blend: c_float) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::zero();
+        Vec3_Lerp(<span class="kw-2">&amp;mut </span>result, <span class="self">self</span>, <span class="kw-2">&amp;</span>b, blend);
+        result
     }
 
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::zero</span>();
-        <span class="ident">Vec3_Normalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="self">self</span>);
-        <span class="ident">result</span>
+    <span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::zero();
+        Vec3_Normalize(<span class="kw-2">&amp;mut </span>result, <span class="self">self</span>);
+        result
     }
 
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mat</span>: <span class="ident">Matrix</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::zero</span>();
-        <span class="ident">Vec3_Transform</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">mat</span>);
-        <span class="ident">result</span>
+    <span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>transform(<span class="kw-2">&amp;</span><span class="self">self</span>, mat: Matrix) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::zero();
+        Vec3_Transform(<span class="kw-2">&amp;mut </span>result, <span class="self">self</span>, <span class="kw-2">&amp;</span>mat);
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_y</span>(<span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">mat</span>: <span class="ident">Matrix</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::zero</span>();
-        <span class="ident">Vec3_TransformY</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">mat</span>);
-        <span class="ident">result</span>
+    <span class="kw">pub fn </span>transform_y(y: c_float, mat: Matrix) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::zero();
+        Vec3_TransformY(<span class="kw-2">&amp;mut </span>result, y, <span class="kw-2">&amp;</span>mat);
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_x</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_RotateX</span>(<span class="ident">v</span>, <span class="ident">angle</span>)
+    <span class="kw">pub fn </span>rotate_x(v: Vec3, angle: c_float) -&gt; <span class="self">Self </span>{
+        Vec3_RotateX(v, angle)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_y</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_RotateY</span>(<span class="ident">v</span>, <span class="ident">angle</span>)
+    <span class="kw">pub fn </span>rotate_y(v: Vec3, angle: c_float) -&gt; <span class="self">Self </span>{
+        Vec3_RotateY(v, angle)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_y3</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_RotateY3</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>, <span class="ident">angle</span>)
+    <span class="kw">pub fn </span>rotate_y3(x: c_float, y: c_float, z: c_float, angle: c_float) -&gt; <span class="self">Self </span>{
+        Vec3_RotateY3(x, y, z, angle)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_z</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_RotateZ</span>(<span class="ident">v</span>, <span class="ident">angle</span>)
+    <span class="kw">pub fn </span>rotate_z(v: Vec3, angle: c_float) -&gt; <span class="self">Self </span>{
+        Vec3_RotateZ(v, angle)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">floor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">IVec3</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">IVec3::zero</span>();
-        <span class="ident">IVec3_Floor</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="self">self</span>);
-        <span class="ident">result</span>
+    <span class="kw">pub fn </span>floor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; IVec3 {
+        <span class="kw">let </span><span class="kw-2">mut </span>result = IVec3::zero();
+        IVec3_Floor(<span class="kw-2">&amp;mut </span>result, <span class="self">self</span>);
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_dir_vector</span>(<span class="ident">yawRad</span>: <span class="ident">c_float</span>, <span class="ident">pitchRad</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Vec3_GetDirVector</span>(<span class="ident">yawRad</span>, <span class="ident">pitchRad</span>)
-    }
-}
-
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">Vec3_BigPos</span>() -&gt; <span class="ident">Vec3</span> {
-    <span class="ident">Vec3</span> {
-        <span class="ident">X</span>: <span class="number">1e25_f32</span>,
-        <span class="ident">Y</span>: <span class="number">1e25_f32</span>,
-        <span class="ident">Z</span>: <span class="number">1e25_f32</span>,
+    <span class="kw">pub fn </span>get_dir_vector(yawRad: c_float, pitchRad: c_float) -&gt; <span class="self">Self </span>{
+        Vec3_GetDirVector(yawRad, pitchRad)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">Vec3_Create3</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="ident">Vec3</span> { <span class="ident">X</span>: <span class="ident">x</span>, <span class="ident">Y</span>: <span class="ident">y</span>, <span class="ident">Z</span>: <span class="ident">z</span> }
-}
-
-<span class="doccomment">/// Returns the squared length of the vector.</span>
-<span class="doccomment">/// Squared length can be used for comparison, to avoid a costly sqrt()</span>
-<span class="doccomment">/// However, you must sqrt() this when adding lengths.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_LengthSquared</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>) -&gt; <span class="ident">c_float</span> {
-    <span class="ident">v</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">v</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">v</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>
-}
-
-<span class="doccomment">/// Linearly interpolates components of two vectors.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_Lerp</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec3</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>, <span class="ident">blend</span>: <span class="ident">c_float</span>) {
-    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">blend</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">X</span> <span class="op">-</span> <span class="ident">a</span>.<span class="ident">X</span>) <span class="op">+</span> <span class="ident">a</span>.<span class="ident">X</span>;
-    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">blend</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">Y</span> <span class="op">-</span> <span class="ident">a</span>.<span class="ident">Y</span>) <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Y</span>;
-    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">blend</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">Z</span> <span class="op">-</span> <span class="ident">a</span>.<span class="ident">Z</span>) <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Z</span>;
-}
-
-<span class="doccomment">/// Scales all components of a vector to lie in [-1, 1]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_Normalize</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec3</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>) {
-    <span class="kw">let</span> <span class="ident">lenSquared</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">a</span>.<span class="ident">Z</span>;
-    <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="number">1.0</span> <span class="op">/</span> <span class="ident">sqrtf</span>(<span class="ident">lenSquared</span>);
-    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">scale</span>;
-    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">scale</span>;
-    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">scale</span>;
-}
-
-<span class="doccomment">/// Transforms a vector by the given matrix.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_Transform</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec3</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>, <span class="ident">mat</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>) {
-    <span class="comment">// a could be pointing to result - can&#39;t directly assign X/Y/Z therefore</span>
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row1</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row2</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row3</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">row4</span>.<span class="ident">X</span>;
-    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row1</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row2</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row3</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">row4</span>.<span class="ident">Y</span>;
-    <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">X</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row1</span>.<span class="ident">Z</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row2</span>.<span class="ident">Z</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row3</span>.<span class="ident">Z</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">row4</span>.<span class="ident">Z</span>;
-    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">x</span>;
-    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">y</span>;
-    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">z</span>;
-}
-
-<span class="doccomment">/// Same as Vec3_Transform, but faster since X and Z are assumed as 0.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_TransformY</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec3</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">mat</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>) {
-    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row2</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">row4</span>.<span class="ident">X</span>;
-    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row2</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">row4</span>.<span class="ident">Y</span>;
-    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">row2</span>.<span class="ident">Z</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">row4</span>.<span class="ident">Z</span>;
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateX</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
-    <span class="ident">Vec3_Create3</span>(<span class="ident">v</span>.<span class="ident">X</span>, <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>, <span class="op">-</span><span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>)
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateY</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
-    <span class="ident">Vec3_Create3</span>(<span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">-</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>, <span class="ident">v</span>.<span class="ident">Y</span>, <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Z</span>)
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateY3</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
-    <span class="ident">Vec3_Create3</span>(<span class="ident">cosA</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">z</span>, <span class="ident">y</span>, <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">z</span>)
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_RotateZ</span>(<span class="ident">v</span>: <span class="ident">Vec3</span>, <span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">cosA</span> <span class="op">=</span> <span class="ident">cosf</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">sinA</span> <span class="op">=</span> <span class="ident">sinf</span>(<span class="ident">angle</span>);
-    <span class="ident">Vec3_Create3</span>(<span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span>, <span class="op">-</span><span class="ident">sinA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">X</span> <span class="op">+</span> <span class="ident">cosA</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">Y</span>, <span class="ident">v</span>.<span class="ident">Z</span>)
-}
-
-<span class="doccomment">/// Whether all of the components of the two vectors are equal.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_Equals</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>) -&gt; <span class="ident">bool</span> {
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::float_cmp</span>)]</span>
-    {
-        <span class="ident">a</span>.<span class="ident">X</span> <span class="op">==</span> <span class="ident">b</span>.<span class="ident">X</span> <span class="op">&amp;&amp;</span> <span class="ident">a</span>.<span class="ident">Y</span> <span class="op">==</span> <span class="ident">b</span>.<span class="ident">Y</span> <span class="op">&amp;&amp;</span> <span class="ident">a</span>.<span class="ident">Z</span> <span class="op">==</span> <span class="ident">b</span>.<span class="ident">Z</span>
+<span class="kw">pub const fn </span>Vec3_BigPos() -&gt; Vec3 {
+    Vec3 {
+        X: <span class="number">1e25_f32</span>,
+        Y: <span class="number">1e25_f32</span>,
+        Z: <span class="number">1e25_f32</span>,
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">IVec3_Floor</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">IVec3</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Vec3</span>) {
-    <span class="ident">result</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">floorf</span>(<span class="ident">a</span>.<span class="ident">X</span>) <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="ident">result</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">floorf</span>(<span class="ident">a</span>.<span class="ident">Y</span>) <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="ident">result</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="ident">floorf</span>(<span class="ident">a</span>.<span class="ident">Z</span>) <span class="kw">as</span> <span class="kw">_</span>;
+<span class="kw">pub const fn </span>Vec3_Create3(x: c_float, y: c_float, z: c_float) -&gt; Vec3 {
+    Vec3 { X: x, Y: y, Z: z }
 }
 
-<span class="doccomment">/// Returns a normalised vector facing in the direction described by the given yaw and pitch.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Vec3_GetDirVector</span>(<span class="ident">yawRad</span>: <span class="ident">c_float</span>, <span class="ident">pitchRad</span>: <span class="ident">c_float</span>) -&gt; <span class="ident">Vec3</span> {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="op">-</span><span class="ident">cosf</span>(<span class="ident">pitchRad</span>) <span class="op">*</span> <span class="op">-</span><span class="ident">sinf</span>(<span class="ident">yawRad</span>);
-    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="op">-</span><span class="ident">sinf</span>(<span class="ident">pitchRad</span>);
-    <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="op">-</span><span class="ident">cosf</span>(<span class="ident">pitchRad</span>) <span class="op">*</span> <span class="ident">cosf</span>(<span class="ident">yawRad</span>);
-    <span class="ident">Vec3_Create3</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>)
+<span class="doccomment">/// Returns the squared length of the vector.
+/// Squared length can be used for comparison, to avoid a costly sqrt()
+/// However, you must sqrt() this when adding lengths.
+</span><span class="kw">pub fn </span>Vec3_LengthSquared(v: <span class="kw-2">&amp;</span>Vec3) -&gt; c_float {
+    v.X * v.X + v.Y * v.Y + v.Z * v.Z
+}
+
+<span class="doccomment">/// Linearly interpolates components of two vectors.
+</span><span class="kw">pub fn </span>Vec3_Lerp(result: <span class="kw-2">&amp;mut </span>Vec3, a: <span class="kw-2">&amp;</span>Vec3, b: <span class="kw-2">&amp;</span>Vec3, blend: c_float) {
+    result.X = blend * (b.X - a.X) + a.X;
+    result.Y = blend * (b.Y - a.Y) + a.Y;
+    result.Z = blend * (b.Z - a.Z) + a.Z;
+}
+
+<span class="doccomment">/// Scales all components of a vector to lie in [-1, 1]
+</span><span class="kw">pub fn </span>Vec3_Normalize(result: <span class="kw-2">&amp;mut </span>Vec3, a: <span class="kw-2">&amp;</span>Vec3) {
+    <span class="kw">let </span>lenSquared = a.X * a.X + a.Y * a.Y + a.Z * a.Z;
+    <span class="kw">let </span>scale = <span class="number">1.0 </span>/ sqrtf(lenSquared);
+    result.X = a.X * scale;
+    result.Y = a.Y * scale;
+    result.Z = a.Z * scale;
+}
+
+<span class="doccomment">/// Transforms a vector by the given matrix.
+</span><span class="kw">pub fn </span>Vec3_Transform(result: <span class="kw-2">&amp;mut </span>Vec3, a: <span class="kw-2">&amp;</span>Vec3, mat: <span class="kw-2">&amp;</span>Matrix) {
+    <span class="comment">// a could be pointing to result - can&#39;t directly assign X/Y/Z therefore
+    </span><span class="kw">let </span>x = a.X * mat.row1.X + a.Y * mat.row2.X + a.Z * mat.row3.X + mat.row4.X;
+    <span class="kw">let </span>y = a.X * mat.row1.Y + a.Y * mat.row2.Y + a.Z * mat.row3.Y + mat.row4.Y;
+    <span class="kw">let </span>z = a.X * mat.row1.Z + a.Y * mat.row2.Z + a.Z * mat.row3.Z + mat.row4.Z;
+    result.X = x;
+    result.Y = y;
+    result.Z = z;
+}
+
+<span class="doccomment">/// Same as Vec3_Transform, but faster since X and Z are assumed as 0.
+</span><span class="kw">pub fn </span>Vec3_TransformY(result: <span class="kw-2">&amp;mut </span>Vec3, y: c_float, mat: <span class="kw-2">&amp;</span>Matrix) {
+    result.X = y * mat.row2.X + mat.row4.X;
+    result.Y = y * mat.row2.Y + mat.row4.Y;
+    result.Z = y * mat.row2.Z + mat.row4.Z;
+}
+
+<span class="kw">pub fn </span>Vec3_RotateX(v: Vec3, angle: c_float) -&gt; Vec3 {
+    <span class="kw">let </span>cosA = cosf(angle);
+    <span class="kw">let </span>sinA = sinf(angle);
+    Vec3_Create3(v.X, cosA * v.Y + sinA * v.Z, -sinA * v.Y + cosA * v.Z)
+}
+
+<span class="kw">pub fn </span>Vec3_RotateY(v: Vec3, angle: c_float) -&gt; Vec3 {
+    <span class="kw">let </span>cosA = cosf(angle);
+    <span class="kw">let </span>sinA = sinf(angle);
+    Vec3_Create3(cosA * v.X - sinA * v.Z, v.Y, sinA * v.X + cosA * v.Z)
+}
+
+<span class="kw">pub fn </span>Vec3_RotateY3(x: c_float, y: c_float, z: c_float, angle: c_float) -&gt; Vec3 {
+    <span class="kw">let </span>cosA = cosf(angle);
+    <span class="kw">let </span>sinA = sinf(angle);
+    Vec3_Create3(cosA * x - sinA * z, y, sinA * x + cosA * z)
+}
+
+<span class="kw">pub fn </span>Vec3_RotateZ(v: Vec3, angle: c_float) -&gt; Vec3 {
+    <span class="kw">let </span>cosA = cosf(angle);
+    <span class="kw">let </span>sinA = sinf(angle);
+    Vec3_Create3(cosA * v.X + sinA * v.Y, -sinA * v.X + cosA * v.Y, v.Z)
+}
+
+<span class="doccomment">/// Whether all of the components of the two vectors are equal.
+</span><span class="kw">pub fn </span>Vec3_Equals(a: <span class="kw-2">&amp;</span>Vec3, b: <span class="kw-2">&amp;</span>Vec3) -&gt; bool {
+    <span class="attribute">#[allow(clippy::float_cmp)]
+    </span>{
+        a.X == b.X &amp;&amp; a.Y == b.Y &amp;&amp; a.Z == b.Z
+    }
+}
+
+<span class="kw">pub fn </span>IVec3_Floor(result: <span class="kw-2">&amp;mut </span>IVec3, a: <span class="kw-2">&amp;</span>Vec3) {
+    result.X = floorf(a.X) <span class="kw">as _</span>;
+    result.Y = floorf(a.Y) <span class="kw">as _</span>;
+    result.Z = floorf(a.Z) <span class="kw">as _</span>;
+}
+
+<span class="doccomment">/// Returns a normalised vector facing in the direction described by the given yaw and pitch.
+</span><span class="kw">pub fn </span>Vec3_GetDirVector(yawRad: c_float, pitchRad: c_float) -&gt; Vec3 {
+    <span class="kw">let </span>x = -cosf(pitchRad) * -sinf(yawRad);
+    <span class="kw">let </span>y = -sinf(pitchRad);
+    <span class="kw">let </span>z = -cosf(pitchRad) * cosf(yawRad);
+    Vec3_Create3(x, y, z)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

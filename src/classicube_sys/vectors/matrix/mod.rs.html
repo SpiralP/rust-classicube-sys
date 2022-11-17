@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\vectors\matrix\mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../classicube_sys/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\vectors\matrix\mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../classicube_sys/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -179,186 +179,186 @@
 <span id="179">179</span>
 <span id="180">180</span>
 <span id="181">181</span>
-</pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">ops</span>;
+</pre><pre class="rust"><code><span class="kw">mod </span>ops;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">bindings</span>::<span class="kw-2">*</span>,
-    <span class="ident">std_types</span>::{<span class="ident">c_double</span>, <span class="ident">c_float</span>},
-    <span class="ident">Tan_Simple</span>,
+<span class="kw">use crate</span>::{
+    bindings::<span class="kw-2">*</span>,
+    std_types::{c_double, c_float},
+    Tan_Simple,
 };
 
-<span class="kw">impl</span> <span class="ident">Matrix</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IDENTITY</span>: <span class="self">Self</span> <span class="op">=</span> <span class="ident">Matrix_IdentityValue</span>();
+<span class="kw">impl </span>Matrix {
+    <span class="kw">pub const </span>IDENTITY: <span class="self">Self </span>= Matrix_IdentityValue();
 
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">identity_value</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Matrix_IdentityValue</span>()
+    <span class="kw">pub const fn </span>identity_value() -&gt; <span class="self">Self </span>{
+        Matrix_IdentityValue()
     }
 
-    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around X axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_x</span>(<span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> {
-            <span class="ident">Matrix_RotateX</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">angle</span>);
+    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around X axis.
+    </span><span class="kw">pub fn </span>rotate_x(angle: c_float) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        <span class="kw">unsafe </span>{
+            Matrix_RotateX(<span class="kw-2">&amp;mut </span>result, angle);
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around Y axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_y</span>(<span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> {
-            <span class="ident">Matrix_RotateY</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">angle</span>);
+    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around Y axis.
+    </span><span class="kw">pub fn </span>rotate_y(angle: c_float) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        <span class="kw">unsafe </span>{
+            Matrix_RotateY(<span class="kw-2">&amp;mut </span>result, angle);
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around Z axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotate_z</span>(<span class="ident">angle</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> {
-            <span class="ident">Matrix_RotateZ</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">angle</span>);
+    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around Z axis.
+    </span><span class="kw">pub fn </span>rotate_z(angle: c_float) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        <span class="kw">unsafe </span>{
+            Matrix_RotateZ(<span class="kw-2">&amp;mut </span>result, angle);
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="doccomment">/// Returns a matrix representing a translation to the given coordinates.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translate</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> {
-            <span class="ident">Matrix_Translate</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>);
+    <span class="doccomment">/// Returns a matrix representing a translation to the given coordinates.
+    </span><span class="kw">pub fn </span>translate(x: c_float, y: c_float, z: c_float) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        <span class="kw">unsafe </span>{
+            Matrix_Translate(<span class="kw-2">&amp;mut </span>result, x, y, z);
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="doccomment">/// Returns a matrix representing a scaling by the given factors.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="ident">x</span>: <span class="ident">c_float</span>, <span class="ident">y</span>: <span class="ident">c_float</span>, <span class="ident">z</span>: <span class="ident">c_float</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="kw">unsafe</span> {
-            <span class="ident">Matrix_Scale</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>);
+    <span class="doccomment">/// Returns a matrix representing a scaling by the given factors.
+    </span><span class="kw">pub fn </span>scale(x: c_float, y: c_float, z: c_float) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        <span class="kw">unsafe </span>{
+            Matrix_Scale(<span class="kw-2">&amp;mut </span>result, x, y, z);
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">orthographic</span>(
-        <span class="ident">left</span>: <span class="ident">c_float</span>,
-        <span class="ident">right</span>: <span class="ident">c_float</span>,
-        <span class="ident">top</span>: <span class="ident">c_float</span>,
-        <span class="ident">bottom</span>: <span class="ident">c_float</span>,
-        <span class="ident">zNear</span>: <span class="ident">c_float</span>,
-        <span class="ident">zFar</span>: <span class="ident">c_float</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="ident">Matrix_Orthographic</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">left</span>, <span class="ident">right</span>, <span class="ident">top</span>, <span class="ident">bottom</span>, <span class="ident">zNear</span>, <span class="ident">zFar</span>);
-        <span class="ident">result</span>
+    <span class="kw">pub fn </span>orthographic(
+        left: c_float,
+        right: c_float,
+        top: c_float,
+        bottom: c_float,
+        zNear: c_float,
+        zFar: c_float,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        Matrix_Orthographic(<span class="kw-2">&amp;mut </span>result, left, right, top, bottom, zNear, zFar);
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">perspective_field_of_view</span>(
-        <span class="ident">fovy</span>: <span class="ident">c_float</span>,
-        <span class="ident">aspect</span>: <span class="ident">c_float</span>,
-        <span class="ident">z_near</span>: <span class="ident">c_float</span>,
-        <span class="ident">z_far</span>: <span class="ident">c_float</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="ident">Matrix_PerspectiveFieldOfView</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">fovy</span>, <span class="ident">aspect</span>, <span class="ident">z_near</span>, <span class="ident">z_far</span>);
-        <span class="ident">result</span>
+    <span class="kw">pub fn </span>perspective_field_of_view(
+        fovy: c_float,
+        aspect: c_float,
+        z_near: c_float,
+        z_far: c_float,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        Matrix_PerspectiveFieldOfView(<span class="kw-2">&amp;mut </span>result, fovy, aspect, z_near, z_far);
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">look_rot</span>(<span class="ident">pos</span>: <span class="ident">Vec3</span>, <span class="ident">rot</span>: <span class="ident">Vec2</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::IDENTITY</span>;
-        <span class="ident">Matrix_LookRot</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">pos</span>, <span class="ident">rot</span>);
-        <span class="ident">result</span>
+    <span class="kw">pub fn </span>look_rot(pos: Vec3, rot: Vec2) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
+        Matrix_LookRot(<span class="kw-2">&amp;mut </span>result, pos, rot);
+        result
     }
 }
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">Matrix_IdentityValue</span>() -&gt; <span class="ident">Matrix</span> {
-    <span class="ident">Matrix</span> {
-        <span class="ident">row1</span>: <span class="ident">Vec4</span> {
-            <span class="ident">X</span>: <span class="number">1.0</span>,
-            <span class="ident">Y</span>: <span class="number">0.0</span>,
-            <span class="ident">Z</span>: <span class="number">0.0</span>,
-            <span class="ident">W</span>: <span class="number">0.0</span>,
+<span class="kw">pub const fn </span>Matrix_IdentityValue() -&gt; Matrix {
+    Matrix {
+        row1: Vec4 {
+            X: <span class="number">1.0</span>,
+            Y: <span class="number">0.0</span>,
+            Z: <span class="number">0.0</span>,
+            W: <span class="number">0.0</span>,
         },
-        <span class="ident">row2</span>: <span class="ident">Vec4</span> {
-            <span class="ident">X</span>: <span class="number">0.0</span>,
-            <span class="ident">Y</span>: <span class="number">1.0</span>,
-            <span class="ident">Z</span>: <span class="number">0.0</span>,
-            <span class="ident">W</span>: <span class="number">0.0</span>,
+        row2: Vec4 {
+            X: <span class="number">0.0</span>,
+            Y: <span class="number">1.0</span>,
+            Z: <span class="number">0.0</span>,
+            W: <span class="number">0.0</span>,
         },
-        <span class="ident">row3</span>: <span class="ident">Vec4</span> {
-            <span class="ident">X</span>: <span class="number">0.0</span>,
-            <span class="ident">Y</span>: <span class="number">0.0</span>,
-            <span class="ident">Z</span>: <span class="number">1.0</span>,
-            <span class="ident">W</span>: <span class="number">0.0</span>,
+        row3: Vec4 {
+            X: <span class="number">0.0</span>,
+            Y: <span class="number">0.0</span>,
+            Z: <span class="number">1.0</span>,
+            W: <span class="number">0.0</span>,
         },
-        <span class="ident">row4</span>: <span class="ident">Vec4</span> {
-            <span class="ident">X</span>: <span class="number">0.0</span>,
-            <span class="ident">Y</span>: <span class="number">0.0</span>,
-            <span class="ident">Z</span>: <span class="number">0.0</span>,
-            <span class="ident">W</span>: <span class="number">1.0</span>,
+        row4: Vec4 {
+            X: <span class="number">0.0</span>,
+            Y: <span class="number">0.0</span>,
+            Z: <span class="number">0.0</span>,
+            W: <span class="number">1.0</span>,
         },
     }
 }
 
-<span class="doccomment">/// Identity matrix. (A * Identity = A)</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Matrix_Identity</span>: <span class="ident">Matrix</span> <span class="op">=</span> <span class="ident">Matrix_IdentityValue</span>();
+<span class="doccomment">/// Identity matrix. (A * Identity = A)
+</span><span class="kw">pub const </span>Matrix_Identity: Matrix = Matrix_IdentityValue();
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Matrix_Orthographic</span>(
-    <span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span>,
-    <span class="ident">left</span>: <span class="ident">c_float</span>,
-    <span class="ident">right</span>: <span class="ident">c_float</span>,
-    <span class="ident">top</span>: <span class="ident">c_float</span>,
-    <span class="ident">bottom</span>: <span class="ident">c_float</span>,
-    <span class="ident">zNear</span>: <span class="ident">c_float</span>,
-    <span class="ident">zFar</span>: <span class="ident">c_float</span>,
+<span class="kw">pub fn </span>Matrix_Orthographic(
+    result: <span class="kw-2">&amp;mut </span>Matrix,
+    left: c_float,
+    right: c_float,
+    top: c_float,
+    bottom: c_float,
+    zNear: c_float,
+    zFar: c_float,
 ) {
-    <span class="comment">/* Transposed, source https://msdn.microsoft.com/en-us/library/dd373965(v=vs.85).aspx */</span>
-    <span class="kw-2">*</span><span class="ident">result</span> <span class="op">=</span> <span class="ident">Matrix_Identity</span>;
+    <span class="comment">/* Transposed, source https://msdn.microsoft.com/en-us/library/dd373965(v=vs.85).aspx */
+    </span><span class="kw-2">*</span>result = Matrix_Identity;
 
-    <span class="ident">result</span>.<span class="ident">row1</span>.<span class="ident">X</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">/</span> (<span class="ident">right</span> <span class="op">-</span> <span class="ident">left</span>);
-    <span class="ident">result</span>.<span class="ident">row2</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">/</span> (<span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>);
-    <span class="ident">result</span>.<span class="ident">row3</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="op">-</span><span class="number">2.0</span> <span class="op">/</span> (<span class="ident">zFar</span> <span class="op">-</span> <span class="ident">zNear</span>);
+    result.row1.X = <span class="number">2.0 </span>/ (right - left);
+    result.row2.Y = <span class="number">2.0 </span>/ (top - bottom);
+    result.row3.Z = -<span class="number">2.0 </span>/ (zFar - zNear);
 
-    <span class="ident">result</span>.<span class="ident">row4</span>.<span class="ident">X</span> <span class="op">=</span> <span class="op">-</span>(<span class="ident">right</span> <span class="op">+</span> <span class="ident">left</span>) <span class="op">/</span> (<span class="ident">right</span> <span class="op">-</span> <span class="ident">left</span>);
-    <span class="ident">result</span>.<span class="ident">row4</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="op">-</span>(<span class="ident">top</span> <span class="op">+</span> <span class="ident">bottom</span>) <span class="op">/</span> (<span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>);
-    <span class="ident">result</span>.<span class="ident">row4</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="op">-</span>(<span class="ident">zFar</span> <span class="op">+</span> <span class="ident">zNear</span>) <span class="op">/</span> (<span class="ident">zFar</span> <span class="op">-</span> <span class="ident">zNear</span>);
+    result.row4.X = -(right + left) / (right - left);
+    result.row4.Y = -(top + bottom) / (top - bottom);
+    result.row4.Z = -(zFar + zNear) / (zFar - zNear);
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Matrix_PerspectiveFieldOfView</span>(
-    <span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span>,
-    <span class="ident">fovy</span>: <span class="ident">c_float</span>,
-    <span class="ident">aspect</span>: <span class="ident">c_float</span>,
-    <span class="ident">zNear</span>: <span class="ident">c_float</span>,
-    <span class="ident">zFar</span>: <span class="ident">c_float</span>,
+<span class="kw">pub fn </span>Matrix_PerspectiveFieldOfView(
+    result: <span class="kw-2">&amp;mut </span>Matrix,
+    fovy: c_float,
+    aspect: c_float,
+    zNear: c_float,
+    zFar: c_float,
 ) {
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">zNear</span> <span class="op">*</span> <span class="ident">Tan_Simple</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">fovy</span> <span class="kw">as</span> <span class="ident">c_double</span>) <span class="kw">as</span> <span class="ident">c_float</span>;
+    <span class="kw">let </span>c = zNear * Tan_Simple(<span class="number">0.5 </span>* fovy <span class="kw">as </span>c_double) <span class="kw">as </span>c_float;
 
-    <span class="comment">/* Transposed, source https://msdn.microsoft.com/en-us/library/dd373537(v=vs.85).aspx */</span>
-    <span class="comment">/* For a FOV based perspective matrix, left/right/top/bottom are calculated as: */</span>
-    <span class="comment">/* left = -c * aspect, right = c * aspect, bottom = -c, top = c */</span>
-    <span class="comment">/* Calculations are simplified because of left/right and top/bottom symmetry */</span>
-    <span class="kw-2">*</span><span class="ident">result</span> <span class="op">=</span> <span class="ident">Matrix_Identity</span>;
-    <span class="ident">result</span>.<span class="ident">row4</span>.<span class="ident">W</span> <span class="op">=</span> <span class="number">0.0</span>;
+    <span class="comment">/* Transposed, source https://msdn.microsoft.com/en-us/library/dd373537(v=vs.85).aspx */
+    /* For a FOV based perspective matrix, left/right/top/bottom are calculated as: */
+    /* left = -c * aspect, right = c * aspect, bottom = -c, top = c */
+    /* Calculations are simplified because of left/right and top/bottom symmetry */
+    </span><span class="kw-2">*</span>result = Matrix_Identity;
+    result.row4.W = <span class="number">0.0</span>;
 
-    <span class="ident">result</span>.<span class="ident">row1</span>.<span class="ident">X</span> <span class="op">=</span> <span class="ident">zNear</span> <span class="op">/</span> (<span class="ident">c</span> <span class="op">*</span> <span class="ident">aspect</span>);
-    <span class="ident">result</span>.<span class="ident">row2</span>.<span class="ident">Y</span> <span class="op">=</span> <span class="ident">zNear</span> <span class="op">/</span> <span class="ident">c</span>;
-    <span class="ident">result</span>.<span class="ident">row4</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="op">-</span>(<span class="number">2.0</span> <span class="op">*</span> <span class="ident">zFar</span> <span class="op">*</span> <span class="ident">zNear</span>) <span class="op">/</span> (<span class="ident">zFar</span> <span class="op">-</span> <span class="ident">zNear</span>);
-    <span class="ident">result</span>.<span class="ident">row3</span>.<span class="ident">Z</span> <span class="op">=</span> <span class="op">-</span>(<span class="ident">zFar</span> <span class="op">+</span> <span class="ident">zNear</span>) <span class="op">/</span> (<span class="ident">zFar</span> <span class="op">-</span> <span class="ident">zNear</span>);
-    <span class="ident">result</span>.<span class="ident">row3</span>.<span class="ident">W</span> <span class="op">=</span> <span class="op">-</span><span class="number">1.0</span>;
+    result.row1.X = zNear / (c * aspect);
+    result.row2.Y = zNear / c;
+    result.row4.Z = -(<span class="number">2.0 </span>* zFar * zNear) / (zFar - zNear);
+    result.row3.Z = -(zFar + zNear) / (zFar - zNear);
+    result.row3.W = -<span class="number">1.0</span>;
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Matrix_LookRot</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span>, <span class="ident">pos</span>: <span class="ident">Vec3</span>, <span class="ident">rot</span>: <span class="ident">Vec2</span>) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rotX</span> <span class="op">=</span> <span class="ident">Matrix_Identity</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rotY</span> <span class="op">=</span> <span class="ident">Matrix_Identity</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">trans</span> <span class="op">=</span> <span class="ident">Matrix_Identity</span>;
+<span class="kw">pub fn </span>Matrix_LookRot(result: <span class="kw-2">&amp;mut </span>Matrix, pos: Vec3, rot: Vec2) {
+    <span class="kw">let </span><span class="kw-2">mut </span>rotX = Matrix_Identity;
+    <span class="kw">let </span><span class="kw-2">mut </span>rotY = Matrix_Identity;
+    <span class="kw">let </span><span class="kw-2">mut </span>trans = Matrix_Identity;
 
-    <span class="kw">unsafe</span> {
-        <span class="ident">Matrix_RotateX</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rotX</span>, <span class="ident">rot</span>.<span class="ident">Y</span>);
-        <span class="ident">Matrix_RotateY</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rotY</span>, <span class="ident">rot</span>.<span class="ident">X</span>);
-        <span class="ident">Matrix_Translate</span>(<span class="kw-2">&amp;mut</span> <span class="ident">trans</span>, <span class="op">-</span><span class="ident">pos</span>.<span class="ident">X</span>, <span class="op">-</span><span class="ident">pos</span>.<span class="ident">Y</span>, <span class="op">-</span><span class="ident">pos</span>.<span class="ident">Z</span>);
+    <span class="kw">unsafe </span>{
+        Matrix_RotateX(<span class="kw-2">&amp;mut </span>rotX, rot.Y);
+        Matrix_RotateY(<span class="kw-2">&amp;mut </span>rotY, rot.X);
+        Matrix_Translate(<span class="kw-2">&amp;mut </span>trans, -pos.X, -pos.Y, -pos.Z);
 
-        <span class="ident">Matrix_Mul</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="ident">rotY</span>, <span class="kw-2">&amp;</span><span class="ident">rotX</span>);
-        <span class="ident">Matrix_Mul</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="ident">trans</span>, <span class="ident">result</span>);
+        Matrix_Mul(result, <span class="kw-2">&amp;</span>rotY, <span class="kw-2">&amp;</span>rotX);
+        Matrix_Mul(result, <span class="kw-2">&amp;</span>trans, result);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

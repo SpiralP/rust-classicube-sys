@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\screen\priority.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>priority.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../classicube_sys/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\screen\priority.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>priority.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../classicube_sys/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -101,108 +101,108 @@
 <span id="101">101</span>
 <span id="102">102</span>
 <span id="103">103</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bindings</span>::{
-    <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span>, <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span>,
-    <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span>, <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span>,
-    <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span>, <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span>,
-    <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span>, <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span>,
-    <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span>, <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span>,
-    <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span>, <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span>,
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::bindings::{
+    GuiPriority_GUI_PRIORITY_CHAT, GuiPriority_GUI_PRIORITY_DISCONNECT,
+    GuiPriority_GUI_PRIORITY_HUD, GuiPriority_GUI_PRIORITY_INVENTORY,
+    GuiPriority_GUI_PRIORITY_LOADING, GuiPriority_GUI_PRIORITY_MENU,
+    GuiPriority_GUI_PRIORITY_OLDLOADING, GuiPriority_GUI_PRIORITY_TEXIDS,
+    GuiPriority_GUI_PRIORITY_TEXPACK, GuiPriority_GUI_PRIORITY_TOUCH,
+    GuiPriority_GUI_PRIORITY_TOUCHMORE, GuiPriority_GUI_PRIORITY_URLWARNING,
 };
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Priority</span> {
-    <span class="ident">UnderDisconnect</span>,
-    <span class="ident">Disconnect</span>,
-    <span class="ident">OverDisconnect</span>,
-    <span class="ident">UnderOldLoading</span>,
-    <span class="ident">OldLoading</span>,
-    <span class="ident">OverOldLoading</span>,
-    <span class="ident">UnderMenu</span>,
-    <span class="ident">Menu</span>,
-    <span class="ident">OverMenu</span>,
-    <span class="ident">UnderTouchMore</span>,
-    <span class="ident">TouchMore</span>,
-    <span class="ident">OverTouchMore</span>,
-    <span class="ident">UnderUrlWarning</span>,
-    <span class="ident">UrlWarning</span>,
-    <span class="ident">OverUrlWarning</span>,
-    <span class="ident">UnderTexPack</span>,
-    <span class="ident">TexPack</span>,
-    <span class="ident">OverTexPack</span>,
-    <span class="ident">UnderTexIds</span>,
-    <span class="ident">TexIds</span>,
-    <span class="ident">OverTexIds</span>,
-    <span class="ident">UnderTouch</span>,
-    <span class="ident">Touch</span>,
-    <span class="ident">OverTouch</span>,
-    <span class="ident">UnderInventory</span>,
-    <span class="ident">Inventory</span>,
-    <span class="ident">OverInventory</span>,
-    <span class="ident">UnderChat</span>,
-    <span class="ident">Chat</span>,
-    <span class="ident">OverChat</span>,
-    <span class="ident">UnderHud</span>,
-    <span class="ident">Hud</span>,
-    <span class="ident">OverHud</span>,
-    <span class="ident">UnderLoading</span>,
-    <span class="ident">Loading</span>,
-    <span class="ident">OverLoading</span>,
-    <span class="ident">UnderEverything</span>,
-    <span class="ident">OverEverything</span>,
-    <span class="ident">Custom</span>(<span class="ident">u8</span>),
+<span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>Priority {
+    UnderDisconnect,
+    Disconnect,
+    OverDisconnect,
+    UnderOldLoading,
+    OldLoading,
+    OverOldLoading,
+    UnderMenu,
+    Menu,
+    OverMenu,
+    UnderTouchMore,
+    TouchMore,
+    OverTouchMore,
+    UnderUrlWarning,
+    UrlWarning,
+    OverUrlWarning,
+    UnderTexPack,
+    TexPack,
+    OverTexPack,
+    UnderTexIds,
+    TexIds,
+    OverTexIds,
+    UnderTouch,
+    Touch,
+    OverTouch,
+    UnderInventory,
+    Inventory,
+    OverInventory,
+    UnderChat,
+    Chat,
+    OverChat,
+    UnderHud,
+    Hud,
+    OverHud,
+    UnderLoading,
+    Loading,
+    OverLoading,
+    UnderEverything,
+    OverEverything,
+    Custom(u8),
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Priority</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">n</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Custom</span>(<span class="ident">n</span>)
+<span class="kw">impl </span>From&lt;u8&gt; <span class="kw">for </span>Priority {
+    <span class="kw">fn </span>from(n: u8) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Custom(n)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Priority</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::UnderDisconnect</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Disconnect</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverDisconnect</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_DISCONNECT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderOldLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::OldLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverOldLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_OLDLOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderMenu</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Menu</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverMenu</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_MENU</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderTouchMore</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::TouchMore</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverTouchMore</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCHMORE</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderUrlWarning</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UrlWarning</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverUrlWarning</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_URLWARNING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderTexPack</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::TexPack</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverTexPack</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXPACK</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderTexIds</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::TexIds</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverTexIds</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TEXIDS</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderTouch</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Touch</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverTouch</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_TOUCH</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderInventory</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Inventory</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverInventory</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_INVENTORY</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderChat</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Chat</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverChat</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_CHAT</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderHud</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Hud</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverHud</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_HUD</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">-</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::Loading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::OverLoading</span> =&gt; <span class="ident">GuiPriority_GUI_PRIORITY_LOADING</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident"><span class="self">Self</span>::UnderEverything</span> =&gt; <span class="number">0</span>,
-            <span class="ident"><span class="self">Self</span>::OverEverything</span> =&gt; <span class="number">255</span>,
-            <span class="ident"><span class="self">Self</span>::Custom</span>(<span class="ident">n</span>) =&gt; <span class="kw-2">*</span><span class="ident">n</span>,
+<span class="kw">impl </span>Priority {
+    <span class="kw">pub fn </span>to_u8(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::UnderDisconnect =&gt; GuiPriority_GUI_PRIORITY_DISCONNECT <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Disconnect =&gt; GuiPriority_GUI_PRIORITY_DISCONNECT <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverDisconnect =&gt; GuiPriority_GUI_PRIORITY_DISCONNECT <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderOldLoading =&gt; GuiPriority_GUI_PRIORITY_OLDLOADING <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::OldLoading =&gt; GuiPriority_GUI_PRIORITY_OLDLOADING <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverOldLoading =&gt; GuiPriority_GUI_PRIORITY_OLDLOADING <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderMenu =&gt; GuiPriority_GUI_PRIORITY_MENU <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Menu =&gt; GuiPriority_GUI_PRIORITY_MENU <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverMenu =&gt; GuiPriority_GUI_PRIORITY_MENU <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderTouchMore =&gt; GuiPriority_GUI_PRIORITY_TOUCHMORE <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::TouchMore =&gt; GuiPriority_GUI_PRIORITY_TOUCHMORE <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverTouchMore =&gt; GuiPriority_GUI_PRIORITY_TOUCHMORE <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderUrlWarning =&gt; GuiPriority_GUI_PRIORITY_URLWARNING <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::UrlWarning =&gt; GuiPriority_GUI_PRIORITY_URLWARNING <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverUrlWarning =&gt; GuiPriority_GUI_PRIORITY_URLWARNING <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderTexPack =&gt; GuiPriority_GUI_PRIORITY_TEXPACK <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::TexPack =&gt; GuiPriority_GUI_PRIORITY_TEXPACK <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverTexPack =&gt; GuiPriority_GUI_PRIORITY_TEXPACK <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderTexIds =&gt; GuiPriority_GUI_PRIORITY_TEXIDS <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::TexIds =&gt; GuiPriority_GUI_PRIORITY_TEXIDS <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverTexIds =&gt; GuiPriority_GUI_PRIORITY_TEXIDS <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderTouch =&gt; GuiPriority_GUI_PRIORITY_TOUCH <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Touch =&gt; GuiPriority_GUI_PRIORITY_TOUCH <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverTouch =&gt; GuiPriority_GUI_PRIORITY_TOUCH <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderInventory =&gt; GuiPriority_GUI_PRIORITY_INVENTORY <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Inventory =&gt; GuiPriority_GUI_PRIORITY_INVENTORY <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverInventory =&gt; GuiPriority_GUI_PRIORITY_INVENTORY <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderChat =&gt; GuiPriority_GUI_PRIORITY_CHAT <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Chat =&gt; GuiPriority_GUI_PRIORITY_CHAT <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverChat =&gt; GuiPriority_GUI_PRIORITY_CHAT <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderHud =&gt; GuiPriority_GUI_PRIORITY_HUD <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Hud =&gt; GuiPriority_GUI_PRIORITY_HUD <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverHud =&gt; GuiPriority_GUI_PRIORITY_HUD <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderLoading =&gt; GuiPriority_GUI_PRIORITY_LOADING <span class="kw">as </span>u8 - <span class="number">1</span>,
+            <span class="self">Self</span>::Loading =&gt; GuiPriority_GUI_PRIORITY_LOADING <span class="kw">as </span>u8,
+            <span class="self">Self</span>::OverLoading =&gt; GuiPriority_GUI_PRIORITY_LOADING <span class="kw">as </span>u8 + <span class="number">1</span>,
+            <span class="self">Self</span>::UnderEverything =&gt; <span class="number">0</span>,
+            <span class="self">Self</span>::OverEverything =&gt; <span class="number">255</span>,
+            <span class="self">Self</span>::Custom(n) =&gt; <span class="kw-2">*</span>n,
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

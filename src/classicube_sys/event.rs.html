@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\event.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>event.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../classicube_sys/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\event.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>event.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../classicube_sys/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -98,65 +98,69 @@
 <span id="98">98</span>
 <span id="99">99</span>
 <span id="100">100</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
+<span id="101">101</span>
+<span id="102">102</span>
+</pre><pre class="rust"><code><span class="attribute">#![allow(clippy::missing_safety_doc)]
 
-<span class="kw">use</span> <span class="ident">core::mem</span>;
+</span><span class="kw">use </span>core::mem;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">bindings</span>::<span class="kw-2">*</span>,
-    <span class="ident">std_types</span>::{<span class="ident">c_float</span>, <span class="ident">c_int</span>, <span class="ident">c_void</span>},
+<span class="kw">use crate</span>::{
+    bindings::<span class="kw-2">*</span>,
+    std_types::{c_float, c_int, c_void},
 };
 
-<span class="macro">macro_rules!</span> <span class="ident">make_register</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">func_name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>) =&gt; {
-        <span class="macro">paste::item!</span> {
-            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> [<span class="op">&lt;</span><span class="ident">Event_Register</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">func_name</span><span class="op">&gt;</span>] (
-                <span class="ident">handlers</span>: <span class="kw-2">*mut</span> [<span class="op">&lt;</span><span class="ident">Event_</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&gt;</span>],
-                <span class="ident">obj</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
-                <span class="ident">handler</span>: [<span class="op">&lt;</span><span class="ident">Event_</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> <span class="ident">_Callback</span><span class="op">&gt;</span>],
+<span class="macro">macro_rules! </span>make_register {
+    (<span class="macro-nonterminal">$func_name</span>:ident, <span class="macro-nonterminal">$name</span>:ident) =&gt; {
+        <span class="macro">paste::item! </span>{
+            <span class="kw">pub unsafe fn </span>[&lt;Event_Register <span class="macro-nonterminal">$func_name</span>&gt;] (
+                handlers: <span class="kw-2">*mut </span>[&lt;Event_ <span class="macro-nonterminal">$name</span>&gt;],
+                obj: <span class="kw-2">*mut </span>c_void,
+                handler: [&lt;Event_ <span class="macro-nonterminal">$name </span>_Callback&gt;],
             ) {
-                <span class="ident">Event_Register</span>(
-                    <span class="ident">handlers</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">Event_Void</span>,
-                    <span class="ident">obj</span>,
-                    <span class="ident">mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Event_Void_Callback</span><span class="op">&gt;</span>(<span class="ident">handler</span>),
+                Event_Register(
+                    handlers <span class="kw">as </span><span class="kw-2">*mut </span>Event_Void,
+                    obj,
+                    <span class="attribute">#[allow(clippy::useless_transmute)]
+                    </span>mem::transmute::&lt;<span class="kw">_</span>, Event_Void_Callback&gt;(handler),
                 )
             }
 
-            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> [<span class="op">&lt;</span><span class="ident">Event_Unregister</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">func_name</span><span class="op">&gt;</span>] (
-                <span class="ident">handlers</span>: <span class="kw-2">*mut</span> [<span class="op">&lt;</span><span class="ident">Event_</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&gt;</span>],
-                <span class="ident">obj</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
-                <span class="ident">handler</span>: [<span class="op">&lt;</span><span class="ident">Event_</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> <span class="ident">_Callback</span><span class="op">&gt;</span>],
+            <span class="kw">pub unsafe fn </span>[&lt;Event_Unregister <span class="macro-nonterminal">$func_name</span>&gt;] (
+                handlers: <span class="kw-2">*mut </span>[&lt;Event_ <span class="macro-nonterminal">$name</span>&gt;],
+                obj: <span class="kw-2">*mut </span>c_void,
+                handler: [&lt;Event_ <span class="macro-nonterminal">$name </span>_Callback&gt;],
             ) {
-                <span class="ident">Event_Unregister</span>(
-                    <span class="ident">handlers</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">Event_Void</span>,
-                    <span class="ident">obj</span>,
-                    <span class="ident">mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Event_Void_Callback</span><span class="op">&gt;</span>(<span class="ident">handler</span>),
+                Event_Unregister(
+                    handlers <span class="kw">as </span><span class="kw-2">*mut </span>Event_Void,
+                    obj,
+                    <span class="attribute">#[allow(clippy::useless_transmute)]
+                    </span>mem::transmute::&lt;<span class="kw">_</span>, Event_Void_Callback&gt;(handler),
                 )
             }
         }
     };
 
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>) =&gt; {
-        <span class="macro">make_register!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
+    (<span class="macro-nonterminal">$name</span>:ident) =&gt; {
+        <span class="macro">make_register!</span>(<span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$name</span>);
     };
 }
 
-<span class="macro">macro_rules!</span> <span class="ident">make_raise</span> {
+<span class="macro">macro_rules! </span>make_raise {
     (
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">func_name</span>:<span class="ident">ident</span>,
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>,
-        ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">ident</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_type</span>:<span class="ident">ty</span>),<span class="op">*</span> )
+        <span class="macro-nonterminal">$func_name</span>:ident,
+        <span class="macro-nonterminal">$name</span>:ident,
+        ( $(<span class="macro-nonterminal">$arg</span>:ident: <span class="macro-nonterminal">$arg_type</span>:ty),* )
     ) =&gt; {
-        <span class="macro">paste::item!</span> {
-            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> [<span class="op">&lt;</span><span class="ident">Event_Raise</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">func_name</span><span class="op">&gt;</span>] (
-                <span class="ident">handlers</span>: <span class="kw-2">&amp;mut</span> [<span class="op">&lt;</span><span class="ident">Event_</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&gt;</span>],
-                $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_type</span>,)<span class="op">*</span>
+        <span class="macro">paste::item! </span>{
+            <span class="kw">pub unsafe fn </span>[&lt;Event_Raise <span class="macro-nonterminal">$func_name</span>&gt;] (
+                handlers: <span class="kw-2">&amp;mut </span>[&lt;Event_ <span class="macro-nonterminal">$name</span>&gt;],
+                $(<span class="macro-nonterminal">$arg</span>: <span class="macro-nonterminal">$arg_type</span>,)*
             ) {
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">handlers</span>.<span class="ident">Count</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">f</span>) <span class="op">=</span> <span class="ident">handlers</span>.<span class="ident">Handlers</span>[<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>] {
-                        (<span class="ident">f</span>)(
-                            <span class="ident">handlers</span>.<span class="ident">Objs</span>[<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>],
-                            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>),<span class="op">*</span>
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..handlers.Count {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(f) = handlers.Handlers[i <span class="kw">as </span>usize] {
+                        (f)(
+                            handlers.Objs[i <span class="kw">as </span>usize],
+                            $(<span class="macro-nonterminal">$arg</span>),*
                         );
                     }
                 }
@@ -165,38 +169,38 @@
     };
 
     (
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>,
-        ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">ident</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_type</span>:<span class="ident">ty</span>),<span class="op">*</span> )
+        <span class="macro-nonterminal">$name</span>:ident,
+        ( $(<span class="macro-nonterminal">$arg</span>:ident: <span class="macro-nonterminal">$arg_type</span>:ty),* )
     ) =&gt; {
-        <span class="macro">make_raise!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_type</span>),<span class="op">*</span> ));
+        <span class="macro">make_raise!</span>(<span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$name</span>, ( $(<span class="macro-nonterminal">$arg</span>: <span class="macro-nonterminal">$arg_type</span>),* ));
     }
 }
 
-<span class="comment">// Raise_ Void, Int, Float are already exported</span>
+<span class="comment">// Raise_ Void, Int, Float are already exported
 
-<span class="macro">make_register!</span>(<span class="ident">Void</span>);
-<span class="macro">make_register!</span>(<span class="ident">Int</span>);
-<span class="macro">make_register!</span>(<span class="ident">Float</span>);
+</span><span class="macro">make_register!</span>(Void);
+<span class="macro">make_register!</span>(Int);
+<span class="macro">make_register!</span>(Float);
 
-<span class="macro">make_register!</span>(<span class="ident">Entry</span>);
-<span class="macro">make_raise!</span>(<span class="ident">Entry</span>, (<span class="ident">stream</span>: <span class="kw-2">*mut</span> <span class="ident">Stream</span>, <span class="ident">name</span>: <span class="kw-2">*const</span> <span class="ident">cc_string</span>));
+<span class="macro">make_register!</span>(Entry);
+<span class="macro">make_raise!</span>(Entry, (stream: <span class="kw-2">*mut </span>Stream, name: <span class="kw-2">*const </span>cc_string));
 
-<span class="macro">make_register!</span>(<span class="ident">Block</span>);
-<span class="macro">make_raise!</span>(<span class="ident">Block</span>, (<span class="ident">coords</span>: <span class="ident">IVec3</span>, <span class="ident">oldBlock</span>: <span class="ident">BlockID</span>, <span class="ident">block</span>: <span class="ident">BlockID</span>));
+<span class="macro">make_register!</span>(Block);
+<span class="macro">make_raise!</span>(Block, (coords: IVec3, oldBlock: BlockID, block: BlockID));
 
-<span class="macro">make_register!</span>(<span class="ident">Chat</span>);
-<span class="macro">make_raise!</span>(<span class="ident">Chat</span>, (<span class="ident">msg</span>: <span class="kw-2">*const</span> <span class="ident">cc_string</span>, <span class="ident">msgType</span>: <span class="ident">c_int</span>));
+<span class="macro">make_register!</span>(Chat);
+<span class="macro">make_raise!</span>(Chat, (msg: <span class="kw-2">*const </span>cc_string, msgType: c_int));
 
-<span class="macro">make_register!</span>(<span class="ident">Input</span>);
-<span class="macro">make_raise!</span>(<span class="ident">Input</span>, (<span class="ident">key</span>: <span class="ident">c_int</span>, <span class="ident">repeating</span>: <span class="ident">cc_bool</span>));
+<span class="macro">make_register!</span>(Input);
+<span class="macro">make_raise!</span>(Input, (key: c_int, repeating: cc_bool));
 
-<span class="macro">make_register!</span>(<span class="ident">String</span>);
-<span class="macro">make_raise!</span>(<span class="ident">String</span>, (<span class="ident">s</span>: <span class="kw-2">*const</span> <span class="ident">cc_string</span>));
+<span class="macro">make_register!</span>(String);
+<span class="macro">make_raise!</span>(String, (s: <span class="kw-2">*const </span>cc_string));
 
-<span class="macro">make_register!</span>(<span class="ident">RawMove</span>);
-<span class="macro">make_raise!</span>(<span class="ident">RawMove</span>, (<span class="ident">x_delta</span>: <span class="ident">c_float</span>, <span class="ident">y_delta</span>: <span class="ident">c_float</span>));
+<span class="macro">make_register!</span>(RawMove);
+<span class="macro">make_raise!</span>(RawMove, (x_delta: c_float, y_delta: c_float));
 
-<span class="macro">make_register!</span>(<span class="ident">PluginMessage</span>);
-<span class="macro">make_raise!</span>(<span class="ident">PluginMessage</span>, (<span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">data</span>: <span class="kw-2">*mut</span> <span class="ident">u8</span>));
+<span class="macro">make_register!</span>(PluginMessage);
+<span class="macro">make_raise!</span>(PluginMessage, (channel: u8, data: <span class="kw-2">*mut </span>u8));
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

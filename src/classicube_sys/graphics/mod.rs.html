@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\graphics\mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../classicube_sys/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\graphics\mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../classicube_sys/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -58,65 +58,65 @@
 <span id="58">58</span>
 <span id="59">59</span>
 <span id="60">60</span>
-</pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">owned_gfx_texture</span>;
-<span class="kw">mod</span> <span class="ident">owned_vertex_buffer</span>;
+</pre><pre class="rust"><code><span class="kw">mod </span>owned_gfx_texture;
+<span class="kw">mod </span>owned_vertex_buffer;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::{<span class="ident">owned_gfx_texture</span>::<span class="kw-2">*</span>, <span class="ident">owned_vertex_buffer</span>::<span class="kw-2">*</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">bindings</span>::<span class="kw-2">*</span>,
-    <span class="ident">std_types</span>::{<span class="ident">c_int</span>, <span class="ident">c_void</span>},
+<span class="kw">pub use </span><span class="self">self</span>::{owned_gfx_texture::<span class="kw-2">*</span>, owned_vertex_buffer::<span class="kw-2">*</span>};
+<span class="kw">use crate</span>::{
+    bindings::<span class="kw-2">*</span>,
+    std_types::{c_int, c_void},
 };
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Gfx_UpdateDynamicVb_IndexedTris</span>(
-    <span class="ident">vb</span>: <span class="ident">GfxResourceID</span>,
-    <span class="ident">vertices</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
-    <span class="ident">vCount</span>: <span class="ident">c_int</span>,
+<span class="attribute">#[allow(clippy::missing_safety_doc)]
+</span><span class="kw">pub unsafe fn </span>Gfx_UpdateDynamicVb_IndexedTris(
+    vb: GfxResourceID,
+    vertices: <span class="kw-2">*mut </span>c_void,
+    vCount: c_int,
 ) {
-    <span class="ident">Gfx_SetDynamicVbData</span>(<span class="ident">vb</span>, <span class="ident">vertices</span>, <span class="ident">vCount</span>);
-    <span class="ident">Gfx_DrawVb_IndexedTris</span>(<span class="ident">vCount</span>);
+    Gfx_SetDynamicVbData(vb, vertices, vCount);
+    Gfx_DrawVb_IndexedTris(vCount);
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Gfx_Make2DQuad</span>(<span class="ident">tex</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Texture</span>, <span class="ident">col</span>: <span class="ident">PackedCol</span>) -&gt; [<span class="ident">VertexTextured</span>; <span class="number">4</span>] {
-    <span class="kw">let</span> <span class="ident">x1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">tex</span>.<span class="ident">X</span> <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="kw">let</span> <span class="ident">x2</span>: <span class="ident">f32</span> <span class="op">=</span> (<span class="ident">tex</span>.<span class="ident">X</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="ident">tex</span>.<span class="ident">Width</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="kw">let</span> <span class="ident">y1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">tex</span>.<span class="ident">Y</span> <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="kw">let</span> <span class="ident">y2</span>: <span class="ident">f32</span> <span class="op">=</span> (<span class="ident">tex</span>.<span class="ident">Y</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="ident">tex</span>.<span class="ident">Height</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="kw">as</span> <span class="kw">_</span>;
+<span class="kw">pub fn </span>Gfx_Make2DQuad(tex: <span class="kw-2">&amp;mut </span>Texture, col: PackedCol) -&gt; [VertexTextured; <span class="number">4</span>] {
+    <span class="kw">let </span>x1: f32 = tex.X <span class="kw">as _</span>;
+    <span class="kw">let </span>x2: f32 = (tex.X <span class="kw">as </span>f32 + tex.Width <span class="kw">as </span>f32) <span class="kw">as _</span>;
+    <span class="kw">let </span>y1: f32 = tex.Y <span class="kw">as _</span>;
+    <span class="kw">let </span>y2: f32 = (tex.Y <span class="kw">as </span>f32 + tex.Height <span class="kw">as </span>f32) <span class="kw">as _</span>;
 
     [
-        <span class="ident">VertexTextured</span> {
-            <span class="ident">X</span>: <span class="ident">x1</span>,
-            <span class="ident">Y</span>: <span class="ident">y1</span>,
-            <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
-            <span class="ident">Col</span>: <span class="ident">col</span>,
-            <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U1</span>,
-            <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V1</span>,
+        VertexTextured {
+            X: x1,
+            Y: y1,
+            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            Col: col,
+            U: tex.uv.U1,
+            V: tex.uv.V1,
         },
-        <span class="ident">VertexTextured</span> {
-            <span class="ident">X</span>: <span class="ident">x2</span>,
-            <span class="ident">Y</span>: <span class="ident">y1</span>,
-            <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
-            <span class="ident">Col</span>: <span class="ident">col</span>,
-            <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U2</span>,
-            <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V1</span>,
+        VertexTextured {
+            X: x2,
+            Y: y1,
+            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            Col: col,
+            U: tex.uv.U2,
+            V: tex.uv.V1,
         },
-        <span class="ident">VertexTextured</span> {
-            <span class="ident">X</span>: <span class="ident">x2</span>,
-            <span class="ident">Y</span>: <span class="ident">y2</span>,
-            <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
-            <span class="ident">Col</span>: <span class="ident">col</span>,
-            <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U2</span>,
-            <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V2</span>,
+        VertexTextured {
+            X: x2,
+            Y: y2,
+            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            Col: col,
+            U: tex.uv.U2,
+            V: tex.uv.V2,
         },
-        <span class="ident">VertexTextured</span> {
-            <span class="ident">X</span>: <span class="ident">x1</span>,
-            <span class="ident">Y</span>: <span class="ident">y2</span>,
-            <span class="ident">Z</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>,
-            <span class="ident">Col</span>: <span class="ident">col</span>,
-            <span class="ident">U</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">U1</span>,
-            <span class="ident">V</span>: <span class="ident">tex</span>.<span class="ident">uv</span>.<span class="ident">V2</span>,
+        VertexTextured {
+            X: x1,
+            Y: y2,
+            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            Col: col,
+            U: tex.uv.U1,
+            V: tex.uv.V2,
         },
     ]
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

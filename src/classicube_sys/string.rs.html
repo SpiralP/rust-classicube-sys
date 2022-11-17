@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../classicube_sys/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../classicube_sys/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../classicube_sys/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -251,159 +251,159 @@
 <span id="251">251</span>
 <span id="252">252</span>
 <span id="253">253</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">borrow::Borrow</span>, <span class="ident">pin::Pin</span>, <span class="ident">slice</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>core::{borrow::Borrow, pin::Pin, slice};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">bindings</span>::{<span class="ident">cc_codepoint</span>, <span class="ident">cc_string</span>, <span class="ident">cc_uint16</span>, <span class="ident">cc_unichar</span>, <span class="ident">STRING_SIZE</span>},
-    <span class="ident">std_types</span>::{<span class="ident">c_char</span>, <span class="ident">c_int</span>, <span class="ident">Box</span>, <span class="ident">CString</span>, <span class="ident">String</span>, <span class="ident">ToString</span>, <span class="ident">Vec</span>},
+<span class="kw">use crate</span>::{
+    bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE},
+    std_types::{c_char, c_int, Box, CString, String, ToString, Vec},
 };
 
-<span class="kw">impl</span> <span class="ident">cc_string</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u8</span>;
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">length</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">unsafe</span> { <span class="ident">slice::from_raw_parts</span>(<span class="ident">data</span>, <span class="ident">len</span>) }
+<span class="kw">impl </span>cc_string {
+    <span class="kw">pub fn </span>as_slice(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
+        <span class="kw">let </span>data = <span class="self">self</span>.buffer <span class="kw">as </span><span class="kw-2">*const </span>u8;
+        <span class="kw">let </span>len = <span class="self">self</span>.length <span class="kw">as </span>usize;
+        <span class="kw">unsafe </span>{ slice::from_raw_parts(data, len) }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">cc_string</span> {
-    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
-        <span class="ident">String::from_utf16_lossy</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>
-                .<span class="ident">as_slice</span>()
-                .<span class="ident">iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">Convert_CP437ToUnicode</span>(<span class="kw-2">*</span><span class="ident">c</span>))
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+<span class="kw">impl </span>ToString <span class="kw">for </span>cc_string {
+    <span class="kw">fn </span>to_string(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+        String::from_utf16_lossy(
+            <span class="kw-2">&amp;</span><span class="self">self
+                </span>.as_slice()
+                .iter()
+                .map(|c| Convert_CP437ToUnicode(<span class="kw-2">*</span>c))
+                .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
         )
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">cc_string</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">cc_string</span>: <span class="ident">cc_string</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">cc_string</span>.<span class="ident">to_string</span>()
+<span class="kw">impl </span>From&lt;cc_string&gt; <span class="kw">for </span>String {
+    <span class="kw">fn </span>from(cc_string: cc_string) -&gt; <span class="self">Self </span>{
+        cc_string.to_string()
     }
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedString</span> {
-    <span class="ident">cc_string</span>: <span class="ident">cc_string</span>,
+<span class="kw">pub struct </span>OwnedString {
+    cc_string: cc_string,
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="ident">c_string</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">CString</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="attribute">#[allow(dead_code)]
+    </span>c_string: Pin&lt;Box&lt;CString&gt;&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">OwnedString</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">S</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">s</span>
-            .<span class="ident">into</span>()
-            <span class="comment">// TODO is chars() &quot;codepoints&quot; in cc&#39;s definition?</span>
-            .<span class="ident">chars</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">cc_codepoint</span>)
-            .<span class="ident">map</span>(<span class="ident">Convert_CodepointToCP437</span>)
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">capacity</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">len</span>();
+<span class="kw">impl </span>OwnedString {
+    <span class="kw">pub fn </span>new&lt;S: Into&lt;String&gt;&gt;(s: S) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>bytes = s
+            .into()
+            <span class="comment">// TODO is chars() &quot;codepoints&quot; in cc&#39;s definition?
+            </span>.chars()
+            .map(|c| c <span class="kw">as </span>cc_codepoint)
+            .map(Convert_CodepointToCP437)
+            .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="kw">let </span>length = bytes.len();
+        <span class="kw">let </span>capacity = bytes.len();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c_string</span> <span class="op">=</span> <span class="ident">Box::pin</span>(<span class="ident">CString::new</span>(<span class="ident">bytes</span>).<span class="ident">unwrap</span>());
-        <span class="kw">let</span> <span class="ident">buffer</span>: <span class="kw-2">*const</span> <span class="ident">c_char</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">c_string</span>.<span class="ident">as_mut</span>().<span class="ident">get_unchecked_mut</span>().<span class="ident">as_ptr</span>() };
+        <span class="kw">let </span><span class="kw-2">mut </span>c_string = Box::pin(CString::new(bytes).unwrap());
+        <span class="kw">let </span>buffer: <span class="kw-2">*const </span>c_char = <span class="kw">unsafe </span>{ c_string.as_mut().get_unchecked_mut().as_ptr() };
 
-        <span class="self">Self</span> {
-            <span class="ident">c_string</span>,
-            <span class="ident">cc_string</span>: <span class="ident">cc_string</span> {
-                <span class="ident">buffer</span>: <span class="ident">buffer</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">c_char</span>,
-                <span class="ident">length</span>: <span class="ident">length</span> <span class="kw">as</span> <span class="ident">cc_uint16</span>,
-                <span class="ident">capacity</span>: <span class="ident">capacity</span> <span class="kw">as</span> <span class="ident">cc_uint16</span>,
+        <span class="self">Self </span>{
+            c_string,
+            cc_string: cc_string {
+                buffer: buffer <span class="kw">as </span><span class="kw-2">*mut </span>c_char,
+                length: length <span class="kw">as </span>cc_uint16,
+                capacity: capacity <span class="kw">as </span>cc_uint16,
             },
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_cc_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">cc_string</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cc_string</span>
+    <span class="kw">pub fn </span>as_cc_string(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>cc_string {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.cc_string
     }
 
-    <span class="doccomment">/// # Safety</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The `OwnedString` needs to live longer than the `cc_string` return here.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_cc_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">cc_string</span> {
-        <span class="ident">cc_string</span> { ..<span class="self">self</span>.<span class="ident">cc_string</span> }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">cc_string</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OwnedString</span> {
-    <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">cc_string</span> {
-        <span class="self">self</span>.<span class="ident">as_cc_string</span>()
+    <span class="doccomment">/// # Safety
+    ///
+    /// The `OwnedString` needs to live longer than the `cc_string` return here.
+    </span><span class="kw">pub unsafe fn </span>get_cc_string(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; cc_string {
+        cc_string { ..<span class="self">self</span>.cc_string }
     }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">test_owned_string</span>() {
-    <span class="kw">let</span> <span class="ident">owned_string</span> <span class="op">=</span> <span class="ident">OwnedString::new</span>(<span class="string">&quot;hello&quot;</span>);
+<span class="kw">impl </span>Borrow&lt;cc_string&gt; <span class="kw">for </span>OwnedString {
+    <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>cc_string {
+        <span class="self">self</span>.as_cc_string()
+    }
+}
 
-    <span class="kw">fn</span> <span class="ident">use_cc_string</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">cc_string</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">T</span>) {
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no_std&quot;</span>))]</span>
-        {
-            <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">s</span>.<span class="ident">borrow</span>());
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>test_owned_string() {
+    <span class="kw">let </span>owned_string = OwnedString::new(<span class="string">&quot;hello&quot;</span>);
+
+    <span class="kw">fn </span>use_cc_string&lt;T: Borrow&lt;cc_string&gt;&gt;(s: T) {
+        <span class="attribute">#[cfg(not(feature = <span class="string">&quot;no_std&quot;</span>))]
+        </span>{
+            <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, s.borrow());
         }
     }
 
-    <span class="ident">use_cc_string</span>(<span class="ident">owned_string</span>.<span class="ident">as_cc_string</span>());
+    use_cc_string(owned_string.as_cc_string());
 
-    <span class="ident">use_cc_string</span>(<span class="ident">owned_string</span>);
+    use_cc_string(owned_string);
 
-    <span class="comment">// let s: cc_string = owned_string.into();</span>
-}
+    <span class="comment">// let s: cc_string = owned_string.into();
+</span>}
 
-<span class="doccomment">/// # Safety</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The `buffer` needs to live longer than the `cc_string`.</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">String_Init</span>(<span class="ident">buffer</span>: <span class="kw-2">*mut</span> <span class="ident">c_char</span>, <span class="ident">length</span>: <span class="ident">c_int</span>, <span class="ident">capacity</span>: <span class="ident">c_int</span>) -&gt; <span class="ident">cc_string</span> {
-    <span class="ident">cc_string</span> {
-        <span class="ident">buffer</span>,
-        <span class="ident">length</span>: <span class="ident">length</span> <span class="kw">as</span> <span class="kw">_</span>,
-        <span class="ident">capacity</span>: <span class="ident">capacity</span> <span class="kw">as</span> <span class="kw">_</span>,
+<span class="doccomment">/// # Safety
+///
+/// The `buffer` needs to live longer than the `cc_string`.
+</span><span class="kw">pub unsafe fn </span>String_Init(buffer: <span class="kw-2">*mut </span>c_char, length: c_int, capacity: c_int) -&gt; cc_string {
+    cc_string {
+        buffer,
+        length: length <span class="kw">as _</span>,
+        capacity: capacity <span class="kw">as _</span>,
     }
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">UNSAFE_GetString</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">cc_string</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">length</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">STRING_SIZE</span>).<span class="ident">rev</span>() {
-        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">data</span>[<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>];
-        <span class="kw">if</span> <span class="ident">code</span> <span class="op">==</span> <span class="string">b&#39;\0&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">code</span> <span class="op">==</span> <span class="string">b&#39; &#39;</span> {
+<span class="attribute">#[allow(clippy::missing_safety_doc)]
+</span><span class="kw">pub unsafe fn </span>UNSAFE_GetString(data: <span class="kw-2">&amp;</span>[u8]) -&gt; cc_string {
+    <span class="kw">let </span><span class="kw-2">mut </span>length = <span class="number">0</span>;
+    <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..STRING_SIZE).rev() {
+        <span class="kw">let </span>code = data[i <span class="kw">as </span>usize];
+        <span class="kw">if </span>code == <span class="string">b&#39;\0&#39; </span>|| code == <span class="string">b&#39; &#39; </span>{
             <span class="kw">continue</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">length</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>;
+        } <span class="kw">else </span>{
+            length = i + <span class="number">1</span>;
             <span class="kw">break</span>;
         }
     }
 
-    <span class="ident">String_Init</span>(
-        <span class="ident">data</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">c_char</span>,
-        <span class="ident">length</span> <span class="kw">as</span> <span class="ident">c_int</span>,
-        <span class="ident">STRING_SIZE</span> <span class="kw">as</span> <span class="ident">c_int</span>,
+    String_Init(
+        data.as_ptr() <span class="kw">as </span><span class="kw-2">*mut </span>c_char,
+        length <span class="kw">as </span>c_int,
+        STRING_SIZE <span class="kw">as </span>c_int,
     )
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">test_get_string</span>() {
-    <span class="kw">unsafe</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span>
-            <span class="string">b&quot;abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl0000000000000000&quot;</span>
-                .<span class="ident">to_vec</span>();
-        <span class="ident">s</span>.<span class="ident">resize</span>(<span class="ident">STRING_SIZE</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="number">0</span>);
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>test_get_string() {
+    <span class="kw">unsafe </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>s =
+            <span class="string">b&quot;abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl0000000000000000&quot;
+                </span>.to_vec();
+        s.resize(STRING_SIZE <span class="kw">as </span>usize, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(
-            <span class="ident">UNSAFE_GetString</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>).<span class="ident">to_string</span>(),
-            <span class="string">&quot;abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl&quot;</span>
-        );
+            UNSAFE_GetString(<span class="kw-2">&amp;</span>s).to_string(),
+            <span class="string">&quot;abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl&quot;
+        </span>);
     }
 }
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">controlChars</span>: <span class="kw-2">&amp;</span>[<span class="ident">cc_unichar</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+<span class="kw">pub const </span>controlChars: <span class="kw-2">&amp;</span>[cc_unichar] = <span class="kw-2">&amp;</span>[
     <span class="number">0x0000</span>, <span class="number">0x263A</span>, <span class="number">0x263B</span>, <span class="number">0x2665</span>, <span class="number">0x2666</span>, <span class="number">0x2663</span>, <span class="number">0x2660</span>, <span class="number">0x2022</span>, <span class="number">0x25D8</span>, <span class="number">0x25CB</span>, <span class="number">0x25D9</span>, <span class="number">0x2642</span>,
     <span class="number">0x2640</span>, <span class="number">0x266A</span>, <span class="number">0x266B</span>, <span class="number">0x263C</span>, <span class="number">0x25BA</span>, <span class="number">0x25C4</span>, <span class="number">0x2195</span>, <span class="number">0x203C</span>, <span class="number">0x00B6</span>, <span class="number">0x00A7</span>, <span class="number">0x25AC</span>, <span class="number">0x21A8</span>,
     <span class="number">0x2191</span>, <span class="number">0x2193</span>, <span class="number">0x2192</span>, <span class="number">0x2190</span>, <span class="number">0x221F</span>, <span class="number">0x2194</span>, <span class="number">0x25B2</span>, <span class="number">0x25BC</span>,
 ];
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">extendedChars</span>: <span class="kw-2">&amp;</span>[<span class="ident">cc_unichar</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+<span class="kw">pub const </span>extendedChars: <span class="kw-2">&amp;</span>[cc_unichar] = <span class="kw-2">&amp;</span>[
     <span class="number">0x2302</span>, <span class="number">0x00C7</span>, <span class="number">0x00FC</span>, <span class="number">0x00E9</span>, <span class="number">0x00E2</span>, <span class="number">0x00E4</span>, <span class="number">0x00E0</span>, <span class="number">0x00E5</span>, <span class="number">0x00E7</span>, <span class="number">0x00EA</span>, <span class="number">0x00EB</span>, <span class="number">0x00E8</span>,
     <span class="number">0x00EF</span>, <span class="number">0x00EE</span>, <span class="number">0x00EC</span>, <span class="number">0x00C4</span>, <span class="number">0x00C5</span>, <span class="number">0x00C9</span>, <span class="number">0x00E6</span>, <span class="number">0x00C6</span>, <span class="number">0x00F4</span>, <span class="number">0x00F6</span>, <span class="number">0x00F2</span>, <span class="number">0x00FB</span>,
     <span class="number">0x00F9</span>, <span class="number">0x00FF</span>, <span class="number">0x00D6</span>, <span class="number">0x00DC</span>, <span class="number">0x00A2</span>, <span class="number">0x00A3</span>, <span class="number">0x00A5</span>, <span class="number">0x20A7</span>, <span class="number">0x0192</span>, <span class="number">0x00E1</span>, <span class="number">0x00ED</span>, <span class="number">0x00F3</span>,
@@ -417,92 +417,92 @@
     <span class="number">0x2248</span>, <span class="number">0x00B0</span>, <span class="number">0x2219</span>, <span class="number">0x00B7</span>, <span class="number">0x221A</span>, <span class="number">0x207F</span>, <span class="number">0x00B2</span>, <span class="number">0x25A0</span>, <span class="number">0x00A0</span>,
 ];
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Convert_CP437ToUnicode</span>(<span class="ident">raw</span>: <span class="ident">u8</span>) -&gt; <span class="ident">cc_unichar</span> {
-    <span class="kw">if</span> <span class="ident">raw</span> <span class="op">&lt;</span> <span class="number">0x20</span> {
-        <span class="ident">controlChars</span>[<span class="ident">raw</span> <span class="kw">as</span> <span class="ident">usize</span>]
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">raw</span> <span class="op">&lt;</span> <span class="number">0x7F</span> {
-        <span class="ident">raw</span> <span class="kw">as</span> <span class="ident">cc_unichar</span>
-    } <span class="kw">else</span> {
-        <span class="ident">extendedChars</span>[<span class="ident">raw</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="number">0x7F</span>]
+<span class="kw">pub fn </span>Convert_CP437ToUnicode(raw: u8) -&gt; cc_unichar {
+    <span class="kw">if </span>raw &lt; <span class="number">0x20 </span>{
+        controlChars[raw <span class="kw">as </span>usize]
+    } <span class="kw">else if </span>raw &lt; <span class="number">0x7F </span>{
+        raw <span class="kw">as </span>cc_unichar
+    } <span class="kw">else </span>{
+        extendedChars[raw <span class="kw">as </span>usize - <span class="number">0x7F</span>]
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Convert_CodepointToCP437</span>(<span class="ident">cp</span>: <span class="ident">cc_codepoint</span>) -&gt; <span class="ident">u8</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="ident">Convert_TryCodepointToCP437</span>(<span class="ident">cp</span>, <span class="kw-2">&amp;mut</span> <span class="ident">c</span>);
-    <span class="ident">c</span>
+<span class="kw">pub fn </span>Convert_CodepointToCP437(cp: cc_codepoint) -&gt; u8 {
+    <span class="kw">let </span><span class="kw-2">mut </span>c: u8 = <span class="number">0</span>;
+    Convert_TryCodepointToCP437(cp, <span class="kw-2">&amp;mut </span>c);
+    c
 }
 
-<span class="kw">fn</span> <span class="ident">ReduceEmoji</span>(<span class="ident">cp</span>: <span class="ident">cc_codepoint</span>) -&gt; <span class="ident">cc_codepoint</span> {
-    <span class="kw">if</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F31E</span> {
-        <span class="kw">return</span> <span class="number">0x263C</span>;
+<span class="kw">fn </span>ReduceEmoji(cp: cc_codepoint) -&gt; cc_codepoint {
+    <span class="kw">if </span>cp == <span class="number">0x1F31E </span>{
+        <span class="kw">return </span><span class="number">0x263C</span>;
     }
-    <span class="kw">if</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F3B5</span> {
-        <span class="kw">return</span> <span class="number">0x266B</span>;
+    <span class="kw">if </span>cp == <span class="number">0x1F3B5 </span>{
+        <span class="kw">return </span><span class="number">0x266B</span>;
     }
-    <span class="kw">if</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F642</span> {
-        <span class="kw">return</span> <span class="number">0x263A</span>;
+    <span class="kw">if </span>cp == <span class="number">0x1F642 </span>{
+        <span class="kw">return </span><span class="number">0x263A</span>;
     }
 
-    <span class="kw">if</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F600</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F601</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F603</span> {
-        <span class="kw">return</span> <span class="number">0x263A</span>;
+    <span class="kw">if </span>cp == <span class="number">0x1F600 </span>|| cp == <span class="number">0x1F601 </span>|| cp == <span class="number">0x1F603 </span>{
+        <span class="kw">return </span><span class="number">0x263A</span>;
     }
-    <span class="kw">if</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F604</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F606</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cp</span> <span class="op">==</span> <span class="number">0x1F60A</span> {
-        <span class="kw">return</span> <span class="number">0x263A</span>;
+    <span class="kw">if </span>cp == <span class="number">0x1F604 </span>|| cp == <span class="number">0x1F606 </span>|| cp == <span class="number">0x1F60A </span>{
+        <span class="kw">return </span><span class="number">0x263A</span>;
     }
-    <span class="ident">cp</span>
+    cp
 }
 
-<span class="kw">fn</span> <span class="ident">Convert_TryCodepointToCP437</span>(<span class="kw-2">mut</span> <span class="ident">cp</span>: <span class="ident">cc_codepoint</span>, <span class="ident">c</span>: <span class="kw-2">&amp;mut</span> <span class="ident">u8</span>) -&gt; <span class="ident">bool</span> {
-    <span class="kw">if</span> (<span class="number">0x20</span>..<span class="number">0x7F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">cp</span>) {
-        <span class="kw-2">*</span><span class="ident">c</span> <span class="op">=</span> <span class="ident">cp</span> <span class="kw">as</span> <span class="ident">u8</span>;
-        <span class="kw">return</span> <span class="bool-val">true</span>;
+<span class="kw">fn </span>Convert_TryCodepointToCP437(<span class="kw-2">mut </span>cp: cc_codepoint, c: <span class="kw-2">&amp;mut </span>u8) -&gt; bool {
+    <span class="kw">if </span>(<span class="number">0x20</span>..<span class="number">0x7F</span>).contains(<span class="kw-2">&amp;</span>cp) {
+        <span class="kw-2">*</span>c = cp <span class="kw">as </span>u8;
+        <span class="kw">return </span><span class="bool-val">true</span>;
     }
-    <span class="kw">if</span> <span class="ident">cp</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0x1F000</span> {
-        <span class="ident">cp</span> <span class="op">=</span> <span class="ident">ReduceEmoji</span>(<span class="ident">cp</span>);
+    <span class="kw">if </span>cp &gt;= <span class="number">0x1F000 </span>{
+        cp = ReduceEmoji(cp);
     }
 
-    <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">chr</span>) <span class="kw">in</span> <span class="ident">controlChars</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-        <span class="kw">if</span> <span class="ident">chr</span> <span class="kw">as</span> <span class="ident">cc_codepoint</span> <span class="op">==</span> <span class="ident">cp</span> {
-            <span class="kw-2">*</span><span class="ident">c</span> <span class="op">=</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>;
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+    <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>chr) <span class="kw">in </span>controlChars.iter().enumerate() {
+        <span class="kw">if </span>chr <span class="kw">as </span>cc_codepoint == cp {
+            <span class="kw-2">*</span>c = i <span class="kw">as </span>u8;
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
     }
 
-    <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">chr</span>) <span class="kw">in</span> <span class="ident">extendedChars</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-        <span class="kw">if</span> <span class="ident">chr</span> <span class="kw">as</span> <span class="ident">cc_codepoint</span> <span class="op">==</span> <span class="ident">cp</span> {
-            <span class="kw-2">*</span><span class="ident">c</span> <span class="op">=</span> (<span class="ident">i</span> <span class="op">+</span> <span class="number">0x7F</span>) <span class="kw">as</span> <span class="ident">u8</span>;
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+    <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>chr) <span class="kw">in </span>extendedChars.iter().enumerate() {
+        <span class="kw">if </span>chr <span class="kw">as </span>cc_codepoint == cp {
+            <span class="kw-2">*</span>c = (i + <span class="number">0x7F</span>) <span class="kw">as </span>u8;
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
     }
 
-    <span class="kw-2">*</span><span class="ident">c</span> <span class="op">=</span> <span class="string">b&#39;?&#39;</span>;
-    <span class="bool-val">false</span>
-}
+    <span class="kw-2">*</span>c = <span class="string">b&#39;?&#39;</span>;
+    <span class="bool-val">false
+</span>}
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">test_cp_437_conversion</span>() {
-    <span class="kw">let</span> <span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">97</span>, <span class="number">236</span>, <span class="number">236</span>]; <span class="comment">// &quot;a∞∞&quot;</span>
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>test_cp_437_conversion() {
+    <span class="kw">let </span>bytes: <span class="kw-2">&amp;</span>[u8] = <span class="kw-2">&amp;</span>[<span class="number">97</span>, <span class="number">236</span>, <span class="number">236</span>]; <span class="comment">// &quot;a∞∞&quot;
 
-    <span class="kw">let</span> <span class="ident">c_str</span> <span class="op">=</span> <span class="ident">CString::new</span>(<span class="ident">bytes</span>).<span class="ident">unwrap</span>();
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">cc_string</span> {
-        <span class="ident">buffer</span>: <span class="ident">c_str</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">c_char</span>,
-        <span class="ident">length</span>: <span class="ident">bytes</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">cc_uint16</span>,
-        <span class="ident">capacity</span>: <span class="ident">bytes</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">cc_uint16</span>,
+    </span><span class="kw">let </span>c_str = CString::new(bytes).unwrap();
+    <span class="kw">let </span>a = cc_string {
+        buffer: c_str.as_ptr() <span class="kw">as </span><span class="kw-2">*mut </span>c_char,
+        length: bytes.len() <span class="kw">as </span>cc_uint16,
+        capacity: bytes.len() <span class="kw">as </span>cc_uint16,
     };
-    <span class="macro">assert_eq!</span>(<span class="ident">a</span>.<span class="ident">to_string</span>(), <span class="string">&quot;a∞∞&quot;</span>);
+    <span class="macro">assert_eq!</span>(a.to_string(), <span class="string">&quot;a∞∞&quot;</span>);
 
-    <span class="kw">let</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;a∞∞&quot;</span>;
-    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">OwnedString::new</span>(<span class="ident">str</span>);
-    <span class="kw">unsafe</span> {
+    <span class="kw">let </span>str = <span class="string">&quot;a∞∞&quot;</span>;
+    <span class="kw">let </span>s = OwnedString::new(str);
+    <span class="kw">unsafe </span>{
         <span class="macro">assert_eq!</span>(
-            <span class="ident">slice::from_raw_parts</span>(
-                <span class="ident">s</span>.<span class="ident">as_cc_string</span>().<span class="ident">buffer</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u8</span>,
-                <span class="ident">s</span>.<span class="ident">as_cc_string</span>().<span class="ident">length</span> <span class="kw">as</span> <span class="ident">usize</span>
+            slice::from_raw_parts(
+                s.as_cc_string().buffer <span class="kw">as </span><span class="kw-2">*const </span>u8,
+                s.as_cc_string().length <span class="kw">as </span>usize
             ),
-            <span class="ident">bytes</span>
+            bytes
         );
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="classicube_sys" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
