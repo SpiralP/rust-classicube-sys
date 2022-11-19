@@ -46,6 +46,7 @@
 <span id="46">46</span>
 <span id="47">47</span>
 <span id="48">48</span>
+<span id="49">49</span>
 </pre><pre class="rust"><code><span class="attribute">#![cfg_attr(feature = <span class="string">&quot;no_std&quot;</span>, no_std)]
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
@@ -61,6 +62,7 @@
 <span class="kw">mod </span>command;
 <span class="kw">mod </span>constants;
 <span class="kw">mod </span>core;
+<span class="kw">mod </span>drawer_2d;
 <span class="kw">mod </span>entity;
 <span class="kw">mod </span>event;
 <span class="kw">mod </span>graphics;
@@ -77,8 +79,8 @@
 <span class="kw">mod </span>world;
 
 <span class="kw">pub use crate</span>::{
-    bindings::<span class="kw-2">*</span>, bitmap::<span class="kw-2">*</span>, chat::<span class="kw-2">*</span>, command::<span class="kw-2">*</span>, constants::<span class="kw-2">*</span>, core::<span class="kw-2">*</span>, entity::<span class="kw-2">*</span>, event::<span class="kw-2">*</span>,
-    graphics::<span class="kw-2">*</span>, input::<span class="kw-2">*</span>, inventory::<span class="kw-2">*</span>, math::<span class="kw-2">*</span>, model::<span class="kw-2">*</span>, packed_col::<span class="kw-2">*</span>, particle::<span class="kw-2">*</span>,
+    bindings::<span class="kw-2">*</span>, bitmap::<span class="kw-2">*</span>, chat::<span class="kw-2">*</span>, command::<span class="kw-2">*</span>, constants::<span class="kw-2">*</span>, core::<span class="kw-2">*</span>, drawer_2d::<span class="kw-2">*</span>, entity::<span class="kw-2">*</span>,
+    event::<span class="kw-2">*</span>, graphics::<span class="kw-2">*</span>, input::<span class="kw-2">*</span>, inventory::<span class="kw-2">*</span>, math::<span class="kw-2">*</span>, model::<span class="kw-2">*</span>, packed_col::<span class="kw-2">*</span>, particle::<span class="kw-2">*</span>,
     screen::OwnedScreen, string::<span class="kw-2">*</span>, vectors::<span class="kw-2">*</span>, world::<span class="kw-2">*</span>,
 };
 
