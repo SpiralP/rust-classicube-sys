@@ -13,6 +13,7 @@ mod chat;
 mod command;
 mod constants;
 mod core;
+mod drawer_2d;
 mod entity;
 mod event;
 mod graphics;
@@ -29,8 +30,8 @@ mod vectors;
 mod world;
 
 pub use crate::{
-    bindings::*, bitmap::*, chat::*, command::*, constants::*, core::*, entity::*, event::*,
-    graphics::*, input::*, inventory::*, math::*, model::*, packed_col::*, particle::*,
+    bindings::*, bitmap::*, chat::*, command::*, constants::*, core::*, drawer_2d::*, entity::*,
+    event::*, graphics::*, input::*, inventory::*, math::*, model::*, packed_col::*, particle::*,
     screen::OwnedScreen, string::*, vectors::*, world::*,
 };
 
