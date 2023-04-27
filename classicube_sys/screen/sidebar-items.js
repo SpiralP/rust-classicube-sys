@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Priority",""]],"struct":[["OwnedScreen",""]]};
+window.SIDEBAR_ITEMS = {"enum":["Priority"],"struct":["OwnedScreen"]};
