@@ -1,4 +1,4 @@
-use std::{collections::HashSet, env, fs, path::Path};
+use std::{collections::HashSet, env, fmt::Write, fs, path::Path};
 
 use regex::Regex;
 
@@ -18,61 +18,65 @@ fn main() {
 
     #[cfg(target_os = "windows")]
     {
-        use std::process::Command;
+        build_classicube();
+    }
+}
 
-        use cc::windows_registry;
-        use fs_extra::dir;
+#[cfg(target_os = "windows")]
+fn build_classicube() {
+    use std::process::Command;
 
-        let out_dir = env::var("OUT_DIR").unwrap();
-        let out_dir = Path::new(&out_dir);
-        let classicube_src_dir = Path::new("ClassiCube").join("src");
-        let build_dir = &out_dir.join("src");
+    use cc::windows_registry;
+    use fs_extra::dir;
 
-        let mut copy_options = dir::CopyOptions::new();
-        copy_options.overwrite = true;
+    let out_dir = env::var("OUT_DIR").unwrap();
+    let out_dir = Path::new(&out_dir);
+    let classicube_dir = Path::new("ClassiCube");
+    let classicube_src_dir = classicube_dir.join("src");
+    let classicube_misc_dir = classicube_dir.join("misc");
+    let build_dir = &out_dir.join("src");
 
-        dir::copy(
-            classicube_src_dir,
-            build_dir.parent().unwrap(),
-            &copy_options,
-        )
-        .unwrap();
+    let mut copy_options = dir::CopyOptions::new();
+    copy_options.overwrite = true;
 
-        let target = env::var("TARGET").unwrap();
+    dir::copy(classicube_src_dir, out_dir, &copy_options).unwrap();
+    dir::copy(classicube_misc_dir, out_dir, &copy_options).unwrap();
 
-        let configuration = if cfg!(debug_assertions) {
-            "Debug"
-        } else {
-            "Release"
-        };
+    let target = env::var("TARGET").unwrap();
 
-        #[cfg(all(target_os = "windows", target_pointer_width = "64"))]
-        let platform = "x64";
+    let configuration = if cfg!(debug_assertions) {
+        "Debug"
+    } else {
+        "Release"
+    };
 
-        #[cfg(all(target_os = "windows", target_pointer_width = "32"))]
-        let platform = "x86";
+    #[cfg(all(target_os = "windows", target_pointer_width = "64"))]
+    let platform = "x64";
 
-        let args = vec![
-            format!("ClassiCube.sln"),
-            format!("/p:Configuration={configuration}"),
-            format!("/p:Platform={platform}"),
-            // TODO detect toolset version
-            format!("/p:PlatformToolset=v143"),
-            format!("/p:WindowsTargetPlatformVersion=10.0"),
-            format!("/p:OutDir={}\\", &out_dir.display()),
-            format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
-        ];
+    #[cfg(all(target_os = "windows", target_pointer_width = "32"))]
+    let platform = "x86";
 
-        let cmd = match Command::new("msbuild.exe")
-            .current_dir(build_dir)
-            .args(&args)
-            .output()
-        {
-            Ok(result) => result,
-            Err(e) => {
-                eprintln!("msbuild from PATH failed, trying hardcoded path: {e:#?}");
+    let args = vec![
+        format!("ClassiCube.sln"),
+        format!("/p:Configuration={configuration}"),
+        format!("/p:Platform={platform}"),
+        // TODO detect toolset version
+        format!("/p:PlatformToolset=v143"),
+        format!("/p:WindowsTargetPlatformVersion=10.0"),
+        format!("/p:OutDir={}\\", &out_dir.display()),
+        format!("/p:IntDir={}\\", &out_dir.join("obj").display()),
+    ];
 
-                match Command::new(r"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe")
+    let cmd = match Command::new("msbuild.exe")
+        .current_dir(build_dir)
+        .args(&args)
+        .output()
+    {
+        Ok(result) => result,
+        Err(e) => {
+            eprintln!("msbuild from PATH failed, trying hardcoded path: {e:#?}");
+
+            match Command::new(r"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe")
                     .current_dir(build_dir)
                     .args(&args)
                     .output()
@@ -89,20 +93,19 @@ fn main() {
                             .unwrap()
                     }
                 }
-            }
-        };
-
-        if !cmd.status.success() {
-            panic!(
-                "stdout: {}\nstderr: {}",
-                String::from_utf8_lossy(&cmd.stdout),
-                String::from_utf8_lossy(&cmd.stderr)
-            );
         }
+    };
 
-        println!("cargo:rustc-link-search=native={}", &out_dir.display());
-        println!("cargo:rustc-link-lib=dylib=ClassiCube");
+    if !cmd.status.success() {
+        panic!(
+            "stdout: {}\nstderr: {}",
+            String::from_utf8_lossy(&cmd.stdout),
+            String::from_utf8_lossy(&cmd.stderr)
+        );
     }
+
+    println!("cargo:rustc-link-search=native={}", &out_dir.display());
+    println!("cargo:rustc-link-lib=dylib=ClassiCube");
 }
 
 fn build_bindings() {
@@ -126,8 +129,10 @@ fn build_bindings() {
         "bindgen.h",
         &header_filenames
             .iter()
-            .map(|filename| format!("#include <{filename}>\n"))
-            .collect::<String>(),
+            .fold(String::new(), |mut output, filename| {
+                let _ = writeln!(output, "#include <{filename}>");
+                output
+            }),
     )
     .allowlist_type(".*");
 
