@@ -12,7 +12,7 @@ libm = { optional = true, version = "0.2" }
 paste = "1"
 
 [build-dependencies]
-bindgen = "0.68"
+bindgen = "0.69"
 cc = "1"
 fs_extra = "1"
 regex = "1"

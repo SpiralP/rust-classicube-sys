@@ -27,6 +27,7 @@ impl OwnedChatCommand {
             .collect();
 
         let help_array = [
+            #[allow(clippy::get_first)]
             help.get(0).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
             help.get(1).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
             help.get(2).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),

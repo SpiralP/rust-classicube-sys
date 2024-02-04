@@ -1,6 +1,5 @@
 mod ops;
 
-pub use self::ops::*;
 use crate::{
     bindings::{IVec3, Vec3},
     std_types::c_int,

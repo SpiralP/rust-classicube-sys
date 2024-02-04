@@ -116,7 +116,7 @@ fn build_bindings() {
     } else {
         bindgen::builder()
     }
-    .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+    .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
     .derive_partialeq(true)
     .derive_eq(true)
     .derive_hash(true)

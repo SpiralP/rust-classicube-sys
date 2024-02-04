@@ -1,6 +1,5 @@
 mod ops;
 
-pub use self::ops::*;
 use crate::{
     bindings::*,
     std_types::{c_float, cosf, floorf, sinf, sqrtf},
