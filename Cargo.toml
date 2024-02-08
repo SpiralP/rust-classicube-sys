@@ -31,3 +31,4 @@ no_std = ["cstr_core", "libc", "libm"]
 [package.metadata.release]
 pre-release-commit-message = "Release {{version}}"
 tag-message = "Release version {{version}}"
+metadata = "required"
