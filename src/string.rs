@@ -7,8 +7,11 @@ use crate::{
 
 impl cc_string {
     pub fn as_slice(&self) -> &[u8] {
-        let data = self.buffer as *const u8;
         let len = self.length as usize;
+        let data = self.buffer as *const u8;
+        if len == 0 || data.is_null() {
+            return &[];
+        }
         unsafe { slice::from_raw_parts(data, len) }
     }
 }
