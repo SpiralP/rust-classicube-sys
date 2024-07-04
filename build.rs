@@ -50,11 +50,11 @@ fn build_classicube() {
         "Release"
     };
 
-    #[cfg(all(target_os = "windows", target_pointer_width = "64"))]
-    let platform = "x64";
-
-    #[cfg(all(target_os = "windows", target_pointer_width = "32"))]
-    let platform = "x86";
+    let platform = match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+        "x86" => "x86",
+        "x86_64" => "x64",
+        other => unimplemented!("CARGO_CFG_TARGET_ARCH {:?}", other),
+    };
 
     let args = vec![
         format!("ClassiCube.sln"),
