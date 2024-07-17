@@ -196,7 +196,11 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
         let file_name = entry.file_name();
         let file_name = file_name.to_string_lossy();
         let file_type = entry.file_type().unwrap();
-        if file_type.is_file() && file_name.ends_with(".h") && !file_name.starts_with('_') {
+        if file_type.is_file()
+            && file_name.ends_with(".h")
+            && !file_name.starts_with('_')
+            && file_name != "VirtualCursor.h"
+        {
             header_paths.push(entry.path());
 
             let data = fs::read_to_string(entry.path())

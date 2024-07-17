@@ -4,7 +4,7 @@ use core::{mem, pin::Pin};
 
 pub use self::priority::Priority;
 use crate::{
-    bindings::{cc_string, Gui_Add, Gui_Remove, Screen, ScreenVTABLE},
+    bindings::{cc_string, Gui_Add, Gui_Remove, InputDevice, Screen, ScreenVTABLE},
     std_types::{c_char, c_int, c_void, Box},
 };
 
@@ -33,6 +33,7 @@ impl OwnedScreen {
             Layout: Some(Layout),
             ContextLost: Some(ContextLost),
             ContextRecreated: Some(ContextRecreated),
+            HandlesPadAxis: Some(HandlesPadAxis),
         });
 
         let screen = Box::pin(unsafe {
@@ -80,7 +81,7 @@ impl OwnedScreen {
     /// Updates this screen, called every frame just before Render().
     pub fn on_update(
         &mut self,
-        f: unsafe extern "C" fn(elem: *mut c_void, delta: f64),
+        f: unsafe extern "C" fn(elem: *mut c_void, delta: f32),
     ) -> &mut Self {
         self.vtable.as_mut().Update = Some(f);
         self
@@ -95,7 +96,7 @@ impl OwnedScreen {
     /// Draws this screen and its widgets on screen.
     pub fn on_render(
         &mut self,
-        f: unsafe extern "C" fn(elem: *mut c_void, delta: f64),
+        f: unsafe extern "C" fn(elem: *mut c_void, delta: f32),
     ) -> &mut Self {
         self.vtable.as_mut().Render = Some(f);
         self
@@ -110,7 +111,7 @@ impl OwnedScreen {
     /// Returns non-zero if an input press is handled.
     pub fn on_handles_input_down(
         &mut self,
-        f: unsafe extern "C" fn(elem: *mut c_void, key: c_int) -> c_int,
+        f: unsafe extern "C" fn(elem: *mut c_void, key: c_int, device: *mut InputDevice) -> c_int,
     ) -> &mut Self {
         self.vtable.as_mut().HandlesInputDown = Some(f);
         self
@@ -119,7 +120,7 @@ impl OwnedScreen {
     /// Returns non-zero if an input release is handled.
     pub fn on_on_input_up(
         &mut self,
-        f: unsafe extern "C" fn(elem: *mut c_void, key: c_int),
+        f: unsafe extern "C" fn(elem: *mut c_void, key: c_int, device: *mut InputDevice),
     ) -> &mut Self {
         self.vtable.as_mut().OnInputUp = Some(f);
         self
@@ -200,6 +201,15 @@ impl OwnedScreen {
         self.vtable.as_mut().ContextRecreated = Some(f);
         self
     }
+
+    /// Returns non-zero if a pad axis update is handled.
+    pub fn on_handles_pad_axis(
+        &mut self,
+        f: unsafe extern "C" fn(elem: *mut c_void, axis: c_int, x: f32, y: f32) -> c_int,
+    ) -> &mut Self {
+        self.vtable.as_mut().HandlesPadAxis = Some(f);
+        self
+    }
 }
 
 impl Default for OwnedScreen {
@@ -217,14 +227,18 @@ impl Drop for OwnedScreen {
 
 // default noop functions
 unsafe extern "C" fn Init(_elem: *mut c_void) {}
-unsafe extern "C" fn Update(_elem: *mut c_void, _delta: f64) {}
+unsafe extern "C" fn Update(_elem: *mut c_void, _delta: f32) {}
 unsafe extern "C" fn Free(_elem: *mut c_void) {}
-unsafe extern "C" fn Render(_elem: *mut c_void, _delta: f64) {}
+unsafe extern "C" fn Render(_elem: *mut c_void, _delta: f32) {}
 unsafe extern "C" fn BuildMesh(_elem: *mut c_void) {}
-unsafe extern "C" fn HandlesInputDown(_elem: *mut c_void, _key: c_int) -> c_int {
+unsafe extern "C" fn HandlesInputDown(
+    _elem: *mut c_void,
+    _key: c_int,
+    _device: *mut InputDevice,
+) -> c_int {
     0
 }
-unsafe extern "C" fn OnInputUp(_elem: *mut c_void, _key: c_int) {}
+unsafe extern "C" fn OnInputUp(_elem: *mut c_void, _key: c_int, _device: *mut InputDevice) {}
 unsafe extern "C" fn HandlesKeyPress(_elem: *mut c_void, _keyChar: c_char) -> c_int {
     0
 }
@@ -254,6 +268,9 @@ unsafe extern "C" fn HandlesMouseScroll(_elem: *mut c_void, _delta: f32) -> c_in
 unsafe extern "C" fn Layout(_elem: *mut c_void) {}
 unsafe extern "C" fn ContextLost(_elem: *mut c_void) {}
 unsafe extern "C" fn ContextRecreated(_elem: *mut c_void) {}
+unsafe extern "C" fn HandlesPadAxis(_elem: *mut c_void, _axis: c_int, _x: f32, _y: f32) -> c_int {
+    0
+}
 
 #[test]
 fn test_screen() {

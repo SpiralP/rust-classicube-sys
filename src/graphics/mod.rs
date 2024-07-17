@@ -18,43 +18,43 @@ pub unsafe fn Gfx_UpdateDynamicVb_IndexedTris(
 }
 
 pub fn Gfx_Make2DQuad(tex: &mut Texture, col: PackedCol) -> [VertexTextured; 4] {
-    let x1: f32 = tex.X as _;
-    let x2: f32 = (tex.X as f32 + tex.Width as f32) as _;
-    let y1: f32 = tex.Y as _;
-    let y2: f32 = (tex.Y as f32 + tex.Height as f32) as _;
+    let x1: f32 = tex.x as _;
+    let x2: f32 = (tex.x as f32 + tex.width as f32) as _;
+    let y1: f32 = tex.y as _;
+    let y2: f32 = (tex.y as f32 + tex.height as f32) as _;
 
     [
         VertexTextured {
-            X: x1,
-            Y: y1,
-            Z: 0 as _,
+            x: x1,
+            y: y1,
+            z: 0 as _,
             Col: col,
-            U: tex.uv.U1,
-            V: tex.uv.V1,
+            U: tex.uv.u1,
+            V: tex.uv.v1,
         },
         VertexTextured {
-            X: x2,
-            Y: y1,
-            Z: 0 as _,
+            x: x2,
+            y: y1,
+            z: 0 as _,
             Col: col,
-            U: tex.uv.U2,
-            V: tex.uv.V1,
+            U: tex.uv.u2,
+            V: tex.uv.v1,
         },
         VertexTextured {
-            X: x2,
-            Y: y2,
-            Z: 0 as _,
+            x: x2,
+            y: y2,
+            z: 0 as _,
             Col: col,
-            U: tex.uv.U2,
-            V: tex.uv.V2,
+            U: tex.uv.u2,
+            V: tex.uv.v2,
         },
         VertexTextured {
-            X: x1,
-            Y: y2,
-            Z: 0 as _,
+            x: x1,
+            y: y2,
+            z: 0 as _,
             Col: col,
-            U: tex.uv.U1,
-            V: tex.uv.V2,
+            U: tex.uv.u1,
+            V: tex.uv.v2,
         },
     ]
 }

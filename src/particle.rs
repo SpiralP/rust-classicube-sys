@@ -6,51 +6,51 @@ pub fn Particle_DoRender(
     rec: &TextureRec,
     col: PackedCol,
 ) -> [VertexTextured; 4] {
-    let sX = size.X * 0.5;
-    let sY = size.Y * 0.5;
+    let sX = size.x * 0.5;
+    let sY = size.y * 0.5;
     let mut centre = *pos;
-    centre.Y += sY;
+    centre.y += sY;
     let view = unsafe { &Gfx.View };
 
-    let aX = view.row1.X * sX;
-    let aY = view.row2.X * sX;
-    let aZ = view.row3.X * sX; // right * size.X * 0.5f
-    let bX = view.row1.Y * sY;
-    let bY = view.row2.Y * sY;
-    let bZ = view.row3.Y * sY; // up    * size.Y * 0.5f
+    let aX = view.row1.x * sX;
+    let aY = view.row2.x * sX;
+    let aZ = view.row3.x * sX; // right * size.x * 0.5f
+    let bX = view.row1.y * sY;
+    let bY = view.row2.y * sY;
+    let bZ = view.row3.y * sY; // up    * size.y * 0.5f
 
     [
         VertexTextured {
-            X: centre.X - aX - bX,
-            Y: centre.Y - aY - bY,
-            Z: centre.Z - aZ - bZ,
+            x: centre.x - aX - bX,
+            y: centre.y - aY - bY,
+            z: centre.z - aZ - bZ,
             Col: col,
-            U: rec.U1,
-            V: rec.V2,
+            U: rec.u1,
+            V: rec.v2,
         },
         VertexTextured {
-            X: centre.X - aX + bX,
-            Y: centre.Y - aY + bY,
-            Z: centre.Z - aZ + bZ,
+            x: centre.x - aX + bX,
+            y: centre.y - aY + bY,
+            z: centre.z - aZ + bZ,
             Col: col,
-            U: rec.U1,
-            V: rec.V1,
+            U: rec.u1,
+            V: rec.v1,
         },
         VertexTextured {
-            X: centre.X + aX + bX,
-            Y: centre.Y + aY + bY,
-            Z: centre.Z + aZ + bZ,
+            x: centre.x + aX + bX,
+            y: centre.y + aY + bY,
+            z: centre.z + aZ + bZ,
             Col: col,
-            U: rec.U2,
-            V: rec.V1,
+            U: rec.u2,
+            V: rec.v1,
         },
         VertexTextured {
-            X: centre.X + aX - bX,
-            Y: centre.Y + aY - bY,
-            Z: centre.Z + aZ - bZ,
+            x: centre.x + aX - bX,
+            y: centre.y + aY - bY,
+            z: centre.z + aZ - bZ,
             Col: col,
-            U: rec.U2,
-            V: rec.V2,
+            U: rec.u2,
+            V: rec.v2,
         },
     ]
 }

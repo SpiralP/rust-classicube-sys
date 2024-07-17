@@ -90,7 +90,7 @@ make_register!(Chat);
 make_raise!(Chat, (msg: *const cc_string, msgType: c_int));
 
 make_register!(Input);
-make_raise!(Input, (key: c_int, repeating: cc_bool));
+make_raise!(Input, (key: c_int, repeating: cc_bool, device: *mut InputDevice));
 
 make_register!(String);
 make_raise!(String, (s: *const cc_string));

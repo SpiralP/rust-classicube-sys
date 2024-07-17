@@ -17,6 +17,9 @@ pub const Pad_Names: &[&str] = &[
     "PAD_Y",
     "PAD_L",
     "PAD_R",
+    "PAD_Z",
+    "PAD_C",
+    "PAD_D",
     "PAD_LEFT",
     "PAD_RIGHT",
     "PAD_UP",
@@ -25,11 +28,21 @@ pub const Pad_Names: &[&str] = &[
     "PAD_SELECT",
     "PAD_ZL",
     "PAD_ZR",
+    "PAD_LSTICK",
+    "PAD_RSTICK",
+    "PAD_CLEFT",
+    "PAD_CRIGHT",
+    "PAD_CUP",
+    "PAD_CDOWN",
 ];
 
-pub const storageNames: [&str; InputButtons_INPUT_COUNT as usize] = [
+pub const Pad_DisplayNames: &[&str] = &[
+    "A", "B", "X", "Y", "L", "R", "Z", "C", "D", "LEFT", "RIGHT", "UP", "DOWN", "START", "SELECT",
+    "ZL", "ZR", "LSTICK", "RSTICK", "CLEFT", "CRIGHT", "CUP", "CDOWN",
+];
+
+pub const Input_StorageNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "None",
-    // Key_Function_Names
     "F1",
     "F2",
     "F3",
@@ -94,7 +107,6 @@ pub const storageNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "PageUp",
     "PageDown",
     "Menu",
-    // Key_Ascii_Names
     "A",
     "B",
     "C",
@@ -152,13 +164,42 @@ pub const storageNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "LeftMouse",
     "RightMouse",
     "MiddleMouse",
-    // Pad_Names
+    "WheelUp",
+    "WheelDown",
+    "WheelLeft",
+    "WheelRight",
+    "XButton3",
+    "XButton4",
+    "XButton5",
+    "XButton6",
+    "VolumeMute",
+    "VolumeUp",
+    "VolumeDown",
+    "Sleep",
+    "MediaNext",
+    "MediaPrev",
+    "MediaPlay",
+    "MediaStop",
+    "BrowserPrev",
+    "BrowserNext",
+    "BrowserRefresh",
+    "BrowserStop",
+    "BrowserSsearch",
+    "BrowserFavorites",
+    "BrowserHome",
+    "LaunchMail",
+    "LaunchMedia",
+    "LaunchApp1",
+    "LaunchCalc",
     "PAD_A",
     "PAD_B",
     "PAD_X",
     "PAD_Y",
     "PAD_L",
     "PAD_R",
+    "PAD_Z",
+    "PAD_C",
+    "PAD_D",
     "PAD_LEFT",
     "PAD_RIGHT",
     "PAD_UP",
@@ -167,11 +208,16 @@ pub const storageNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "PAD_SELECT",
     "PAD_ZL",
     "PAD_ZR",
+    "PAD_LSTICK",
+    "PAD_RSTICK",
+    "PAD_CLEFT",
+    "PAD_CRIGHT",
+    "PAD_CUP",
+    "PAD_CDOWN",
 ];
 
 pub const Input_DisplayNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "NONE",
-    // Key_Function_Names
     "F1",
     "F2",
     "F3",
@@ -236,7 +282,6 @@ pub const Input_DisplayNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "PRIOR",
     "DOWN",
     "MENU",
-    // Key_Ascii_Names
     "A",
     "B",
     "C",
@@ -294,130 +339,465 @@ pub const Input_DisplayNames: [&str; InputButtons_INPUT_COUNT as usize] = [
     "LMOUSE",
     "RMOUSE",
     "MMOUSE",
-    // Pad_Names
-    "PAD_A",
-    "PAD_B",
-    "PAD_X",
-    "PAD_Y",
-    "PAD_L",
-    "PAD_R",
-    "PAD_LEFT",
-    "PAD_RIGHT",
-    "PAD_UP",
-    "PAD_DOWN",
-    "PAD_START",
-    "PAD_SELECT",
-    "PAD_ZL",
-    "PAD_ZR",
+    "WHEELUP",
+    "WHEELDOWN",
+    "WHEELLEFT",
+    "WHEELRIGHT",
+    "XBUTTON3",
+    "XBUTTON4",
+    "XBUTTON5",
+    "XBUTTON6",
+    "VOLUMEMUTE",
+    "VOLUMEUP",
+    "VOLUMEDOWN",
+    "SLEEP",
+    "MEDIANEXT",
+    "MEDIAPREV",
+    "MEDIAPLAY",
+    "MEDIASTOP",
+    "BROWSERPREV",
+    "BROWSERNEXT",
+    "BROWSERREFRESH",
+    "BROWSERSTOP",
+    "BROWSERSEARCH",
+    "BROWSERFAVORITES",
+    "BROWSERHOME",
+    "LAUNCHMAIL",
+    "LAUNCHMEDIA",
+    "LAUNCHAPP1",
+    "LAUNCHCALC",
+    "A",
+    "B",
+    "X",
+    "Y",
+    "L",
+    "R",
+    "Z",
+    "C",
+    "D",
+    "LEFT",
+    "RIGHT",
+    "UP",
+    "DOWN",
+    "START",
+    "SELECT",
+    "ZL",
+    "ZR",
+    "LSTICK",
+    "RSTICK",
+    "CLEFT",
+    "CRIGHT",
+    "CUP",
+    "CDOWN",
 ];
 
-pub const KeyBind_GamepadDefaults: [cc_uint8; KeyBind__KEYBIND_COUNT as usize] = [
-    InputButtons_CCPAD_UP as _,
-    InputButtons_CCPAD_DOWN as _,
-    InputButtons_CCPAD_LEFT as _,
-    InputButtons_CCPAD_RIGHT as _,
-    InputButtons_CCPAD_A as _,
-    0,
-    InputButtons_CCPAD_START as _,
-    InputButtons_CCPAD_Y as _,
-    InputButtons_CCPAD_X as _,
-    0,
-    InputButtons_CCPAD_START as _,
-    0,
-    InputButtons_CCKEY_LSHIFT as _,
-    b'X',
-    b'Z',
-    b'Q',
-    b'E',
-    0,
-    0,
-    0,
-    0,
-    InputButtons_CCKEY_F5 as _,
-    0,
-    0,
-    0,
-    0,
-    InputButtons_CCPAD_L as _,
-    0,
-    InputButtons_CCPAD_R as _,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    InputButtons_CCPAD_ZL as _,
-    InputButtons_CCPAD_ZR as _,
+pub const PadBind_Defaults: [BindMapping; InputBind__BIND_COUNT as usize] = [
+    BindMapping {
+        button1: InputButtons_CCPAD_UP as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_DOWN as _,
+        button2: 0,
+    }, /* BIND_FORWARD, BIND_BACK */
+    BindMapping {
+        button1: InputButtons_CCPAD_LEFT as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_RIGHT as _,
+        button2: 0,
+    }, /* BIND_LEFT, BIND_RIGHT */
+    BindMapping {
+        button1: InputButtons_CCPAD_1 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_JUMP, BIND_RESPAWN */
+    BindMapping {
+        button1: InputButtons_CCPAD_START as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_4 as _,
+        button2: 0,
+    }, /* BIND_SET_SPAWN, BIND_CHAT */
+    BindMapping {
+        button1: InputButtons_CCPAD_3 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_INVENTORY, BIND_FOG */
+    BindMapping {
+        button1: InputButtons_CCPAD_START as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_SEND_CHAT, BIND_TABLIST */
+    BindMapping {
+        button1: InputButtons_CCPAD_2 as _,
+        button2: InputButtons_CCPAD_L as _,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_2 as _,
+        button2: InputButtons_CCPAD_3 as _,
+    }, /* BIND_SPEED, BIND_NOCLIP */
+    BindMapping {
+        button1: InputButtons_CCPAD_2 as _,
+        button2: InputButtons_CCPAD_R as _,
+    }, /* BIND_FLY */
+    BindMapping {
+        button1: InputButtons_CCPAD_2 as _,
+        button2: InputButtons_CCPAD_UP as _,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_2 as _,
+        button2: InputButtons_CCPAD_DOWN as _,
+    }, /* BIND_FLY_UP, BIND_FLY_DOWN */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_EXT_INPUT, BIND_HIDE_FPS */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_SCREENSHOT, BIND_FULLSCREEN, BIND_THIRD_PERSON, BIND_HIDE_GUI */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_AXIS_LINES, BIND_ZOOM_SCROLL, BIND_HALF_SPEED */
+    BindMapping {
+        button1: InputButtons_CCPAD_L as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_R as _,
+        button2: 0,
+    }, /* BIND_DELETE_BLOCK, BIND_PICK_BLOCK, BIND_PLACE_BLOCK */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_AUTOROTATE, BIND_HOTBAR_SWITCH, BIND_SMOOTH_CAMERA */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_DROP_BLOCK, BIND_IDOVERLAY, BIND_BREAK_LIQUIDS */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_LOOK_UP, BIND_LOOK_DOWN, BIND_LOOK_RIGHT, BIND_LOOK_LEFT */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_HOTBAR_1, BIND_HOTBAR_2, BIND_HOTBAR_3 */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_HOTBAR_4, BIND_HOTBAR_5, BIND_HOTBAR_6 */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_HOTBAR_7, BIND_HOTBAR_8, BIND_HOTBAR_9 */
+    BindMapping {
+        button1: InputButtons_CCPAD_ZL as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCPAD_ZR as _,
+        button2: 0,
+    }, /* BIND_HOTBAR_LEFT, BIND_HOTBAR_RIGHT */
 ];
 
-pub const KeyBind_NormalDefaults: [cc_uint8; KeyBind__KEYBIND_COUNT as usize] = [
-    b'W',
-    b'S',
-    b'A',
-    b'D',
-    InputButtons_CCKEY_SPACE as _,
-    b'R',
-    InputButtons_CCKEY_ENTER as _,
-    b'T',
-    b'B',
-    b'F',
-    InputButtons_CCKEY_ENTER as _,
-    InputButtons_CCKEY_TAB as _,
-    InputButtons_CCKEY_LSHIFT as _,
-    b'X',
-    b'Z',
-    b'Q',
-    b'E',
-    InputButtons_CCKEY_LALT as _,
-    InputButtons_CCKEY_F3 as _,
-    InputButtons_CCKEY_F12 as _,
-    InputButtons_CCKEY_F11 as _,
-    InputButtons_CCKEY_F5 as _,
-    InputButtons_CCKEY_F1 as _,
-    InputButtons_CCKEY_F7 as _,
-    b'C',
-    InputButtons_CCKEY_LCTRL as _,
-    InputButtons_CCMOUSE_L as _,
-    InputButtons_CCMOUSE_M as _,
-    InputButtons_CCMOUSE_R as _,
-    InputButtons_CCKEY_F6 as _,
-    InputButtons_CCKEY_LALT as _,
-    InputButtons_CCKEY_F8 as _,
-    b'G',
-    InputButtons_CCKEY_F10 as _,
-    0,
-    0,
-    0,
-    0,
-    0,
-    b'1',
-    b'2',
-    b'3',
-    b'4',
-    b'5',
-    b'6',
-    b'7',
-    b'8',
-    b'9',
-    0,
-    0,
+pub const KeyBind_Defaults: [BindMapping; InputBind__BIND_COUNT as usize] = [
+    BindMapping {
+        button1: b'W',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'S',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'A',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'D',
+        button2: 0,
+    }, /* BIND_FORWARD - BIND_RIGHT */
+    BindMapping {
+        button1: InputButtons_CCKEY_SPACE as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'R',
+        button2: 0,
+    }, /* BIND_JUMP, BIND_RESPAWN */
+    BindMapping {
+        button1: InputButtons_CCKEY_ENTER as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'T',
+        button2: 0,
+    }, /* BIND_SET_SPAWN, BIND_CHAT */
+    BindMapping {
+        button1: b'B',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'F',
+        button2: 0,
+    }, /* BIND_INVENTORY, BIND_FOG */
+    BindMapping {
+        button1: InputButtons_CCKEY_ENTER as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCKEY_TAB as _,
+        button2: 0,
+    }, /* BIND_SEND_CHAT, BIND_TABLIST */
+    BindMapping {
+        button1: InputButtons_CCKEY_LSHIFT as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'X',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'Z',
+        button2: 0,
+    }, /* BIND_SPEED, BIND_NOCLIP, BIND_FLY */
+    BindMapping {
+        button1: b'Q',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'E',
+        button2: 0,
+    }, /* BIND_FLY_UP, BIND_FLY_DOWN */
+    BindMapping {
+        button1: InputButtons_CCKEY_LALT as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCKEY_F3 as _,
+        button2: 0,
+    }, /* BIND_EXT_INPUT, BIND_HIDE_FPS */
+    BindMapping {
+        button1: InputButtons_CCKEY_F12 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCKEY_F11 as _,
+        button2: 0,
+    }, /* BIND_SCREENSHOT, BIND_FULLSCREEN */
+    BindMapping {
+        button1: InputButtons_CCKEY_F5 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCKEY_F1 as _,
+        button2: 0,
+    }, /* BIND_THIRD_PERSON, BIND_HIDE_GUI */
+    BindMapping {
+        button1: InputButtons_CCKEY_F7 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'C',
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCKEY_LCTRL as _,
+        button2: 0,
+    }, /* BIND_AXIS_LINES, BIND_ZOOM_SCROLL, BIND_HALF_SPEED */
+    BindMapping {
+        button1: InputButtons_CCMOUSE_L as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCMOUSE_M as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCMOUSE_R as _,
+        button2: 0,
+    }, /* BIND_DELETE_BLOCK, BIND_PICK_BLOCK, BIND_PLACE_BLOCK */
+    BindMapping {
+        button1: InputButtons_CCKEY_F6 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: InputButtons_CCKEY_LALT as _,
+        button2: 0,
+    }, /* BIND_AUTOROTATE, BIND_HOTBAR_SWITCH */
+    BindMapping {
+        button1: InputButtons_CCKEY_F8 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'G',
+        button2: 0,
+    }, /* BIND_SMOOTH_CAMERA, BIND_DROP_BLOCK */
+    BindMapping {
+        button1: InputButtons_CCKEY_F10 as _,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_IDOVERLAY, BIND_BREAK_LIQUIDS */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_LOOK_UP, BIND_LOOK_DOWN, BIND_LOOK_RIGHT, BIND_LOOK_LEFT */
+    BindMapping {
+        button1: b'1',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'2',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'3',
+        button2: 0,
+    }, /* BIND_HOTBAR_1, BIND_HOTBAR_2, BIND_HOTBAR_3 */
+    BindMapping {
+        button1: b'4',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'5',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'6',
+        button2: 0,
+    }, /* BIND_HOTBAR_4, BIND_HOTBAR_5, BIND_HOTBAR_6 */
+    BindMapping {
+        button1: b'7',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'8',
+        button2: 0,
+    },
+    BindMapping {
+        button1: b'9',
+        button2: 0,
+    }, /* BIND_HOTBAR_7, BIND_HOTBAR_8, BIND_HOTBAR_9 */
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    },
+    BindMapping {
+        button1: 0,
+        button2: 0,
+    }, /* BIND_HOTBAR_LEFT, BIND_HOTBAR_RIGHT */
 ];
 
-pub const keybindNames: [&str; KeyBind__KEYBIND_COUNT as usize] = [
+pub const bindNames: [&str; InputBind__BIND_COUNT as usize] = [
     "Forward",
     "Back",
     "Left",

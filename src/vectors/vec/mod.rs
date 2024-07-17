@@ -8,14 +8,14 @@ use crate::{
 
 impl Vec3 {
     pub const fn new(x: c_float, y: c_float, z: c_float) -> Self {
-        Self { X: x, Y: y, Z: z }
+        Self { x, y, z }
     }
 
     pub const fn zero() -> Self {
         Self {
-            X: 0.0,
-            Y: 0.0,
-            Z: 0.0,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
         }
     }
 
@@ -95,67 +95,67 @@ impl Vec3 {
 
 pub const fn Vec3_BigPos() -> Vec3 {
     Vec3 {
-        X: 1e25_f32,
-        Y: 1e25_f32,
-        Z: 1e25_f32,
+        x: 1e25_f32,
+        y: 1e25_f32,
+        z: 1e25_f32,
     }
 }
 
 pub const fn Vec3_Create3(x: c_float, y: c_float, z: c_float) -> Vec3 {
-    Vec3 { X: x, Y: y, Z: z }
+    Vec3 { x, y, z }
 }
 
 /// Returns the squared length of the vector.
 /// Squared length can be used for comparison, to avoid a costly sqrt()
 /// However, you must sqrt() this when adding lengths.
 pub fn Vec3_LengthSquared(v: &Vec3) -> c_float {
-    v.X * v.X + v.Y * v.Y + v.Z * v.Z
+    v.x * v.x + v.y * v.y + v.z * v.z
 }
 
 /// Linearly interpolates components of two vectors.
 pub fn Vec3_Lerp(result: &mut Vec3, a: &Vec3, b: &Vec3, blend: c_float) {
-    result.X = blend * (b.X - a.X) + a.X;
-    result.Y = blend * (b.Y - a.Y) + a.Y;
-    result.Z = blend * (b.Z - a.Z) + a.Z;
+    result.x = blend * (b.x - a.x) + a.x;
+    result.y = blend * (b.y - a.y) + a.y;
+    result.z = blend * (b.z - a.z) + a.z;
 }
 
 /// Scales all components of a vector to lie in [-1, 1]
 pub fn Vec3_Normalize(result: &mut Vec3, a: &Vec3) {
-    let lenSquared = a.X * a.X + a.Y * a.Y + a.Z * a.Z;
+    let lenSquared = a.x * a.x + a.y * a.y + a.z * a.z;
     let scale = 1.0 / sqrtf(lenSquared);
-    result.X = a.X * scale;
-    result.Y = a.Y * scale;
-    result.Z = a.Z * scale;
+    result.x = a.x * scale;
+    result.y = a.y * scale;
+    result.z = a.z * scale;
 }
 
 /// Transforms a vector by the given matrix.
 pub fn Vec3_Transform(result: &mut Vec3, a: &Vec3, mat: &Matrix) {
-    // a could be pointing to result - can't directly assign X/Y/Z therefore
-    let x = a.X * mat.row1.X + a.Y * mat.row2.X + a.Z * mat.row3.X + mat.row4.X;
-    let y = a.X * mat.row1.Y + a.Y * mat.row2.Y + a.Z * mat.row3.Y + mat.row4.Y;
-    let z = a.X * mat.row1.Z + a.Y * mat.row2.Z + a.Z * mat.row3.Z + mat.row4.Z;
-    result.X = x;
-    result.Y = y;
-    result.Z = z;
+    // a could be pointing to result - can't directly assign x/y/z therefore
+    let x = a.x * mat.row1.x + a.y * mat.row2.x + a.z * mat.row3.x + mat.row4.x;
+    let y = a.x * mat.row1.y + a.y * mat.row2.y + a.z * mat.row3.y + mat.row4.y;
+    let z = a.x * mat.row1.z + a.y * mat.row2.z + a.z * mat.row3.z + mat.row4.z;
+    result.x = x;
+    result.y = y;
+    result.z = z;
 }
 
-/// Same as Vec3_Transform, but faster since X and Z are assumed as 0.
+/// Same as Vec3_Transform, but faster since x and z are assumed as 0.
 pub fn Vec3_TransformY(result: &mut Vec3, y: c_float, mat: &Matrix) {
-    result.X = y * mat.row2.X + mat.row4.X;
-    result.Y = y * mat.row2.Y + mat.row4.Y;
-    result.Z = y * mat.row2.Z + mat.row4.Z;
+    result.x = y * mat.row2.x + mat.row4.x;
+    result.y = y * mat.row2.y + mat.row4.y;
+    result.z = y * mat.row2.z + mat.row4.z;
 }
 
 pub fn Vec3_RotateX(v: Vec3, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
-    Vec3_Create3(v.X, cosA * v.Y + sinA * v.Z, -sinA * v.Y + cosA * v.Z)
+    Vec3_Create3(v.x, cosA * v.y + sinA * v.z, -sinA * v.y + cosA * v.z)
 }
 
 pub fn Vec3_RotateY(v: Vec3, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
-    Vec3_Create3(cosA * v.X - sinA * v.Z, v.Y, sinA * v.X + cosA * v.Z)
+    Vec3_Create3(cosA * v.x - sinA * v.z, v.y, sinA * v.x + cosA * v.z)
 }
 
 pub fn Vec3_RotateY3(x: c_float, y: c_float, z: c_float, angle: c_float) -> Vec3 {
@@ -167,21 +167,21 @@ pub fn Vec3_RotateY3(x: c_float, y: c_float, z: c_float, angle: c_float) -> Vec3
 pub fn Vec3_RotateZ(v: Vec3, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
-    Vec3_Create3(cosA * v.X + sinA * v.Y, -sinA * v.X + cosA * v.Y, v.Z)
+    Vec3_Create3(cosA * v.x + sinA * v.y, -sinA * v.x + cosA * v.y, v.z)
 }
 
 /// Whether all of the components of the two vectors are equal.
 pub fn Vec3_Equals(a: &Vec3, b: &Vec3) -> bool {
     #[allow(clippy::float_cmp)]
     {
-        a.X == b.X && a.Y == b.Y && a.Z == b.Z
+        a.x == b.x && a.y == b.y && a.z == b.z
     }
 }
 
 pub fn IVec3_Floor(result: &mut IVec3, a: &Vec3) {
-    result.X = floorf(a.X) as _;
-    result.Y = floorf(a.Y) as _;
-    result.Z = floorf(a.Z) as _;
+    result.x = floorf(a.x) as _;
+    result.y = floorf(a.y) as _;
+    result.z = floorf(a.z) as _;
 }
 
 /// Returns a normalised vector facing in the direction described by the given yaw and pitch.
