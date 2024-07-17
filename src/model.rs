@@ -86,15 +86,12 @@ macro_rules! BoxDesc_Box {
     };
 }
 
-type BoxDesc_Dims_Return = (u8, u8, u8);
-type BoxDesc_Bounds_Return = (c_float, c_float, c_float, c_float, c_float, c_float);
+type BoxDescDimsReturn = (u8, u8, u8);
+type BoxDescBoundsReturn = (c_float, c_float, c_float, c_float, c_float, c_float);
 impl BoxDesc {
     pub fn from_macros(
         (texX, texY): (u16, u16),
-        ((sizeX, sizeY, sizeZ), (x1, y1, z1, x2, y2, z2)): (
-            BoxDesc_Dims_Return,
-            BoxDesc_Bounds_Return,
-        ),
+        ((sizeX, sizeY, sizeZ), (x1, y1, z1, x2, y2, z2)): (BoxDescDimsReturn, BoxDescBoundsReturn),
     ) -> Self {
         Self {
             texX,

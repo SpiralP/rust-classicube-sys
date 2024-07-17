@@ -170,11 +170,11 @@ fn build_bindings() {
 
     let bindings = bindings.generate().unwrap();
 
-    // Write the bindings to the $OUT_DIR/bindings.rs file.
-    let out_dir = env::var("OUT_DIR").unwrap();
+    let bindings_path = Path::new(&env::var("OUT_DIR").unwrap()).join("bindings.rs");
     bindings
-        .write_to_file(Path::new(&out_dir).join("bindings.rs"))
+        .write_to_file(bindings_path)
         .expect("Couldn't write bindings!");
+    // panic!("{bindings_path:?}");
 }
 
 #[derive(Debug, Hash, PartialEq, Eq)]
@@ -204,10 +204,10 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
                 .replace("\r\n", "\n");
 
             // exported vars
-            for mat in Regex::new(r"(?m)^CC_VAR.*$").unwrap().find_iter(&data) {
+            for mat in Regex::new(r"(?m)^\s*CC_VAR.*$").unwrap().find_iter(&data) {
                 let part = &data[mat.start()..];
 
-                if let Some(captures) = Regex::new(r"^CC_VAR +extern +int +([[:word:]]+);")
+                if let Some(captures) = Regex::new(r"^CC_VAR\s+extern\s+int\s+([[:word:]]+);")
                     .unwrap()
                     .captures(part)
                 {
@@ -217,14 +217,20 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
                         .as_str()
                         .to_string();
 
+                    let type_name = if cfg!(feature = "no_std") {
+                        "::core::ffi::c_int".to_string()
+                    } else {
+                        "::std::os::raw::c_int".to_string()
+                    };
+
                     var_names.insert(VarType::Static {
                         var_name,
-                        type_name: "::std::os::raw::c_int".to_string(),
+                        type_name,
                     });
                 } else {
                     // need ?s for .* to match \n
                     let captures = Regex::new(
-                        r"(?s)^CC_VAR +extern +struct +([[:word:]]+) +\{.*?\n\} +([[:word:]]+);",
+                        r"(?s)^\s*CC_VAR\s+extern\s+struct\s+([[:word:]]+)(?:\s+\{.*?\n\})?\s+([[:word:]]+);",
                     )
                     .unwrap()
                     .captures(part)
@@ -251,7 +257,7 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
             }
 
             // C macros/defines
-            for captures in Regex::new(r"(?m)^#define +([[:word:]]+).*$")
+            for captures in Regex::new(r"(?m)^\s*#define\s+([[:word:]]+).*$")
                 .unwrap()
                 .captures_iter(&data)
             {
@@ -266,7 +272,7 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
             for mat in Regex::new(r"(?m)^CC_API.*$").unwrap().find_iter(&data) {
                 let part = mat.as_str();
                 let function_name = Regex::new(
-                    r"(?m)^CC_API(?: +STRING_REF| +struct)? +[[:word:]]+ *\*? +([[:word:]]+)\(.*$",
+                    r"(?m)^\s*CC_API(?:\s+STRING_REF|\s+struct)?\s+[[:word:]]+ *\*?\s+([[:word:]]+)\(.*$",
                 )
                 .unwrap()
                 .captures(part)
