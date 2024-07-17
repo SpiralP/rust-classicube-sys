@@ -121,7 +121,7 @@
                     handlers <span class="kw">as </span><span class="kw-2">*mut </span>Event_Void,
                     obj,
                     <span class="attr">#[allow(clippy::useless_transmute)]
-                    </span>mem::transmute::&lt;<span class="kw">_</span>, Event_Void_Callback&gt;(handler),
+                    </span>mem::transmute::&lt;[&lt;Event_ <span class="macro-nonterminal">$name </span>_Callback&gt;], Event_Void_Callback&gt;(handler),
                 )
             }
 
@@ -134,7 +134,7 @@
                     handlers <span class="kw">as </span><span class="kw-2">*mut </span>Event_Void,
                     obj,
                     <span class="attr">#[allow(clippy::useless_transmute)]
-                    </span>mem::transmute::&lt;<span class="kw">_</span>, Event_Void_Callback&gt;(handler),
+                    </span>mem::transmute::&lt;[&lt;Event_ <span class="macro-nonterminal">$name </span>_Callback&gt;], Event_Void_Callback&gt;(handler),
                 )
             }
         }

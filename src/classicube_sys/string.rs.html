@@ -254,7 +254,18 @@
 <a href="#254" id="254">254</a>
 <a href="#255" id="255">255</a>
 <a href="#256" id="256">256</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>core::{borrow::Borrow, pin::Pin, slice};
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+</pre></div><pre class="rust"><code><span class="kw">use </span>core::{
+    borrow::Borrow,
+    fmt::{<span class="self">self</span>, Display},
+    pin::Pin,
+    slice,
+};
 
 <span class="kw">use crate</span>::{
     bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE},
@@ -272,8 +283,8 @@
     }
 }
 
-<span class="kw">impl </span>ToString <span class="kw">for </span>cc_string {
-    <span class="kw">fn </span>to_string(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+<span class="kw">impl </span>Display <span class="kw">for </span>cc_string {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; fmt::Result {
         String::from_utf16_lossy(
             <span class="kw-2">&amp;</span><span class="self">self
                 </span>.as_slice()
@@ -281,6 +292,7 @@
                 .map(|c| Convert_CP437ToUnicode(<span class="kw-2">*</span>c))
                 .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
         )
+        .fmt(f)
     }
 }
 
