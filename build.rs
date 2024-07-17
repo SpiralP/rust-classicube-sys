@@ -1,4 +1,8 @@
-use std::{collections::HashSet, env, fmt::Write, fs, path::Path};
+use std::{
+    collections::HashSet,
+    env, fs,
+    path::{Path, PathBuf},
+};
 
 use regex::Regex;
 
@@ -109,7 +113,7 @@ fn build_classicube() {
 }
 
 fn build_bindings() {
-    let (header_filenames, var_types, function_names) = get_exports();
+    let (header_paths, var_types, function_names) = get_exports();
 
     let mut bindings = if cfg!(feature = "no_std") {
         bindgen::builder().use_core().ctypes_prefix("libc")
@@ -125,16 +129,11 @@ fn build_bindings() {
     .no_copy("Bitmap")
     .no_copy("Texture")
     .clang_arg("-I./ClassiCube/src")
-    .header_contents(
-        "bindgen.h",
-        &header_filenames
-            .iter()
-            .fold(String::new(), |mut output, filename| {
-                let _ = writeln!(output, "#include <{filename}>");
-                output
-            }),
-    )
     .allowlist_type(".*");
+
+    for header in header_paths {
+        bindings = bindings.header(header.to_string_lossy());
+    }
 
     for var_type in var_types {
         match var_type {
@@ -186,20 +185,19 @@ enum VarType {
 
 /// We don't want to include functions/vars that aren't exported.
 ///
-/// returns (header_filenames, var names, function names)
-fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
-    let mut header_filenames = Vec::new();
+/// returns (header_paths, var names, function names)
+fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
+    let mut header_paths = Vec::new();
     let mut var_names = HashSet::new();
     let mut function_names = HashSet::new();
 
     for entry in fs::read_dir("ClassiCube/src").unwrap() {
         let entry = entry.unwrap();
         let file_name = entry.file_name();
-        if entry.file_type().unwrap().is_file()
-            && file_name.to_string_lossy().ends_with(".h")
-            && !file_name.to_string_lossy().starts_with('_')
-        {
-            header_filenames.push(file_name.to_str().unwrap().to_string());
+        let file_name = file_name.to_string_lossy();
+        let file_type = entry.file_type().unwrap();
+        if file_type.is_file() && file_name.ends_with(".h") && !file_name.starts_with('_') {
+            header_paths.push(entry.path());
 
             let data = fs::read_to_string(entry.path())
                 .unwrap()
@@ -283,7 +281,7 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
         }
     }
 
-    header_filenames.sort();
+    header_paths.sort();
 
     let mut var_names = var_names.drain().collect::<Vec<_>>();
     var_names.sort_unstable_by(|a, b| {
@@ -301,5 +299,5 @@ fn get_exports() -> (Vec<String>, Vec<VarType>, Vec<String>) {
     let mut function_names = function_names.drain().collect::<Vec<_>>();
     function_names.sort();
 
-    (header_filenames, var_names, function_names)
+    (header_paths, var_names, function_names)
 }
