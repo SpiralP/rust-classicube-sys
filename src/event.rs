@@ -19,7 +19,7 @@ macro_rules! make_register {
                     handlers as *mut Event_Void,
                     obj,
                     #[allow(clippy::useless_transmute)]
-                    mem::transmute::<_, Event_Void_Callback>(handler),
+                    mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
                 )
             }
 
@@ -32,7 +32,7 @@ macro_rules! make_register {
                     handlers as *mut Event_Void,
                     obj,
                     #[allow(clippy::useless_transmute)]
-                    mem::transmute::<_, Event_Void_Callback>(handler),
+                    mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
                 )
             }
         }

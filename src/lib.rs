@@ -44,6 +44,6 @@ pub use crate::{
 #[test]
 fn test_dllimport_linking() {
     unsafe {
-        println!("{:?}", &Server as *const _);
+        println!("{:?}", ::core::ptr::addr_of!(Server) as *const _);
     }
 }

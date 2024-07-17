@@ -1,4 +1,9 @@
-use core::{borrow::Borrow, pin::Pin, slice};
+use core::{
+    borrow::Borrow,
+    fmt::{self, Display},
+    pin::Pin,
+    slice,
+};
 
 use crate::{
     bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE},
@@ -16,8 +21,8 @@ impl cc_string {
     }
 }
 
-impl ToString for cc_string {
-    fn to_string(&self) -> String {
+impl Display for cc_string {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         String::from_utf16_lossy(
             &self
                 .as_slice()
@@ -25,6 +30,7 @@ impl ToString for cc_string {
                 .map(|c| Convert_CP437ToUnicode(*c))
                 .collect::<Vec<_>>(),
         )
+        .fmt(f)
     }
 }
 
