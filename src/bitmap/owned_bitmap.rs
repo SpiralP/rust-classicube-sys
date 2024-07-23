@@ -1,8 +1,8 @@
-use core::{borrow::Borrow, pin::Pin};
+use core::borrow::Borrow;
 
 use crate::{
     bindings::{Bitmap, BitmapCol},
-    std_types::{c_int, vec, Box, Vec},
+    std_types::{c_int, vec, Vec},
     Math_NextPowOf2,
 };
 
@@ -10,14 +10,13 @@ pub struct OwnedBitmap {
     bitmap: Bitmap,
 
     #[allow(dead_code)]
-    #[allow(clippy::box_collection)]
-    pixels: Pin<Box<Vec<BitmapCol>>>,
+    pixels: Vec<BitmapCol>,
 }
 
 impl OwnedBitmap {
     pub fn new(width: c_int, height: c_int, color: BitmapCol) -> Self {
-        let mut pixels = Box::pin(vec![color; width as usize * height as usize]);
-        let scan0 = unsafe { pixels.as_mut().get_unchecked_mut().as_mut_ptr() };
+        let mut pixels = vec![color; width as usize * height as usize];
+        let scan0 = pixels.as_mut_ptr();
 
         Self {
             pixels,

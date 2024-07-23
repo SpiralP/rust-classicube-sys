@@ -1,6 +1,6 @@
 mod priority;
 
-use core::{mem, pin::Pin};
+use core::mem;
 
 pub use self::priority::Priority;
 use crate::{
@@ -9,14 +9,14 @@ use crate::{
 };
 
 pub struct OwnedScreen {
-    pub screen: Pin<Box<Screen>>,
-    vtable: Pin<Box<ScreenVTABLE>>,
+    pub screen: Box<Screen>,
+    vtable: Box<ScreenVTABLE>,
     added: bool,
 }
 
 impl OwnedScreen {
     pub fn new() -> Self {
-        let mut vtable = Box::pin(ScreenVTABLE {
+        let mut vtable = Box::new(ScreenVTABLE {
             Init: Some(Init),
             Update: Some(Update),
             Free: Some(Free),
@@ -36,9 +36,9 @@ impl OwnedScreen {
             HandlesPadAxis: Some(HandlesPadAxis),
         });
 
-        let screen = Box::pin(unsafe {
+        let screen = Box::new(unsafe {
             let mut screen: Screen = mem::zeroed();
-            screen.VTABLE = vtable.as_mut().get_unchecked_mut();
+            screen.VTABLE = vtable.as_mut();
             screen
         });
 
@@ -55,10 +55,7 @@ impl OwnedScreen {
         }
         unsafe {
             // priority is stored as a u8 even though api is c_int
-            Gui_Add(
-                self.screen.as_mut().get_unchecked_mut(),
-                priority.into().to_u8() as _,
-            );
+            Gui_Add(self.screen.as_mut(), priority.into().to_u8() as _);
         }
         self.added = true;
     }
@@ -66,7 +63,7 @@ impl OwnedScreen {
     pub fn remove(&mut self) {
         if self.added {
             unsafe {
-                Gui_Remove(self.screen.as_mut().get_unchecked_mut());
+                Gui_Remove(self.screen.as_mut());
             }
             self.added = false;
         }

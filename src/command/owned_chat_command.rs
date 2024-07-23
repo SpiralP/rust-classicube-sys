@@ -1,4 +1,4 @@
-use core::{pin::Pin, ptr};
+use core::{ffi::CStr, ptr};
 
 use crate::{
     bindings::{cc_string, Commands_Register},
@@ -7,9 +7,9 @@ use crate::{
 };
 
 pub struct OwnedChatCommand {
-    pub name: Pin<Box<CString>>,
-    pub help: Vec<Pin<Box<CString>>>,
-    pub command: Pin<Box<ChatCommand>>,
+    pub name: Box<CStr>,
+    pub help: Vec<Box<CStr>>,
+    pub command: Box<ChatCommand>,
 }
 
 impl OwnedChatCommand {
@@ -19,11 +19,11 @@ impl OwnedChatCommand {
         singleplayer_only: bool,
         mut help: Vec<&str>,
     ) -> Self {
-        let name = Box::pin(CString::new(name).unwrap());
+        let name = CString::new(name).unwrap().into_boxed_c_str();
 
-        let help: Vec<Pin<Box<CString>>> = help
+        let help: Vec<Box<CStr>> = help
             .drain(..)
-            .map(|s| Box::pin(CString::new(s).unwrap()))
+            .map(|s| CString::new(s).unwrap().into_boxed_c_str())
             .collect();
 
         let help_array = [
@@ -35,7 +35,7 @@ impl OwnedChatCommand {
             help.get(4).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
         ];
 
-        let command = Box::pin(ChatCommand {
+        let command = Box::new(ChatCommand {
             name: name.as_ptr(),
             Execute: Some(execute),
             flags: if singleplayer_only {
@@ -58,7 +58,7 @@ impl OwnedChatCommand {
         let OwnedChatCommand { command, .. } = self;
 
         unsafe {
-            Commands_Register(command.as_mut().get_unchecked_mut());
+            Commands_Register(command.as_mut());
         }
     }
 }
