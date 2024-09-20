@@ -1,3 +1,3 @@
 (function() {var implementors = {
-"classicube_sys":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.79.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"type\" href=\"classicube_sys/type.cc_string.html\" title=\"type classicube_sys::cc_string\">cc_string</a>"]]
+"classicube_sys":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.81.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"type\" href=\"classicube_sys/type.cc_string.html\" title=\"type classicube_sys::cc_string\">cc_string</a>"]]
 };if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
