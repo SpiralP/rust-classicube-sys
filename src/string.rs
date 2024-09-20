@@ -1,7 +1,7 @@
 use core::{
     borrow::Borrow,
+    ffi::CStr,
     fmt::{self, Display},
-    pin::Pin,
     slice,
 };
 
@@ -44,7 +44,7 @@ pub struct OwnedString {
     cc_string: cc_string,
 
     #[allow(dead_code)]
-    c_string: Pin<Box<CString>>,
+    c_str: Box<CStr>,
 }
 
 impl OwnedString {
@@ -59,11 +59,11 @@ impl OwnedString {
         let length = bytes.len();
         let capacity = bytes.len();
 
-        let mut c_string = Box::pin(CString::new(bytes).unwrap());
-        let buffer: *const c_char = unsafe { c_string.as_mut().get_unchecked_mut().as_ptr() };
+        let c_str = CString::new(bytes).unwrap().into_boxed_c_str();
+        let buffer: *const c_char = c_str.as_ptr();
 
         Self {
-            c_string,
+            c_str,
             cc_string: cc_string {
                 buffer: buffer as *mut c_char,
                 length: length as cc_uint16,
