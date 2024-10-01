@@ -13,7 +13,7 @@ impl Matrix {
         Matrix_IdentityValue()
     }
 
-    /// Returns a matrix representing a counter-clockwise rotation around X axis.
+    /// Returns a matrix representing a counter-clockwise rotation around x axis.
     pub fn rotate_x(angle: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -22,7 +22,7 @@ impl Matrix {
         result
     }
 
-    /// Returns a matrix representing a counter-clockwise rotation around Y axis.
+    /// Returns a matrix representing a counter-clockwise rotation around y axis.
     pub fn rotate_y(angle: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -31,7 +31,7 @@ impl Matrix {
         result
     }
 
-    /// Returns a matrix representing a counter-clockwise rotation around Z axis.
+    /// Returns a matrix representing a counter-clockwise rotation around z axis.
     pub fn rotate_z(angle: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -92,28 +92,28 @@ impl Matrix {
 pub const fn Matrix_IdentityValue() -> Matrix {
     Matrix {
         row1: Vec4 {
-            X: 1.0,
-            Y: 0.0,
-            Z: 0.0,
-            W: 0.0,
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
         },
         row2: Vec4 {
-            X: 0.0,
-            Y: 1.0,
-            Z: 0.0,
-            W: 0.0,
+            x: 0.0,
+            y: 1.0,
+            z: 0.0,
+            w: 0.0,
         },
         row3: Vec4 {
-            X: 0.0,
-            Y: 0.0,
-            Z: 1.0,
-            W: 0.0,
+            x: 0.0,
+            y: 0.0,
+            z: 1.0,
+            w: 0.0,
         },
         row4: Vec4 {
-            X: 0.0,
-            Y: 0.0,
-            Z: 0.0,
-            W: 1.0,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 1.0,
         },
     }
 }
@@ -133,13 +133,13 @@ pub fn Matrix_Orthographic(
     /* Transposed, source https://msdn.microsoft.com/en-us/library/dd373965(v=vs.85).aspx */
     *result = Matrix_Identity;
 
-    result.row1.X = 2.0 / (right - left);
-    result.row2.Y = 2.0 / (top - bottom);
-    result.row3.Z = -2.0 / (zFar - zNear);
+    result.row1.x = 2.0 / (right - left);
+    result.row2.y = 2.0 / (top - bottom);
+    result.row3.z = -2.0 / (zFar - zNear);
 
-    result.row4.X = -(right + left) / (right - left);
-    result.row4.Y = -(top + bottom) / (top - bottom);
-    result.row4.Z = -(zFar + zNear) / (zFar - zNear);
+    result.row4.x = -(right + left) / (right - left);
+    result.row4.y = -(top + bottom) / (top - bottom);
+    result.row4.z = -(zFar + zNear) / (zFar - zNear);
 }
 
 pub fn Matrix_PerspectiveFieldOfView(
@@ -156,13 +156,13 @@ pub fn Matrix_PerspectiveFieldOfView(
     /* left = -c * aspect, right = c * aspect, bottom = -c, top = c */
     /* Calculations are simplified because of left/right and top/bottom symmetry */
     *result = Matrix_Identity;
-    result.row4.W = 0.0;
+    result.row4.w = 0.0;
 
-    result.row1.X = zNear / (c * aspect);
-    result.row2.Y = zNear / c;
-    result.row4.Z = -(2.0 * zFar * zNear) / (zFar - zNear);
-    result.row3.Z = -(zFar + zNear) / (zFar - zNear);
-    result.row3.W = -1.0;
+    result.row1.x = zNear / (c * aspect);
+    result.row2.y = zNear / c;
+    result.row4.z = -(2.0 * zFar * zNear) / (zFar - zNear);
+    result.row3.z = -(zFar + zNear) / (zFar - zNear);
+    result.row3.w = -1.0;
 }
 
 pub fn Matrix_LookRot(result: &mut Matrix, pos: Vec3, rot: Vec2) {
@@ -171,9 +171,9 @@ pub fn Matrix_LookRot(result: &mut Matrix, pos: Vec3, rot: Vec2) {
     let mut trans = Matrix_Identity;
 
     unsafe {
-        Matrix_RotateX(&mut rotX, rot.Y);
-        Matrix_RotateY(&mut rotY, rot.X);
-        Matrix_Translate(&mut trans, -pos.X, -pos.Y, -pos.Z);
+        Matrix_RotateX(&mut rotX, rot.y);
+        Matrix_RotateY(&mut rotY, rot.x);
+        Matrix_Translate(&mut trans, -pos.x, -pos.y, -pos.z);
 
         Matrix_Mul(result, &rotY, &rotX);
         Matrix_Mul(result, &trans, result);

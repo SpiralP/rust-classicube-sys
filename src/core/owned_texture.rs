@@ -23,10 +23,10 @@ impl OwnedTexture {
         let gfx_texture = OwnedGfxTexture::new(bmp, true, false);
         let texture = Texture {
             ID: gfx_texture.resource_id,
-            X: coords.0,
-            Y: coords.1,
-            Width: size.0,
-            Height: size.1,
+            x: coords.0,
+            y: coords.1,
+            width: size.0,
+            height: size.1,
             uv,
         };
 

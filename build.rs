@@ -113,7 +113,7 @@ fn build_classicube() {
 }
 
 fn build_bindings() {
-    let (header_paths, var_types, function_names) = get_exports();
+    let (header_paths, var_names, function_names) = get_exports();
 
     let mut bindings = if cfg!(feature = "no_std") {
         bindgen::builder().use_core().ctypes_prefix("libc")
@@ -135,33 +135,8 @@ fn build_bindings() {
         bindings = bindings.header(header.to_string_lossy());
     }
 
-    for var_type in var_types {
-        match var_type {
-            VarType::Other(var_name) => {
-                bindings = bindings.allowlist_var(var_name);
-            }
-
-            #[cfg(not(target_os = "windows"))]
-            VarType::Static {
-                var_name,
-                type_name: _,
-            } => {
-                bindings = bindings.allowlist_var(var_name);
-            }
-
-            // fix windows not dllimporting from the rustc-link-lib build println
-            #[cfg(target_os = "windows")]
-            VarType::Static {
-                var_name,
-                type_name,
-            } => {
-                bindings = bindings.raw_line(r#"#[link(name = "ClassiCube", kind = "dylib")]"#);
-                bindings = bindings.raw_line(r#"extern "C" {"#);
-                bindings =
-                    bindings.raw_line(format!(r#"    pub static mut {var_name}: {type_name};"#));
-                bindings = bindings.raw_line(r#"}"#);
-            }
-        }
+    for var_name in var_names {
+        bindings = bindings.allowlist_var(var_name);
     }
 
     for function_name in function_names {
@@ -171,22 +146,30 @@ fn build_bindings() {
     let bindings = bindings.generate().unwrap();
 
     let bindings_path = Path::new(&env::var("OUT_DIR").unwrap()).join("bindings.rs");
+    #[allow(clippy::needless_borrows_for_generic_args)]
     bindings
-        .write_to_file(bindings_path)
+        .write_to_file(&bindings_path)
         .expect("Couldn't write bindings!");
     // panic!("{bindings_path:?}");
-}
 
-#[derive(Debug, Hash, PartialEq, Eq)]
-enum VarType {
-    Static { var_name: String, type_name: String },
-    Other(String),
+    // fix windows not dllimporting from the rustc-link-lib build println
+    #[cfg(target_os = "windows")]
+    {
+        let contents = fs::read_to_string(&bindings_path).unwrap();
+
+        let search = "extern \"C\" {\r\n    pub static mut ";
+        let new_contents = contents.replace(
+            search,
+            &format!(r#"#[link(name = "ClassiCube", kind = "dylib")]{search}"#),
+        );
+        fs::write(&bindings_path, new_contents).unwrap();
+    }
 }
 
 /// We don't want to include functions/vars that aren't exported.
 ///
 /// returns (header_paths, var names, function names)
-fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
+fn get_exports() -> (Vec<PathBuf>, Vec<String>, Vec<String>) {
     let mut header_paths = Vec::new();
     let mut var_names = HashSet::new();
     let mut function_names = HashSet::new();
@@ -196,7 +179,13 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
         let file_name = entry.file_name();
         let file_name = file_name.to_string_lossy();
         let file_type = entry.file_type().unwrap();
-        if file_type.is_file() && file_name.ends_with(".h") && !file_name.starts_with('_') {
+        if file_type.is_file()
+            && file_name.ends_with(".h")
+            && !file_name.starts_with('_')
+            && file_name != "VirtualCursor.h"
+        {
+            // TODO VirtualCursor.h
+
             header_paths.push(entry.path());
 
             let data = fs::read_to_string(entry.path())
@@ -207,53 +196,32 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
             for mat in Regex::new(r"(?m)^\s*CC_VAR.*$").unwrap().find_iter(&data) {
                 let part = &data[mat.start()..];
 
-                if let Some(captures) = Regex::new(r"^CC_VAR\s+extern\s+int\s+([[:word:]]+);")
-                    .unwrap()
-                    .captures(part)
-                {
-                    let var_name = captures
-                        .get(1)
-                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"))
-                        .as_str()
-                        .to_string();
+                let captures = [
+                    // CC_VAR extern int EventAPIVersion;
+                    r"^\s*CC_VAR\s+extern\s+int\s+([[:word:]]+);",
 
-                    let type_name = if cfg!(feature = "no_std") {
-                        "::core::ffi::c_int".to_string()
-                    } else {
-                        "::std::os::raw::c_int".to_string()
-                    };
-
-                    var_names.insert(VarType::Static {
-                        var_name,
-                        type_name,
-                    });
-                } else {
+                    // CC_VAR extern struct Physics_ {
+                    //   ...
+                    // } Physics;
                     // need ?s for .* to match \n
-                    let captures = Regex::new(
-                        r"(?s)^\s*CC_VAR\s+extern\s+struct\s+([[:word:]]+)(?:\s+\{.*?\n\})?\s+([[:word:]]+);",
-                    )
-                    .unwrap()
-                    .captures(part)
+                    r"(?s)^\s*CC_VAR\s+extern\s+struct\s+[[:word:]]+(?:\s+\{.*?\n\})?\s+([[:word:]]+);",
+
+                    // CC_VAR extern struct Pointer Pointers[INPUT_MAX_POINTERS];
+                    r"^\s*CC_VAR\s+extern\s+struct\s+[[:word:]]+\s+([[:word:]]+)\[[[:word:]]+\];",
+                ]
+                    .into_iter()
+                    .find_map(|regex| Regex::new(regex).unwrap().captures(part))
                     .unwrap_or_else(|| {
                         panic!("couldn't get capture in file {file_name:?} from {part:?}")
                     });
 
-                    let type_name = captures
-                        .get(1)
-                        .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"))
-                        .as_str()
-                        .to_string();
-                    let var_name = captures
-                        .get(2)
-                        .unwrap_or_else(|| panic!("couldn't get capture 2 from {part:?}"))
-                        .as_str()
-                        .to_string();
+                let var_name = captures
+                    .get(1)
+                    .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"))
+                    .as_str()
+                    .to_string();
 
-                    var_names.insert(VarType::Static {
-                        var_name,
-                        type_name,
-                    });
-                }
+                var_names.insert(var_name);
             }
 
             // C macros/defines
@@ -265,14 +233,14 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
                     .get(1)
                     .unwrap_or_else(|| panic!("couldn't get capture 1"));
 
-                var_names.insert(VarType::Other(macro_name.as_str().to_string()));
+                var_names.insert(macro_name.as_str().to_string());
             }
 
             // exported functions
-            for mat in Regex::new(r"(?m)^CC_API.*$").unwrap().find_iter(&data) {
+            for mat in Regex::new(r"(?m)^\s*CC_API.*$").unwrap().find_iter(&data) {
                 let part = mat.as_str();
                 let function_name = Regex::new(
-                    r"(?m)^\s*CC_API(?:\s+STRING_REF|\s+struct)?\s+[[:word:]]+ *\*?\s+([[:word:]]+)\(.*$",
+                    r"(?m)^\s*CC_API(?:\s+STRING_REF|\s+struct)?\s+[[:word:]]+ *\*?\s+([[:word:]]+)\s*\(.*$",
                 )
                 .unwrap()
                 .captures(part)
@@ -290,17 +258,7 @@ fn get_exports() -> (Vec<PathBuf>, Vec<VarType>, Vec<String>) {
     header_paths.sort();
 
     let mut var_names = var_names.drain().collect::<Vec<_>>();
-    var_names.sort_unstable_by(|a, b| {
-        let a = match a {
-            VarType::Other(var_name) => var_name,
-            VarType::Static { var_name, .. } => var_name,
-        };
-        let b = match b {
-            VarType::Other(var_name) => var_name,
-            VarType::Static { var_name, .. } => var_name,
-        };
-        a.partial_cmp(b).unwrap()
-    });
+    var_names.sort_unstable();
 
     let mut function_names = function_names.drain().collect::<Vec<_>>();
     function_names.sort();

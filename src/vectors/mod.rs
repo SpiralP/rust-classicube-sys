@@ -5,13 +5,13 @@ mod vec;
 pub use self::{ivec::*, matrix::*, vec::*};
 use crate::{bindings::*, std_types::c_double};
 
-/// Sets the X, Y, and Z components of a 3D vector
+/// Sets the x, y, and z components of a 3D vector
 #[macro_export]
 macro_rules! Vec3_Set {
     ($v:expr, $x:expr, $y:expr, $z:expr) => {
-        $v.X = $x;
-        $v.Y = $y;
-        $v.Z = $z;
+        $v.x = $x;
+        $v.y = $y;
+        $v.z = $z;
     };
 }
 
@@ -21,7 +21,7 @@ macro_rules! Vec3_IsZero {
     ($v:expr) => {
         #[allow(clippy::float_cmp)]
         {
-            $v.X == 0 as _ && $v.Y == 0 as _ && $v.Z == 0 as _
+            $v.x == 0 as _ && $v.y == 0 as _ && $v.z == 0 as _
         }
     };
 }
