@@ -90,11 +90,11 @@
 
 <span class="kw">impl </span>IVec3 {
     <span class="kw">pub const fn </span>new(x: c_int, y: c_int, z: c_int) -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{ X: x, Y: y, Z: z }
+        <span class="self">Self </span>{ x, y, z }
     }
 
     <span class="kw">pub const fn </span>zero() -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{ X: <span class="number">0</span>, Y: <span class="number">0</span>, Z: <span class="number">0 </span>}
+        <span class="self">Self </span>{ x: <span class="number">0</span>, y: <span class="number">0</span>, z: <span class="number">0 </span>}
     }
 
     <span class="kw">pub fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: c_int, y: c_int, z: c_int) {
@@ -139,27 +139,27 @@
 <span class="doccomment">/// Returns a vector with all components set to Int32_MaxValue.
 </span><span class="kw">pub const fn </span>IVec3_MaxValue() -&gt; IVec3 {
     IVec3 {
-        X: Int32_MaxValue,
-        Y: Int32_MaxValue,
-        Z: Int32_MaxValue,
+        x: Int32_MaxValue,
+        y: Int32_MaxValue,
+        z: Int32_MaxValue,
     }
 }
 
 <span class="kw">pub fn </span>IVec3_ToVec3(result: <span class="kw-2">&amp;mut </span>Vec3, a: <span class="kw-2">&amp;</span>IVec3) {
-    result.X = a.X <span class="kw">as _</span>;
-    result.Y = a.Y <span class="kw">as _</span>;
-    result.Z = a.Z <span class="kw">as _</span>;
+    result.x = a.x <span class="kw">as _</span>;
+    result.y = a.y <span class="kw">as _</span>;
+    result.z = a.z <span class="kw">as _</span>;
 }
 
 <span class="kw">pub fn </span>IVec3_Min(result: <span class="kw-2">&amp;mut </span>IVec3, a: <span class="kw-2">&amp;</span>IVec3, b: <span class="kw-2">&amp;</span>IVec3) {
-    result.X = a.X.min(b.X);
-    result.Y = a.Y.min(b.Y);
-    result.Z = a.Z.min(b.Z);
+    result.x = a.x.min(b.x);
+    result.y = a.y.min(b.y);
+    result.z = a.z.min(b.z);
 }
 
 <span class="kw">pub fn </span>IVec3_Max(result: <span class="kw-2">&amp;mut </span>IVec3, a: <span class="kw-2">&amp;</span>IVec3, b: <span class="kw-2">&amp;</span>IVec3) {
-    result.X = a.X.max(b.X);
-    result.Y = a.Y.max(b.Y);
-    result.Z = a.Z.max(b.Z);
+    result.x = a.x.max(b.x);
+    result.y = a.y.max(b.y);
+    result.z = a.z.max(b.z);
 }
 </code></pre></div></section></main></body></html>

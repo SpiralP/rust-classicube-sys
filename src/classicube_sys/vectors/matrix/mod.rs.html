@@ -194,7 +194,7 @@
         Matrix_IdentityValue()
     }
 
-    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around X axis.
+    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around x axis.
     </span><span class="kw">pub fn </span>rotate_x(angle: c_float) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
         <span class="kw">unsafe </span>{
@@ -203,7 +203,7 @@
         result
     }
 
-    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around Y axis.
+    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around y axis.
     </span><span class="kw">pub fn </span>rotate_y(angle: c_float) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
         <span class="kw">unsafe </span>{
@@ -212,7 +212,7 @@
         result
     }
 
-    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around Z axis.
+    <span class="doccomment">/// Returns a matrix representing a counter-clockwise rotation around z axis.
     </span><span class="kw">pub fn </span>rotate_z(angle: c_float) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::IDENTITY;
         <span class="kw">unsafe </span>{
@@ -273,28 +273,28 @@
 <span class="kw">pub const fn </span>Matrix_IdentityValue() -&gt; Matrix {
     Matrix {
         row1: Vec4 {
-            X: <span class="number">1.0</span>,
-            Y: <span class="number">0.0</span>,
-            Z: <span class="number">0.0</span>,
-            W: <span class="number">0.0</span>,
+            x: <span class="number">1.0</span>,
+            y: <span class="number">0.0</span>,
+            z: <span class="number">0.0</span>,
+            w: <span class="number">0.0</span>,
         },
         row2: Vec4 {
-            X: <span class="number">0.0</span>,
-            Y: <span class="number">1.0</span>,
-            Z: <span class="number">0.0</span>,
-            W: <span class="number">0.0</span>,
+            x: <span class="number">0.0</span>,
+            y: <span class="number">1.0</span>,
+            z: <span class="number">0.0</span>,
+            w: <span class="number">0.0</span>,
         },
         row3: Vec4 {
-            X: <span class="number">0.0</span>,
-            Y: <span class="number">0.0</span>,
-            Z: <span class="number">1.0</span>,
-            W: <span class="number">0.0</span>,
+            x: <span class="number">0.0</span>,
+            y: <span class="number">0.0</span>,
+            z: <span class="number">1.0</span>,
+            w: <span class="number">0.0</span>,
         },
         row4: Vec4 {
-            X: <span class="number">0.0</span>,
-            Y: <span class="number">0.0</span>,
-            Z: <span class="number">0.0</span>,
-            W: <span class="number">1.0</span>,
+            x: <span class="number">0.0</span>,
+            y: <span class="number">0.0</span>,
+            z: <span class="number">0.0</span>,
+            w: <span class="number">1.0</span>,
         },
     }
 }
@@ -314,13 +314,13 @@
     <span class="comment">/* Transposed, source https://msdn.microsoft.com/en-us/library/dd373965(v=vs.85).aspx */
     </span><span class="kw-2">*</span>result = Matrix_Identity;
 
-    result.row1.X = <span class="number">2.0 </span>/ (right - left);
-    result.row2.Y = <span class="number">2.0 </span>/ (top - bottom);
-    result.row3.Z = -<span class="number">2.0 </span>/ (zFar - zNear);
+    result.row1.x = <span class="number">2.0 </span>/ (right - left);
+    result.row2.y = <span class="number">2.0 </span>/ (top - bottom);
+    result.row3.z = -<span class="number">2.0 </span>/ (zFar - zNear);
 
-    result.row4.X = -(right + left) / (right - left);
-    result.row4.Y = -(top + bottom) / (top - bottom);
-    result.row4.Z = -(zFar + zNear) / (zFar - zNear);
+    result.row4.x = -(right + left) / (right - left);
+    result.row4.y = -(top + bottom) / (top - bottom);
+    result.row4.z = -(zFar + zNear) / (zFar - zNear);
 }
 
 <span class="kw">pub fn </span>Matrix_PerspectiveFieldOfView(
@@ -337,13 +337,13 @@
     /* left = -c * aspect, right = c * aspect, bottom = -c, top = c */
     /* Calculations are simplified because of left/right and top/bottom symmetry */
     </span><span class="kw-2">*</span>result = Matrix_Identity;
-    result.row4.W = <span class="number">0.0</span>;
+    result.row4.w = <span class="number">0.0</span>;
 
-    result.row1.X = zNear / (c * aspect);
-    result.row2.Y = zNear / c;
-    result.row4.Z = -(<span class="number">2.0 </span>* zFar * zNear) / (zFar - zNear);
-    result.row3.Z = -(zFar + zNear) / (zFar - zNear);
-    result.row3.W = -<span class="number">1.0</span>;
+    result.row1.x = zNear / (c * aspect);
+    result.row2.y = zNear / c;
+    result.row4.z = -(<span class="number">2.0 </span>* zFar * zNear) / (zFar - zNear);
+    result.row3.z = -(zFar + zNear) / (zFar - zNear);
+    result.row3.w = -<span class="number">1.0</span>;
 }
 
 <span class="kw">pub fn </span>Matrix_LookRot(result: <span class="kw-2">&amp;mut </span>Matrix, pos: Vec3, rot: Vec2) {
@@ -352,9 +352,9 @@
     <span class="kw">let </span><span class="kw-2">mut </span>trans = Matrix_Identity;
 
     <span class="kw">unsafe </span>{
-        Matrix_RotateX(<span class="kw-2">&amp;mut </span>rotX, rot.Y);
-        Matrix_RotateY(<span class="kw-2">&amp;mut </span>rotY, rot.X);
-        Matrix_Translate(<span class="kw-2">&amp;mut </span>trans, -pos.X, -pos.Y, -pos.Z);
+        Matrix_RotateX(<span class="kw-2">&amp;mut </span>rotX, rot.y);
+        Matrix_RotateY(<span class="kw-2">&amp;mut </span>rotY, rot.x);
+        Matrix_Translate(<span class="kw-2">&amp;mut </span>trans, -pos.x, -pos.y, -pos.z);
 
         Matrix_Mul(result, <span class="kw-2">&amp;</span>rotY, <span class="kw-2">&amp;</span>rotX);
         Matrix_Mul(result, <span class="kw-2">&amp;</span>trans, result);

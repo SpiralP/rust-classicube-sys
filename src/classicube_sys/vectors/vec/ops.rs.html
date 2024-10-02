@@ -108,9 +108,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>add(<span class="kw-2">mut </span><span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X += other.X;
-        <span class="self">self</span>.Y += other.Y;
-        <span class="self">self</span>.Z += other.Z;
+        <span class="self">self</span>.x += other.x;
+        <span class="self">self</span>.y += other.y;
+        <span class="self">self</span>.z += other.z;
         <span class="self">self
     </span>}
 }
@@ -119,9 +119,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>add(<span class="kw-2">mut </span><span class="self">self</span>, other: c_float) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X += other;
-        <span class="self">self</span>.Y += other;
-        <span class="self">self</span>.Z += other;
+        <span class="self">self</span>.x += other;
+        <span class="self">self</span>.y += other;
+        <span class="self">self</span>.z += other;
         <span class="self">self
     </span>}
 }
@@ -130,9 +130,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>sub(<span class="kw-2">mut </span><span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X -= other.X;
-        <span class="self">self</span>.Y -= other.Y;
-        <span class="self">self</span>.Z -= other.Z;
+        <span class="self">self</span>.x -= other.x;
+        <span class="self">self</span>.y -= other.y;
+        <span class="self">self</span>.z -= other.z;
         <span class="self">self
     </span>}
 }
@@ -141,9 +141,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>sub(<span class="kw-2">mut </span><span class="self">self</span>, other: c_float) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X -= other;
-        <span class="self">self</span>.Y -= other;
-        <span class="self">self</span>.Z -= other;
+        <span class="self">self</span>.x -= other;
+        <span class="self">self</span>.y -= other;
+        <span class="self">self</span>.z -= other;
         <span class="self">self
     </span>}
 }
@@ -152,9 +152,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>mul(<span class="kw-2">mut </span><span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X <span class="kw-2">*</span>= other.X;
-        <span class="self">self</span>.Y <span class="kw-2">*</span>= other.Y;
-        <span class="self">self</span>.Z <span class="kw-2">*</span>= other.Z;
+        <span class="self">self</span>.x <span class="kw-2">*</span>= other.x;
+        <span class="self">self</span>.y <span class="kw-2">*</span>= other.y;
+        <span class="self">self</span>.z <span class="kw-2">*</span>= other.z;
         <span class="self">self
     </span>}
 }
@@ -163,9 +163,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>mul(<span class="kw-2">mut </span><span class="self">self</span>, other: c_float) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X <span class="kw-2">*</span>= other;
-        <span class="self">self</span>.Y <span class="kw-2">*</span>= other;
-        <span class="self">self</span>.Z <span class="kw-2">*</span>= other;
+        <span class="self">self</span>.x <span class="kw-2">*</span>= other;
+        <span class="self">self</span>.y <span class="kw-2">*</span>= other;
+        <span class="self">self</span>.z <span class="kw-2">*</span>= other;
         <span class="self">self
     </span>}
 }
@@ -174,9 +174,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>div(<span class="kw-2">mut </span><span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X /= other.X;
-        <span class="self">self</span>.Y /= other.Y;
-        <span class="self">self</span>.Z /= other.Z;
+        <span class="self">self</span>.x /= other.x;
+        <span class="self">self</span>.y /= other.y;
+        <span class="self">self</span>.z /= other.z;
         <span class="self">self
     </span>}
 }
@@ -185,9 +185,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>div(<span class="kw-2">mut </span><span class="self">self</span>, other: c_float) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X /= other;
-        <span class="self">self</span>.Y /= other;
-        <span class="self">self</span>.Z /= other;
+        <span class="self">self</span>.x /= other;
+        <span class="self">self</span>.y /= other;
+        <span class="self">self</span>.z /= other;
         <span class="self">self
     </span>}
 }
@@ -196,9 +196,9 @@
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="kw">fn </span>neg(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.X = -<span class="self">self</span>.X;
-        <span class="self">self</span>.Y = -<span class="self">self</span>.Y;
-        <span class="self">self</span>.Z = -<span class="self">self</span>.Z;
+        <span class="self">self</span>.x = -<span class="self">self</span>.x;
+        <span class="self">self</span>.y = -<span class="self">self</span>.y;
+        <span class="self">self</span>.z = -<span class="self">self</span>.z;
         <span class="self">self
     </span>}
 }

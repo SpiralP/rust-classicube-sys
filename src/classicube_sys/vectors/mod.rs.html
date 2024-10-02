@@ -64,13 +64,13 @@
 <span class="kw">pub use </span><span class="self">self</span>::{ivec::<span class="kw-2">*</span>, matrix::<span class="kw-2">*</span>, vec::<span class="kw-2">*</span>};
 <span class="kw">use crate</span>::{bindings::<span class="kw-2">*</span>, std_types::c_double};
 
-<span class="doccomment">/// Sets the X, Y, and Z components of a 3D vector
+<span class="doccomment">/// Sets the x, y, and z components of a 3D vector
 </span><span class="attr">#[macro_export]
 </span><span class="macro">macro_rules!</span> Vec3_Set {
     (<span class="macro-nonterminal">$v</span>:expr, <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$y</span>:expr, <span class="macro-nonterminal">$z</span>:expr) =&gt; {
-        <span class="macro-nonterminal">$v</span>.X = <span class="macro-nonterminal">$x</span>;
-        <span class="macro-nonterminal">$v</span>.Y = <span class="macro-nonterminal">$y</span>;
-        <span class="macro-nonterminal">$v</span>.Z = <span class="macro-nonterminal">$z</span>;
+        <span class="macro-nonterminal">$v</span>.x = <span class="macro-nonterminal">$x</span>;
+        <span class="macro-nonterminal">$v</span>.y = <span class="macro-nonterminal">$y</span>;
+        <span class="macro-nonterminal">$v</span>.z = <span class="macro-nonterminal">$z</span>;
     };
 }
 
@@ -80,7 +80,7 @@
     (<span class="macro-nonterminal">$v</span>:expr) =&gt; {
         <span class="attr">#[allow(clippy::float_cmp)]
         </span>{
-            <span class="macro-nonterminal">$v</span>.X == <span class="number">0 </span><span class="kw">as _ </span>&amp;&amp; <span class="macro-nonterminal">$v</span>.Y == <span class="number">0 </span><span class="kw">as _ </span>&amp;&amp; <span class="macro-nonterminal">$v</span>.Z == <span class="number">0 </span><span class="kw">as _
+            <span class="macro-nonterminal">$v</span>.x == <span class="number">0 </span><span class="kw">as _ </span>&amp;&amp; <span class="macro-nonterminal">$v</span>.y == <span class="number">0 </span><span class="kw">as _ </span>&amp;&amp; <span class="macro-nonterminal">$v</span>.z == <span class="number">0 </span><span class="kw">as _
         </span>}
     };
 }

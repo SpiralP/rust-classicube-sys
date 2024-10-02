@@ -62,51 +62,51 @@
     rec: <span class="kw-2">&amp;</span>TextureRec,
     col: PackedCol,
 ) -&gt; [VertexTextured; <span class="number">4</span>] {
-    <span class="kw">let </span>sX = size.X * <span class="number">0.5</span>;
-    <span class="kw">let </span>sY = size.Y * <span class="number">0.5</span>;
+    <span class="kw">let </span>sX = size.x * <span class="number">0.5</span>;
+    <span class="kw">let </span>sY = size.y * <span class="number">0.5</span>;
     <span class="kw">let </span><span class="kw-2">mut </span>centre = <span class="kw-2">*</span>pos;
-    centre.Y += sY;
+    centre.y += sY;
     <span class="kw">let </span>view = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;</span>Gfx.View };
 
-    <span class="kw">let </span>aX = view.row1.X * sX;
-    <span class="kw">let </span>aY = view.row2.X * sX;
-    <span class="kw">let </span>aZ = view.row3.X * sX; <span class="comment">// right * size.X * 0.5f
-    </span><span class="kw">let </span>bX = view.row1.Y * sY;
-    <span class="kw">let </span>bY = view.row2.Y * sY;
-    <span class="kw">let </span>bZ = view.row3.Y * sY; <span class="comment">// up    * size.Y * 0.5f
+    <span class="kw">let </span>aX = view.row1.x * sX;
+    <span class="kw">let </span>aY = view.row2.x * sX;
+    <span class="kw">let </span>aZ = view.row3.x * sX; <span class="comment">// right * size.x * 0.5f
+    </span><span class="kw">let </span>bX = view.row1.y * sY;
+    <span class="kw">let </span>bY = view.row2.y * sY;
+    <span class="kw">let </span>bZ = view.row3.y * sY; <span class="comment">// up    * size.y * 0.5f
 
     </span>[
         VertexTextured {
-            X: centre.X - aX - bX,
-            Y: centre.Y - aY - bY,
-            Z: centre.Z - aZ - bZ,
+            x: centre.x - aX - bX,
+            y: centre.y - aY - bY,
+            z: centre.z - aZ - bZ,
             Col: col,
-            U: rec.U1,
-            V: rec.V2,
+            U: rec.u1,
+            V: rec.v2,
         },
         VertexTextured {
-            X: centre.X - aX + bX,
-            Y: centre.Y - aY + bY,
-            Z: centre.Z - aZ + bZ,
+            x: centre.x - aX + bX,
+            y: centre.y - aY + bY,
+            z: centre.z - aZ + bZ,
             Col: col,
-            U: rec.U1,
-            V: rec.V1,
+            U: rec.u1,
+            V: rec.v1,
         },
         VertexTextured {
-            X: centre.X + aX + bX,
-            Y: centre.Y + aY + bY,
-            Z: centre.Z + aZ + bZ,
+            x: centre.x + aX + bX,
+            y: centre.y + aY + bY,
+            z: centre.z + aZ + bZ,
             Col: col,
-            U: rec.U2,
-            V: rec.V1,
+            U: rec.u2,
+            V: rec.v1,
         },
         VertexTextured {
-            X: centre.X + aX - bX,
-            Y: centre.Y + aY - bY,
-            Z: centre.Z + aZ - bZ,
+            x: centre.x + aX - bX,
+            y: centre.y + aY - bY,
+            z: centre.z + aZ - bZ,
             Col: col,
-            U: rec.U2,
-            V: rec.V2,
+            U: rec.u2,
+            V: rec.v2,
         },
     ]
 }

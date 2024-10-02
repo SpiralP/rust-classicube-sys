@@ -192,7 +192,7 @@
 <span class="macro">make_raise!</span>(Chat, (msg: <span class="kw-2">*const </span>cc_string, msgType: c_int));
 
 <span class="macro">make_register!</span>(Input);
-<span class="macro">make_raise!</span>(Input, (key: c_int, repeating: cc_bool));
+<span class="macro">make_raise!</span>(Input, (key: c_int, repeating: cc_bool, device: <span class="kw-2">*mut </span>InputDevice));
 
 <span class="macro">make_register!</span>(String);
 <span class="macro">make_raise!</span>(String, (s: <span class="kw-2">*const </span>cc_string));

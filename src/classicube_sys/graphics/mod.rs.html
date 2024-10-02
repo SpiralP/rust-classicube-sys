@@ -78,43 +78,43 @@
 }
 
 <span class="kw">pub fn </span>Gfx_Make2DQuad(tex: <span class="kw-2">&amp;mut </span>Texture, col: PackedCol) -&gt; [VertexTextured; <span class="number">4</span>] {
-    <span class="kw">let </span>x1: f32 = tex.X <span class="kw">as _</span>;
-    <span class="kw">let </span>x2: f32 = (tex.X <span class="kw">as </span>f32 + tex.Width <span class="kw">as </span>f32) <span class="kw">as _</span>;
-    <span class="kw">let </span>y1: f32 = tex.Y <span class="kw">as _</span>;
-    <span class="kw">let </span>y2: f32 = (tex.Y <span class="kw">as </span>f32 + tex.Height <span class="kw">as </span>f32) <span class="kw">as _</span>;
+    <span class="kw">let </span>x1: f32 = tex.x <span class="kw">as _</span>;
+    <span class="kw">let </span>x2: f32 = (tex.x <span class="kw">as </span>f32 + tex.width <span class="kw">as </span>f32) <span class="kw">as _</span>;
+    <span class="kw">let </span>y1: f32 = tex.y <span class="kw">as _</span>;
+    <span class="kw">let </span>y2: f32 = (tex.y <span class="kw">as </span>f32 + tex.height <span class="kw">as </span>f32) <span class="kw">as _</span>;
 
     [
         VertexTextured {
-            X: x1,
-            Y: y1,
-            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            x: x1,
+            y: y1,
+            z: <span class="number">0 </span><span class="kw">as _</span>,
             Col: col,
-            U: tex.uv.U1,
-            V: tex.uv.V1,
+            U: tex.uv.u1,
+            V: tex.uv.v1,
         },
         VertexTextured {
-            X: x2,
-            Y: y1,
-            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            x: x2,
+            y: y1,
+            z: <span class="number">0 </span><span class="kw">as _</span>,
             Col: col,
-            U: tex.uv.U2,
-            V: tex.uv.V1,
+            U: tex.uv.u2,
+            V: tex.uv.v1,
         },
         VertexTextured {
-            X: x2,
-            Y: y2,
-            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            x: x2,
+            y: y2,
+            z: <span class="number">0 </span><span class="kw">as _</span>,
             Col: col,
-            U: tex.uv.U2,
-            V: tex.uv.V2,
+            U: tex.uv.u2,
+            V: tex.uv.v2,
         },
         VertexTextured {
-            X: x1,
-            Y: y2,
-            Z: <span class="number">0 </span><span class="kw">as _</span>,
+            x: x1,
+            y: y2,
+            z: <span class="number">0 </span><span class="kw">as _</span>,
             Col: col,
-            U: tex.uv.U1,
-            V: tex.uv.V2,
+            U: tex.uv.u1,
+            V: tex.uv.v2,
         },
     ]
 }
