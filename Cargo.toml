@@ -19,9 +19,11 @@ paste = "1"
 
 [build-dependencies]
 bindgen = "0.72"
-cc = "1"
-fs_extra = "1"
 regex = "1"
+
+[target.'cfg(target_os = "windows")'.build-dependencies]
+cc = { version = "1" }
+fs_extra = { version = "1" }
 
 [features]
 default = []
