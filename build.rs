@@ -174,7 +174,7 @@ fn get_exports() -> (Vec<PathBuf>, Vec<String>, Vec<String>) {
     let mut var_names = HashSet::new();
     let mut function_names = HashSet::new();
 
-    for entry in fs::read_dir("ClassiCube/src").unwrap() {
+    for entry in fs::read_dir("ClassiCube/src").expect("read_dir: ClassiCube/src") {
         let entry = entry.unwrap();
         let file_name = entry.file_name();
         let file_name = file_name.to_string_lossy();

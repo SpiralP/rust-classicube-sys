@@ -1,17 +1,28 @@
-name: Rust
+name: Build
 
-on: [push]
+on:
+  pull_request:
+    branches: [master, main]
+  push:
+    branches: ["*"]
+    tags: ["*"]
+  workflow_dispatch:
 
 concurrency:
-  group: ${{ github.ref }}
+  group: build-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
-  contents: write
+  contents: read # for checkout
 
 jobs:
+  linux_nix:
+    uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@c486e35ce06f991c4565d2d8064948aa5b520047 # main
+
   windows:
     runs-on: windows-latest
+    permissions:
+      contents: write # for publishing docs
 
     steps:
       - name: Set git to use LF
