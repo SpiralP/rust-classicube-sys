@@ -25,60 +25,36 @@ jobs:
       contents: write # for publishing docs
 
     steps:
-      - name: Set git to use LF
-        run: |
-          git config --global core.autocrlf false
-          git config --global core.eol lf
-
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           submodules: recursive
 
-      - name: Install deps
+      - name: Install rust
         run: |
-          iwr -useb get.scoop.sh -outfile install-scoop.ps1
-          .\install-scoop.ps1 -RunAsAdmin
-          rm install-scoop.ps1
-          echo "$HOME\scoop\shims" >> $env:GITHUB_PATH
-          echo "C:\ProgramData\scoop\shims" >> $env:GITHUB_PATH
-          scoop install aria2
-          scoop install llvm
-          echo "LIBCLANG_PATH=$HOME\scoop\apps\llvm\current\bin" >> $env:GITHUB_ENV
-
-      - name: setup-msbuild
-        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
-
-      - name: Install rust stable
-        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
-        with:
-          toolchain: stable
-          override: true
-          components: rustfmt
+          rustup default stable
+          rustup component add rustfmt
+          rustup target add x86_64-pc-windows-msvc
 
       - name: Build
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        with:
-          command: build
+        run: |
+          cargo build --target x86_64-pc-windows-msvc
 
-      - name: Build docs
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        if: github.ref == 'refs/heads/main'
-        with:
-          command: doc
+      - name: Test
+        run: |
+          cargo test --target x86_64-pc-windows-msvc -- --nocapture --test-threads 1
+
+      - name: Doc
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          cargo doc --target x86_64-pc-windows-msvc
 
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/doc
+          publish_dir: ./target/x86_64-pc-windows-msvc/doc
           force_orphan: true
-
-      - name: Test
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        with:
-          command: test
-          args: -- --nocapture
 
   linux:
     runs-on: ubuntu-24.04
@@ -88,29 +64,19 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install deps
+      - name: Install rust
         run: |
-          sudo apt-get -y update
-          sudo apt-get -y install clang llvm
-          sudo apt-get -y install mesa-common-dev libopenal-dev libcurl4-openssl-dev libgl1-mesa-dev
-
-      - name: Install rust stable
-        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
-        with:
-          toolchain: stable
-          override: true
-          components: rustfmt
+          rustup default stable
+          rustup component add rustfmt
+          rustup target add x86_64-unknown-linux-gnu
 
       - name: Build
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        with:
-          command: build
+        run: |
+          cargo build --target x86_64-unknown-linux-gnu
 
       - name: Test
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        with:
-          command: test
-          args: -- --nocapture
+        run: |
+          cargo test --target x86_64-unknown-linux-gnu -- --nocapture --test-threads 1
 
   mac:
     runs-on: macos-14
@@ -120,25 +86,16 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install deps
+      - name: Install rust
         run: |
-          brew install llvm
-          echo "/usr/local/opt/llvm/bin" >> $GITHUB_PATH
-
-      - name: Install rust stable
-        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
-        with:
-          toolchain: stable
-          override: true
-          components: rustfmt
+          rustup default stable
+          rustup component add rustfmt
+          rustup target add x86_64-apple-darwin
 
       - name: Build
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        with:
-          command: build
+        run: |
+          cargo build --target x86_64-apple-darwin
 
       - name: Test
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
-        with:
-          command: test
-          args: -- --nocapture
+        run: |
+          cargo test --target x86_64-apple-darwin -- --nocapture --test-threads 1
