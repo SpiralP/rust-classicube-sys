@@ -157,7 +157,7 @@ fn build_bindings() {
     {
         let contents = fs::read_to_string(&bindings_path).unwrap();
 
-        let search = "extern \"C\" {\r\n    pub static mut ";
+        let search = "unsafe extern \"C\" {\r\n    pub static mut ";
         let new_contents = contents.replace(
             search,
             &format!(r#"#[link(name = "ClassiCube", kind = "dylib")]{search}"#),
