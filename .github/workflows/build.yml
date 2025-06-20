@@ -20,7 +20,7 @@ jobs:
     uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@c486e35ce06f991c4565d2d8064948aa5b520047 # main
 
   windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     permissions:
       contents: write # for publishing docs
 
@@ -81,7 +81,7 @@ jobs:
           args: -- --nocapture
 
   linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1
@@ -113,7 +113,7 @@ jobs:
           args: -- --nocapture
 
   mac:
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1
