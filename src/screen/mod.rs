@@ -55,7 +55,7 @@ impl OwnedScreen {
         }
         unsafe {
             // priority is stored as a u8 even though api is c_int
-            Gui_Add(self.screen.as_mut(), priority.into().to_u8() as _);
+            Gui_Add(self.screen.as_mut(), priority.into().to_u8().into());
         }
         self.added = true;
     }
@@ -75,7 +75,7 @@ impl OwnedScreen {
         self
     }
 
-    /// Updates this screen, called every frame just before Render().
+    /// Updates this screen, called every frame just before `Render()`.
     pub fn on_update(
         &mut self,
         f: unsafe extern "C" fn(elem: *mut c_void, delta: f32),

@@ -1,4 +1,7 @@
-use crate::{bindings::*, std_types::c_float};
+use crate::{
+    bindings::{cc_uint16, BoxDesc, ModelPart, FACE_CONSTS_FACE_COUNT, MODEL_QUAD_VERTICES},
+    std_types::c_float,
+};
 
 #[allow(clippy::unnecessary_cast)]
 pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT as u32 * MODEL_QUAD_VERTICES as u32;
@@ -89,6 +92,7 @@ macro_rules! BoxDesc_Box {
 type BoxDescDimsReturn = (u8, u8, u8);
 type BoxDescBoundsReturn = (c_float, c_float, c_float, c_float, c_float, c_float);
 impl BoxDesc {
+    #[must_use]
     pub fn from_macros(
         (texX, texY): (u16, u16),
         ((sizeX, sizeY, sizeZ), (x1, y1, z1, x2, y2, z2)): (BoxDescDimsReturn, BoxDescBoundsReturn),
@@ -137,6 +141,8 @@ macro_rules! Model_RetAABB {
 
 #[test]
 fn test_model_macros() {
+    use crate::Entity;
+
     fn BoxDesc_BuildBox(_part: *mut ModelPart, desc: *const BoxDesc) {
         #[cfg(not(feature = "no_std"))]
         unsafe {

@@ -1,3 +1,5 @@
+#![allow(clippy::regex_creation_in_loops)]
+
 use std::{
     collections::HashSet,
     env, fs,

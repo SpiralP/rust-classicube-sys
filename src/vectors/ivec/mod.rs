@@ -7,10 +7,12 @@ use crate::{
 };
 
 impl IVec3 {
+    #[must_use]
     pub const fn new(x: c_int, y: c_int, z: c_int) -> Self {
         Self { x, y, z }
     }
 
+    #[must_use]
     pub const fn zero() -> Self {
         Self { x: 0, y: 0, z: 0 }
     }
@@ -19,14 +21,17 @@ impl IVec3 {
         Vec3_Set!(self, x, y, z);
     }
 
+    #[must_use]
     pub fn is_zero(&self) -> bool {
         Vec3_IsZero!(self)
     }
 
+    #[must_use]
     pub const fn max_value() -> Self {
         IVec3_MaxValue()
     }
 
+    #[must_use]
     pub fn to_vec3(&self) -> Vec3 {
         let mut result = Vec3::zero();
         IVec3_ToVec3(&mut result, self);
@@ -54,7 +59,8 @@ impl From<IVec3> for Vec3 {
     }
 }
 
-/// Returns a vector with all components set to Int32_MaxValue.
+/// Returns a vector with all components set to `Int32_MaxValue`.
+#[must_use]
 pub const fn IVec3_MaxValue() -> IVec3 {
     IVec3 {
         x: Int32_MaxValue,

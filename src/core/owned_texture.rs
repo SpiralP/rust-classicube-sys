@@ -31,11 +31,12 @@ impl OwnedTexture {
         };
 
         Self {
-            gfx_texture,
             texture,
+            gfx_texture,
         }
     }
 
+    #[must_use]
     pub fn as_texture(&self) -> &Texture {
         &self.texture
     }
@@ -47,6 +48,7 @@ impl OwnedTexture {
     /// # Safety
     ///
     /// The `OwnedTexture` needs to live longer than the `Texture` return here.
+    #[must_use]
     pub unsafe fn get_texture(&self) -> Texture {
         Texture { ..self.texture }
     }

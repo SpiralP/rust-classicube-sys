@@ -1,5 +1,6 @@
 use crate::std_types::c_int;
 
+#[must_use]
 pub fn Math_NextPowOf2(value: c_int) -> c_int {
     let mut next = 1;
     while value > next {
@@ -8,6 +9,7 @@ pub fn Math_NextPowOf2(value: c_int) -> c_int {
     next
 }
 
+#[must_use]
 pub fn Math_IsPowOf2(value: c_int) -> bool {
     value != 0 && (value & (value - 1)) == 0
 }

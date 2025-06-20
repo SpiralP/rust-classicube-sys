@@ -1,7 +1,10 @@
 mod ops;
 
 use crate::{
-    bindings::*,
+    bindings::{
+        Matrix, Matrix_Mul, Matrix_RotateX, Matrix_RotateY, Matrix_RotateZ, Matrix_Scale,
+        Matrix_Translate, Vec2, Vec3, Vec4,
+    },
     std_types::{c_double, c_float},
     Tan_Simple,
 };
@@ -9,11 +12,13 @@ use crate::{
 impl Matrix {
     pub const IDENTITY: Self = Matrix_IdentityValue();
 
+    #[must_use]
     pub const fn identity_value() -> Self {
         Matrix_IdentityValue()
     }
 
     /// Returns a matrix representing a counter-clockwise rotation around x axis.
+    #[must_use]
     pub fn rotate_x(angle: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -23,6 +28,7 @@ impl Matrix {
     }
 
     /// Returns a matrix representing a counter-clockwise rotation around y axis.
+    #[must_use]
     pub fn rotate_y(angle: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -32,6 +38,7 @@ impl Matrix {
     }
 
     /// Returns a matrix representing a counter-clockwise rotation around z axis.
+    #[must_use]
     pub fn rotate_z(angle: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -41,6 +48,7 @@ impl Matrix {
     }
 
     /// Returns a matrix representing a translation to the given coordinates.
+    #[must_use]
     pub fn translate(x: c_float, y: c_float, z: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -50,6 +58,7 @@ impl Matrix {
     }
 
     /// Returns a matrix representing a scaling by the given factors.
+    #[must_use]
     pub fn scale(x: c_float, y: c_float, z: c_float) -> Self {
         let mut result = Self::IDENTITY;
         unsafe {
@@ -58,6 +67,7 @@ impl Matrix {
         result
     }
 
+    #[must_use]
     pub fn orthographic(
         left: c_float,
         right: c_float,
@@ -71,6 +81,7 @@ impl Matrix {
         result
     }
 
+    #[must_use]
     pub fn perspective_field_of_view(
         fovy: c_float,
         aspect: c_float,
@@ -82,6 +93,7 @@ impl Matrix {
         result
     }
 
+    #[must_use]
     pub fn look_rot(pos: Vec3, rot: Vec2) -> Self {
         let mut result = Self::IDENTITY;
         Matrix_LookRot(&mut result, pos, rot);
@@ -89,6 +101,7 @@ impl Matrix {
     }
 }
 
+#[must_use]
 pub const fn Matrix_IdentityValue() -> Matrix {
     Matrix {
         row1: Vec4 {
@@ -149,7 +162,7 @@ pub fn Matrix_PerspectiveFieldOfView(
     zNear: c_float,
     zFar: c_float,
 ) {
-    let c = zNear * Tan_Simple(0.5 * fovy as c_double) as c_float;
+    let c = zNear * Tan_Simple(0.5 * c_double::from(fovy)) as c_float;
 
     /* Transposed, source https://msdn.microsoft.com/en-us/library/dd373537(v=vs.85).aspx */
     /* For a FOV based perspective matrix, left/right/top/bottom are calculated as: */

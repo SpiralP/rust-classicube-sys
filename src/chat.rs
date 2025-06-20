@@ -1,4 +1,7 @@
-use crate::{bindings::*, std_types::c_char};
+use crate::{
+    bindings::{Chat_AddOf, MsgType_MSG_TYPE_NORMAL, String_FromReadonly},
+    std_types::c_char,
+};
 
 #[allow(clippy::missing_safety_doc)]
 pub unsafe fn Chat_AddRaw(raw: *const c_char) {

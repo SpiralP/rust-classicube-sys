@@ -14,6 +14,7 @@ pub struct OwnedContext2D {
 }
 
 impl OwnedContext2D {
+    #[must_use]
     pub fn new(width: c_int, height: c_int, color: BitmapCol) -> Self {
         let mut pixels = vec![color; width as usize * height as usize];
         let scan0 = pixels.as_mut_ptr();
@@ -21,9 +22,9 @@ impl OwnedContext2D {
         Self {
             context_2d: Context2D {
                 bmp: Bitmap {
-                    height,
-                    width,
                     scan0,
+                    width,
+                    height,
                 },
                 height,
                 width,
@@ -33,10 +34,12 @@ impl OwnedContext2D {
         }
     }
 
+    #[must_use]
     pub fn new_cleared(width: c_int, height: c_int) -> Self {
         Self::new(width, height, 0x0000_0000)
     }
 
+    #[must_use]
     pub fn new_pow_of_2(width: c_int, height: c_int, color: BitmapCol) -> OwnedContext2D {
         let width = Math_NextPowOf2(width);
         let height = Math_NextPowOf2(height);
@@ -44,10 +47,12 @@ impl OwnedContext2D {
         Self::new(width, height, color)
     }
 
+    #[must_use]
     pub fn new_pow_of_2_cleared(width: c_int, height: c_int) -> OwnedContext2D {
         Self::new_pow_of_2(width, height, 0x0000_0000)
     }
 
+    #[must_use]
     pub fn as_context_2d(&self) -> &Context2D {
         &self.context_2d
     }
@@ -56,6 +61,7 @@ impl OwnedContext2D {
         &mut self.context_2d
     }
 
+    #[must_use]
     pub fn as_bitmap(&self) -> &Bitmap {
         &self.context_2d.bmp
     }

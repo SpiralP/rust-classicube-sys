@@ -1,7 +1,13 @@
 #![cfg_attr(feature = "no_std", no_std)]
-#![allow(non_snake_case)]
-#![allow(non_camel_case_types)]
-#![allow(non_upper_case_globals)]
+#![warn(clippy::pedantic)]
+#![allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals
+)]
 #![doc = include_str!("../README.md")]
 
 #[cfg(feature = "no_std")]

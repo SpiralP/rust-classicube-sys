@@ -11,6 +11,7 @@ use crate::{
 };
 
 impl cc_string {
+    #[must_use]
     pub fn as_slice(&self) -> &[u8] {
         let len = self.length as usize;
         let data = self.buffer as *const u8;
@@ -48,6 +49,8 @@ pub struct OwnedString {
 }
 
 impl OwnedString {
+    #[must_use]
+    #[allow(clippy::missing_panics_doc)]
     pub fn new<S: Into<String>>(s: S) -> Self {
         let bytes = s
             .into()
@@ -65,13 +68,14 @@ impl OwnedString {
         Self {
             c_str,
             cc_string: cc_string {
-                buffer: buffer as *mut c_char,
+                buffer: buffer.cast_mut(),
                 length: length as cc_uint16,
                 capacity: capacity as cc_uint16,
             },
         }
     }
 
+    #[must_use]
     pub fn as_cc_string(&self) -> &cc_string {
         &self.cc_string
     }
@@ -79,6 +83,7 @@ impl OwnedString {
     /// # Safety
     ///
     /// The `OwnedString` needs to live longer than the `cc_string` return here.
+    #[must_use]
     pub unsafe fn get_cc_string(&self) -> cc_string {
         cc_string { ..self.cc_string }
     }
@@ -92,14 +97,14 @@ impl Borrow<cc_string> for OwnedString {
 
 #[test]
 fn test_owned_string() {
-    let owned_string = OwnedString::new("hello");
-
     fn use_cc_string<T: Borrow<cc_string>>(s: T) {
         #[cfg(not(feature = "no_std"))]
         {
             println!("{:?}", s.borrow());
         }
     }
+
+    let owned_string = OwnedString::new("hello");
 
     use_cc_string(owned_string.as_cc_string());
 
@@ -120,16 +125,16 @@ pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -
 }
 
 #[allow(clippy::missing_safety_doc)]
+#[must_use]
 pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
     let mut length = 0;
     for i in (0..STRING_SIZE).rev() {
         let code = data[i as usize];
         if code == b'\0' || code == b' ' {
             continue;
-        } else {
-            length = i + 1;
-            break;
         }
+        length = i + 1;
+        break;
     }
 
     String_Init(
@@ -173,16 +178,18 @@ pub const extendedChars: &[cc_unichar] = &[
     0x2248, 0x00B0, 0x2219, 0x00B7, 0x221A, 0x207F, 0x00B2, 0x25A0, 0x00A0,
 ];
 
+#[must_use]
 pub fn Convert_CP437ToUnicode(raw: u8) -> cc_unichar {
     if raw < 0x20 {
         controlChars[raw as usize]
     } else if raw < 0x7F {
-        raw as cc_unichar
+        cc_unichar::from(raw)
     } else {
         extendedChars[raw as usize - 0x7F]
     }
 }
 
+#[must_use]
 pub fn Convert_CodepointToCP437(cp: cc_codepoint) -> u8 {
     let mut c: u8 = 0;
     Convert_TryCodepointToCP437(cp, &mut c);
@@ -219,14 +226,14 @@ fn Convert_TryCodepointToCP437(mut cp: cc_codepoint, c: &mut u8) -> bool {
     }
 
     for (i, &chr) in controlChars.iter().enumerate() {
-        if chr as cc_codepoint == cp {
+        if cc_codepoint::from(chr) == cp {
             *c = i as u8;
             return true;
         }
     }
 
     for (i, &chr) in extendedChars.iter().enumerate() {
-        if chr as cc_codepoint == cp {
+        if cc_codepoint::from(chr) == cp {
             *c = (i + 0x7F) as u8;
             return true;
         }
@@ -242,7 +249,7 @@ fn test_cp_437_conversion() {
 
     let c_str = CString::new(bytes).unwrap();
     let a = cc_string {
-        buffer: c_str.as_ptr() as *mut c_char,
+        buffer: c_str.as_ptr().cast_mut(),
         length: bytes.len() as cc_uint16,
         capacity: bytes.len() as cc_uint16,
     };

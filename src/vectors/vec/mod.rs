@@ -1,16 +1,18 @@
 mod ops;
 
 use crate::{
-    bindings::*,
+    bindings::{IVec3, Matrix, Vec3},
     std_types::{c_float, cosf, floorf, sinf, sqrtf},
     Vec3_IsZero, Vec3_Set,
 };
 
 impl Vec3 {
+    #[must_use]
     pub const fn new(x: c_float, y: c_float, z: c_float) -> Self {
         Self { x, y, z }
     }
 
+    #[must_use]
     pub const fn zero() -> Self {
         Self {
             x: 0.0,
@@ -19,10 +21,12 @@ impl Vec3 {
         }
     }
 
+    #[must_use]
     pub const fn big_pos() -> Self {
         Vec3_BigPos()
     }
 
+    #[must_use]
     pub const fn create(x: c_float, y: c_float, z: c_float) -> Self {
         Vec3_Create3(x, y, z)
     }
@@ -31,10 +35,12 @@ impl Vec3 {
         Vec3_Set!(self, x, y, z);
     }
 
+    #[must_use]
     pub fn is_zero(&self) -> bool {
         Vec3_IsZero!(self)
     }
 
+    #[must_use]
     pub fn length_squared(&self) -> c_float {
         Vec3_LengthSquared(self)
     }
@@ -60,39 +66,47 @@ impl Vec3 {
         result
     }
 
+    #[must_use]
     pub fn transform_y(y: c_float, mat: Matrix) -> Self {
         let mut result = Self::zero();
         Vec3_TransformY(&mut result, y, &mat);
         result
     }
 
+    #[must_use]
     pub fn rotate_x(v: Vec3, angle: c_float) -> Self {
         Vec3_RotateX(v, angle)
     }
 
+    #[must_use]
     pub fn rotate_y(v: Vec3, angle: c_float) -> Self {
         Vec3_RotateY(v, angle)
     }
 
+    #[must_use]
     pub fn rotate_y3(x: c_float, y: c_float, z: c_float, angle: c_float) -> Self {
         Vec3_RotateY3(x, y, z, angle)
     }
 
+    #[must_use]
     pub fn rotate_z(v: Vec3, angle: c_float) -> Self {
         Vec3_RotateZ(v, angle)
     }
 
+    #[must_use]
     pub fn floor(&self) -> IVec3 {
         let mut result = IVec3::zero();
         IVec3_Floor(&mut result, self);
         result
     }
 
+    #[must_use]
     pub fn get_dir_vector(yawRad: c_float, pitchRad: c_float) -> Self {
         Vec3_GetDirVector(yawRad, pitchRad)
     }
 }
 
+#[must_use]
 pub const fn Vec3_BigPos() -> Vec3 {
     Vec3 {
         x: 1e25_f32,
@@ -101,13 +115,15 @@ pub const fn Vec3_BigPos() -> Vec3 {
     }
 }
 
+#[must_use]
 pub const fn Vec3_Create3(x: c_float, y: c_float, z: c_float) -> Vec3 {
     Vec3 { x, y, z }
 }
 
 /// Returns the squared length of the vector.
-/// Squared length can be used for comparison, to avoid a costly sqrt()
-/// However, you must sqrt() this when adding lengths.
+/// Squared length can be used for comparison, to avoid a costly `sqrt()`
+/// However, you must `sqrt()` this when adding lengths.
+#[must_use]
 pub fn Vec3_LengthSquared(v: &Vec3) -> c_float {
     v.x * v.x + v.y * v.y + v.z * v.z
 }
@@ -139,31 +155,35 @@ pub fn Vec3_Transform(result: &mut Vec3, a: &Vec3, mat: &Matrix) {
     result.z = z;
 }
 
-/// Same as Vec3_Transform, but faster since x and z are assumed as 0.
+/// Same as `Vec3_Transform`, but faster since x and z are assumed as 0.
 pub fn Vec3_TransformY(result: &mut Vec3, y: c_float, mat: &Matrix) {
     result.x = y * mat.row2.x + mat.row4.x;
     result.y = y * mat.row2.y + mat.row4.y;
     result.z = y * mat.row2.z + mat.row4.z;
 }
 
+#[must_use]
 pub fn Vec3_RotateX(v: Vec3, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
     Vec3_Create3(v.x, cosA * v.y + sinA * v.z, -sinA * v.y + cosA * v.z)
 }
 
+#[must_use]
 pub fn Vec3_RotateY(v: Vec3, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
     Vec3_Create3(cosA * v.x - sinA * v.z, v.y, sinA * v.x + cosA * v.z)
 }
 
+#[must_use]
 pub fn Vec3_RotateY3(x: c_float, y: c_float, z: c_float, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
     Vec3_Create3(cosA * x - sinA * z, y, sinA * x + cosA * z)
 }
 
+#[must_use]
 pub fn Vec3_RotateZ(v: Vec3, angle: c_float) -> Vec3 {
     let cosA = cosf(angle);
     let sinA = sinf(angle);
@@ -171,6 +191,7 @@ pub fn Vec3_RotateZ(v: Vec3, angle: c_float) -> Vec3 {
 }
 
 /// Whether all of the components of the two vectors are equal.
+#[must_use]
 pub fn Vec3_Equals(a: &Vec3, b: &Vec3) -> bool {
     #[allow(clippy::float_cmp)]
     {
@@ -185,6 +206,7 @@ pub fn IVec3_Floor(result: &mut IVec3, a: &Vec3) {
 }
 
 /// Returns a normalised vector facing in the direction described by the given yaw and pitch.
+#[must_use]
 pub fn Vec3_GetDirVector(yawRad: c_float, pitchRad: c_float) -> Vec3 {
     let x = -cosf(pitchRad) * -sinf(yawRad);
     let y = -sinf(pitchRad);

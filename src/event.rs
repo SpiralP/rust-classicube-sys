@@ -3,7 +3,14 @@
 use core::mem;
 
 use crate::{
-    bindings::*,
+    bindings::{
+        cc_bool, cc_string, BlockID, Event_Block, Event_Block_Callback, Event_Chat,
+        Event_Chat_Callback, Event_Entry, Event_Entry_Callback, Event_Float, Event_Float_Callback,
+        Event_Input, Event_Input_Callback, Event_Int, Event_Int_Callback, Event_PluginMessage,
+        Event_PluginMessage_Callback, Event_RawMove, Event_RawMove_Callback, Event_Register,
+        Event_String, Event_String_Callback, Event_Unregister, Event_Void, Event_Void_Callback,
+        IVec3, InputDevice, Stream,
+    },
     std_types::{c_float, c_int, c_void},
 };
 
@@ -16,7 +23,7 @@ macro_rules! make_register {
                 handler: [<Event_ $name _Callback>],
             ) {
                 Event_Register(
-                    handlers as *mut Event_Void,
+                    handlers.cast::<Event_Void>(),
                     obj,
                     #[allow(clippy::useless_transmute)]
                     mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
@@ -29,7 +36,7 @@ macro_rules! make_register {
                 handler: [<Event_ $name _Callback>],
             ) {
                 Event_Unregister(
-                    handlers as *mut Event_Void,
+                    handlers.cast::<Event_Void>(),
                     obj,
                     #[allow(clippy::useless_transmute)]
                     mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
@@ -51,9 +58,10 @@ macro_rules! make_raise {
     ) => {
         paste::item! {
             pub unsafe fn [<Event_Raise $func_name>] (
-                handlers: &mut [<Event_ $name>],
+                handlers: *mut [<Event_ $name>],
                 $($arg: $arg_type,)*
             ) {
+                let handlers = &mut *handlers;
                 for i in 0..handlers.Count {
                     if let Some(f) = handlers.Handlers[i as usize] {
                         (f)(
