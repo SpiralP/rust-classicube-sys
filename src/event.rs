@@ -15,12 +15,14 @@ macro_rules! make_register {
                 obj: *mut c_void,
                 handler: [<Event_ $name _Callback>],
             ) {
-                Event_Register(
-                    handlers as *mut Event_Void,
-                    obj,
-                    #[allow(clippy::useless_transmute)]
-                    mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
-                )
+                unsafe {
+                    Event_Register(
+                        handlers as *mut Event_Void,
+                        obj,
+                        #[allow(clippy::useless_transmute)]
+                        mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
+                    )
+                }
             }
 
             pub unsafe fn [<Event_Unregister $func_name>] (
@@ -28,12 +30,14 @@ macro_rules! make_register {
                 obj: *mut c_void,
                 handler: [<Event_ $name _Callback>],
             ) {
-                Event_Unregister(
-                    handlers as *mut Event_Void,
-                    obj,
-                    #[allow(clippy::useless_transmute)]
-                    mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
-                )
+                unsafe {
+                    Event_Unregister(
+                        handlers as *mut Event_Void,
+                        obj,
+                        #[allow(clippy::useless_transmute)]
+                        mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
+                    )
+                }
             }
         }
     };
@@ -56,10 +60,12 @@ macro_rules! make_raise {
             ) {
                 for i in 0..handlers.Count {
                     if let Some(f) = handlers.Handlers[i as usize] {
-                        (f)(
-                            handlers.Objs[i as usize],
-                            $($arg),*
-                        );
+                        unsafe {
+                            (f)(
+                                handlers.Objs[i as usize],
+                                $($arg),*
+                            );
+                        }
                     }
                 }
             }

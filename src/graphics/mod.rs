@@ -13,8 +13,10 @@ pub unsafe fn Gfx_UpdateDynamicVb_IndexedTris(
     vertices: *mut c_void,
     vCount: c_int,
 ) {
-    Gfx_SetDynamicVbData(vb, vertices, vCount);
-    Gfx_DrawVb_IndexedTris(vCount);
+    unsafe {
+        Gfx_SetDynamicVbData(vb, vertices, vCount);
+        Gfx_DrawVb_IndexedTris(vCount);
+    }
 }
 
 pub fn Gfx_Make2DQuad(tex: &mut Texture, col: PackedCol) -> [VertexTextured; 4] {

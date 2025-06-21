@@ -10,7 +10,7 @@ pub fn Particle_DoRender(
     let sY = size.y * 0.5;
     let mut centre = *pos;
     centre.y += sY;
-    let view = unsafe { &Gfx.View };
+    let view = unsafe { Gfx.View };
 
     let aX = view.row1.x * sX;
     let aY = view.row2.x * sX;

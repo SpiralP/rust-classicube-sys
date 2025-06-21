@@ -10,5 +10,7 @@ pub unsafe fn Entity_Init(e: &mut Entity) {
     e._skinReqID = 0;
     e.SkinRaw[0] = 0;
     e.NameRaw[0] = 0;
-    Entity_SetModel(e, model.as_cc_string());
+    unsafe {
+        Entity_SetModel(e, model.as_cc_string());
+    }
 }

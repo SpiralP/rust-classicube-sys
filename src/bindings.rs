@@ -5,12 +5,13 @@
     deref_nullptr
 )]
 #![allow(
-    clippy::missing_safety_doc,
-    clippy::unreadable_literal,
-    clippy::cognitive_complexity,
-    clippy::redundant_static_lifetimes,
     clippy::approx_constant,
+    clippy::cognitive_complexity,
+    clippy::missing_safety_doc,
+    clippy::ptr_offset_with_cast,
+    clippy::redundant_static_lifetimes,
     clippy::too_many_arguments,
+    clippy::unreadable_literal,
     clippy::useless_transmute
 )]
 

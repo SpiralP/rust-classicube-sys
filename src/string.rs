@@ -6,8 +6,8 @@ use core::{
 };
 
 use crate::{
-    bindings::{cc_codepoint, cc_string, cc_uint16, cc_unichar, STRING_SIZE},
-    std_types::{c_char, c_int, Box, CString, String, ToString, Vec},
+    bindings::{STRING_SIZE, cc_codepoint, cc_string, cc_uint16, cc_unichar},
+    std_types::{Box, CString, String, ToString, Vec, c_char, c_int},
 };
 
 impl cc_string {
@@ -132,11 +132,13 @@ pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
         }
     }
 
-    String_Init(
-        data.as_ptr() as *mut c_char,
-        length as c_int,
-        STRING_SIZE as c_int,
-    )
+    unsafe {
+        String_Init(
+            data.as_ptr() as *mut c_char,
+            length as c_int,
+            STRING_SIZE as c_int,
+        )
+    }
 }
 
 #[test]
