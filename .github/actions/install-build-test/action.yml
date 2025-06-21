@@ -1,0 +1,31 @@
+name: install-build-test
+description: ""
+
+inputs:
+  target:
+    description: Build target.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      with:
+        submodules: recursive
+
+    - name: Install rust
+      run: |
+        rustup default stable
+        rustup component add rustfmt
+        rustup target add ${{ inputs.target }}
+      shell: bash
+
+    - name: Build
+      run: |
+        cargo build --target ${{ inputs.target }}
+      shell: bash
+
+    - name: Test
+      run: |
+        cargo test --target ${{ inputs.target }} -- --nocapture --test-threads 1
+      shell: bash

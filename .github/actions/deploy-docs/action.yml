@@ -1,0 +1,28 @@
+name: deploy-docs
+description: ""
+
+inputs:
+  target:
+    description: Build target.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Doc
+      run: |
+        cargo doc --target ${{ inputs.target }}
+      shell: bash
+
+    - name: Configure git to use LF
+      run: |
+        git config --global core.autocrlf false                                                   
+        git config --global core.eol lf
+      shell: bash
+
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
+      with:
+        github_token: ${{ github.token }}
+        publish_dir: ./target/${{ inputs.target }}/doc
+        force_orphan: true
