@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false # do not cancel in-progress jobs
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  get-version-metadata:
+    runs-on: ubuntu-24.04
+    if: "${{ ! startsWith(github.event.head_commit.message, 'chore(release): ') }}"
+    outputs:
+      version-metadata: ${{ steps.get-version-metadata.outputs.version-metadata }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          submodules: true
+      - id: get-version-metadata
+        run: |
+          classicube_version="$(git -C ./ClassiCube/ describe --exact-match --tags HEAD)"
+          test -z "$classicube_version" && echo "classicube_version is empty" && exit 1
+          version_metadata="ClassiCube $classicube_version"
+          echo "version-metadata=$version_metadata" | tee -a "$GITHUB_OUTPUT"
+
+  release:
+    needs: get-version-metadata
+    if: "${{ needs.get-version-metadata.outputs.version-metadata && ! startsWith(github.event.head_commit.message, 'chore(release): ') }}"
+    permissions: {} # none, since we use a custom app
+    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@8847488babc65414c11faffa3aa1a5b4d59cd515 # main
+    with:
+      cargo-publish: true
+      environment-name: release
+      replace-files: |
+        Cargo.lock
+        Cargo.toml
+      package-name: classicube-sys
+      version-metadata: ${{ needs.get-version-metadata.outputs.version-metadata }}
+    secrets:
+      app-id: ${{ secrets.APP_ID }}
+      app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
