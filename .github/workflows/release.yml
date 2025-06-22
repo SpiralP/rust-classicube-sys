@@ -9,13 +9,14 @@ concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false # do not cancel in-progress jobs
 
-permissions:
-  contents: read # for checkout
+permissions: {} # none, since we specify permissions per job
 
 jobs:
   get-version-metadata:
     runs-on: ubuntu-24.04
     if: "${{ ! startsWith(github.event.head_commit.message, 'chore(release): ') }}"
+    permissions:
+      contents: read # for checkout
     outputs:
       version-metadata: ${{ steps.get-version-metadata.outputs.version-metadata }}
     steps:
