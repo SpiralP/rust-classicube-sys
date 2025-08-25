@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   linux-nix:
-    uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@0babcf252130fbde2c8df92f17e3d5e8fef958ef # main
+    uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@266907f31489c3108fdb1941292d18314c07b4d3 # main
     concurrency:
       group: linux-nix-${{ github.ref }}
       cancel-in-progress: true
@@ -122,7 +122,7 @@ jobs:
           echo "version-metadata=$version_metadata" | tee -a "$GITHUB_OUTPUT"
 
   release:
-    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@0babcf252130fbde2c8df92f17e3d5e8fef958ef # main
+    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@266907f31489c3108fdb1941292d18314c07b4d3 # main
     needs: get-version-metadata
     if: "${{ needs.get-version-metadata.outputs.version-metadata }}"
     permissions: {} # none, since we use a custom app
