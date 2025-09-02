@@ -7,9 +7,14 @@ use crate::{
     std_types::{c_float, c_int, c_void},
 };
 
-macro_rules! make_register {
-    ($func_name:ident, $name:ident) => {
+macro_rules! make_register_unregister {
+    (
+        $(#[$attr:meta])*
+        $func_name:ident,
+        $name:ident
+    ) => {
         paste::item! {
+            $(#[$attr])*
             pub unsafe fn [<Event_Register $func_name>] (
                 handlers: *mut [<Event_ $name>],
                 obj: *mut c_void,
@@ -25,6 +30,7 @@ macro_rules! make_register {
                 }
             }
 
+            $(#[$attr])*
             pub unsafe fn [<Event_Unregister $func_name>] (
                 handlers: *mut [<Event_ $name>],
                 obj: *mut c_void,
@@ -43,18 +49,19 @@ macro_rules! make_register {
     };
 
     ($name:ident) => {
-        make_register!($name, $name);
+        make_register_unregister!($name, $name);
     };
 }
 
 macro_rules! make_raise {
     (
-        $func_name:ident,
+        $(#[$attr:meta])*
         $name:ident,
         ( $($arg:ident: $arg_type:ty),* )
     ) => {
         paste::item! {
-            pub unsafe fn [<Event_Raise $func_name>] (
+            $(#[$attr])*
+            pub unsafe fn [<Event_Raise $name>] (
                 handlers: &mut [<Event_ $name>],
                 $($arg: $arg_type,)*
             ) {
@@ -71,38 +78,68 @@ macro_rules! make_raise {
             }
         }
     };
-
-    (
-        $name:ident,
-        ( $($arg:ident: $arg_type:ty),* )
-    ) => {
-        make_raise!($name, $name, ( $($arg: $arg_type),* ));
-    }
 }
 
-// Raise_ Void, Int, Float are already exported
+// ClassiCube/src/Event.h
 
-make_register!(Void);
-make_register!(Int);
-make_register!(Float);
+// Event_RaiseVoid, Event_RaiseInt, Event_RaiseFloat are already exported
+make_register_unregister!(Void);
+make_register_unregister!(Int);
+make_register_unregister!(Float);
 
-make_register!(Entry);
-make_raise!(Entry, (stream: *mut Stream, name: *const cc_string));
+make_register_unregister!(Entry);
+make_raise!(
+    /// Calls all registered callbacks for an event which has data stream and name arguments.
+    Entry, (stream: *mut Stream, name: *const cc_string)
+);
 
-make_register!(Block);
-make_raise!(Block, (coords: IVec3, oldBlock: BlockID, block: BlockID));
+make_register_unregister!(Block);
+make_raise!(
+    /// Calls all registered callbacks for an event which takes block change arguments.
+    /// These are the coordinates/location of the change, block there before, block there now.
+    Block, (coords: IVec3, oldBlock: BlockID, block: BlockID)
+);
 
-make_register!(Chat);
-make_raise!(Chat, (msg: *const cc_string, msgType: c_int));
+make_register_unregister!(Chat);
+make_raise!(
+    /// Calls all registered callbacks for an event which has chat message type and contents.
+    /// See MsgType enum in Chat.h for what types of messages there are.
+    Chat, (msg: *const cc_string, msgType: c_int)
+);
 
-make_register!(Input);
-make_raise!(Input, (key: c_int, repeating: cc_bool, device: *mut InputDevice));
+make_register_unregister!(Input);
+make_raise!(
+    /// Calls all registered callbacks for an event which has keyboard key/mouse button.
+    /// repeating is whether the key/button was already pressed down. (i.e. user is holding down key)
+    Input, (key: c_int, repeating: cc_bool, device: *mut InputDevice)
+);
 
-make_register!(String);
-make_raise!(String, (s: *const cc_string));
+make_register_unregister!(String);
+make_raise!(
+    /// Calls all registered callbacks for an event which has a string argument.
+    String, (s: *const cc_string)
+);
 
-make_register!(RawMove);
-make_raise!(RawMove, (x_delta: c_float, y_delta: c_float));
+make_register_unregister!(RawMove);
+make_raise!(
+    /// Calls all registered callbacks for an event which has raw pointer movement arguments.
+    RawMove, (x_delta: c_float, y_delta: c_float)
+);
 
-make_register!(PluginMessage);
-make_raise!(PluginMessage, (channel: u8, data: *mut u8));
+make_register_unregister!(PadAxis);
+make_raise!(
+    /// Calls all registered callbacks for an event which has pad axis arguments.
+    PadAxis, (port: c_int, axis: c_int, x: c_float, y: c_float)
+);
+
+make_register_unregister!(PluginMessage);
+make_raise!(
+    /// Calls all registered callbacks for an event which has a channel and a 64 byte data argument.
+    PluginMessage, (channel: cc_uint8, data: *mut cc_uint8)
+);
+
+make_register_unregister!(LightingMode);
+make_raise!(
+    /// Calls all registered callbacks for an event called when the Lighting_LightingMode is changed
+    LightingMode, (oldMode: cc_uint8, fromServer: cc_bool)
+);
