@@ -6,6 +6,7 @@ use core::{
 };
 
 use crate::{
+    String_CalcLen, String_CopyToRaw,
     bindings::{STRING_SIZE, cc_codepoint, cc_string, cc_uint16, cc_unichar},
     std_types::{Box, CString, String, ToString, Vec, c_char, c_int},
 };
@@ -108,6 +109,8 @@ fn test_owned_string() {
     // let s: cc_string = owned_string.into();
 }
 
+/// Constructs a string from the given arguments.
+///
 /// # Safety
 ///
 /// The `buffer` needs to live longer than the `cc_string`.
@@ -119,7 +122,46 @@ pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -
     }
 }
 
-#[allow(clippy::missing_safety_doc)]
+/// Constructs a string from a (maybe null terminated) buffer.
+///
+/// # Safety
+///
+/// The `buffer` needs to live longer than the `cc_string`.
+#[must_use]
+pub unsafe fn String_FromRaw(buffer: *mut c_char, capacity: c_int) -> cc_string {
+    unsafe { String_Init(buffer, String_CalcLen(buffer, capacity), capacity) }
+}
+
+/// Constructs a string from a compile time array, that may have arbitary actual length of data at runtime
+///
+/// # Safety
+///
+/// The `buffer` needs to live longer than the `cc_string`.
+///
+/// # Panics
+///
+/// The function will panic if `buffer.len()` is outside the range of `c_int`.
+#[must_use]
+pub unsafe fn String_FromRawArray(buffer: &mut [c_char]) -> cc_string {
+    unsafe { String_FromRaw(buffer.as_mut_ptr(), c_int::try_from(buffer.len()).unwrap()) }
+}
+
+/// Calls `String_CopyToRaw` on a compile time array.
+///
+/// # Panics
+///
+/// The function will panic if `buffer.len()` is outside the range of `c_int`.
+pub fn String_CopyToRawArray(buffer: &mut [c_char], src: &cc_string) {
+    unsafe {
+        String_CopyToRaw(
+            buffer.as_mut_ptr(),
+            c_int::try_from(buffer.len()).unwrap(),
+            src,
+        );
+    }
+}
+
+#[must_use]
 pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
     let mut length = 0;
     for i in (0..STRING_SIZE).rev() {
