@@ -71,7 +71,7 @@ jobs:
           target: i686-unknown-linux-gnu
 
   mac-x86_64:
-    runs-on: macos-14
+    runs-on: macos-15
     concurrency:
       group: mac-x86_64-${{ github.ref }}
       cancel-in-progress: true
@@ -81,7 +81,7 @@ jobs:
           target: x86_64-apple-darwin
 
   mac-aarch64:
-    runs-on: macos-14
+    runs-on: macos-15
     concurrency:
       group: mac-aarch64-${{ github.ref }}
       cancel-in-progress: true
