@@ -26,7 +26,10 @@ jobs:
       group: windows-x86_64-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: SpiralP/rust-classicube-sys/.github/actions/install-build-test@main
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
         with:
           target: x86_64-pc-windows-msvc
 
@@ -41,7 +44,10 @@ jobs:
       group: windows-i686-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: SpiralP/rust-classicube-sys/.github/actions/install-build-test@main
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
         with:
           target: i686-pc-windows-msvc
 
@@ -51,7 +57,10 @@ jobs:
       group: linux-x86_64-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: SpiralP/rust-classicube-sys/.github/actions/install-build-test@main
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
         with:
           target: x86_64-unknown-linux-gnu
 
@@ -61,12 +70,15 @@ jobs:
       group: linux-i686-${{ github.ref }}
       cancel-in-progress: true
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
       - name: Install deps
         run: |
           sudo apt-get -y update
           sudo apt-get -y install gcc-multilib g++-multilib
 
-      - uses: SpiralP/rust-classicube-sys/.github/actions/install-build-test@main
+      - uses: ./.github/actions/install-build-test
         with:
           target: i686-unknown-linux-gnu
 
@@ -76,7 +88,10 @@ jobs:
       group: mac-x86_64-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: SpiralP/rust-classicube-sys/.github/actions/install-build-test@main
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
         with:
           target: x86_64-apple-darwin
 
@@ -86,7 +101,10 @@ jobs:
       group: mac-aarch64-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: SpiralP/rust-classicube-sys/.github/actions/install-build-test@main
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
         with:
           target: aarch64-apple-darwin
 
