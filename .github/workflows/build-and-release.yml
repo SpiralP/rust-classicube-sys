@@ -140,7 +140,7 @@ jobs:
           echo "version-metadata=$version_metadata" | tee -a "$GITHUB_OUTPUT"
 
   release:
-    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@575cd65e188a9f3afbea756c4651da5b95548e0f # main
+    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@62705daa56c7f73e2d725dccec9ca8dd3bd2ffce # main
     needs: get-version-metadata
     if: "${{ needs.get-version-metadata.outputs.version-metadata }}"
     permissions: {} # none, since we use a custom app
@@ -156,6 +156,6 @@ jobs:
       package-name: classicube-sys
       version-metadata: ${{ needs.get-version-metadata.outputs.version-metadata }}
     secrets:
-      app-id: ${{ secrets.APP_ID }}
+      app-client-id: ${{ secrets.APP_CLIENT_ID }}
       app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
