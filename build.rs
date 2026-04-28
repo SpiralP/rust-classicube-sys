@@ -24,7 +24,21 @@ fn main() {
 
     #[cfg(target_os = "windows")]
     {
+        use std::process::Command;
+
         build_classicube();
+
+        // rustfmt is required, or else we get strange errors:
+        // error LNK2019: unresolved external symbol Entities referenced in function ...
+        // error LNK2019: unresolved external symbol Gfx referenced in function ...
+        assert!(
+            Command::new("rustfmt.exe")
+                .arg("--version")
+                .status()
+                .expect("rustfmt not found in PATH, please install rustfmt or add it to PATH")
+                .success(),
+            "rustfmt is required to build the bindings on windows, please install rustfmt or add it to PATH"
+        );
     }
 }
 
