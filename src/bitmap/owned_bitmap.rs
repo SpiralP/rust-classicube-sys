@@ -1,9 +1,9 @@
 use core::borrow::Borrow;
 
 use crate::{
-    bindings::{Bitmap, BitmapCol},
-    std_types::{c_int, vec, Vec},
     Math_NextPowOf2,
+    bindings::{Bitmap, BitmapCol},
+    std_types::{Vec, c_int, vec},
 };
 
 pub struct OwnedBitmap {

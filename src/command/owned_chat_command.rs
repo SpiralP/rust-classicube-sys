@@ -1,9 +1,9 @@
 use core::{ffi::CStr, ptr};
 
 use crate::{
-    bindings::{cc_string, Commands_Register},
-    std_types::{c_int, Box, CString, Vec},
-    ChatCommand, COMMAND_FLAG_SINGLEPLAYER_ONLY,
+    COMMAND_FLAG_SINGLEPLAYER_ONLY, ChatCommand,
+    bindings::{Commands_Register, cc_string},
+    std_types::{Box, CString, Vec, c_int},
 };
 
 pub struct OwnedChatCommand {

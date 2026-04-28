@@ -37,7 +37,8 @@ fn main() {
                 .status()
                 .expect("rustfmt not found in PATH, please install rustfmt or add it to PATH")
                 .success(),
-            "rustfmt is required to build the bindings on windows, please install rustfmt or add it to PATH"
+            "rustfmt is required to build the bindings on windows, please install rustfmt or add \
+             it to PATH"
         );
     }
 }
@@ -54,6 +55,7 @@ fn build_classicube() {
     let classicube_dir = Path::new("ClassiCube");
     let classicube_src_dir = classicube_dir.join("src");
     let classicube_misc_dir = classicube_dir.join("misc");
+    let classicube_third_party_dir = classicube_dir.join("third_party");
     let build_dir = &out_dir.join("src");
 
     let mut copy_options = dir::CopyOptions::new();
@@ -61,6 +63,7 @@ fn build_classicube() {
 
     dir::copy(classicube_src_dir, out_dir, &copy_options).unwrap();
     dir::copy(classicube_misc_dir, out_dir, &copy_options).unwrap();
+    dir::copy(classicube_third_party_dir, out_dir, &copy_options).unwrap();
 
     let target = env::var("TARGET").unwrap();
 

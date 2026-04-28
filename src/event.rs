@@ -129,7 +129,7 @@ make_raise!(
 make_register_unregister!(PadAxis);
 make_raise!(
     /// Calls all registered callbacks for an event which has pad axis arguments.
-    PadAxis, (port: c_int, axis: c_int, x: c_float, y: c_float)
+    PadAxis, (upd: *mut PadAxisUpdate)
 );
 
 make_register_unregister!(PluginMessage);

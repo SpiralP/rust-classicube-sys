@@ -4,8 +4,9 @@ use core::mem;
 
 pub use self::priority::Priority;
 use crate::{
-    bindings::{cc_string, Gui_Add, Gui_Remove, InputDevice, Screen, ScreenVTABLE},
-    std_types::{c_char, c_int, c_void, Box},
+    PadAxisUpdate,
+    bindings::{Gui_Add, Gui_Remove, InputDevice, Screen, ScreenVTABLE, cc_string},
+    std_types::{Box, c_char, c_int, c_void},
 };
 
 pub struct OwnedScreen {
@@ -202,7 +203,7 @@ impl OwnedScreen {
     /// Returns non-zero if a pad axis update is handled.
     pub fn on_handles_pad_axis(
         &mut self,
-        f: unsafe extern "C" fn(elem: *mut c_void, axis: c_int, x: f32, y: f32) -> c_int,
+        f: unsafe extern "C" fn(elem: *mut c_void, upd: *mut PadAxisUpdate) -> c_int,
     ) -> &mut Self {
         self.vtable.as_mut().HandlesPadAxis = Some(f);
         self
@@ -265,7 +266,7 @@ unsafe extern "C" fn HandlesMouseScroll(_elem: *mut c_void, _delta: f32) -> c_in
 unsafe extern "C" fn Layout(_elem: *mut c_void) {}
 unsafe extern "C" fn ContextLost(_elem: *mut c_void) {}
 unsafe extern "C" fn ContextRecreated(_elem: *mut c_void) {}
-unsafe extern "C" fn HandlesPadAxis(_elem: *mut c_void, _axis: c_int, _x: f32, _y: f32) -> c_int {
+unsafe extern "C" fn HandlesPadAxis(_elem: *mut c_void, _upd: *mut PadAxisUpdate) -> c_int {
     0
 }
 

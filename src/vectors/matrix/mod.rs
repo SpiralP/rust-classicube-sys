@@ -1,9 +1,9 @@
 mod ops;
 
 use crate::{
+    Tan_Simple,
     bindings::*,
     std_types::{c_double, c_float},
-    Tan_Simple,
 };
 
 impl Matrix {

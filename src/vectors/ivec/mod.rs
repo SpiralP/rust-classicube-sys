@@ -1,9 +1,9 @@
 mod ops;
 
 use crate::{
+    Int32_MaxValue, Vec3_IsZero, Vec3_Set,
     bindings::{IVec3, Vec3},
     std_types::c_int,
-    Int32_MaxValue, Vec3_IsZero, Vec3_Set,
 };
 
 impl IVec3 {

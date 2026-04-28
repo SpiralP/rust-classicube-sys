@@ -6,7 +6,7 @@ use core::{
 };
 
 use crate::{
-    String_CalcLen, String_CopyToRaw,
+    String_CalcLen,
     bindings::{STRING_SIZE, cc_codepoint, cc_string, cc_uint16, cc_unichar},
     std_types::{Box, CString, String, ToString, Vec, c_char, c_int},
 };
@@ -146,21 +146,6 @@ pub unsafe fn String_FromRawArray(buffer: &mut [c_char]) -> cc_string {
     unsafe { String_FromRaw(buffer.as_mut_ptr(), c_int::try_from(buffer.len()).unwrap()) }
 }
 
-/// Calls `String_CopyToRaw` on a compile time array.
-///
-/// # Panics
-///
-/// The function will panic if `buffer.len()` is outside the range of `c_int`.
-pub fn String_CopyToRawArray(buffer: &mut [c_char], src: &cc_string) {
-    unsafe {
-        String_CopyToRaw(
-            buffer.as_mut_ptr(),
-            c_int::try_from(buffer.len()).unwrap(),
-            src,
-        );
-    }
-}
-
 #[must_use]
 pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
     let mut length = 0;
@@ -168,10 +153,9 @@ pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
         let code = data[i as usize];
         if code == b'\0' || code == b' ' {
             continue;
-        } else {
-            length = i + 1;
-            break;
         }
+        length = i + 1;
+        break;
     }
 
     unsafe {

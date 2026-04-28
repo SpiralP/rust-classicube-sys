@@ -1,9 +1,9 @@
 use core::borrow::Borrow;
 
 use crate::{
-    bindings::{cc_uint16, Bitmap, Texture, TextureRec},
-    std_types::c_short,
     OwnedGfxTexture,
+    bindings::{Bitmap, Texture, TextureRec, cc_uint16},
+    std_types::c_short,
 };
 
 pub struct OwnedTexture {

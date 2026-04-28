@@ -1,9 +1,9 @@
 use core::{borrow::Borrow, ptr};
 
 use crate::{
-    bindings::{Bitmap, BitmapCol, Context2D},
-    std_types::{c_int, vec, Vec},
     Math_NextPowOf2,
+    bindings::{Bitmap, BitmapCol, Context2D},
+    std_types::{Vec, c_int, vec},
 };
 
 pub struct OwnedContext2D {

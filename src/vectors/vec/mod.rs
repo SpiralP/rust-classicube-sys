@@ -1,9 +1,9 @@
 mod ops;
 
 use crate::{
+    Vec3_IsZero, Vec3_Set,
     bindings::*,
     std_types::{c_float, cosf, floorf, sinf, sqrtf},
-    Vec3_IsZero, Vec3_Set,
 };
 
 impl Vec3 {
