@@ -49,7 +49,7 @@ pub static mut Plugin_Component: IGameComponent = IGameComponent {
 };
 ```
 
-Copy the `.dll`/`.so`/`.dylib` from `target/{debug,release}/` to the `plugins` folder where your ClassiCube executable is found
+Copy the `.dll`/`.so`/`.dylib` from `target/{debug,release}/` to the `plugins` folder where your `ClassiCube` executable is found
 
 ## References
 
