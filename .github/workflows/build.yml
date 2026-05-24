@@ -1,0 +1,80 @@
+name: build
+
+on:
+  pull_request:
+    branches: [main, master, alpha, beta]
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  linux_nix:
+    uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@a7630d0468733e888f9104a242063f1bcb6a0022 # main
+
+  windows:
+    name: Build Windows ${{ matrix.config.arch }}
+    runs-on: windows-2025
+    permissions:
+      contents: write # for deploy-docs gh-pages push (x86_64 + main only)
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { arch: x86_64, target: x86_64-pc-windows-msvc, deploy-docs: true }
+          - { arch: i686, target: i686-pc-windows-msvc }
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
+        with:
+          target: ${{ matrix.config.target }}
+      - uses: ./.github/actions/deploy-docs
+        if: ${{ matrix.config.deploy-docs && github.ref == 'refs/heads/main' }}
+        with:
+          target: ${{ matrix.config.target }}
+
+  linux:
+    name: Build Linux ${{ matrix.config.arch }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { arch: x86_64, target: x86_64-unknown-linux-gnu }
+          - { arch: i686, target: i686-unknown-linux-gnu, multilib: true }
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - name: Install multilib
+        if: ${{ matrix.config.multilib }}
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install gcc-multilib g++-multilib
+      - uses: ./.github/actions/install-build-test
+        with:
+          target: ${{ matrix.config.target }}
+
+  mac:
+    name: Build MacOS ${{ matrix.config.arch }}
+    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { arch: x86_64, target: x86_64-apple-darwin }
+          - { arch: aarch64, target: aarch64-apple-darwin }
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/install-build-test
+        with:
+          target: ${{ matrix.config.target }}

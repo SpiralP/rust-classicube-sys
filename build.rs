@@ -59,8 +59,8 @@ fn windows_host_setup() {
             .status()
             .expect("rustfmt not found in PATH, please install rustfmt or add it to PATH")
             .success(),
-        "rustfmt is required to build the bindings on windows, please install rustfmt or add \
-         it to PATH"
+        "rustfmt is required to build the bindings on windows, please install rustfmt or add it \
+         to PATH"
     );
 }
 
