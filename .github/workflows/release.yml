@@ -14,27 +14,9 @@ jobs:
     permissions:
       contents: read # for checkout in called workflow
 
-  deploy-docs:
-    name: Deploy docs to Pages
-    runs-on: ubuntu-24.04
-    needs: build
-    if: ${{ github.ref == 'refs/heads/main' }}
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    concurrency:
-      group: pages
-      cancel-in-progress: false
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
-
   get-version-metadata:
     runs-on: ubuntu-24.04
-    needs: deploy-docs
+    needs: build
     if: "${{ ! startsWith(github.event.head_commit.message, 'chore(release): ') }}"
     permissions:
       contents: read
@@ -54,7 +36,7 @@ jobs:
           echo "version-metadata=$version_metadata" | tee -a "$GITHUB_OUTPUT"
 
   release:
-    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@a7630d0468733e888f9104a242063f1bcb6a0022 # main
+    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@293249c4cc7d14128b1dcbd1c64373a9323b1c49 # main
     needs: get-version-metadata
     if: "${{ needs.get-version-metadata.outputs.version-metadata }}"
     permissions: {} # none, since we use a custom app
@@ -69,7 +51,36 @@ jobs:
         Cargo.toml
       package-name: classicube-sys
       version-metadata: ${{ needs.get-version-metadata.outputs.version-metadata }}
+      # Dispatch build.yml on the just-pushed release tag during the publish
+      # phase (before the GH release is created), so windows x86_64 uploads a
+      # `github-pages` artifact built against the bumped Cargo.toml. The
+      # deploy-docs job below pipes it across into this run for Pages deploy.
+      # Cross-platform builds in the dispatched run also serve as a sanity
+      # check; any failure auto-deletes the tag from origin.
+      build-workflow: build.yml
     secrets:
       app-client-id: ${{ secrets.APP_CLIENT_ID }}
       app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  deploy-docs:
+    name: Deploy docs to Pages
+    needs: release
+    if: ${{ needs.release.outputs.tag && !contains(needs.release.outputs.tag, '-') }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read # cross-run artifact download
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page-url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deploy
+        uses: SpiralP/github-reusable-workflows/.github/actions/deploy-pages-from-run@293249c4cc7d14128b1dcbd1c64373a9323b1c49 # main
+        with:
+          run-id: ${{ needs.release.outputs.dispatched-run-id }}

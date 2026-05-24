@@ -1,5 +1,5 @@
 name: install-build-test
-description: ""
+description: "Install rust, build, and test with nextest for the given target."
 
 inputs:
   target:
