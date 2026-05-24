@@ -34,7 +34,7 @@ jobs:
 
   get-version-metadata:
     runs-on: ubuntu-24.04
-    needs: build
+    needs: deploy-docs
     if: "${{ ! startsWith(github.event.head_commit.message, 'chore(release): ') }}"
     permissions:
       contents: read
