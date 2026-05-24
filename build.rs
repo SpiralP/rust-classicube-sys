@@ -8,39 +8,60 @@ use std::{
 
 use regex::Regex;
 
+struct Exports {
+    header_paths: Vec<PathBuf>,
+    // CC_VAR — linker-exported variables
+    cc_vars: Vec<String>,
+    // #define — bindgen-only constants, never appear in the .def
+    defines: Vec<String>,
+    // CC_API — linker-exported functions
+    cc_funcs: Vec<String>,
+}
+
 fn main() {
-    build_bindings();
+    let exports = collect_exports();
+    build_bindings(&exports);
 
-    #[cfg(target_os = "linux")]
-    {
-        // linux doesn't need to build or link to the shared library
-    }
-
-    #[cfg(target_os = "macos")]
-    {
-        // mac also doesn't need to build/link, but
-        // mac needs to have "-undefined dynamic_lookup" on the compile flags!
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    if target_os != "windows" {
+        // linux/mac don't need to build or link the shared library
+        // (mac needs "-undefined dynamic_lookup" at consumer link time)
+        return;
     }
 
     #[cfg(target_os = "windows")]
     {
-        use std::process::Command;
-
-        build_classicube();
-
-        // rustfmt is required, or else we get strange errors:
-        // error LNK2019: unresolved external symbol Entities referenced in function ...
-        // error LNK2019: unresolved external symbol Gfx referenced in function ...
-        assert!(
-            Command::new("rustfmt.exe")
-                .arg("--version")
-                .status()
-                .expect("rustfmt not found in PATH, please install rustfmt or add it to PATH")
-                .success(),
-            "rustfmt is required to build the bindings on windows, please install rustfmt or add \
-             it to PATH"
-        );
+        windows_host_setup();
     }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let target = env::var("TARGET").unwrap();
+        build_import_library(&target, &exports);
+    }
+
+    let out_dir = env::var("OUT_DIR").unwrap();
+    println!("cargo:rustc-link-search=native={out_dir}");
+    println!("cargo:rustc-link-lib=dylib=ClassiCube");
+}
+
+#[cfg(target_os = "windows")]
+fn windows_host_setup() {
+    use std::process::Command;
+
+    build_classicube();
+
+    // rustfmt is required, or else we get strange errors:
+    // error LNK2019: unresolved external symbol Entities referenced in function ...
+    // error LNK2019: unresolved external symbol Gfx referenced in function ...
+    assert!(
+        Command::new("rustfmt.exe")
+            .arg("--version")
+            .status()
+            .expect("rustfmt not found in PATH, please install rustfmt or add it to PATH")
+            .success(),
+        "rustfmt is required to build the bindings on windows, please install rustfmt or add \
+         it to PATH"
+    );
 }
 
 #[cfg(target_os = "windows")]
@@ -126,14 +147,68 @@ fn build_classicube() {
             String::from_utf8_lossy(&cmd.stderr)
         );
     }
-
-    println!("cargo:rustc-link-search=native={}", &out_dir.display());
-    println!("cargo:rustc-link-lib=dylib=ClassiCube");
 }
 
-fn build_bindings() {
-    let (header_paths, var_names, function_names) = get_exports();
+#[cfg(not(target_os = "windows"))]
+fn build_import_library(target: &str, exports: &Exports) {
+    let out_dir = env::var("OUT_DIR").unwrap();
+    let out_dir = Path::new(&out_dir);
 
+    // CC_VARs need the DATA flag so dlltool emits `__imp_X` data-import
+    // pointers; without it, `extern "C" { pub static X }` would deref a JMP stub.
+    let mut def = String::from("LIBRARY ClassiCube.exe\nEXPORTS\n");
+    for name in &exports.cc_funcs {
+        def.push_str(name);
+        def.push('\n');
+    }
+    for name in &exports.cc_vars {
+        def.push_str(name);
+        def.push_str(" DATA\n");
+    }
+
+    let def_path = out_dir.join("ClassiCube.def");
+    fs::write(&def_path, def).unwrap();
+
+    let dlltool = find_dlltool(target);
+    let lib_path = out_dir.join("libClassiCube.dll.a");
+    let status = std::process::Command::new(&dlltool)
+        .args([
+            "--input-def",
+            def_path.to_str().unwrap(),
+            "--output-lib",
+            lib_path.to_str().unwrap(),
+            "--dllname",
+            "ClassiCube.exe",
+        ])
+        .status()
+        .unwrap_or_else(|e| panic!("failed to spawn {dlltool}: {e}"));
+    assert!(status.success(), "dlltool failed");
+}
+
+#[cfg(not(target_os = "windows"))]
+fn find_dlltool(target: &str) -> String {
+    let prefix = match target {
+        "x86_64-pc-windows-gnu" => Some("x86_64-w64-mingw32"),
+        "i686-pc-windows-gnu" => Some("i686-w64-mingw32"),
+        _ => None,
+    };
+    let candidates: Vec<String> = match prefix {
+        Some(p) => vec![format!("{p}-dlltool"), "dlltool".into()],
+        None => vec!["dlltool".into()],
+    };
+    for name in &candidates {
+        if std::process::Command::new(name)
+            .arg("--version")
+            .output()
+            .is_ok()
+        {
+            return name.clone();
+        }
+    }
+    panic!("dlltool not found in PATH (tried: {candidates:?})");
+}
+
+fn build_bindings(exports: &Exports) {
     let mut bindings = if cfg!(feature = "no_std") {
         bindgen::builder().use_core().ctypes_prefix("libc")
     } else {
@@ -150,15 +225,15 @@ fn build_bindings() {
     .clang_arg("-I./ClassiCube/src")
     .allowlist_type(".*");
 
-    for header in header_paths {
+    for header in &exports.header_paths {
         bindings = bindings.header(header.to_string_lossy());
     }
 
-    for var_name in var_names {
+    for var_name in exports.cc_vars.iter().chain(exports.defines.iter()) {
         bindings = bindings.allowlist_var(var_name);
     }
 
-    for function_name in function_names {
+    for function_name in &exports.cc_funcs {
         bindings = bindings.allowlist_function(function_name);
     }
 
@@ -169,29 +244,25 @@ fn build_bindings() {
     bindings
         .write_to_file(&bindings_path)
         .expect("Couldn't write bindings!");
-    // panic!("{bindings_path:?}");
 
     // fix windows not dllimporting from the rustc-link-lib build println
-    #[cfg(target_os = "windows")]
-    {
-        let contents = fs::read_to_string(&bindings_path).unwrap();
-
-        let search = "unsafe extern \"C\" {\r\n    pub static mut ";
-        let new_contents = contents.replace(
-            search,
-            &format!(r#"#[link(name = "ClassiCube", kind = "dylib")]{search}"#),
-        );
+    if env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows") {
+        let contents = fs::read_to_string(&bindings_path)
+            .unwrap()
+            .replace("\r\n", "\n");
+        let attr = r#"#[link(name = "ClassiCube", kind = "dylib")]"#;
+        let needle = "unsafe extern \"C\" {\n    pub static mut ";
+        let new_contents = contents.replace(needle, &format!("{attr}{needle}"));
         fs::write(&bindings_path, new_contents).unwrap();
     }
 }
 
 /// We don't want to include functions/vars that aren't exported.
-///
-/// returns (header_paths, var names, function names)
-fn get_exports() -> (Vec<PathBuf>, Vec<String>, Vec<String>) {
+fn collect_exports() -> Exports {
     let mut header_paths = Vec::new();
-    let mut var_names = HashSet::new();
-    let mut function_names = HashSet::new();
+    let mut cc_vars = HashSet::new();
+    let mut defines = HashSet::new();
+    let mut cc_funcs = HashSet::new();
 
     for entry in fs::read_dir("ClassiCube/src").expect("read_dir: ClassiCube/src") {
         let entry = entry.unwrap();
@@ -240,7 +311,7 @@ fn get_exports() -> (Vec<PathBuf>, Vec<String>, Vec<String>) {
                     .as_str()
                     .to_string();
 
-                var_names.insert(var_name);
+                cc_vars.insert(var_name);
             }
 
             // C macros/defines
@@ -252,7 +323,7 @@ fn get_exports() -> (Vec<PathBuf>, Vec<String>, Vec<String>) {
                     .get(1)
                     .unwrap_or_else(|| panic!("couldn't get capture 1"));
 
-                var_names.insert(macro_name.as_str().to_string());
+                defines.insert(macro_name.as_str().to_string());
             }
 
             // exported functions
@@ -269,18 +340,26 @@ fn get_exports() -> (Vec<PathBuf>, Vec<String>, Vec<String>) {
                 .get(1)
                 .unwrap_or_else(|| panic!("couldn't get capture 1 from {part:?}"));
 
-                function_names.insert(function_name.as_str().to_string());
+                cc_funcs.insert(function_name.as_str().to_string());
             }
         }
     }
 
     header_paths.sort();
 
-    let mut var_names = var_names.drain().collect::<Vec<_>>();
-    var_names.sort_unstable();
+    let mut cc_vars = cc_vars.drain().collect::<Vec<_>>();
+    cc_vars.sort_unstable();
 
-    let mut function_names = function_names.drain().collect::<Vec<_>>();
-    function_names.sort();
+    let mut defines = defines.drain().collect::<Vec<_>>();
+    defines.sort_unstable();
 
-    (header_paths, var_names, function_names)
+    let mut cc_funcs = cc_funcs.drain().collect::<Vec<_>>();
+    cc_funcs.sort();
+
+    Exports {
+        header_paths,
+        cc_vars,
+        defines,
+        cc_funcs,
+    }
 }
