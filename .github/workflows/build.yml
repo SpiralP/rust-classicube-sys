@@ -20,13 +20,11 @@ jobs:
   windows:
     name: Build Windows ${{ matrix.config.arch }}
     runs-on: windows-2025
-    permissions:
-      contents: write # for deploy-docs gh-pages push (x86_64 + main only)
     strategy:
       fail-fast: false
       matrix:
         config:
-          - { arch: x86_64, target: x86_64-pc-windows-msvc, deploy-docs: true }
+          - { arch: x86_64, target: x86_64-pc-windows-msvc, build-docs: true }
           - { arch: i686, target: i686-pc-windows-msvc }
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -35,8 +33,8 @@ jobs:
       - uses: ./.github/actions/install-build-test
         with:
           target: ${{ matrix.config.target }}
-      - uses: ./.github/actions/deploy-docs
-        if: ${{ matrix.config.deploy-docs && github.ref == 'refs/heads/main' }}
+      - uses: ./.github/actions/build-docs
+        if: ${{ matrix.config.build-docs && github.ref == 'refs/heads/main' }}
         with:
           target: ${{ matrix.config.target }}
 

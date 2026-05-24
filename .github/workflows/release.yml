@@ -12,7 +12,25 @@ jobs:
     uses: ./.github/workflows/build.yml
     if: "${{ ! startsWith(github.event.head_commit.message, 'chore(release): ') }}"
     permissions:
-      contents: write # for deploy-docs gh-pages push on main
+      contents: read # for checkout in called workflow
+
+  deploy-docs:
+    name: Deploy docs to Pages
+    runs-on: ubuntu-24.04
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' }}
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
 
   get-version-metadata:
     runs-on: ubuntu-24.04
