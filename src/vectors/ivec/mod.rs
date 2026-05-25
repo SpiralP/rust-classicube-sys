@@ -69,6 +69,10 @@ pub const fn IVec3_MaxValue() -> IVec3 {
     }
 }
 
+#[expect(
+    clippy::cast_precision_loss,
+    reason = "i32 to f32 precision loss is acceptable for world coordinates"
+)]
 pub fn IVec3_ToVec3(result: &mut Vec3, a: &IVec3) {
     result.x = a.x as _;
     result.y = a.y as _;

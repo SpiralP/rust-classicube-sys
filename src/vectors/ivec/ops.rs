@@ -1,6 +1,6 @@
 use core::ops::{Add, Div, Mul, Neg, Sub};
 
-use crate::{bindings::*, std_types::c_int};
+use crate::{bindings::IVec3, std_types::c_int};
 
 impl Add<Self> for IVec3 {
     type Output = Self;

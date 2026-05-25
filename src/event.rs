@@ -3,7 +3,15 @@
 use core::mem;
 
 use crate::{
-    bindings::*,
+    bindings::{
+        BlockID, Event_Block, Event_Block_Callback, Event_Chat, Event_Chat_Callback, Event_Entry,
+        Event_Entry_Callback, Event_Float, Event_Float_Callback, Event_Input, Event_Input_Callback,
+        Event_Int, Event_Int_Callback, Event_LightingMode, Event_LightingMode_Callback,
+        Event_PadAxis, Event_PadAxis_Callback, Event_PluginMessage, Event_PluginMessage_Callback,
+        Event_RawMove, Event_RawMove_Callback, Event_Register, Event_String, Event_String_Callback,
+        Event_Unregister, Event_Void, Event_Void_Callback, IVec3, InputDevice, PadAxisUpdate,
+        Stream, cc_bool, cc_string, cc_uint8,
+    },
     std_types::{c_float, c_int, c_void},
 };
 
@@ -66,10 +74,15 @@ macro_rules! make_raise {
                 $($arg: $arg_type,)*
             ) {
                 for i in 0..handlers.Count {
-                    if let Some(f) = handlers.Handlers[i as usize] {
+                    #[expect(
+                        clippy::cast_sign_loss,
+                        reason = "handler index is a non-negative c_int from FFI"
+                    )]
+                    let i = i as usize;
+                    if let Some(f) = handlers.Handlers[i] {
                         unsafe {
                             (f)(
-                                handlers.Objs[i as usize],
+                                handlers.Objs[i],
                                 $($arg),*
                             );
                         }

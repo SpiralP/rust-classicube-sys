@@ -55,6 +55,7 @@ impl OwnedString {
     /// Panics if the CP437-encoded bytes contain an interior NUL — only
     /// possible when the input string contains a U+0000 character, since
     /// `Convert_CodepointToCP437` maps unrepresentable codepoints to `'?'`.
+    /// Also panics if the encoded length exceeds [`cc_uint16::MAX`].
     pub fn new<S: Into<String>>(s: S) -> Self {
         let bytes = s
             .into()
@@ -69,12 +70,16 @@ impl OwnedString {
         let c_str = CString::new(bytes).unwrap().into_boxed_c_str();
         let buffer: *const c_char = c_str.as_ptr();
 
+        let length = cc_uint16::try_from(length).expect("string length exceeds cc_string capacity");
+        let capacity =
+            cc_uint16::try_from(capacity).expect("string length exceeds cc_string capacity");
+
         Self {
             c_str,
             cc_string: cc_string {
                 buffer: buffer.cast_mut(),
-                length: length as cc_uint16,
-                capacity: capacity as cc_uint16,
+                length,
+                capacity,
             },
         }
     }
@@ -101,14 +106,14 @@ impl Borrow<cc_string> for OwnedString {
 
 #[test]
 fn test_owned_string() {
-    let owned_string = OwnedString::new("hello");
-
     fn use_cc_string<T: Borrow<cc_string>>(s: T) {
         #[cfg(not(feature = "no_std"))]
         {
             println!("{:?}", s.borrow());
         }
     }
+
+    let owned_string = OwnedString::new("hello");
 
     use_cc_string(owned_string.as_cc_string());
 
@@ -122,11 +127,15 @@ fn test_owned_string() {
 /// # Safety
 ///
 /// The `buffer` needs to live longer than the `cc_string`.
+///
+/// # Panics
+///
+/// Panics if `length` or `capacity` does not fit in [`cc_uint16`].
 pub unsafe fn String_Init(buffer: *mut c_char, length: c_int, capacity: c_int) -> cc_string {
     cc_string {
         buffer,
-        length: length as _,
-        capacity: capacity as _,
+        length: cc_uint16::try_from(length).expect("cc_string length out of range"),
+        capacity: cc_uint16::try_from(capacity).expect("cc_string capacity out of range"),
     }
 }
 
@@ -159,6 +168,10 @@ pub unsafe fn String_FromRawArray(buffer: &mut [c_char]) -> cc_string {
 /// `data` must have at least `STRING_SIZE` bytes and outlive the returned
 /// `cc_string`, which borrows it as a non-owning buffer.
 #[must_use]
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "STRING_SIZE and resulting length fit in c_int"
+)]
 pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
     let mut length = 0;
     for i in (0..STRING_SIZE).rev() {
@@ -251,6 +264,10 @@ fn ReduceEmoji(cp: cc_codepoint) -> cc_codepoint {
     cp
 }
 
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "codepoint and lookup indices have been range-checked to fit in u8"
+)]
 fn Convert_TryCodepointToCP437(mut cp: cc_codepoint, c: &mut u8) -> bool {
     if (0x20..0x7F).contains(&cp) {
         *c = cp as u8;
@@ -283,10 +300,11 @@ fn test_cp_437_conversion() {
     let bytes: &[u8] = &[97, 236, 236]; // "a∞∞"
 
     let c_str = CString::new(bytes).unwrap();
+    let len = cc_uint16::try_from(bytes.len()).unwrap();
     let a = cc_string {
-        buffer: c_str.as_ptr() as *mut c_char,
-        length: bytes.len() as cc_uint16,
-        capacity: bytes.len() as cc_uint16,
+        buffer: c_str.as_ptr().cast_mut(),
+        length: len,
+        capacity: len,
     };
     assert_eq!(a.to_string(), "a∞∞");
 

@@ -3,7 +3,10 @@ mod matrix;
 mod vec;
 
 pub use self::{ivec::*, matrix::*, vec::*};
-use crate::{bindings::*, std_types::c_double};
+use crate::{
+    bindings::{Math_Cos, Math_Sin},
+    std_types::c_double,
+};
 
 /// Sets the x, y, and z components of a 3D vector
 #[macro_export]
@@ -19,7 +22,7 @@ macro_rules! Vec3_Set {
 #[macro_export]
 macro_rules! Vec3_IsZero {
     ($v:expr) => {
-        #[allow(clippy::float_cmp)]
+        #[allow(clippy::float_cmp, clippy::cast_precision_loss)]
         {
             $v.x == 0 as _ && $v.y == 0 as _ && $v.z == 0 as _
         }

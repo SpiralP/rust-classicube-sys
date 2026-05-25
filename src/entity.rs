@@ -1,5 +1,5 @@
 use super::OwnedString;
-use crate::bindings::*;
+use crate::bindings::{Entity, Entity_SetModel};
 
 #[allow(clippy::missing_safety_doc)]
 pub unsafe fn Entity_Init(e: &mut Entity) {

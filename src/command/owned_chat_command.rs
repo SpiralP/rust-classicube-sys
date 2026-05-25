@@ -41,14 +41,20 @@ impl OwnedChatCommand {
             help.get(4).map_or(ptr::null(), |cs| cs.as_ptr()),
         ];
 
+        #[expect(
+            clippy::cast_possible_truncation,
+            reason = "COMMAND_FLAG_SINGLEPLAYER_ONLY fits in the flags u8"
+        )]
+        let flags = if singleplayer_only {
+            COMMAND_FLAG_SINGLEPLAYER_ONLY as _
+        } else {
+            0
+        };
+
         let command = Box::new(ChatCommand {
             name: name.as_ptr(),
             Execute: Some(execute),
-            flags: if singleplayer_only {
-                COMMAND_FLAG_SINGLEPLAYER_ONLY as _
-            } else {
-                0
-            },
+            flags,
             help: help_array,
             next: ptr::null_mut(),
         });

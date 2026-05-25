@@ -1,4 +1,7 @@
-use crate::{bindings::*, std_types::c_int};
+use crate::{
+    bindings::{Gfx_CreateDynamicVb, Gfx_DeleteVb, GfxResourceID, VertexFormat},
+    std_types::c_int,
+};
 
 pub struct OwnedGfxVertexBuffer {
     pub resource_id: GfxResourceID,

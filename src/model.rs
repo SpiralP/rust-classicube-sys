@@ -1,4 +1,7 @@
-use crate::{bindings::*, std_types::c_float};
+use crate::{
+    bindings::{BoxDesc, FACE_CONSTS_FACE_COUNT, MODEL_QUAD_VERTICES, ModelPart, cc_uint16},
+    std_types::c_float,
+};
 
 #[allow(clippy::unnecessary_cast)]
 pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT as u32 * MODEL_QUAD_VERTICES as u32;
@@ -6,13 +9,10 @@ pub const MODEL_BOX_VERTICES: u32 = FACE_CONSTS_FACE_COUNT as u32 * MODEL_QUAD_V
 #[macro_export]
 macro_rules! BoxDesc_Dim {
     ($p1:expr, $p2:expr) => {
+        #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
         {
-            if $p1 < $p2 {
-                $p2 - $p1
-            } else {
-                $p1 - $p2
-            }
-        } as u8
+            (if $p1 < $p2 { $p2 - $p1 } else { $p1 - $p2 }) as u8
+        }
     };
 }
 
@@ -42,6 +42,7 @@ macro_rules! BoxDesc_Dims {
 #[macro_export]
 macro_rules! BoxDesc_Bounds {
     ($x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
+        #[allow(clippy::cast_precision_loss)]
         (
             $x1 as ::libc::c_float / 16.0,
             $y1 as ::libc::c_float / 16.0,
@@ -56,6 +57,7 @@ macro_rules! BoxDesc_Bounds {
 #[macro_export]
 macro_rules! BoxDesc_Bounds {
     ($x1:expr, $y1:expr, $z1:expr, $x2:expr, $y2:expr, $z2:expr) => {
+        #[allow(clippy::cast_precision_loss)]
         (
             $x1 as ::std::os::raw::c_float / 16.0,
             $y1 as ::std::os::raw::c_float / 16.0,
@@ -138,6 +140,8 @@ macro_rules! Model_RetAABB {
 
 #[test]
 fn test_model_macros() {
+    use crate::bindings::Entity;
+
     fn BoxDesc_BuildBox(_part: *mut ModelPart, desc: *const BoxDesc) {
         #[cfg(not(feature = "no_std"))]
         unsafe {
@@ -146,10 +150,8 @@ fn test_model_macros() {
     }
 
     let mut part: ModelPart = unsafe { core::mem::zeroed() };
-    BoxDesc_BuildBox(
-        &mut part,
-        &BoxDesc::from_macros(BoxDesc_Tex!(0, 16), BoxDesc_Box!(-3, 1, -3, 3, 7, 3)),
-    );
+    let desc = BoxDesc::from_macros(BoxDesc_Tex!(0, 16), BoxDesc_Box!(-3, 1, -3, 3, 7, 3));
+    BoxDesc_BuildBox(&raw mut part, &raw const desc);
 
     let mut e: Entity = unsafe { core::mem::zeroed() };
     Model_RetSize!(e, 0.0, 0.0, 0.0);

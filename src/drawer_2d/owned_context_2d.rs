@@ -14,9 +14,14 @@ pub struct OwnedContext2D {
 }
 
 impl OwnedContext2D {
+    /// # Panics
+    ///
+    /// Panics if `width` or `height` is negative.
     #[must_use]
     pub fn new(width: c_int, height: c_int, color: BitmapCol) -> Self {
-        let mut pixels = vec![color; width as usize * height as usize];
+        let w = usize::try_from(width).expect("context width must be non-negative");
+        let h = usize::try_from(height).expect("context height must be non-negative");
+        let mut pixels = vec![color; w * h];
         let scan0 = pixels.as_mut_ptr();
 
         Self {

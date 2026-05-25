@@ -1,14 +1,28 @@
-use crate::bindings::*;
+use crate::bindings::{
+    PACKEDCOL_A_SHIFT, PACKEDCOL_B_SHIFT, PACKEDCOL_G_SHIFT, PACKEDCOL_R_SHIFT, PackedCol,
+};
 
 #[must_use]
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "extracting low byte of packed color"
+)]
 pub const fn PackedCol_R(col: PackedCol) -> u8 {
     (col >> PACKEDCOL_R_SHIFT) as u8
 }
 #[must_use]
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "extracting low byte of packed color"
+)]
 pub const fn PackedCol_G(col: PackedCol) -> u8 {
     (col >> PACKEDCOL_G_SHIFT) as u8
 }
 #[must_use]
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "extracting low byte of packed color"
+)]
 pub const fn PackedCol_B(col: PackedCol) -> u8 {
     (col >> PACKEDCOL_B_SHIFT) as u8
 }

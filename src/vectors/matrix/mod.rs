@@ -2,7 +2,10 @@ mod ops;
 
 use crate::{
     Tan_Simple,
-    bindings::*,
+    bindings::{
+        Matrix, Matrix_Mul, Matrix_RotateX, Matrix_RotateY, Matrix_RotateZ, Matrix_Scale,
+        Matrix_Translate, Vec2, Vec3, Vec4,
+    },
     std_types::{c_double, c_float},
 };
 
@@ -159,6 +162,10 @@ pub fn Matrix_PerspectiveFieldOfView(
     zNear: c_float,
     zFar: c_float,
 ) {
+    #[expect(
+        clippy::cast_possible_truncation,
+        reason = "fovy projection collapses back to f32"
+    )]
     let c = zNear * Tan_Simple(0.5 * c_double::from(fovy)) as c_float;
 
     /* Transposed, source https://msdn.microsoft.com/en-us/library/dd373537(v=vs.85).aspx */

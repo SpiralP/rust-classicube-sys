@@ -1,4 +1,20 @@
-use crate::bindings::*;
+#![expect(
+    clippy::cast_possible_truncation,
+    reason = "bindgen InputButtons_* constants are small enums that fit in u8"
+)]
+
+use crate::bindings::{
+    BindMapping, InputBind__BIND_COUNT, InputButtons_CCKEY_ENTER, InputButtons_CCKEY_F1,
+    InputButtons_CCKEY_F3, InputButtons_CCKEY_F5, InputButtons_CCKEY_F6, InputButtons_CCKEY_F7,
+    InputButtons_CCKEY_F8, InputButtons_CCKEY_F10, InputButtons_CCKEY_F11, InputButtons_CCKEY_F12,
+    InputButtons_CCKEY_LALT, InputButtons_CCKEY_LCTRL, InputButtons_CCKEY_LSHIFT,
+    InputButtons_CCKEY_SPACE, InputButtons_CCKEY_TAB, InputButtons_CCMOUSE_L,
+    InputButtons_CCMOUSE_M, InputButtons_CCMOUSE_R, InputButtons_CCPAD_1, InputButtons_CCPAD_2,
+    InputButtons_CCPAD_3, InputButtons_CCPAD_4, InputButtons_CCPAD_DOWN, InputButtons_CCPAD_L,
+    InputButtons_CCPAD_LEFT, InputButtons_CCPAD_R, InputButtons_CCPAD_RIGHT,
+    InputButtons_CCPAD_START, InputButtons_CCPAD_UP, InputButtons_CCPAD_ZL, InputButtons_CCPAD_ZR,
+    InputButtons_INPUT_COUNT,
+};
 
 pub const Key_Function_Names: &[&str] = &[
     "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15",

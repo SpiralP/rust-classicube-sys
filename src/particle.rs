@@ -1,4 +1,4 @@
-use crate::bindings::*;
+use crate::bindings::{Gfx, PackedCol, TextureRec, Vec2, Vec3, VertexTextured};
 
 #[must_use]
 pub fn Particle_DoRender(

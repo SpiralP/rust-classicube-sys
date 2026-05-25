@@ -2,7 +2,7 @@ mod ops;
 
 use crate::{
     Vec3_IsZero, Vec3_Set,
-    bindings::*,
+    bindings::{IVec3, Matrix, Vec3},
     std_types::{c_float, cosf, floorf, sinf, sqrtf},
 };
 
@@ -199,6 +199,10 @@ pub fn Vec3_Equals(a: &Vec3, b: &Vec3) -> bool {
     }
 }
 
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "floor result is intentionally narrowed to i32"
+)]
 pub fn IVec3_Floor(result: &mut IVec3, a: &Vec3) {
     result.x = floorf(a.x) as _;
     result.y = floorf(a.y) as _;

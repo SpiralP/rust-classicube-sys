@@ -1,4 +1,4 @@
-use crate::bindings::*;
+use crate::bindings::{Bitmap, Gfx_CreateTexture, Gfx_DeleteTexture, GfxResourceID};
 
 pub struct OwnedGfxTexture {
     pub resource_id: GfxResourceID,

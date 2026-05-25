@@ -1,15 +1,28 @@
-use crate::{bindings::*, std_types::c_int};
+use crate::{
+    bindings::{BlockID, Inventory},
+    std_types::c_int,
+};
 
 /// Gets the block at the nth index in the current hotbar.
+///
+/// # Panics
+///
+/// Panics if `Inventory.Offset + idx` is negative.
 #[must_use]
 pub fn Inventory_Get(idx: c_int) -> BlockID {
-    unsafe { Inventory.Table[(Inventory.Offset + idx) as usize] }
+    let i = usize::try_from(unsafe { Inventory.Offset } + idx).expect("hotbar index out of range");
+    unsafe { Inventory.Table[i] }
 }
 
 /// Sets the block at the nth index in the current hotbar.
+///
+/// # Panics
+///
+/// Panics if `Inventory.Offset + idx` is negative.
 pub fn Inventory_Set(idx: c_int, block: BlockID) {
+    let i = usize::try_from(unsafe { Inventory.Offset } + idx).expect("hotbar index out of range");
     unsafe {
-        Inventory.Table[(Inventory.Offset + idx) as usize] = block;
+        Inventory.Table[i] = block;
     }
 }
 

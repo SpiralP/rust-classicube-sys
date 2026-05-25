@@ -3,7 +3,10 @@ mod owned_vertex_buffer;
 
 pub use self::{owned_gfx_texture::*, owned_vertex_buffer::*};
 use crate::{
-    bindings::*,
+    bindings::{
+        Gfx_DrawVb_IndexedTris, Gfx_SetDynamicVbData, GfxResourceID, PackedCol, Texture,
+        VertexTextured,
+    },
     std_types::{c_int, c_void},
 };
 

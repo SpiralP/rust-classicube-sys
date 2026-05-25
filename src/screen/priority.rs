@@ -1,3 +1,8 @@
+#![expect(
+    clippy::cast_possible_truncation,
+    reason = "bindgen GuiPriority_* constants are small enums that fit in u8"
+)]
+
 use crate::bindings::{
     GuiPriority_GUI_PRIORITY_CHAT, GuiPriority_GUI_PRIORITY_DISCONNECT,
     GuiPriority_GUI_PRIORITY_HUD, GuiPriority_GUI_PRIORITY_INVENTORY,
