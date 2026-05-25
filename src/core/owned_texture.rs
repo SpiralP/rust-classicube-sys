@@ -14,13 +14,15 @@ pub struct OwnedTexture {
 }
 
 impl OwnedTexture {
+    /// Returns `None` if `OwnedGfxTexture::new` rejects the bitmap — see its
+    /// docs for the conditions under which the GPU can refuse the upload.
     pub fn new(
         bmp: &mut Bitmap,
         coords: (c_short, c_short),
         size: (cc_uint16, cc_uint16),
         uv: TextureRec,
-    ) -> Self {
-        let gfx_texture = OwnedGfxTexture::new(bmp, true, false);
+    ) -> Option<Self> {
+        let gfx_texture = OwnedGfxTexture::new(bmp, true, false)?;
         let texture = Texture {
             ID: gfx_texture.resource_id,
             x: coords.0,
@@ -30,10 +32,10 @@ impl OwnedTexture {
             uv,
         };
 
-        Self {
+        Some(Self {
             gfx_texture,
             texture,
-        }
+        })
     }
 
     pub fn as_texture(&self) -> &Texture {

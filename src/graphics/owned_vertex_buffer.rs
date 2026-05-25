@@ -5,12 +5,16 @@ pub struct OwnedGfxVertexBuffer {
 }
 
 impl OwnedGfxVertexBuffer {
-    pub fn new(fmt: VertexFormat, max_vertices: c_int) -> Self {
+    /// Returns `None` if the GPU rejects the buffer — typically because the
+    /// graphics context is currently lost (mid-device-reset on Windows D3D9).
+    pub fn new(fmt: VertexFormat, max_vertices: c_int) -> Option<Self> {
         let resource_id = unsafe { Gfx_CreateDynamicVb(fmt, max_vertices) };
 
-        assert!(resource_id as usize != 0);
+        if resource_id as usize == 0 {
+            return None;
+        }
 
-        Self { resource_id }
+        Some(Self { resource_id })
     }
 }
 

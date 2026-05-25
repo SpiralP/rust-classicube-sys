@@ -5,16 +5,18 @@ pub struct OwnedGfxTexture {
 }
 
 impl OwnedGfxTexture {
-    /// # Panics
-    ///
-    /// Will panic if `bmp` doesn't have a power of two dimensions.
-    pub fn new(bmp: &mut Bitmap, managed_pool: bool, mipmaps: bool) -> Self {
+    /// Returns `None` if the GPU rejects the bitmap — e.g. the graphics
+    /// context is currently lost (mid-device-reset on Windows D3D9) or the
+    /// power-of-two-rounded dimensions exceed the backend's texture limits.
+    pub fn new(bmp: &mut Bitmap, managed_pool: bool, mipmaps: bool) -> Option<Self> {
         let resource_id =
             unsafe { Gfx_CreateTexture(bmp, u8::from(managed_pool), u8::from(mipmaps)) };
 
-        assert!(resource_id as usize != 0);
+        if resource_id as usize == 0 {
+            return None;
+        }
 
-        Self { resource_id }
+        Some(Self { resource_id })
     }
 }
 
