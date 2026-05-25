@@ -23,7 +23,7 @@ impl OwnedGfxTexture {
 impl Drop for OwnedGfxTexture {
     fn drop(&mut self) {
         unsafe {
-            Gfx_DeleteTexture(&mut self.resource_id);
+            Gfx_DeleteTexture(&raw mut self.resource_id);
         }
     }
 }

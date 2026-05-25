@@ -12,6 +12,7 @@ use crate::{
 };
 
 impl cc_string {
+    #[must_use]
     pub fn as_slice(&self) -> &[u8] {
         let len = self.length as usize;
         let data = self.buffer as *const u8;
@@ -49,6 +50,11 @@ pub struct OwnedString {
 }
 
 impl OwnedString {
+    /// # Panics
+    ///
+    /// Panics if the CP437-encoded bytes contain an interior NUL — only
+    /// possible when the input string contains a U+0000 character, since
+    /// `Convert_CodepointToCP437` maps unrepresentable codepoints to `'?'`.
     pub fn new<S: Into<String>>(s: S) -> Self {
         let bytes = s
             .into()
@@ -66,13 +72,14 @@ impl OwnedString {
         Self {
             c_str,
             cc_string: cc_string {
-                buffer: buffer as *mut c_char,
+                buffer: buffer.cast_mut(),
                 length: length as cc_uint16,
                 capacity: capacity as cc_uint16,
             },
         }
     }
 
+    #[must_use]
     pub fn as_cc_string(&self) -> &cc_string {
         &self.cc_string
     }
@@ -80,6 +87,7 @@ impl OwnedString {
     /// # Safety
     ///
     /// The `OwnedString` needs to live longer than the `cc_string` return here.
+    #[must_use]
     pub unsafe fn get_cc_string(&self) -> cc_string {
         cc_string { ..self.cc_string }
     }
@@ -146,6 +154,10 @@ pub unsafe fn String_FromRawArray(buffer: &mut [c_char]) -> cc_string {
     unsafe { String_FromRaw(buffer.as_mut_ptr(), c_int::try_from(buffer.len()).unwrap()) }
 }
 
+/// # Safety
+///
+/// `data` must have at least `STRING_SIZE` bytes and outlive the returned
+/// `cc_string`, which borrows it as a non-owning buffer.
 #[must_use]
 pub unsafe fn UNSAFE_GetString(data: &[u8]) -> cc_string {
     let mut length = 0;
@@ -201,16 +213,18 @@ pub const extendedChars: &[cc_unichar] = &[
     0x2248, 0x00B0, 0x2219, 0x00B7, 0x221A, 0x207F, 0x00B2, 0x25A0, 0x00A0,
 ];
 
+#[must_use]
 pub fn Convert_CP437ToUnicode(raw: u8) -> cc_unichar {
     if raw < 0x20 {
         controlChars[raw as usize]
     } else if raw < 0x7F {
-        raw as cc_unichar
+        cc_unichar::from(raw)
     } else {
         extendedChars[raw as usize - 0x7F]
     }
 }
 
+#[must_use]
 pub fn Convert_CodepointToCP437(cp: cc_codepoint) -> u8 {
     let mut c: u8 = 0;
     Convert_TryCodepointToCP437(cp, &mut c);
@@ -247,14 +261,14 @@ fn Convert_TryCodepointToCP437(mut cp: cc_codepoint, c: &mut u8) -> bool {
     }
 
     for (i, &chr) in controlChars.iter().enumerate() {
-        if chr as cc_codepoint == cp {
+        if cc_codepoint::from(chr) == cp {
             *c = i as u8;
             return true;
         }
     }
 
     for (i, &chr) in extendedChars.iter().enumerate() {
-        if chr as cc_codepoint == cp {
+        if cc_codepoint::from(chr) == cp {
             *c = (i + 0x7F) as u8;
             return true;
         }

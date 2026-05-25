@@ -13,6 +13,9 @@ pub struct OwnedChatCommand {
 }
 
 impl OwnedChatCommand {
+    /// # Panics
+    ///
+    /// Panics if `name` or any entry in `help` contains an interior NUL byte.
     pub fn new(
         name: &str,
         execute: unsafe extern "C" fn(args: *const cc_string, argsCount: c_int),
@@ -27,12 +30,15 @@ impl OwnedChatCommand {
             .collect();
 
         let help_array = [
-            #[allow(clippy::get_first)]
-            help.get(0).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
-            help.get(1).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
-            help.get(2).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
-            help.get(3).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
-            help.get(4).map(|cs| cs.as_ptr()).unwrap_or(ptr::null()),
+            #[expect(
+                clippy::get_first,
+                reason = "consistent indexing across the 5-slot array"
+            )]
+            help.get(0).map_or(ptr::null(), |cs| cs.as_ptr()),
+            help.get(1).map_or(ptr::null(), |cs| cs.as_ptr()),
+            help.get(2).map_or(ptr::null(), |cs| cs.as_ptr()),
+            help.get(3).map_or(ptr::null(), |cs| cs.as_ptr()),
+            help.get(4).map_or(ptr::null(), |cs| cs.as_ptr()),
         ];
 
         let command = Box::new(ChatCommand {

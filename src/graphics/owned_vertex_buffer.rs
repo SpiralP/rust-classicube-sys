@@ -7,6 +7,7 @@ pub struct OwnedGfxVertexBuffer {
 impl OwnedGfxVertexBuffer {
     /// Returns `None` if the GPU rejects the buffer — typically because the
     /// graphics context is currently lost (mid-device-reset on Windows D3D9).
+    #[must_use]
     pub fn new(fmt: VertexFormat, max_vertices: c_int) -> Option<Self> {
         let resource_id = unsafe { Gfx_CreateDynamicVb(fmt, max_vertices) };
 
@@ -21,7 +22,7 @@ impl OwnedGfxVertexBuffer {
 impl Drop for OwnedGfxVertexBuffer {
     fn drop(&mut self) {
         unsafe {
-            Gfx_DeleteVb(&mut self.resource_id);
+            Gfx_DeleteVb(&raw mut self.resource_id);
         }
     }
 }

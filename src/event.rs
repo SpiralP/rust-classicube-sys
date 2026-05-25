@@ -22,7 +22,7 @@ macro_rules! make_register_unregister {
             ) {
                 unsafe {
                     Event_Register(
-                        handlers as *mut Event_Void,
+                        handlers.cast::<Event_Void>(),
                         obj,
                         #[allow(clippy::useless_transmute)]
                         mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
@@ -38,7 +38,7 @@ macro_rules! make_register_unregister {
             ) {
                 unsafe {
                     Event_Unregister(
-                        handlers as *mut Event_Void,
+                        handlers.cast::<Event_Void>(),
                         obj,
                         #[allow(clippy::useless_transmute)]
                         mem::transmute::<[<Event_ $name _Callback>], Event_Void_Callback>(handler),
@@ -103,7 +103,7 @@ make_raise!(
 make_register_unregister!(Chat);
 make_raise!(
     /// Calls all registered callbacks for an event which has chat message type and contents.
-    /// See MsgType enum in Chat.h for what types of messages there are.
+    /// See `MsgType` enum in `Chat.h` for what types of messages there are.
     Chat, (msg: *const cc_string, msgType: c_int)
 );
 
@@ -140,6 +140,6 @@ make_raise!(
 
 make_register_unregister!(LightingMode);
 make_raise!(
-    /// Calls all registered callbacks for an event called when the Lighting_LightingMode is changed
+    /// Calls all registered callbacks for an event called when the `Lighting_LightingMode` is changed
     LightingMode, (oldMode: cc_uint8, fromServer: cc_bool)
 );

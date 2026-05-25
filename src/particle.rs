@@ -1,5 +1,6 @@
 use crate::bindings::*;
 
+#[must_use]
 pub fn Particle_DoRender(
     size: &Vec2,
     pos: &Vec3,

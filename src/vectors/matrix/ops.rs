@@ -8,7 +8,7 @@ impl Mul<Self> for Matrix {
     fn mul(self, right: Self) -> Self {
         let mut result = Matrix_Identity;
         unsafe {
-            Matrix_Mul(&mut result, &self, &right);
+            Matrix_Mul(&raw mut result, &raw const self, &raw const right);
         }
         result
     }

@@ -57,6 +57,7 @@ impl From<u8> for Priority {
 }
 
 impl Priority {
+    #[must_use]
     pub fn to_u8(&self) -> u8 {
         match self {
             Self::UnderDisconnect => GuiPriority_GUI_PRIORITY_DISCONNECT as u8 - 1,

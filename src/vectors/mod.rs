@@ -54,6 +54,7 @@ macro_rules! Vec3_Mul3By {
     };
 }
 
+#[must_use]
 pub fn Tan_Simple(x: c_double) -> c_double {
     unsafe { Math_Sin(x) / Math_Cos(x) }
 }
