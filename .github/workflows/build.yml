@@ -41,6 +41,7 @@ jobs:
         if: ${{ matrix.config.build-docs }}
         with:
           target: ${{ matrix.config.target }}
+          upload: ${{ github.event_name == 'workflow_dispatch' }}
 
   linux:
     name: Build Linux ${{ matrix.config.arch }}

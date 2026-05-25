@@ -1,10 +1,14 @@
 name: build-docs
-description: "Build cargo docs and upload as a GitHub Pages artifact."
+description: "Build cargo docs, optionally uploading as a GitHub Pages artifact."
 
 inputs:
   target:
     description: Build target.
     required: true
+  upload:
+    description: Upload the built docs as a `github-pages` artifact.
+    required: false
+    default: "false"
 
 runs:
   using: composite
@@ -14,6 +18,7 @@ runs:
       shell: bash
 
     - name: Upload Pages artifact
+      if: ${{ inputs.upload == 'true' }}
       uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
       with:
         path: ./target/${{ inputs.target }}/doc
