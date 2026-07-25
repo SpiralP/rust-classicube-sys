@@ -36,7 +36,7 @@ jobs:
           echo "version-metadata=$version_metadata" | tee -a "$GITHUB_OUTPUT"
 
   release:
-    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@d9cf5d14da79d4c3ab3e62cf1aa22b99afec170f # main
+    uses: SpiralP/github-reusable-workflows/.github/workflows/release.yml@a1173dbfbf9c4b64ad3a2d76d1e04aff2fd22b06 # main
     needs: get-version-metadata
     if: "${{ needs.get-version-metadata.outputs.version-metadata }}"
     permissions: {} # none, since we use a custom app
@@ -81,6 +81,6 @@ jobs:
       cancel-in-progress: false
     steps:
       - id: deploy
-        uses: SpiralP/github-reusable-workflows/.github/actions/deploy-pages-from-run@d9cf5d14da79d4c3ab3e62cf1aa22b99afec170f # main
+        uses: SpiralP/github-reusable-workflows/.github/actions/deploy-pages-from-run@a1173dbfbf9c4b64ad3a2d76d1e04aff2fd22b06 # main
         with:
           run-id: ${{ needs.release.outputs.dispatched-run-id }}
