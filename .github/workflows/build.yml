@@ -19,7 +19,7 @@ jobs:
     # job already validated nix against this commit minutes earlier, and the
     # nix output isn't attached to the release.
     if: ${{ github.event_name != 'workflow_dispatch' }}
-    uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@b19f9057e6e4f8754dcfef14fde34f70c694fd8e # main
+    uses: SpiralP/github-reusable-workflows/.github/workflows/build.yml@c6ce4893ab329fc6ae3ae6ee4b982ce7762eadba # main
 
   windows:
     name: Build Windows ${{ matrix.config.arch }}
